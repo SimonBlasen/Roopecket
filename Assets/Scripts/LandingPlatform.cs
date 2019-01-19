@@ -13,6 +13,10 @@ public class LandingPlatform : MonoBehaviour
 
     [SerializeField]
     private Light[] spotlights;
+    [SerializeField]
+    private GameObject[] landedObjects;
+    [SerializeField]
+    private GameObject[] notLandedObjects;
 
     private List<Transform> landedTransforms = new List<Transform>();
 
@@ -83,6 +87,14 @@ public class LandingPlatform : MonoBehaviour
         for (int i = 0; i < spotlights.Length; i++)
         {
             spotlights[i].enabled = on;
+        }
+        for (int i = 0; i < landedObjects.Length; i++)
+        {
+            landedObjects[i].SetActive(on);
+        }
+        for (int i = 0; i < notLandedObjects.Length; i++)
+        {
+            notLandedObjects[i].SetActive(!on);
         }
     }
 
