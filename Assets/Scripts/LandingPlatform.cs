@@ -86,7 +86,7 @@ public class LandingPlatform : MonoBehaviour
     {
         for (int i = 0; i < spotlights.Length; i++)
         {
-            spotlights[i].enabled = on;
+            spotlights[i].GetComponent<FlickerLight>().On = on;
         }
         for (int i = 0; i < landedObjects.Length; i++)
         {
