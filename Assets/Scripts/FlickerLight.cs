@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 
 [RequireComponent(typeof(Light))]
 public class FlickerLight : MonoBehaviour {

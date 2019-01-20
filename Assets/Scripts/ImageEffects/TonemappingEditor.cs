@@ -1,10 +1,10 @@
-using System;
+/*using System;
 using UnityEditor;
 using UnityEngine;
 
 namespace UnityStandardAssets.ImageEffects
 {
-    /*[CustomEditor (typeof(Tonemapping))]
+    [CustomEditor (typeof(Tonemapping))]
     class TonemappingEditor : Editor
     {
         SerializedObject serObj;
@@ -77,5 +77,6 @@ namespace UnityStandardAssets.ImageEffects
 
             serObj.ApplyModifiedProperties();
         }
-    }*/
+    }
 }
+*/
