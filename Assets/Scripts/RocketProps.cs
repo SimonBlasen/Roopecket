@@ -12,12 +12,20 @@ public class RocketProps : MonoBehaviour
     private int collisionDamage = 40;
     [SerializeField]
     private int maxHealth = 200;
+    [SerializeField]
+    private float maxFuel = 200f;
+    [SerializeField]
+    private float thrustFuelPerSecond = 4f;
 
     [Header("References")]
     [SerializeField]
     private Transform[] okToHitTransforms;
+    [SerializeField]
+    private RocketController rocketController;
 
     private int currentHealth;
+
+    private float currentFuel = 0f;
 
     private float tickCounter = 0f;
 
@@ -25,12 +33,75 @@ public class RocketProps : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        currentFuel = maxFuel;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentFuel > 0f)
+        {
+            for (int i = 0; i < rocketController.Thrusts.Length; i++)
+            {
+                if (rocketController.Thrusts[i])
+                {
+                    currentFuel -= Time.deltaTime * thrustFuelPerSecond;
+                }
+            }
+        }
+        else
+        {
+            currentFuel = 0f;
+        }
+    }
 
+    public bool OutOfFuel
+    {
+        get
+        {
+            return currentFuel <= 0f;
+        }
+    }
+
+    public int CurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+    }
+
+    public int MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+    }
+
+    public float CurrentFuel
+    {
+        get
+        {
+            return currentFuel;
+        }
+    }
+
+    public float MaxFuel
+    {
+        get
+        {
+            return maxFuel;
+        }
+    }
+
+    public void AddFuel(float amount)
+    {
+        currentFuel += amount;
+        if (currentFuel > maxFuel)
+        {
+            currentFuel = maxFuel;
+        }
     }
 
     public void Die()

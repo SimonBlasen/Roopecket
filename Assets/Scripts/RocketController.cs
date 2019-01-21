@@ -12,6 +12,8 @@ public class RocketController : MonoBehaviour {
     private ParticleSystem[] thrustParticles;
     [SerializeField]
     private float thrustStrength = 10.0f;
+    [SerializeField]
+    private RocketProps rocketProps;
 
     private bool[] thrusts = null;
 
@@ -36,25 +38,36 @@ public class RocketController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-		for (int i = 0; i < thrustPositions.Length; i++)
+        if (rocketProps.OutOfFuel == false)
         {
-            if (thrusts[i])
+            for (int i = 0; i < thrustPositions.Length; i++)
             {
-                ownRig.AddForceAtPosition(transform.up * thrustStrength, thrustPositions[i].position);
+                if (thrusts[i])
+                {
+                    ownRig.AddForceAtPosition(transform.up * thrustStrength, thrustPositions[i].position);
+                }
+            }
+
+            for (int i = 0; i < keyCodes.Length; i++)
+            {
+                if (Input.GetKey(keyCodes[i]))
+                {
+                    SetThrust(i, true);
+                }
+                else
+                {
+                    SetThrust(i, false);
+                }
             }
         }
-
-        for (int i = 0; i < keyCodes.Length; i++)
+        else
         {
-            if (Input.GetKey(keyCodes[i]))
-            {
-                SetThrust(i, true);
-            }
-            else
+            for (int i = 0; i < keyCodes.Length; i++)
             {
                 SetThrust(i, false);
             }
         }
+
 
         if (!Turning)
         {
@@ -104,6 +117,14 @@ public class RocketController : MonoBehaviour {
     public Vector3 Normal
     {
         get; set;
+    }
+
+    public bool[] Thrusts
+    {
+        get
+        {
+            return thrusts;
+        }
     }
 
     public void SetThrust(int index, bool on)
