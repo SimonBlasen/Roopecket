@@ -11,6 +11,8 @@ public class RocketController : MonoBehaviour {
     [SerializeField]
     private ParticleSystem[] thrustParticles;
     [SerializeField]
+    private Light[] thrustLights;
+    [SerializeField]
     private float thrustStrength = 10.0f;
     [SerializeField]
     private RocketProps rocketProps;
@@ -137,10 +139,12 @@ public class RocketController : MonoBehaviour {
         {
             if (on)
             {
+                thrustLights[index].intensity = 5f;
                 thrustParticles[index].Play();
             }
             else
             {
+                thrustLights[index].intensity = 0f;
                 thrustParticles[index].Stop();
             }
             thrusts[index] = on;
