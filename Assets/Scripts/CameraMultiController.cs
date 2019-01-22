@@ -74,8 +74,13 @@ public class CameraMultiController : MonoBehaviour
         Vector3 vecSide = Vector3.Cross(vecUp, offsetVector);
 
 
-        transform.position = Vector3.Lerp(transform.position, mid + offsetVector.normalized * (maxDist + (rocketRigidbody != null ? rocketRigidbody.velocity.magnitude * distanceFactor : 0f)), lerpSpeed);
+        transform.position = Vector3.Lerp(transform.position, mid + offsetVector.normalized * (maxDist + (IsRocketDead ? 20f : (rocketRigidbody != null ? rocketRigidbody.velocity.magnitude * distanceFactor : 0f))), lerpSpeed);
         transform.LookAt(transform.position + offsetVector * -1f);
+    }
+
+    public bool IsRocketDead
+    {
+        get;set;
     }
 
     public Vector3 OffsetVector

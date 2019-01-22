@@ -9,7 +9,9 @@ public class RocketProps : MonoBehaviour
     [SerializeField]
     private float tickTime = 1f;
     [SerializeField]
-    private int collisionDamage = 40;
+    private float collisionDamage = 40;
+    [SerializeField]
+    private float impactToleranceThrusters = 5f;
     [SerializeField]
     private int maxHealth = 200;
     [SerializeField]
@@ -22,6 +24,16 @@ public class RocketProps : MonoBehaviour
     private Transform[] okToHitTransforms;
     [SerializeField]
     private RocketController rocketController;
+    [SerializeField]
+    private CameraMultiController cameraMulti;
+
+    [Header("Prefabs")]
+    [SerializeField]
+    private GameObject dieExplosion;
+    [SerializeField]
+    private GameObject deadRocket;
+    [SerializeField]
+    private GameObject dieExplosionForce;
 
     private int currentHealth;
 
@@ -34,6 +46,7 @@ public class RocketProps : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentFuel = maxFuel;
+        cameraMulti.IsRocketDead = false;
     }
 
     // Update is called once per frame
@@ -107,7 +120,22 @@ public class RocketProps : MonoBehaviour
     public void Die()
     {
         //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        Debug.Log("Died");
+        //Debug.Log("Died");
+        GameObject explosion = Instantiate(dieExplosion);
+        explosion.transform.position = transform.position;
+
+        GameObject deadRocketInst = Instantiate(deadRocket);
+        deadRocketInst.transform.position = transform.position;
+
+        cameraMulti.IsRocketDead = true;
+
+        Destroy(explosion, 3.8f);
+
+        GameObject instForce = Instantiate(dieExplosionForce);
+        instForce.transform.position = transform.position;
+        Destroy(instForce, 2f);
+
+        gameObject.SetActive(false);
     }
 
     [Header("Shake Settings")]
@@ -138,7 +166,7 @@ public class RocketProps : MonoBehaviour
 
 
     private void OnCollisionStay(Collision collision)
-    {
+    {/*
         bool notOkay = false;
         for (int i = 0; i < collision.contacts.Length; i++)
         {
@@ -167,11 +195,12 @@ public class RocketProps : MonoBehaviour
                 tickCounter = 0f;
                 Damage(collisionDamage);
             }
-        }
+        }*/
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Debug.Log("Impact: " + collision.impulse.magnitude.ToString());
         bool notOkay = false;
         for (int i = 0; i < collision.contacts.Length; i++)
         {
@@ -194,8 +223,15 @@ public class RocketProps : MonoBehaviour
         if (notOkay)
         {
             //Debug.Log("Collision");
-            tickCounter = 0f;
-            Damage(collisionDamage);
+            //tickCounter = 0f;
+            Damage((int)(collisionDamage * collision.impulse.magnitude));
+        }
+        else
+        {
+            if (collision.impulse.magnitude > impactToleranceThrusters)
+            {
+                Damage((int)(collisionDamage * (collision.impulse.magnitude - impactToleranceThrusters)));
+            }
         }
     }
 }
