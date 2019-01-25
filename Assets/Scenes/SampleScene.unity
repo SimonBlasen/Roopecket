@@ -6692,6 +6692,7 @@ MonoBehaviour:
   - {fileID: 1743181883}
   thrustLights: []
   thrustStrength: 380
+  midPoint: {fileID: 0}
   rocketProps: {fileID: 0}
 --- !u!4 &264086784
 Transform:
@@ -11962,7 +11963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1128944601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11987,6 +11988,7 @@ MonoBehaviour:
   - {fileID: 1631196349}
   thrustLights: []
   thrustStrength: 380
+  midPoint: {fileID: 0}
   rocketProps: {fileID: 0}
 --- !u!4 &1128944602
 Transform:
@@ -12040,6 +12042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tickTime: 1
   collisionDamage: 40
+  impactToleranceThrusters: 5
   maxHealth: 200
   maxFuel: 200
   thrustFuelPerSecond: 4
@@ -12049,6 +12052,10 @@ MonoBehaviour:
   - {fileID: 1426570194}
   - {fileID: 207213496}
   rocketController: {fileID: 0}
+  cameraMulti: {fileID: 0}
+  dieExplosion: {fileID: 0}
+  deadRocket: {fileID: 0}
+  dieExplosionForce: {fileID: 0}
   magnitude: 4
   roughness: 10
   fadeIn: 0.1
@@ -12600,11 +12607,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4041233365465440, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 11.03
+      value: 10.653
       objectReference: {fileID: 0}
     - target: {fileID: 4041233365465440, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.855
+      value: 2.504
       objectReference: {fileID: 0}
     - target: {fileID: 4041233365465440, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
       propertyPath: m_LocalPosition.z
@@ -12665,6 +12672,22 @@ Prefab:
       propertyPath: thrustLights.Array.data[3]
       value: 
       objectReference: {fileID: 485716269}
+    - target: {fileID: 1287118487579380, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233365465440, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233365465440, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041233365465440, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73b0be45567cce8449bbf1cbd66e3c39, type: 2}
   m_IsPrefabAsset: 0

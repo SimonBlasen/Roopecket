@@ -15,6 +15,8 @@ public class RocketController : MonoBehaviour {
     [SerializeField]
     private float thrustStrength = 10.0f;
     [SerializeField]
+    private Transform midPoint;
+    [SerializeField]
     private RocketProps rocketProps;
 
     private bool[] thrusts = null;
@@ -101,6 +103,10 @@ public class RocketController : MonoBehaviour {
     private void Init()
     {
         ownRig = GetComponent<Rigidbody>();
+        if (midPoint != null)
+        {
+            ownRig.centerOfMass = midPoint.localPosition;
+        }
         thrusts = new bool[thrustPositions.Length];
         for (int i = 0; i < thrusts.Length; i++)
         {
