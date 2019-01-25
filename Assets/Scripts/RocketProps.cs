@@ -126,6 +126,7 @@ public class RocketProps : MonoBehaviour
 
         GameObject deadRocketInst = Instantiate(deadRocket);
         deadRocketInst.transform.position = transform.position;
+        deadRocketInst.transform.rotation = transform.rotation;
 
         cameraMulti.IsRocketDead = true;
 
@@ -133,6 +134,7 @@ public class RocketProps : MonoBehaviour
 
         GameObject instForce = Instantiate(dieExplosionForce);
         instForce.transform.position = transform.position;
+        
         Destroy(instForce, 2f);
 
         gameObject.SetActive(false);
