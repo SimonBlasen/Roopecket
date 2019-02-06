@@ -5931,7 +5931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1322643120}
-  rocketProps: {fileID: 0}
+  rocketProps: {fileID: 458882874}
 --- !u!114 &152358686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7319,7 +7319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 911297574}
   text: {fileID: 1460697336}
-  rocketProps: {fileID: 0}
+  rocketProps: {fileID: 458882874}
 --- !u!114 &429007333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7528,6 +7528,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 455769207}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &458882874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114104079643485016, guid: 73b0be45567cce8449bbf1cbd66e3c39,
+    type: 2}
+  m_PrefabInternal: {fileID: 1253567878}
+  m_Script: {fileID: 11500000, guid: 02bbb130e1159274ca448eaab3a7057e, type: 3}
 --- !u!1001 &482000501
 Prefab:
   m_ObjectHideFlags: 0
@@ -7827,6 +7833,10 @@ Prefab:
     - target: {fileID: 19822192, guid: e9a6501da28be2b4986e8ba47c2e017c, type: 2}
       propertyPath: InitialModule.startSpeed.scalar
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19822192, guid: e9a6501da28be2b4986e8ba47c2e017c, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9a6501da28be2b4986e8ba47c2e017c, type: 2}
