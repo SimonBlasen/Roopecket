@@ -115,6 +115,8 @@ public class RocketController : MonoBehaviour {
 
         Normal = new Vector3(0f, 0f, -1f);
         Turning = false;
+
+        Manager.Instance.ActivateManager();
     }
 
     public bool Turning
