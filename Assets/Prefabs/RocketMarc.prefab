@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 54303275572870466}
   - component: {fileID: 114104079643485016}
   - component: {fileID: 114746624014748664}
+  - component: {fileID: 75858238191871252}
   m_Layer: 0
   m_Name: RocketMarc
   m_TagString: Rocket
@@ -472,6 +473,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1485002877058198
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4861928371503690}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1538905300775140
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +622,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1691793855366930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4249743737200938}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1715068094379098
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +750,21 @@ GameObject:
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Rocket
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1799953209730326
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4803038923420454}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -952,8 +998,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287118487579380}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 11.03, y: 2.855, z: 0.3710258}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 11.03, y: 1.516, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 4316645450006098}
   - {fileID: 4864653991331226}
@@ -983,6 +1029,7 @@ Transform:
   - {fileID: 4642695184062978}
   - {fileID: 4754863205066946}
   - {fileID: 4469837101556860}
+  - {fileID: 4249743737200938}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1161,6 +1208,19 @@ Transform:
   m_Father: {fileID: 4041233365465440}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 107.54401, y: -0.000015258789, z: -0.000015258789}
+--- !u!4 &4249743737200938
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691793855366930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.182, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4041233365465440}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4281218966609928
 Transform:
   m_ObjectHideFlags: 1
@@ -1212,6 +1272,7 @@ Transform:
   m_Children:
   - {fileID: 4499585374088482}
   - {fileID: 4776491078184214}
+  - {fileID: 4861928371503690}
   m_Father: {fileID: 4041233365465440}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1266,6 +1327,7 @@ Transform:
   m_Children:
   - {fileID: 4235847152738020}
   - {fileID: 4043892369346912}
+  - {fileID: 4803038923420454}
   m_Father: {fileID: 4041233365465440}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1578,6 +1640,19 @@ Transform:
   m_Father: {fileID: 4235847152738020}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4803038923420454
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799953209730326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4356411576736552}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4803288022537198
 Transform:
   m_ObjectHideFlags: 1
@@ -1604,6 +1679,19 @@ Transform:
   m_Father: {fileID: 4041233365465440}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 107.54401, y: 90, z: -0.000015258789}
+--- !u!4 &4861928371503690
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1485002877058198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4316645450006098}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4864653991331226
 Transform:
   m_ObjectHideFlags: 1
@@ -2149,7 +2237,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 6881ff8c82c797241acfe15cdc9ceefc, type: 2}
+  - {fileID: 2100000, guid: 54a136c6262f58d4b87051a5a1cd3b70, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2877,6 +2965,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.9999999, z: 9.633121}
   m_Center: {x: 0.000015258789, y: 0, z: -3.8165622}
+--- !u!75 &75858238191871252
+ConstantForce:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287118487579380}
+  m_Enabled: 1
+  m_Force: {x: 0, y: 0, z: 0}
+  m_RelativeForce: {x: 0, y: 0, z: 0}
+  m_Torque: {x: 0, y: 0, z: 0}
+  m_RelativeTorque: {x: 0, y: 0, z: 0}
 --- !u!95 &95355331463001160
 Animator:
   serializedVersion: 3
@@ -3107,10 +3206,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyCodes: 61000000730000006400000066000000
   thrustPositions:
-  - {fileID: 4316645450006098}
+  - {fileID: 4861928371503690}
   - {fileID: 4864653991331226}
   - {fileID: 4529487404035192}
-  - {fileID: 4356411576736552}
+  - {fileID: 4803038923420454}
   thrustParticles:
   - {fileID: 198813660790777320}
   - {fileID: 198993724187997452}
@@ -3122,6 +3221,7 @@ MonoBehaviour:
   - {fileID: 108697340283398332}
   - {fileID: 108189689689591818}
   thrustStrength: 380
+  midPoint: {fileID: 0}
   rocketProps: {fileID: 114104079643485016}
 --- !u!135 &135741626883114326
 SphereCollider:
