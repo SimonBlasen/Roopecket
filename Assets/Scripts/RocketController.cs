@@ -7,6 +7,8 @@ public class RocketController : MonoBehaviour {
     [SerializeField]
     private KeyCode[] keyCodes;
     [SerializeField]
+    private KeyCode keyLander;
+    [SerializeField]
     private Transform[] thrustPositions;
     [SerializeField]
     private ParticleSystem[] thrustParticles;
@@ -18,6 +20,8 @@ public class RocketController : MonoBehaviour {
     private Transform midPoint;
     [SerializeField]
     private RocketProps rocketProps;
+    [SerializeField]
+    private LanderMover[] landerMovers;
 
     private bool[] thrusts = null;
 
@@ -69,6 +73,14 @@ public class RocketController : MonoBehaviour {
             for (int i = 0; i < keyCodes.Length; i++)
             {
                 SetThrust(i, false);
+            }
+        }
+
+        if (Input.GetKeyDown(keyLander))
+        {
+            for (int i = 0; i < landerMovers.Length; i++)
+            {
+                landerMovers[i].TurnOut = !landerMovers[i].TurnOut;
             }
         }
 
