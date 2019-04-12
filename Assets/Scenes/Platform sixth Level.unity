@@ -6484,11 +6484,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 57179931}
@@ -32799,9 +32799,36 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 24.581686
       objectReference: {fileID: 0}
+    - target: {fileID: 65487946164849566, guid: b0e164894349f554dbfcf34cfa965e48,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 65487946164849566, guid: b0e164894349f554dbfcf34cfa965e48,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0e164894349f554dbfcf34cfa965e48, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1198861694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1940648963341260, guid: b0e164894349f554dbfcf34cfa965e48,
+    type: 2}
+  m_PrefabInternal: {fileID: 1198861693}
+--- !u!114 &1198861695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1198861694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b90bbf5b7c42624eb2374cb24c18ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelToLoad: Platform seventh Level
 --- !u!1 &1207771658 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 134010, guid: 380c131da968d424ab4902f967bc23d5,

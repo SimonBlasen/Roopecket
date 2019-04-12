@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class flyingGoal : MonoBehaviour {
 
@@ -19,10 +20,10 @@ public class flyingGoal : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "FlyingGoal")
+        if (other.transform.tag == "Rocket")
         {
 
-           
+            SceneManager.LoadScene(levelToLoad);
 
         }
     }
