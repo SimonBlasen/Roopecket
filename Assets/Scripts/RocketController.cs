@@ -13,6 +13,8 @@ public class RocketController : MonoBehaviour {
     [SerializeField]
     private ParticleSystem[] thrustParticles;
     [SerializeField]
+    private AudioSource[] thrusterAudioSrcs;
+    [SerializeField]
     private Light[] thrustLights;
     [SerializeField]
     private float thrustStrength = 10.0f;
@@ -22,8 +24,12 @@ public class RocketController : MonoBehaviour {
     private RocketProps rocketProps;
     [SerializeField]
     private LanderMover[] landerMovers;
+    [SerializeField]
+    private float thrusterAudioIncr = 0.1f;
 
     private bool[] thrusts = null;
+
+    private bool[] audioOn = new bool[4];
 
     private Rigidbody ownRig;
 
@@ -40,6 +46,28 @@ public class RocketController : MonoBehaviour {
         localVelocity.y = 0f;
 
         ownRig.angularVelocity = transform.TransformDirection(localVelocity);
+
+
+        for (int i = 0; i < thrusterAudioSrcs.Length; i++)
+        {
+            if (audioOn[i] && thrusterAudioSrcs[i].volume < 1f)
+            {
+                thrusterAudioSrcs[i].volume += thrusterAudioIncr * Time.deltaTime;
+                if (thrusterAudioSrcs[i].volume > 1f)
+                {
+                    thrusterAudioSrcs[i].volume = 1f;
+                }
+            }
+            else if (audioOn[i] == false && thrusterAudioSrcs[i].volume > 0f)
+            {
+                thrusterAudioSrcs[i].volume -= thrusterAudioIncr * Time.deltaTime;
+                if (thrusterAudioSrcs[i].volume < 0f)
+                {
+                    thrusterAudioSrcs[i].volume = 0f;
+                    thrusterAudioSrcs[i].Stop();
+                }
+            }
+        }
     }
 
 
@@ -124,6 +152,10 @@ public class RocketController : MonoBehaviour {
         {
             thrusts[i] = false;
         }
+        for (int i = 0; i < audioOn.Length; i++)
+        {
+            audioOn[i] = false;
+        }
 
         Normal = new Vector3(0f, 0f, -1f);
         Turning = false;
@@ -148,6 +180,7 @@ public class RocketController : MonoBehaviour {
             return thrusts;
         }
     }
+    
 
     public void SetThrust(int index, bool on)
     {
@@ -161,11 +194,20 @@ public class RocketController : MonoBehaviour {
             {
                 thrustLights[index].intensity = 5f;
                 thrustParticles[index].Play();
+                if (thrusts[index] == false)
+                {
+                    thrusterAudioSrcs[index].Play();
+                    audioOn[index] = true;
+                }
             }
             else
             {
                 thrustLights[index].intensity = 0f;
                 thrustParticles[index].Stop();
+                if (thrusts[index])
+                {
+                    audioOn[index] = false;
+                }
             }
             thrusts[index] = on;
         }

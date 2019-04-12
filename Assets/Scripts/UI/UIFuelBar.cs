@@ -15,7 +15,7 @@ public class UIFuelBar : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        rocketProps = GameObject.FindObjectOfType<RocketProps>();
     }
 
     // Update is called once per frame

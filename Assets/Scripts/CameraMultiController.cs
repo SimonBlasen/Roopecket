@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class CameraMultiController : MonoBehaviour
 {
@@ -18,12 +19,14 @@ public class CameraMultiController : MonoBehaviour
     private float lerpSpeed = 0.1f;
     [SerializeField]
     private float camScaleFactor = 2f;
+    [SerializeField]
+    private PostProcessingBehaviour postProc;
 
 
     // Use this for initialization
     void Start()
     {
-
+        postProc = GetComponentInChildren<PostProcessingBehaviour>();
     }
 
     // Update is called once per frame
@@ -76,6 +79,12 @@ public class CameraMultiController : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, mid + offsetVector.normalized * (maxDist + (IsRocketDead ? 20f : (rocketRigidbody != null ? rocketRigidbody.velocity.magnitude * distanceFactor : 0f))), lerpSpeed);
         transform.LookAt(transform.position + offsetVector * -1f);
+
+        DepthOfFieldModel.Settings set = postProc.profile.depthOfField.settings;
+
+        set.focusDistance = (maxDist + (IsRocketDead ? 20f : (rocketRigidbody != null ? rocketRigidbody.velocity.magnitude * distanceFactor : 0f)));
+
+        postProc.profile.depthOfField.settings = set;
     }
 
     public bool IsRocketDead

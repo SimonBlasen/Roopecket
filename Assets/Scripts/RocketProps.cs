@@ -92,6 +92,11 @@ public class RocketProps : MonoBehaviour
         }
     }
 
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
     public float CurrentFuel
     {
         get
