@@ -26,6 +26,8 @@ public class RocketController : MonoBehaviour {
     private LanderMover[] landerMovers;
     [SerializeField]
     private float thrusterAudioIncr = 0.1f;
+    [SerializeField]
+    public float rocketVolume = 1f;
 
     private bool[] thrusts = null;
 
@@ -50,12 +52,12 @@ public class RocketController : MonoBehaviour {
 
         for (int i = 0; i < thrusterAudioSrcs.Length; i++)
         {
-            if (audioOn[i] && thrusterAudioSrcs[i].volume < 1f)
+            if (audioOn[i] && thrusterAudioSrcs[i].volume < rocketVolume)
             {
                 thrusterAudioSrcs[i].volume += thrusterAudioIncr * Time.deltaTime;
-                if (thrusterAudioSrcs[i].volume > 1f)
+                if (thrusterAudioSrcs[i].volume > rocketVolume)
                 {
-                    thrusterAudioSrcs[i].volume = 1f;
+                    thrusterAudioSrcs[i].volume = rocketVolume;
                 }
             }
             else if (audioOn[i] == false && thrusterAudioSrcs[i].volume > 0f)

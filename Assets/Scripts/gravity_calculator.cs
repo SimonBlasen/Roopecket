@@ -6,12 +6,21 @@ public class gravity_calculator : MonoBehaviour {
 
     public string gravity = "-1";
     public GUISkin skin;
-    public int showLevel = 0; 
+    public int showLevel = 0;
+    public RocketController rocket;
 
     // Use this for initialization
-    void Start () {
-		
-	}
+    private void Start()
+    {
+
+
+
+    }
+
+    private void Update()
+    {
+        
+    }
 
     private void OnGUI()
     {
