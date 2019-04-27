@@ -170,6 +170,9 @@ public class RocketController : MonoBehaviour {
         get;set;
     }
 
+    public Vector3 GravityZone
+    { get; set; }
+
     public Vector3 Normal
     {
         get; set;
