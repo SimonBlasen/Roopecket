@@ -33,6 +33,7 @@ public class GravityZone : MonoBehaviour {
                 par = par.parent;
             }
             par.GetComponent<ConstantForce>().force = (-Physics.gravity + gravityHere) * par.GetComponent<Rigidbody>().mass;
+            par.GetComponent<RocketController>().GravityZone = gravityHere;
         }
     }
 
@@ -46,6 +47,7 @@ public class GravityZone : MonoBehaviour {
                 par = par.parent;
             }
             par.GetComponent<ConstantForce>().force = Vector3.zero;
+            par.GetComponent<RocketController>().GravityZone = Vector3.zero;
         }
     }
 }
