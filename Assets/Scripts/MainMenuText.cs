@@ -8,7 +8,7 @@ public class MainMenuText : MonoBehaviour {
 
     private RectTransform menuText;
     private Vector3 spawn;
-    private Vector3 selectedGarage, selectedContinue, selectedOptions;
+    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial;
     private bool MouseHover = false;
     private bool Entered;
     private bool MousePress = false;
@@ -20,9 +20,10 @@ public class MainMenuText : MonoBehaviour {
     void Start () {
         MouseHover = false;
         spawn = transform.position;
-        selectedContinue = new Vector3(0f,0f,-4.15f);
-        selectedGarage = new Vector3(0f, 0.1f, -4.15f);
-        selectedOptions = new Vector3(0f, -0.1f, -4.15f);
+        selectedContinue = new Vector3(0f,0.05f,-4.15f);
+        selectedGarage = new Vector3(0f, 0.15f, -4.15f);
+        selectedOptions = new Vector3(0f, -0.05f, -4.15f);
+        selectedTutorial = new Vector3(0f, -0.15f, -4.15f);
         hidedButton = new Vector3(100f, 100f, 100f);
         FirstTouch = false;
        
@@ -33,18 +34,19 @@ public class MainMenuText : MonoBehaviour {
 
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
 
-       
+
 
         if (FirstTouch)
 
         {
 
-      
+
 
             if (MouseHover)
             {
@@ -86,34 +88,45 @@ public class MainMenuText : MonoBehaviour {
                     transform.position = selectedOptions;
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 0.5f, 1f);
+
                 }
 
+                if (pointName == "Tutorial" && MouseHover)
+                {
+                    transform.position = selectedTutorial;
+                    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = new Color(1f, 1f, 0.5f, 1f);
 
+                    if (MousePress)
+                    {
 
+                        SceneManager.LoadScene("Tutorial1");
+
+                    }
+                }
+
+                else
+                {
+
+                    transform.position = spawn;
+                    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = new Color(1f, 1f, 1f, 1f);
+
+                }
 
             }
 
-            else
-            {
+            /*   if (FirstTouch == false)
+               {
 
-                transform.position = spawn;
-                SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-                renderer.color = new Color(1f, 1f, 1f, 1f);
+                   SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                   renderer.color = new Color(1f, 1f, 1f, 0.1f);
+               }
+              */
 
-            }
 
         }
-
-     /*   if (FirstTouch == false)
-        {
-
-            SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-            renderer.color = new Color(1f, 1f, 1f, 0.1f);
-        }
-       */
-        
-
-	}
+    }
 
     private void OnMouseEnter()
     {
