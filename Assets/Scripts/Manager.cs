@@ -54,9 +54,14 @@ public class Manager : MonoBehaviour
     {
         rocketsFueling.Add(rocket.GetComponent<RocketProps>());
 
-        if (landingPlatform.Split('_').Length == 2 && landingPlatform.Split('_')[0] == "Finish")
+        if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish")
         {
-            SceneManager.LoadScene(landingPlatform.Split('_')[1]);
+            string conc = landingPlatform.Split('_')[1];
+            for (int i = 2; i < landingPlatform.Split('_').Length; i++)
+            {
+                conc += "_" + landingPlatform.Split('_')[i];
+            }
+            SceneManager.LoadScene(conc);
         }
 
         Debug.Log("Landed on " + landingPlatform);
