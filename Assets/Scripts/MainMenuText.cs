@@ -67,7 +67,7 @@ public class MainMenuText : MonoBehaviour {
 
 
 
-                if (pointName == "Garage" && MouseHover)
+                else if (pointName == "Garage" && MouseHover)
                 {
                     transform.position = selectedGarage;
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
@@ -83,7 +83,7 @@ public class MainMenuText : MonoBehaviour {
 
 
 
-                if (pointName == "Options" && MouseHover)
+                else if (pointName == "Options" && MouseHover)
                 {
                     transform.position = selectedOptions;
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
@@ -93,7 +93,7 @@ public class MainMenuText : MonoBehaviour {
 
 
 
-                if (pointName == "Tutorial" && MouseHover)
+                else if (pointName == "Tutorial" && MouseHover)
                 {
                     transform.position = selectedTutorial;
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
@@ -116,6 +116,13 @@ public class MainMenuText : MonoBehaviour {
 
                 }
 
+            }
+
+            else
+            {
+                transform.position = spawn;
+                SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                renderer.color = new Color(1f, 1f, 1f, 1f);
             }
 
             /*   if (FirstTouch == false)
