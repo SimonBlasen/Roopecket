@@ -20,7 +20,7 @@ public class MainMenuText : MonoBehaviour {
     void Start () {
         MouseHover = false;
         spawn = transform.position;
-        selectedContinue = new Vector3(0f,0.05f,-4.15f);
+        selectedContinue = new Vector3(0f, 0.05f, -4.15f);
         selectedGarage = new Vector3(0f, 0.15f, -4.15f);
         selectedOptions = new Vector3(0f, -0.05f, -4.15f);
         selectedTutorial = new Vector3(0f, -0.15f, -4.15f);
@@ -90,6 +90,8 @@ public class MainMenuText : MonoBehaviour {
                     renderer.color = new Color(1f, 1f, 0.5f, 1f);
 
                 }
+
+
 
                 if (pointName == "Tutorial" && MouseHover)
                 {
