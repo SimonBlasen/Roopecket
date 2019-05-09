@@ -6162,8 +6162,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490850419}
-  - component: {fileID: 490850420}
   - component: {fileID: 490850421}
+  - component: {fileID: 490850420}
   m_Layer: 0
   m_Name: Opening
   m_TagString: Untagged
@@ -6187,21 +6187,24 @@ Transform:
   m_Father: {fileID: 1253567879}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &490850420
-Animation:
+--- !u!95 &490850420
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 490850418}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 69335ed616992d443a3364c49d2cd949, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 69335ed616992d443a3364c49d2cd949, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 225998e3ed71d114a95e2531bdc8f912, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &490850421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6216,6 +6219,7 @@ MonoBehaviour:
   misslePrefab: {fileID: 1838067559658446, guid: 28bf0643d16c783409e68d04e8b5a049,
     type: 2}
   missleSpawn: {fileID: 1533378467}
+  anim: {fileID: 0}
 --- !u!4 &514491857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4502225618787180, guid: b866767f5000c1f4ebdea8e229883830,
