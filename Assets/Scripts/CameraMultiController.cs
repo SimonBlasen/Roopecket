@@ -82,7 +82,7 @@ public class CameraMultiController : MonoBehaviour
         Vector3 goalPos = mid + offsetVector.normalized * distance;
 
         RaycastHit hit;
-        if (Physics.Raycast(new Ray(goalPos, childTransform.forward), out hit, distance - 2f))
+        if (false && Physics.Raycast(new Ray(goalPos, childTransform.forward), out hit, distance - 2f))
         {
             goalPos = hit.point + childTransform.forward * 0.1f;
             distance = Vector3.Distance(mid, goalPos);
