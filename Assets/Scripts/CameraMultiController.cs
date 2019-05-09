@@ -22,11 +22,13 @@ public class CameraMultiController : MonoBehaviour
     [SerializeField]
     private PostProcessingBehaviour postProc;
 
+    private Transform childTransform = null;
 
     // Use this for initialization
     void Start()
     {
         postProc = GetComponentInChildren<PostProcessingBehaviour>();
+        childTransform = GetComponentInChildren<Camera>().transform;
     }
 
     // Update is called once per frame
@@ -76,13 +78,21 @@ public class CameraMultiController : MonoBehaviour
         Vector3 vecUp = Vector3.up;
         Vector3 vecSide = Vector3.Cross(vecUp, offsetVector);
 
+        float distance = (maxDist + (IsRocketDead ? 20f : (rocketRigidbody != null ? rocketRigidbody.velocity.magnitude * distanceFactor : 0f)));
+        Vector3 goalPos = mid + offsetVector.normalized * distance;
 
-        transform.position = Vector3.Lerp(transform.position, mid + offsetVector.normalized * (maxDist + (IsRocketDead ? 20f : (rocketRigidbody != null ? rocketRigidbody.velocity.magnitude * distanceFactor : 0f))), lerpSpeed);
+        RaycastHit hit;
+        if (Physics.Raycast(new Ray(goalPos, childTransform.forward), out hit, distance - 2f))
+        {
+            goalPos = hit.point + childTransform.forward * 0.1f;
+            distance = Vector3.Distance(mid, goalPos);
+        }
+        transform.position = Vector3.Lerp(transform.position, goalPos, lerpSpeed);
         transform.LookAt(transform.position + offsetVector * -1f);
 
         DepthOfFieldModel.Settings set = postProc.profile.depthOfField.settings;
 
-        set.focusDistance = (maxDist + (IsRocketDead ? 20f : (rocketRigidbody != null ? rocketRigidbody.velocity.magnitude * distanceFactor : 0f)));
+        set.focusDistance = distance;
 
         postProc.profile.depthOfField.settings = set;
     }
