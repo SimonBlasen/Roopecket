@@ -11,6 +11,8 @@ public class MissleShooter : MonoBehaviour
     [Header("References")]
     [SerializeField]
     private Transform missleSpawn;
+    [SerializeField]
+    private Rigidbody rocketRig;
 
     public Animator anim;
 
@@ -36,6 +38,7 @@ public class MissleShooter : MonoBehaviour
             GameObject instMissle = Instantiate(misslePrefab);
             instMissle.transform.position = missleSpawn.position;
             instMissle.transform.forward = missleSpawn.forward;
+            instMissle.GetComponent<Rigidbody>().velocity = rocketRig.velocity + (missleSpawn.forward * 3f);
             anim.SetBool("open", true);
             waitMissleAnim = 0.3f;
         }
