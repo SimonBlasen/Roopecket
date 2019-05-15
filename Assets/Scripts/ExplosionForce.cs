@@ -22,29 +22,24 @@ public class ExplosionForce : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (affected.Contains(other.transform.GetInstanceID()) == false)
+        Transform par = other.transform;
+        while (par.parent != null)
         {
-            if (other.transform.GetComponent<Rigidbody>() != null)
+            par = par.parent;
+            if (par.GetComponent<Rigidbody>() != null)
             {
-                other.transform.GetComponent<Rigidbody>().AddExplosionForce(explisionForce, transform.position, GetComponent<SphereCollider>().radius);
-                Debug.Log("Added explision force to: " + other.name);
+                break;
             }
-
-            affected.Add(other.transform.GetInstanceID());
         }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (affected.Contains(other.transform.GetInstanceID()) == false)
+        if (affected.Contains(par.GetInstanceID()) == false && par.GetComponent<ShootMissleObj>() == null)
         {
-            if (other.transform.GetComponent<Rigidbody>() != null)
+            if (par.GetComponent<Rigidbody>() != null)
             {
-                other.transform.GetComponent<Rigidbody>().AddExplosionForce(explisionForce, transform.position, GetComponent<SphereCollider>().radius);
-                Debug.Log("Added explision force to: " + other.name);
+                par.GetComponent<Rigidbody>().AddExplosionForce(explisionForce, transform.position, GetComponent<SphereCollider>().radius);
+                Debug.Log("Added explision force to: " + par.name);
             }
 
-            affected.Add(other.transform.GetInstanceID());
+            affected.Add(par.GetInstanceID());
         }
     }
 }

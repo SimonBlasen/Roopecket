@@ -81,8 +81,9 @@ public class ShootMissleObj : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Rocket")
+        if (other.tag != "Rocket" && other.tag != "ExplosionForce")
         {
+            Debug.Log(other.name);
             explode();
         }
     }
