@@ -146,14 +146,7 @@ public class RocketController : MonoBehaviour {
 
     private void Init()
     {
-        if (thrustStrengthes.Length == 0)
-        {
-            thrustStrengthes = new float[thrusts.Length];
-            for (int i = 0; i < thrustStrengthes.Length; i++)
-            {
-                thrustStrengthes[i] = thrustStrength;
-            }
-        }
+        
         ownRig = GetComponent<Rigidbody>();
         if (midPoint != null)
         {
@@ -167,6 +160,15 @@ public class RocketController : MonoBehaviour {
         for (int i = 0; i < audioOn.Length; i++)
         {
             audioOn[i] = false;
+        }
+
+        if (thrustStrengthes.Length == 0)
+        {
+            thrustStrengthes = new float[thrusts.Length];
+            for (int i = 0; i < thrustStrengthes.Length; i++)
+            {
+                thrustStrengthes[i] = thrustStrength;
+            }
         }
 
         Normal = new Vector3(0f, 0f, -1f);

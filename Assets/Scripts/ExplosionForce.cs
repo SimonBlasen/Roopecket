@@ -33,4 +33,18 @@ public class ExplosionForce : MonoBehaviour
             affected.Add(other.transform.GetInstanceID());
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (affected.Contains(other.transform.GetInstanceID()) == false)
+        {
+            if (other.transform.GetComponent<Rigidbody>() != null)
+            {
+                other.transform.GetComponent<Rigidbody>().AddExplosionForce(explisionForce, transform.position, GetComponent<SphereCollider>().radius);
+                Debug.Log("Added explision force to: " + other.name);
+            }
+
+            affected.Add(other.transform.GetInstanceID());
+        }
+    }
 }
