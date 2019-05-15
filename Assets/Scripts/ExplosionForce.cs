@@ -27,6 +27,7 @@ public class ExplosionForce : MonoBehaviour
             if (other.transform.GetComponent<Rigidbody>() != null)
             {
                 other.transform.GetComponent<Rigidbody>().AddExplosionForce(explisionForce, transform.position, GetComponent<SphereCollider>().radius);
+                Debug.Log("Added explision force to: " + other.name);
             }
 
             affected.Add(other.transform.GetInstanceID());

@@ -16,7 +16,11 @@ public class ShootMissleObj : MonoBehaviour {
     [SerializeField]
     private Transform thrustPos;
     [SerializeField]
-    private ParticleSystem thrustParticles;
+    private ParticleSystem[] thrustParticles;
+    [SerializeField]
+    private GameObject explosionPrefab;
+    [SerializeField]
+    private GameObject explisionForce;
 
 
     private float thrustingFor = 0f;
@@ -29,6 +33,8 @@ public class ShootMissleObj : MonoBehaviour {
         //thrustParticles.Play();
 
     }
+
+    private bool thrustersOff = false;
 	
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -41,6 +47,15 @@ public class ShootMissleObj : MonoBehaviour {
             ownRig.angularVelocity = Vector3.zero;
             //ownRig.AddForceAtPosition(transform.up * thrustStrength, thrustPos.position);
         }
+        else if (thrustersOff == false)
+        {
+            thrustersOff = true;
+            for (int i = 0; i < thrustParticles.Length; i++)
+            {
+                thrustParticles[i].Stop();
+            }
+
+        }
 	}
 
     private void explode()
@@ -51,6 +66,15 @@ public class ShootMissleObj : MonoBehaviour {
         {
             affObjs[i].GetComponent<ExplosionAffectedObj>().Damage(explosionStrength / (Mathf.Pow(2f, Vector3.Distance(transform.position, affObjs[i].position))));
         }
+
+        GameObject instExpl = Instantiate(explosionPrefab);
+        instExpl.transform.position = transform.position;
+        Destroy(instExpl, 4f);
+
+        GameObject instExplF = Instantiate(explisionForce);
+        instExplF.transform.position = transform.position;
+        Destroy(instExplF, 4f);
+
         Debug.Log("Explode");
         Destroy(gameObject);
     }
