@@ -19,6 +19,8 @@ public class RocketController : MonoBehaviour {
     [SerializeField]
     private float thrustStrength = 10.0f;
     [SerializeField]
+    private float[] thrustStrengthes;
+    [SerializeField]
     private Transform midPoint;
     [SerializeField]
     private RocketProps rocketProps;
@@ -82,7 +84,7 @@ public class RocketController : MonoBehaviour {
             {
                 if (thrusts[i])
                 {
-                    ownRig.AddForceAtPosition(transform.up * thrustStrength, thrustPositions[i].position);
+                    ownRig.AddForceAtPosition(transform.up * thrustStrengthes[i], thrustPositions[i].position);
                 }
             }
 
@@ -144,6 +146,14 @@ public class RocketController : MonoBehaviour {
 
     private void Init()
     {
+        if (thrustStrengthes.Length == 0)
+        {
+            thrustStrengthes = new float[thrusts.Length];
+            for (int i = 0; i < thrustStrengthes.Length; i++)
+            {
+                thrustStrengthes[i] = thrustStrength;
+            }
+        }
         ownRig = GetComponent<Rigidbody>();
         if (midPoint != null)
         {
