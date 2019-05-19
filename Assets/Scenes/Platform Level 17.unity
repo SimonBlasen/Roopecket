@@ -727,7 +727,12 @@ Prefab:
         type: 2}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 0fc06160db12f924f9e60675067a3d2e, type: 3}
+      objectReference: {fileID: 8300000, guid: c5b01aba1f6ef7a47ab08890340141b6, type: 3}
+    - target: {fileID: 82175955081835204, guid: 7336bd56578024642afaaf2fd8be4225,
+        type: 2}
+      propertyPath: m_Pitch
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7336bd56578024642afaaf2fd8be4225, type: 2}
   m_IsPrefabAsset: 0
@@ -14792,11 +14797,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4341333523118590, guid: ac3b63023129edc41b815b750627bff4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -214.691
+      value: -214.616
       objectReference: {fileID: 0}
     - target: {fileID: 4341333523118590, guid: ac3b63023129edc41b815b750627bff4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.27999973
+      value: -0.163
       objectReference: {fileID: 0}
     - target: {fileID: 4341333523118590, guid: ac3b63023129edc41b815b750627bff4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -14827,6 +14832,16 @@ Prefab:
       propertyPath: cameraMulti
       value: 
       objectReference: {fileID: 349594115}
+    - target: {fileID: 65488488642008672, guid: ac3b63023129edc41b815b750627bff4,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 65374230212187720, guid: ac3b63023129edc41b815b750627bff4,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac3b63023129edc41b815b750627bff4, type: 2}
   m_IsPrefabAsset: 0
@@ -21698,7 +21713,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1287763111941332, guid: d501ceb6126aafa4ebd501f85c9e3878, type: 2}
       propertyPath: m_Name
-      value: Landing Platform (4)
+      value: Finish Platform
       objectReference: {fileID: 0}
     - target: {fileID: 23464195759813424, guid: d501ceb6126aafa4ebd501f85c9e3878,
         type: 2}
@@ -21732,7 +21747,7 @@ Prefab:
     - target: {fileID: 114286137764606034, guid: d501ceb6126aafa4ebd501f85c9e3878,
         type: 2}
       propertyPath: platformName
-      value: 
+      value: Finish_Platform Level 18
       objectReference: {fileID: 0}
     - target: {fileID: 4038906395069086, guid: d501ceb6126aafa4ebd501f85c9e3878, type: 2}
       propertyPath: m_LocalPosition.y
