@@ -3,67 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseContinue : MonoBehaviour {
+public class PauseContinue : MonoBehaviour
+{
+    public static bool GameIsPaused = false;
+    public GameObject pauseMenuUI;
 
-   
 
-    private bool showPauseScreen = false;
-    private bool menuGO = false;
-
-    public int WSH = 20, WSW = 20;
-
-    public float startTime;
-    private string currentTime;
-    public Rect timerRect;
+    
 
 
 
-	// Use this for initialization
-	void Start () {
-
-        timerRect = new Rect(10, 10, 400, 100);
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-        if(menuGO)
-        {
-            showPauseScreen = true;
-        }
-
-        startTime += Time.deltaTime;
-        currentTime = string.Format("{0:0.0}",startTime);
-
-
-        
-
-	}
-
-    private void OnGUI()
+    // Update is called once per frame
+    void Update()
     {
 
-        if (showPauseScreen)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            print("Pause");
-            Rect winScreenRect = new Rect(Screen.width / 2 - (WSW / 2), Screen.height / 2 - (WSH / 2), WSW, WSH);
 
-            Time.timeScale = 0;
-
-            GUI.Box(winScreenRect, "PAUSE");
-
-            if (GUI.Button(new Rect((winScreenRect.x + winScreenRect.width - 170), (winScreenRect.y + winScreenRect.height - 60), 150, 40), "Main Menu"))
+            if (GameIsPaused)
             {
-                SceneManager.LoadScene("Main_Menu_3");
+                Resume();
+            }
+            else
+            {
+                PauseGame();
             }
         }
 
-        GUI.Label(timerRect, currentTime);
+
+
+}
+
+
+    public void PauseGame()
+    {
+
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+
     }
 
-    private void OnMouseDown()
+    public void Resume()
     {
-        menuGO = true;
+
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+
+    }
+
+    public void loadMenu()
+    {
+
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main_Menu_3");
+
+    }
+
+    public void quitGame()
+    {
+
+        Application.Quit();
+
     }
 }
