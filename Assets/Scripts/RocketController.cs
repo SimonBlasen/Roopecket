@@ -33,7 +33,7 @@ public class RocketController : MonoBehaviour {
 
     private bool[] thrusts = null;
 
-    private bool[] audioOn = new bool[4];
+    private bool[] audioOn = null;
 
     private Rigidbody ownRig;
 
@@ -84,7 +84,7 @@ public class RocketController : MonoBehaviour {
             {
                 if (thrusts[i])
                 {
-                    ownRig.AddForceAtPosition(transform.up * thrustStrengthes[i], thrustPositions[i].position);
+                    ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
                 }
             }
 
@@ -153,6 +153,7 @@ public class RocketController : MonoBehaviour {
             ownRig.centerOfMass = midPoint.localPosition;
         }
         thrusts = new bool[thrustPositions.Length];
+        audioOn = new bool[thrusts.Length];
         for (int i = 0; i < thrusts.Length; i++)
         {
             thrusts[i] = false;
