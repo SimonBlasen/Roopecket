@@ -25,7 +25,7 @@ public class RocketProps : MonoBehaviour
     [SerializeField]
     private RocketController rocketController;
     [SerializeField]
-    private CameraMultiController cameraMulti;
+    public CameraMultiController cameraMulti;
 
     [Header("Prefabs")]
     [SerializeField]

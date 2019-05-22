@@ -12,22 +12,36 @@ public class UIFuelBar : MonoBehaviour {
 
     private float lastFuel = 0f;
 
+    RocketSpawner rs;
+
     // Use this for initialization
     void Start()
     {
-        rocketProps = GameObject.FindObjectOfType<RocketProps>();
+        //rocketProps = GameObject.FindObjectOfType<RocketProps>();
+        rocketProps = null;
+        rs = GameObject.FindObjectOfType<RocketSpawner>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rocketProps.CurrentFuel != lastFuel)
+        if (rocketProps == null)
         {
-            lastFuel = rocketProps.CurrentFuel;
-            float percent = lastFuel / rocketProps.MaxFuel;
-            image.fillAmount = percent;
-            int percentInt = (int)(percent * 100f + 0.999f);
-            text.text = percentInt.ToString() + "%";
+            if (rs.SpawnedRocket != null)
+            {
+                rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+            }
+        }
+        else
+        {
+            if (rocketProps.CurrentFuel != lastFuel)
+            {
+                lastFuel = rocketProps.CurrentFuel;
+                float percent = lastFuel / rocketProps.MaxFuel;
+                image.fillAmount = percent;
+                int percentInt = (int)(percent * 100f + 0.999f);
+                text.text = percentInt.ToString() + "%";
+            }
         }
     }
 }

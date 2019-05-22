@@ -6,9 +6,9 @@ using UnityEngine.PostProcessing;
 public class CameraMultiController : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] rockets;
+    public Transform[] rockets;
     [SerializeField]
-    private Rigidbody rocketRigidbody;
+    public Rigidbody rocketRigidbody;
     [SerializeField]
     private Vector3 offsetVector = new Vector3(0f, 0f, -1f);
     [SerializeField]

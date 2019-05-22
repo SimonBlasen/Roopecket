@@ -18,21 +18,35 @@ public class UIRocketGreenFill : MonoBehaviour
 
     private int lastHealth = 0;
 
-	// Use this for initialization
-	void Start ()
+    RocketSpawner rs;
+
+    // Use this for initialization
+    void Start ()
     {
         maxHeight = insideRocket.sizeDelta.y;
 
-        rocketProps = GameObject.FindObjectOfType<RocketProps>();
-	}
+        //rocketProps = GameObject.FindObjectOfType<RocketProps>();
+        rocketProps = null;
+        rs = GameObject.FindObjectOfType<RocketSpawner>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (rocketProps.CurrentHealth != lastHealth)
+        if (rocketProps == null)
         {
-            lastHealth = rocketProps.CurrentHealth;
-            healthPercentage = ((float)lastHealth) / rocketProps.MaxHealth;
+            if (rs.SpawnedRocket != null)
+            {
+                rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+            }
+        }
+        else
+        {
+            if (rocketProps.CurrentHealth != lastHealth)
+            {
+                lastHealth = rocketProps.CurrentHealth;
+                healthPercentage = ((float)lastHealth) / rocketProps.MaxHealth;
+            }
         }
     }
 
