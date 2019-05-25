@@ -25,7 +25,7 @@ public class ArrowRocketSelector : MonoBehaviour
 
     private void Start()
     {
-
+        rocketNubmber = Statics.selectedRocket;
         spawn = transform.position;
         selected = spawn + new Vector3(0f, 0f, -0.2f);
 
@@ -34,7 +34,7 @@ public class ArrowRocketSelector : MonoBehaviour
             rockets[i].gameObject.SetActive(false);
         }
 
-        currentRocket = rockets[0];
+        currentRocket = rockets[rocketNubmber];
         currentRocket.gameObject.SetActive(true);
         currentRocket.transform.position = rocketSpawn;
         currentRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -54,6 +54,8 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         if (number >= 0 && number < rockets.Length)
         {
+            Statics.selectedRocket = number;
+
             currentRocket.gameObject.SetActive(false);
 
             currentRocket = rockets[number];
