@@ -8,7 +8,7 @@ public class MainMenuText : MonoBehaviour {
 
     private RectTransform menuText;
     private Vector3 spawn;
-    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial;
+    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit;
     private bool MouseHover = false;
     private bool Entered;
     private bool MousePress = false;
@@ -20,15 +20,20 @@ public class MainMenuText : MonoBehaviour {
     void Start () {
         MouseHover = false;
         spawn = transform.position;
+
         selectedContinue = new Vector3(0f, 0.05f, -4.15f);
         selectedGarage = new Vector3(0f, 0.15f, -4.15f);
         selectedOptions = new Vector3(0f, -0.05f, -4.15f);
         selectedTutorial = new Vector3(0f, -0.15f, -4.15f);
+        selectedQuit = new Vector3(0f, -0.8f, -4f);
+
         hidedButton = new Vector3(100f, 100f, 100f);
         FirstTouch = false;
        
            
             SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+
+            if(pointName != "Quit")
             renderer.color = new Color(1f, 1f, 0.5f, 0.05f);
 
 
@@ -54,7 +59,7 @@ public class MainMenuText : MonoBehaviour {
                 {
                     transform.position = selectedContinue;
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
-                    renderer.color = new Color(1f, 1f, 0.5f, 1f);
+                    renderer.color = new Color(1f, 1f, 0.3f, 1f);
 
                     if (MousePress)
                     {
@@ -77,6 +82,20 @@ public class MainMenuText : MonoBehaviour {
                     {
 
                         SceneManager.LoadScene("Garage");
+
+                    }
+                }
+
+                else if (pointName == "Quit" && MouseHover)
+                {
+                    transform.position = selectedQuit;
+                    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = new Color(1f, 0.5f, 0f, 1f);
+
+                    if (MousePress)
+                    {
+
+                        Application.Quit();
 
                     }
                 }
