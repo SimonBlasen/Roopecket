@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiManager : MonoBehaviour {
+public class MultiManager : MonoBehaviour
+{
 
     private const int maxPlayers = 16;
     private ulong[] otherPlayersSteamIDs = new ulong[maxPlayers];
     private string[] otherPlayersNames = new string[maxPlayers];
 
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
 
     public void SetOtherplayerName(ulong steam64ID, string name)
@@ -60,4 +62,6 @@ public class MultiManager : MonoBehaviour {
         {
             //TODO
         }
+        return -1;
     }
+}
