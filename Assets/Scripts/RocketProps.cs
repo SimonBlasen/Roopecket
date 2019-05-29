@@ -34,6 +34,8 @@ public class RocketProps : MonoBehaviour
     private GameObject deadRocket;
     [SerializeField]
     private GameObject dieExplosionForce;
+    public GameObject damageSmoke;
+    public GameObject damageFire;
 
     private int currentHealth;
 
@@ -45,6 +47,7 @@ public class RocketProps : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        damageSmoke.SetActive(false);
         currentFuel = maxFuel;
         cameraMulti.IsRocketDead = false;
     }
@@ -65,6 +68,19 @@ public class RocketProps : MonoBehaviour
         else
         {
             currentFuel = 0f;
+        }
+
+        if(currentHealth <= (maxHealth / 2))
+        {
+
+            damageSmoke.SetActive(true);
+
+        }
+        if (currentHealth <= ((maxHealth / 2)-(maxHealth / 4)))
+        {
+
+            damageFire.SetActive(true);
+
         }
     }
 
