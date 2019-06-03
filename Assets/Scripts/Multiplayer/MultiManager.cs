@@ -7,13 +7,17 @@ public class MultiManager : MonoBehaviour
 
     private const int maxPlayers = 16;
     private ulong[] otherPlayersSteamIDs = new ulong[maxPlayers];
-    private string[] otherPlayersNames = new string[maxPlayers];
+    private OtherPlayer[] otherPlayers = new OtherPlayer[maxPlayers];
 
 
     // Use this for initialization
     void Start()
     {
-
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            otherPlayers[i].init = false;
+            otherPlayersSteamIDs[i] = 0;
+        }
     }
 
     // Update is called once per frame
@@ -25,7 +29,22 @@ public class MultiManager : MonoBehaviour
 
     public void SetOtherplayerName(ulong steam64ID, string name)
     {
+        int playerID = getPlayerID(steam64ID);
+        if (playerID == -1)
+        {
+            for (int i = 0; i < maxPlayers; i++)
+            {
+                if (otherPlayers[i].init == false)
+                {
+                    otherPlayersSteamIDs[i] = steam64ID;
+                    playerID = i;
+                    break;
+                }
+            }
+        }
 
+        otherPlayers[playerID].init = true;
+        otherPlayers[playerID].name = name;
     }
 
 
@@ -60,8 +79,22 @@ public class MultiManager : MonoBehaviour
     {
         for (int i = 0; i < otherPlayersSteamIDs.Length; i++)
         {
-            //TODO
+            if (otherPlayersSteamIDs[i] == steam64ID)
+            {
+                return i;
+            }
         }
         return -1;
     }
+}
+
+
+public struct OtherPlayer
+{
+    public bool init;
+    public string name;
+    public Vector3 position;
+    public Vector3 rot;
+    public bool landingMoversOut;
+    public bool[] thrusters;
 }
