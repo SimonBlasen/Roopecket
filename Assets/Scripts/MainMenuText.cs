@@ -15,6 +15,7 @@ public class MainMenuText : MonoBehaviour {
     private bool FirstTouch = false;
     public string pointName;
     public Vector3 hidedButton;
+    private float buttonsHoverLerpSpeed = 0.05f;
 
     // Use this for initialization
     void Start () {
@@ -57,7 +58,7 @@ public class MainMenuText : MonoBehaviour {
             {
                 if (pointName == "Continue" && MouseHover)
                 {
-                    transform.position = selectedContinue;
+                    transform.position = Vector3.Lerp(transform.position, selectedContinue, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 0.3f, 1f);
 
@@ -74,7 +75,7 @@ public class MainMenuText : MonoBehaviour {
 
                 else if (pointName == "Garage" && MouseHover)
                 {
-                    transform.position = selectedGarage;
+                    transform.position = Vector3.Lerp(transform.position, selectedGarage, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 0.5f, 1f);
 
@@ -88,7 +89,7 @@ public class MainMenuText : MonoBehaviour {
 
                 else if (pointName == "Quit" && MouseHover)
                 {
-                    transform.position = selectedQuit;
+                    transform.position = Vector3.Lerp(transform.position, selectedQuit, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 0.5f, 0f, 1f);
 
@@ -104,7 +105,7 @@ public class MainMenuText : MonoBehaviour {
 
                 else if (pointName == "Options" && MouseHover)
                 {
-                    transform.position = selectedOptions;
+                    transform.position = Vector3.Lerp(transform.position, selectedOptions, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 0.5f, 1f);
 
@@ -114,7 +115,7 @@ public class MainMenuText : MonoBehaviour {
 
                 else if (pointName == "Tutorial" && MouseHover)
                 {
-                    transform.position = selectedTutorial;
+                    transform.position = Vector3.Lerp(transform.position, selectedTutorial, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 0.5f, 1f);
 
@@ -129,7 +130,7 @@ public class MainMenuText : MonoBehaviour {
                 else
                 {
 
-                    transform.position = spawn;
+                    transform.position = Vector3.Lerp(transform.position, spawn, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 1f, 1f);
 
@@ -139,7 +140,7 @@ public class MainMenuText : MonoBehaviour {
 
             else
             {
-                transform.position = spawn;
+                transform.position = Vector3.Lerp(transform.position, spawn, buttonsHoverLerpSpeed);
                 SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                 renderer.color = new Color(1f, 1f, 1f, 1f);
             }

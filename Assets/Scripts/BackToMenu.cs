@@ -7,6 +7,7 @@ public class BackToMenu : MonoBehaviour {
 
     private Vector3 spawn;
     public Vector3 selectedText;
+    private float lerpSpeed = 0.08f;
 
     private bool click = false;
     private bool mouseHover = false;
@@ -24,7 +25,7 @@ public class BackToMenu : MonoBehaviour {
         if (mouseHover)
         {
 
-            transform.position = selectedText;
+            transform.position = Vector3.Lerp(transform.position, selectedText, lerpSpeed);
 
             if (click)
             {
@@ -38,7 +39,7 @@ public class BackToMenu : MonoBehaviour {
         else
         {
 
-            transform.position = spawn;
+            transform.position = Vector3.Lerp(transform.position, spawn, lerpSpeed);
 
         }
 

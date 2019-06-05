@@ -47,7 +47,7 @@ public class RocketProps : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        damageSmoke.SetActive(false);
+        if (damageSmoke != null) damageSmoke.SetActive(false);
         currentFuel = maxFuel;
         cameraMulti.IsRocketDead = false;
     }
