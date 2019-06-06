@@ -19,6 +19,22 @@ public class RocketSpawner : MonoBehaviour {
         }
         else
         {
+            /*if (GameObject.FindObjectOfType<Canvas>() == null)
+            {
+                Debug.LogError("No Canvas found");
+            }
+            else
+            {
+                if (GameObject.FindObjectOfType<Canvas>().transform.GetComponentInChildren<UIRocketGreenFill>() == null)
+                {
+                    Debug.LogError("Could not find health bar gui");
+                }
+                else
+                {
+                    GameObject.FindObjectOfType<Canvas>().transform.GetComponentInChildren<UIRocketGreenFill>()
+                }
+            }*/
+
             CameraMultiController cmc = GameObject.FindObjectOfType<CameraMultiController>();
 
             instRock.GetComponent<RocketProps>().cameraMulti = cmc;

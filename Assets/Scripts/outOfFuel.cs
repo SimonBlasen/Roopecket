@@ -9,15 +9,40 @@ public class outOfFuel : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject noFuelMenuUI;
 
+    private RocketProps rocketProps;
+    private RocketSpawner rs;
+
+    private bool outOfFuelBefore = false;
 
 
-
+    private void Start()
+    {
+        rocketProps = null;
+        rs = GameObject.FindObjectOfType<RocketSpawner>();
+    }
 
 
     // Update is called once per frame
     void Update()
     {
 
+        if (rocketProps == null)
+        {
+            if (rs.SpawnedRocket != null)
+            {
+                rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+            }
+        }
+        else
+        {
+            if (rocketProps.OutOfFuel && outOfFuelBefore == false)
+            {
+                outOfFuelBefore = true;
+                noFuelMenuUI.SetActive(true);
+                Time.timeScale = 0f;
+                GameIsPaused = true;
+            }
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Tab)) // FUEL OUT?

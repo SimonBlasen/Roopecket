@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Statics
 {
-    public static int selectedRocket = 1;
+    public static int selectedRocket = 0;
 }
