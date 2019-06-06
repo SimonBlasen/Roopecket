@@ -39,7 +39,7 @@ public class rocketDestroyed : MonoBehaviour {
         noLifeMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        SceneManager.LoadScene("Main_Menu_3");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
 
