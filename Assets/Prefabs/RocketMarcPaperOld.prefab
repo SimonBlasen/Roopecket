@@ -1059,7 +1059,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1357245723322836}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -214.691, y: -0.27999973, z: 20}
+  m_LocalPosition: {x: -214.616, y: -0.163, z: 20}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 4150276556979820}
@@ -1634,7 +1634,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 11.1, z: 0.4}
+  m_Size: {x: 1.4, y: 11.1, z: 2}
   m_Center: {x: 0, y: -1, z: 0}
 --- !u!65 &65488488642008672
 BoxCollider:
@@ -1646,7 +1646,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 11.1, z: 0.4}
+  m_Size: {x: 1.4, y: 11.1, z: 2}
   m_Center: {x: 0, y: -1, z: 0}
 --- !u!65 &65654356668999158
 BoxCollider:
@@ -2251,6 +2251,11 @@ MonoBehaviour:
   - {fileID: 108875715942991188}
   - {fileID: 108146612726066208}
   thrustStrength: 380
+  thrustStrengthes:
+  - 200
+  - 400
+  - 400
+  - 200
   midPoint: {fileID: 0}
   rocketProps: {fileID: 114270032376464430}
   landerMovers:
@@ -2285,6 +2290,8 @@ MonoBehaviour:
   deadRocket: {fileID: 1568727331595100, guid: 3bc9db66712f91344805d412bd600e66, type: 2}
   dieExplosionForce: {fileID: 1183352250159776, guid: 3569171e28adc7445907a5df94809a54,
     type: 2}
+  damageSmoke: {fileID: 0}
+  damageFire: {fileID: 0}
   magnitude: 4
   roughness: 10
   fadeIn: 0.1
