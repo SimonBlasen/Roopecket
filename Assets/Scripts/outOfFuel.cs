@@ -39,19 +39,24 @@ public class outOfFuel : MonoBehaviour
             {
                 outOfFuelBefore = true;
                 noFuelMenuUI.SetActive(true);
-                Time.timeScale = 0f;
-                GameIsPaused = true;
+                //Time.timeScale = 0f;
+                //GameIsPaused = true;
+            }
+            else if (outOfFuelBefore && rocketProps.OutOfFuel == false)
+            {
+                outOfFuelBefore = false;
+                noFuelMenuUI.SetActive(false);
             }
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Tab)) // FUEL OUT?
+        /*if (Input.GetKeyDown(KeyCode.Tab)) // FUEL OUT?
         {
             noFuelMenuUI.SetActive(true);
             Time.timeScale = 0f;
             GameIsPaused = true;
 
-        }
+        }*/
 
 
 
