@@ -16,6 +16,8 @@ public class ArrowRocketSelector : MonoBehaviour
     public Transform[] rockets;
     public Transform currentRocket;
 
+    public GameObject cage;
+
     Vector3 spawn;
     Vector3 selected;
 
@@ -39,6 +41,8 @@ public class ArrowRocketSelector : MonoBehaviour
         currentRocket.transform.position = rocketSpawn;
         currentRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
         currentRocket.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        SavedGame.OwnedRockets[0] = true;
     }
 
     void Update()
@@ -64,6 +68,10 @@ public class ArrowRocketSelector : MonoBehaviour
             currentRocket.transform.position = rocketSpawn;
             currentRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
             currentRocket.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            
+            
+            cage.SetActive(!SavedGame.OwnedRockets[number]);
+            
         }
     }
     
