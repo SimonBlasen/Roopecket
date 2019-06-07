@@ -14,11 +14,11 @@ public class SavedGame
 
 
     // SavedGame variables
-    public static int LastSelectedRocket = 0;       // 0
-    public static int CurrentLevelIndex = 0;        // 1
-    public static bool[] OwnedRockets;              // 2
-    public static int Money = 0;                    // 3
-    public static float CurrentLevelTime;           // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
+    public static int LastSelectedRocket = 0;           // 0
+    public static int CurrentLevelIndex = 0;            // 1
+    public static bool[] OwnedRockets = new bool[32];   // 2
+    public static int Money = 0;                        // 3
+    public static float CurrentLevelTime;               // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
     // Hier kannst noch so viele Sachen hinzufügen wie du willst
 
 
