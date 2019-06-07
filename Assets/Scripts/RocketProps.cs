@@ -84,6 +84,14 @@ public class RocketProps : MonoBehaviour
         }
     }
 
+    public bool IsDestroyed
+    {
+        get
+        {
+            return currentHealth <= 0;
+        }
+    }
+
     public bool OutOfFuel
     {
         get
@@ -106,11 +114,6 @@ public class RocketProps : MonoBehaviour
         {
             return maxHealth;
         }
-    }
-
-    public float GetCurrentHealth()
-    {
-        return currentHealth;
     }
 
     public float CurrentFuel
