@@ -183,6 +183,14 @@ public class RocketController : MonoBehaviour {
         get;set;
     }
 
+    public bool LandingMoversOut
+    {
+        get
+        {
+            return landerMovers[0].TurnOut;
+        }
+    }
+
     public Vector3 GravityZone
     { get; set; }
 
