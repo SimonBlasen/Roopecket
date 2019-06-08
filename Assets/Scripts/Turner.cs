@@ -91,6 +91,8 @@ public class Turner : MonoBehaviour {
 
             if (inRockets.Contains(topParent) == false)
             {
+                cmc = topParent.GetComponent<RocketProps>().cameraMulti;
+
                 topParent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
                 inRockets.Add(topParent);

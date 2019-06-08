@@ -9,6 +9,15 @@ public class RocketSpawner : MonoBehaviour {
     [SerializeField]
     private bool spawn2Rockets = false;
 
+    public CameraMultiController cmc;
+    public CameraMultiController cmc1;
+    public CameraMultiController cmc2;
+    private Camera cmcCam;
+    private Camera cmc1Cam;
+    private Camera cmc2Cam;
+    private Transform rocket1;
+    private Transform rocket2;
+
 
     // Use this for initialization
     void Start () {
@@ -47,9 +56,11 @@ public class RocketSpawner : MonoBehaviour {
                 }
             }*/
 
-            CameraMultiController cmc = GameObject.FindObjectOfType<CameraMultiController>();
+            //CameraMultiController cmc = GameObject.FindObjectOfType<CameraMultiController>();
+            cmcCam = cmc.transform.GetComponentInChildren<Camera>();
 
             instRock.GetComponent<RocketProps>().cameraMulti = cmc;
+            rocket1 = instRock.transform;
 
             SpawnedRocket = instRock;
 
@@ -62,7 +73,9 @@ public class RocketSpawner : MonoBehaviour {
 
             if (spawn2Rockets)
             {
-                instRock2.GetComponent<RocketProps>().cameraMulti = cmc;
+                instRock.GetComponent<RocketProps>().cameraMulti = cmc1;
+                instRock2.GetComponent<RocketProps>().cameraMulti = cmc2;
+                rocket2 = instRock2.transform;
                 cmc.rockets = new Transform[] { instRock.transform, instRock2.transform };
                 cmc.rocketRigidbody = null;
                 instRock2.transform.position = startPlatformP2.transform.position + new Vector3(0f, 2f, 0f);
@@ -90,6 +103,20 @@ public class RocketSpawner : MonoBehaviour {
                     }
                 }
 
+                
+                cmc1.rockets = new Transform[] { instRock.transform };
+                cmc1.rocketRigidbody = instRock.GetComponent<Rigidbody>();
+                cmc1Cam = cmc1.transform.GetComponentInChildren<Camera>();
+                cmc1.transform.GetComponentInChildren<AudioListener>().enabled = false;
+
+                cmc2.rockets = new Transform[] { instRock2.transform };
+                cmc2.rocketRigidbody = instRock2.GetComponent<Rigidbody>();
+                cmc2Cam = cmc2.transform.GetComponentInChildren<Camera>();
+                cmc2.transform.GetComponentInChildren<AudioListener>().enabled = false;
+
+                cmc1Cam.enabled = false;
+                cmc2Cam.enabled = false;
+                cmcCam.enabled = true;
             }
 
 
@@ -101,7 +128,42 @@ public class RocketSpawner : MonoBehaviour {
     public GameObject SpawnedRocket { get; set; }
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+		if (spawn2Rockets)
+        {
+            float angleDiff = absAngleDiff(rocket1.rotation.eulerAngles.y, rocket2.rotation.eulerAngles.y);
+
+            if (angleDiff < 1f)
+            {
+                cmc1.LerpChild = false;
+                cmc2.LerpChild = false;
+                cmc1Cam.enabled = false;
+                cmc2Cam.enabled = false;
+                cmcCam.enabled = true;
+                cmc1Cam.transform.position = cmcCam.transform.position;
+                cmc2Cam.transform.position = cmcCam.transform.position;
+            }
+            else
+            {
+                cmc1.LerpChild = true;
+                cmc2.LerpChild = true;
+                cmc1Cam.enabled = true;
+                cmc2Cam.enabled = true;
+                cmcCam.enabled = false;
+            }
+        }
 	}
+
+    private float absAngleDiff(float angle1, float angle2)
+    {
+        if (Mathf.Abs(angle1 - angle2) >= 360f)
+        {
+            return absAngleDiff(angle1 > angle2 ? angle1 - 360f : angle1, angle1 > angle2 ? angle2 : angle2 - 360f);
+        }
+        else
+        {
+            return Mathf.Abs(angle1 - angle2);
+        }
+    }
 }

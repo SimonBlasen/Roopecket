@@ -12,7 +12,7 @@ public enum PressurePlateType
 public class CoopPressurePlate : MonoBehaviour
 {
     [SerializeField]
-    private CoopActivatable activatable;
+    private CoopActivatable[] activatables;
     [SerializeField]
     private CoopCable cable;
     [SerializeField]
@@ -28,7 +28,7 @@ public class CoopPressurePlate : MonoBehaviour
     [SerializeField]
     private float brakeMultiplier = 1f;
     [SerializeField]
-    private float activationDelay = 1f;
+    private float[] activationDelay;
 
 
 
@@ -40,9 +40,12 @@ public class CoopPressurePlate : MonoBehaviour
     {
         rigChild = child.GetComponent<Rigidbody>();
 
-        if (activatable != null)
+        if (activatables.Length > 0)
         {
-            activatable.Delay = activationDelay;
+            for (int i = 0; i < activatables.Length; i++)
+            {
+                activatables[i].Delay = activationDelay[i];
+            }
         }
 	}
 	
@@ -82,16 +85,20 @@ public class CoopPressurePlate : MonoBehaviour
         }
 
 
-        if (activatable != null)
+        if (activatables.Length > 0)
         {
-            activatable.Value = PressedAmount;
+            for (int i = 0; i < activatables.Length; i++)
+            {
+                activatables[i].Value = PressedAmount;
+                activatables[i].IsPressed = IsPressed;
+            }
         }
 
         if (cable != null)
         {
-            if ((PressedAmount >= 0.05f) != cable.SwitchedOn)
+            if (IsPressed != cable.SwitchedOn)
             {
-                cable.SwitchedOn = (PressedAmount >= 0.05f);
+                cable.SwitchedOn = IsPressed;
             }
         }
 
@@ -109,7 +116,7 @@ public class CoopPressurePlate : MonoBehaviour
     {
         get
         {
-            return PressedAmount >= 0.8f;
+            return PressedAmount >= 0.05f;
         }
     }
 }

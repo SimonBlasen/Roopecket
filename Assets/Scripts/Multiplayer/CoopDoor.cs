@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoopFallDoor : CoopActivatable
+public class CoopDoor : CoopActivatable
 {
     [SerializeField]
     private Transform doorObject;

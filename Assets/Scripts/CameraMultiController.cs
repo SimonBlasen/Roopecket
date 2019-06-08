@@ -21,19 +21,29 @@ public class CameraMultiController : MonoBehaviour
     private float camScaleFactor = 2f;
     [SerializeField]
     private PostProcessingBehaviour postProc;
+    [SerializeField]
+    private float lerpSpeedChild = 0.04f;
 
     private Transform childTransform = null;
+    private Vector3 childLocalOffset = Vector3.zero;
 
     // Use this for initialization
     void Start()
     {
         postProc = GetComponentInChildren<PostProcessingBehaviour>();
         childTransform = GetComponentInChildren<Camera>().transform;
+        childLocalOffset = childTransform.localPosition;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (LerpChild)
+        {
+            childTransform.localPosition = Vector3.Lerp(childTransform.localPosition, childLocalOffset, lerpSpeedChild);
+        }
+
+
         Vector3 mid = Vector3.zero;
 
         Vector3 minBB = rockets[0].position;
@@ -112,5 +122,10 @@ public class CameraMultiController : MonoBehaviour
         {
             offsetVector = value;
         }
+    }
+
+    public bool LerpChild
+    {
+        get;set;
     }
 }

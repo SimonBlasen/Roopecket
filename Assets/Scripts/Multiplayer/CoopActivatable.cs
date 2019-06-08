@@ -7,6 +7,7 @@ public class CoopActivatable : MonoBehaviour
 
     private float[] times = new float[4048];
     private float[] values = new float[4048];
+    private bool[] boolValues = new bool[4048];
 
     private int writeIndex = 0;
     private int readIndex = 0;
@@ -24,6 +25,7 @@ public class CoopActivatable : MonoBehaviour
         {
             times[writeIndex] = Time.time + Delay;
             values[writeIndex] = Value;
+            boolValues[writeIndex] = IsPressed;
             writeIndex++;
             if (writeIndex >= times.Length)
             {
@@ -33,6 +35,7 @@ public class CoopActivatable : MonoBehaviour
             if (Time.time > times[readIndex])
             {
                 handleValue(values[readIndex]);
+                handleBoolValue(boolValues[readIndex]);
                 readIndex++;
                 if (readIndex >= times.Length)
                 {
@@ -43,6 +46,7 @@ public class CoopActivatable : MonoBehaviour
         else
         {
             handleValue(Value);
+            handleBoolValue(IsPressed);
         }
     }
 
@@ -51,13 +55,23 @@ public class CoopActivatable : MonoBehaviour
 
     }
 
- 
+    protected virtual void handleBoolValue(bool val)
+    {
+
+    }
+
+
     public float Value
     {
         get;set;
     }
 
     public float Delay
+    {
+        get;set;
+    }
+
+    public bool IsPressed
     {
         get;set;
     }

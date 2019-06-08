@@ -49,7 +49,10 @@ public class RocketProps : MonoBehaviour
         currentHealth = maxHealth;
         if (damageSmoke != null) damageSmoke.SetActive(false);
         currentFuel = maxFuel;
-        cameraMulti.IsRocketDead = false;
+        if (cameraMulti != null)
+        {
+            cameraMulti.IsRocketDead = false;
+        }
     }
 
     // Update is called once per frame
