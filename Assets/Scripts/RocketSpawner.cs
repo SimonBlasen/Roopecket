@@ -87,19 +87,19 @@ public class RocketSpawner : MonoBehaviour {
                 {
                     if (i == 0)
                     {
-                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.Keypad4;
+                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.G;
                     }
                     else if (i == 1)
                     {
-                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.Keypad5;
+                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.H;
                     }
                     else if (i == 2)
                     {
-                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.Keypad6;
+                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.J;
                     }
                     else if (i == 3)
                     {
-                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.KeypadPlus;
+                        instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.K;
                     }
                 }
 
@@ -141,13 +141,13 @@ public class RocketSpawner : MonoBehaviour {
                 cmc1Cam.enabled = false;
                 cmc2Cam.enabled = false;
                 cmcCam.enabled = true;
-                cmc1Cam.transform.position = cmcCam.transform.position;
-                cmc2Cam.transform.position = cmcCam.transform.position;
+                //cmc1Cam.transform.position = cmcCam.transform.position;
+                //cmc2Cam.transform.position = cmcCam.transform.position;
             }
             else
             {
-                cmc1.LerpChild = true;
-                cmc2.LerpChild = true;
+                //cmc1.LerpChild = true;
+                //cmc2.LerpChild = true;
                 cmc1Cam.enabled = true;
                 cmc2Cam.enabled = true;
                 cmcCam.enabled = false;

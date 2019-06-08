@@ -72,6 +72,15 @@ public class RocketController : MonoBehaviour {
                 }
             }
         }
+
+        if (Input.GetKeyDown(keyLander))
+        {
+            Debug.Log("KeyDown");
+            for (int i = 0; i < landerMovers.Length; i++)
+            {
+                landerMovers[i].TurnOut = !landerMovers[i].TurnOut;
+            }
+        }
     }
 
 
@@ -108,13 +117,7 @@ public class RocketController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(keyLander))
-        {
-            for (int i = 0; i < landerMovers.Length; i++)
-            {
-                landerMovers[i].TurnOut = !landerMovers[i].TurnOut;
-            }
-        }
+        
 
 
         if (!Turning)

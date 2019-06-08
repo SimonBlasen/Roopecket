@@ -24,6 +24,8 @@ public class CameraMultiController : MonoBehaviour
     [SerializeField]
     private float lerpSpeedChild = 0.04f;
 
+    public bool debugLog = false;
+
     private Transform childTransform = null;
     private Vector3 childLocalOffset = Vector3.zero;
 
@@ -41,6 +43,11 @@ public class CameraMultiController : MonoBehaviour
         if (LerpChild)
         {
             childTransform.localPosition = Vector3.Lerp(childTransform.localPosition, childLocalOffset, lerpSpeedChild);
+        }
+
+        if (debugLog)
+        {
+            Debug.Log(childTransform.localPosition.ToString());
         }
 
 
