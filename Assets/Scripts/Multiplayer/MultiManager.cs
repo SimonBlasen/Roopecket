@@ -6,6 +6,8 @@ public class MultiManager : MonoBehaviour
 {
     [SerializeField]
     private float sendRate = 1/20f;
+    [SerializeField]
+    private Network network;
 
 
     private const int maxPlayers = 16;
@@ -64,6 +66,11 @@ public class MultiManager : MonoBehaviour
                 sendOwnPose();
             }
         }
+    }
+
+    public byte OwnID
+    {
+        get;set;
     }
 
 

@@ -178,6 +178,30 @@ public class RocketController : MonoBehaviour {
         Manager.Instance.ActivateManager();
     }
 
+    public KeyCode[] Controls
+    {
+        get
+        {
+            return keyCodes;
+        }
+        set
+        {
+            keyCodes = value;
+        }
+    }
+
+    public KeyCode LandingKey
+    {
+        get
+        {
+            return keyLander;
+        }
+        set
+        {
+            keyLander = value;
+        }
+    }
+
     public bool Turning
     {
         get;set;
