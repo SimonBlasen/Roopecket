@@ -28457,7 +28457,17 @@ MonoBehaviour:
   camScaleFactor: 1.6
   postProc: {fileID: 0}
   lerpSpeedChild: 0.04
+  lerpSpeedProjMatr: 0.04
+  linearSpeedProjMatr: 0.04
   debugLog: 0
+  proj1: {x: 0, y: 0}
+  proj2: {x: 0, y: 0}
+  proj1Goal: {x: 0, y: 0}
+  proj2Goal: {x: 1, y: 1}
+  vector1GoalOutside: {x: 0, y: 0}
+  vector2GoalOutside: {x: 1, y: 1}
+  finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!1001 &154997403
 Prefab:
   m_ObjectHideFlags: 0
@@ -43780,7 +43790,17 @@ MonoBehaviour:
   camScaleFactor: 1.6
   postProc: {fileID: 0}
   lerpSpeedChild: 0.04
+  lerpSpeedProjMatr: 0.04
+  linearSpeedProjMatr: 0.04
   debugLog: 0
+  proj1: {x: 0, y: 0}
+  proj2: {x: 0, y: 0}
+  proj1Goal: {x: 0, y: 0}
+  proj2Goal: {x: 1, y: 1}
+  vector1GoalOutside: {x: 0, y: 0}
+  vector2GoalOutside: {x: 1, y: 1}
+  finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!114 &534669908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44378,7 +44398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &607884450
 RectTransform:
   m_ObjectHideFlags: 0
