@@ -27,6 +27,11 @@ public class RocketSpawner : MonoBehaviour {
     public float upRectWidth = 1f;
     public float upRectHeight = 1f;
 
+    [SerializeField]
+    private float seperateX = 100f;
+    [SerializeField]
+    private float seperateZ = 50f;
+
 
     // Use this for initialization
     void Start () {
@@ -155,7 +160,7 @@ public class RocketSpawner : MonoBehaviour {
 
             //Debug.Log(angleDiff);
 
-            if (angleDiff < 0.2f && camsSepBefore)
+            if (shouldMerge() && camsSepBefore)
             {
                 Debug.Log("1");
                 camsSepBefore = false;
@@ -169,7 +174,7 @@ public class RocketSpawner : MonoBehaviour {
 
                 lerpedBack = false;
             }
-            else if (angleDiff < 0.2f && lerpedBack == false && cmc1.FinishedLerpingBack && cmc2.FinishedLerpingBack)
+            else if (shouldMerge() && lerpedBack == false && cmc1.FinishedLerpingBack && cmc2.FinishedLerpingBack)
             {
                 Debug.Log("2");
                 lerpedBack = true;
@@ -179,7 +184,7 @@ public class RocketSpawner : MonoBehaviour {
                 cmc1Cam.transform.position = cmcCam.transform.position;
                 cmc2Cam.transform.position = cmcCam.transform.position;
             }
-            else if (angleDiff > 1f && camsSepBefore == false)
+            else if (shouldSeperate() && camsSepBefore == false)
             {
                 Debug.Log("3");
                 camsSepBefore = true;
@@ -204,6 +209,68 @@ public class RocketSpawner : MonoBehaviour {
         }
 	}
 
+    private bool shouldSeperate()
+    {
+        float angleDiff = absAngleDiff(rocket1.rotation.eulerAngles.y, rocket2.rotation.eulerAngles.y);
+
+
+        float xDiff = Mathf.Abs(rocket1.position.x - rocket2.position.x);
+        float yDiff = Mathf.Abs(rocket1.position.y - rocket2.position.y);
+        float zDiff = Mathf.Abs(rocket1.position.z - rocket2.position.z);
+
+        float diffXPlane = 0f;
+        float diffZPlane = 0f;
+
+        float an = absAngleDiff(0f, rocket1.rotation.eulerAngles.y);
+        if (an < 45f || (an > 135f && an < 225f) || an > 315f)
+        {
+            diffXPlane = xDiff * xDiff + yDiff * yDiff;
+            diffZPlane = zDiff * zDiff + yDiff * yDiff;
+        }
+        else
+        {
+            diffXPlane = zDiff * zDiff + yDiff * yDiff;
+            diffZPlane = xDiff * xDiff + yDiff * yDiff;
+        }
+
+        if (angleDiff > 1f || diffXPlane >= seperateX || diffZPlane >= seperateZ)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool shouldMerge()
+    {
+        float angleDiff = absAngleDiff(rocket1.rotation.eulerAngles.y, rocket2.rotation.eulerAngles.y);
+
+
+        float xDiff = Mathf.Abs(rocket1.position.x - rocket2.position.x);
+        float yDiff = Mathf.Abs(rocket1.position.y - rocket2.position.y);
+        float zDiff = Mathf.Abs(rocket1.position.z - rocket2.position.z);
+
+        float diffXPlane = 0f;
+        float diffZPlane = 0f;
+
+        float an = absAngleDiff(0f, rocket1.rotation.eulerAngles.y);
+        if (an < 45f || (an > 135f && an < 225f) || an > 315f)
+        {
+            diffXPlane = xDiff * xDiff + yDiff * yDiff;
+            diffZPlane = zDiff * zDiff + yDiff * yDiff;
+        }
+        else
+        {
+            diffXPlane = zDiff * zDiff + yDiff * yDiff;
+            diffZPlane = xDiff * xDiff + yDiff * yDiff;
+        }
+
+        if (angleDiff < 0.2f && diffXPlane < seperateX && diffZPlane < seperateZ)
+        {
+            return true;
+        }
+        return false;
+    }
+
     private float absAngleDiff(float angle1, float angle2)
     {
         if (Mathf.Abs(angle1 - angle2) >= 360f)
@@ -213,6 +280,14 @@ public class RocketSpawner : MonoBehaviour {
         else
         {
             return Mathf.Abs(angle1 - angle2);
+        }
+    }
+
+    public bool Spawn2Rockets
+    {
+        get
+        {
+            return spawn2Rockets;
         }
     }
 }

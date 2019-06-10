@@ -7147,6 +7147,7 @@ MonoBehaviour:
   vector1GoalOutside: {x: 0, y: 0}
   vector2GoalOutside: {x: 1, y: 1}
   finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!1 &165441352
 GameObject:
   m_ObjectHideFlags: 0
@@ -7273,8 +7274,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.504717, b: 0.5846419, a: 1}
-  m_Intensity: 2.89
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.51
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -12724,6 +12725,7 @@ MonoBehaviour:
   vector1GoalOutside: {x: 0, y: 0}
   vector2GoalOutside: {x: 1, y: 1}
   finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!114 &534669908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12735,7 +12737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 3c748f6c8b6973c47bc7b680ab261291, type: 2}
+  profile: {fileID: 11400000, guid: 91d61e0544b1fe14b9251bf303632428, type: 2}
 --- !u!114 &534669909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17481,8 +17483,8 @@ MonoBehaviour:
   lerpSpeed: 0.1
   camScaleFactor: 1.6
   postProc: {fileID: 0}
-  lerpSpeedChild: 0.04
-  lerpSpeedProjMatr: 0.01
+  lerpSpeedChild: 0.007
+  lerpSpeedProjMatr: 0.007
   linearSpeedProjMatr: 0.04
   debugLog: 0
   proj1: {x: 0, y: 0}
@@ -17492,6 +17494,7 @@ MonoBehaviour:
   vector1GoalOutside: {x: 0, y: 0}
   vector2GoalOutside: {x: 1, y: 1}
   finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!4 &793645701
 Transform:
   m_ObjectHideFlags: 0
@@ -24128,7 +24131,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.88758993, b: 0.19215685, a: 1}
-  m_Intensity: 0.27
+  m_Intensity: 0.8
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -24162,7 +24165,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1281577477}
   m_LocalRotation: {x: -0.07439762, y: -0.8921542, z: 0.41601753, w: -0.15954693}
-  m_LocalPosition: {x: 5.36, y: 3, z: -1.96}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -25846,6 +25849,10 @@ Prefab:
     - target: {fileID: 1463945101960996, guid: b866767f5000c1f4ebdea8e229883830, type: 2}
       propertyPath: m_Name
       value: Turn (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1463945101960996, guid: b866767f5000c1f4ebdea8e229883830, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b866767f5000c1f4ebdea8e229883830, type: 2}
@@ -32480,7 +32487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 3c748f6c8b6973c47bc7b680ab261291, type: 2}
+  profile: {fileID: 11400000, guid: 2b78e0dc724e1c647bdcb4a760b14945, type: 2}
 --- !u!114 &1707528164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32529,6 +32536,7 @@ MonoBehaviour:
   vector1GoalOutside: {x: 0, y: 0}
   vector2GoalOutside: {x: 1, y: 1}
   finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!81 &1707528166
 AudioListener:
   m_ObjectHideFlags: 0
@@ -37807,8 +37815,8 @@ MonoBehaviour:
   lerpSpeed: 0.1
   camScaleFactor: 1.6
   postProc: {fileID: 0}
-  lerpSpeedChild: 0.04
-  lerpSpeedProjMatr: 0.01
+  lerpSpeedChild: 0.007
+  lerpSpeedProjMatr: 0.007
   linearSpeedProjMatr: 0.04
   debugLog: 0
   proj1: {x: 0, y: 0}
@@ -37818,6 +37826,7 @@ MonoBehaviour:
   vector1GoalOutside: {x: 0, y: 0}
   vector2GoalOutside: {x: 1, y: 1}
   finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!4 &1984140922
 Transform:
   m_ObjectHideFlags: 0
@@ -37989,7 +37998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 3c748f6c8b6973c47bc7b680ab261291, type: 2}
+  profile: {fileID: 11400000, guid: 45b98c0f568e34941a63308ae276eda7, type: 2}
 --- !u!114 &2016395535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38038,6 +38047,7 @@ MonoBehaviour:
   vector1GoalOutside: {x: 0, y: 0}
   vector2GoalOutside: {x: 1, y: 1}
   finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!81 &2016395537
 AudioListener:
   m_ObjectHideFlags: 0
@@ -38287,7 +38297,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 0.19339621, g: 0.19339621, b: 1, a: 1}
-  m_Intensity: 0.18
+  m_Intensity: 0.4
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -38321,7 +38331,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2022169954}
   m_LocalRotation: {x: -0.26466092, y: -0.70658344, z: 0.3294844, w: -0.5675689}
-  m_LocalPosition: {x: 5.36, y: 3, z: -1.96}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
