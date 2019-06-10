@@ -120,7 +120,7 @@ public class CameraMultiController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Finished moving");
+                //Debug.Log("Finished moving");
                 finishedLerpProj = true;
                 CameraMultiController.SetScissorRect(childCamera, new Rect(proj1Goal.x, proj1Goal.y, proj2Goal.x, proj2Goal.y));
                 sign1 = 0f;
