@@ -18,6 +18,15 @@ public class RocketSpawner : MonoBehaviour {
     private Transform rocket1;
     private Transform rocket2;
 
+    public float rectX = 0f;
+    public float rectY = 0f;
+    public float rectWidth = 1f;
+    public float rectHeight = 1f;
+    public float upRectX = 0f;
+    public float upRectY = 0f;
+    public float upRectWidth = 1f;
+    public float upRectHeight = 1f;
+
 
     // Use this for initialization
     void Start () {
@@ -109,10 +118,17 @@ public class RocketSpawner : MonoBehaviour {
                 cmc1Cam = cmc1.transform.GetComponentInChildren<Camera>();
                 cmc1.transform.GetComponentInChildren<AudioListener>().enabled = false;
 
+                cmc1.vector1GoalOutside = new Vector2(rectX, rectY);
+                cmc1.vector2GoalOutside = new Vector2(rectWidth, rectHeight);
+
+
                 cmc2.rockets = new Transform[] { instRock2.transform };
                 cmc2.rocketRigidbody = instRock2.GetComponent<Rigidbody>();
                 cmc2Cam = cmc2.transform.GetComponentInChildren<Camera>();
                 cmc2.transform.GetComponentInChildren<AudioListener>().enabled = false;
+
+                cmc2.vector1GoalOutside = new Vector2(upRectX, upRectY);
+                cmc2.vector2GoalOutside = new Vector2(upRectWidth, upRectHeight);
 
                 cmc1Cam.enabled = false;
                 cmc2Cam.enabled = false;
@@ -126,28 +142,61 @@ public class RocketSpawner : MonoBehaviour {
 
 
     public GameObject SpawnedRocket { get; set; }
-	
-	// Update is called once per frame
-	void Update ()
+
+    private bool camsSepBefore = false;
+    private bool lerpedBack = false;
+
+    // Update is called once per frame
+    void Update ()
     {
 		if (spawn2Rockets)
         {
             float angleDiff = absAngleDiff(rocket1.rotation.eulerAngles.y, rocket2.rotation.eulerAngles.y);
 
-            if (angleDiff < 1f)
+            //Debug.Log(angleDiff);
+
+            if (angleDiff < 0.2f && camsSepBefore)
             {
+                Debug.Log("1");
+                camsSepBefore = false;
+
                 cmc1.LerpChild = false;
                 cmc2.LerpChild = false;
+                cmc1.finishedLerpProj = false;
+                cmc2.finishedLerpProj = false;
+                cmc1.LerpToTransform(cmcCam.transform);
+                cmc2.LerpToTransform(cmcCam.transform);
+
+                lerpedBack = false;
+            }
+            else if (angleDiff < 0.2f && lerpedBack == false && cmc1.FinishedLerpingBack && cmc2.FinishedLerpingBack)
+            {
+                Debug.Log("2");
+                lerpedBack = true;
                 cmc1Cam.enabled = false;
                 cmc2Cam.enabled = false;
                 cmcCam.enabled = true;
-                //cmc1Cam.transform.position = cmcCam.transform.position;
-                //cmc2Cam.transform.position = cmcCam.transform.position;
+                cmc1Cam.transform.position = cmcCam.transform.position;
+                cmc2Cam.transform.position = cmcCam.transform.position;
             }
-            else
+            else if (angleDiff > 1f && camsSepBefore == false)
             {
-                //cmc1.LerpChild = true;
-                //cmc2.LerpChild = true;
+                Debug.Log("3");
+                camsSepBefore = true;
+                cmc1.LerpChild = true;
+                cmc2.LerpChild = true;
+                cmc1.finishedLerpProj = false;
+                cmc2.finishedLerpProj = false;
+                cmc1.timeLerpBackToTransform = 0f;
+                cmc2.timeLerpBackToTransform = 0f;
+
+                CameraMultiController.SetScissorRect(cmc1Cam, new Rect(rectX, rectY, rectWidth, rectHeight));
+                CameraMultiController.SetScissorRect(cmc2Cam, new Rect(upRectX, upRectY, upRectWidth, upRectHeight));
+                cmc1.proj1 = new Vector2(rectX, rectY);
+                cmc1.proj2 = new Vector2(rectWidth, rectHeight);
+                cmc2.proj1 = new Vector2(upRectX, upRectY);
+                cmc2.proj2 = new Vector2(upRectWidth, upRectHeight);
+
                 cmc1Cam.enabled = true;
                 cmc2Cam.enabled = true;
                 cmcCam.enabled = false;

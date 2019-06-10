@@ -31,6 +31,17 @@ public class Turner : MonoBehaviour {
 
             Vector2 toRocket = new Vector2(toRocket3.x, toRocket3.z);
             float curAngle = Vector2.Angle(toRocket, inVector);
+            if (curAngle > 45f)
+            {
+                if (Mathf.Abs(toRocket.x) < Mathf.Abs(toRocket.y))
+                {
+                    toRocket.x = 0f;
+                }
+                else
+                {
+                    toRocket.y = 0f;
+                }
+            }
 
 
             if (insideCurve)
@@ -99,7 +110,7 @@ public class Turner : MonoBehaviour {
 
                 topParent.GetComponent<RocketController>().Turning = true;
 
-                Debug.Log("Rocket in");
+                //Debug.Log("Rocket in");
             }
 
         }
@@ -117,7 +128,7 @@ public class Turner : MonoBehaviour {
 
             if (inRockets.Contains(topParent))
             {
-                Debug.Log(cmc.OffsetVector.ToString());
+                //Debug.Log(cmc.OffsetVector.ToString());
                 Vector3 toRocket3 = (topParent.position - midPoint.position);
                 Vector2 toRocket = new Vector2(toRocket3.x, toRocket3.z);
                 toRocket.Normalize();
@@ -199,7 +210,7 @@ public class Turner : MonoBehaviour {
 
                 inRockets.Remove(topParent);
 
-                Debug.Log("Rocket out");
+                //Debug.Log("Rocket out");
             }
 
             
