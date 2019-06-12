@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.053389944, g: 0.15094802, b: 0.19478062, a: 1}
+  m_IndirectSpecularColor: {r: 0.053151503, g: 0.15094265, b: 0.19470885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5586,6 +5586,18 @@ MonoBehaviour:
   lerpSpeed: 0.1
   camScaleFactor: 1.6
   postProc: {fileID: 0}
+  lerpSpeedChild: 0.04
+  lerpSpeedProjMatr: 0.04
+  linearSpeedProjMatr: 0.04
+  debugLog: 0
+  proj1: {x: 0, y: 0}
+  proj2: {x: 0, y: 0}
+  proj1Goal: {x: 0, y: 0}
+  proj2Goal: {x: 1, y: 1}
+  vector1GoalOutside: {x: 0, y: 0}
+  vector2GoalOutside: {x: 1, y: 1}
+  finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!1 &165441352
 GameObject:
   m_ObjectHideFlags: 0
@@ -7689,6 +7701,18 @@ MonoBehaviour:
   lerpSpeed: 0.1
   camScaleFactor: 1.6
   postProc: {fileID: 0}
+  lerpSpeedChild: 0.04
+  lerpSpeedProjMatr: 0.04
+  linearSpeedProjMatr: 0.04
+  debugLog: 0
+  proj1: {x: 0, y: 0}
+  proj2: {x: 0, y: 0}
+  proj1Goal: {x: 0, y: 0}
+  proj2Goal: {x: 1, y: 1}
+  vector1GoalOutside: {x: 0, y: 0}
+  vector2GoalOutside: {x: 1, y: 1}
+  finishedLerpProj: 0
+  timeLerpBackToTransform: 0
 --- !u!114 &534669908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12395,6 +12419,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114597610026471260, guid: 829cd5e76b4fcff4f81bd063bfb906e6,
+        type: 2}
+      propertyPath: cmc
+      value: 
+      objectReference: {fileID: 150083830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 829cd5e76b4fcff4f81bd063bfb906e6, type: 2}
   m_IsPrefabAsset: 0
