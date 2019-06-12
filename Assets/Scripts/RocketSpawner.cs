@@ -71,6 +71,10 @@ public class RocketSpawner : MonoBehaviour {
             }*/
 
             //CameraMultiController cmc = GameObject.FindObjectOfType<CameraMultiController>();
+            if (spawn2Rockets == false)
+            {
+                cmc = GameObject.FindObjectOfType<CameraMultiController>();
+            }
             cmcCam = cmc.transform.GetComponentInChildren<Camera>();
 
             instRock.GetComponent<RocketProps>().cameraMulti = cmc;
