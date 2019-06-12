@@ -191,6 +191,7 @@ public class RocketProps : MonoBehaviour
         {
             CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
 
+            StaticsSingleplayer.Inst.AddDamage(damage);
 
             currentHealth -= damage;
             if (currentHealth <= 0)
