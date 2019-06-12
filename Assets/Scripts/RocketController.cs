@@ -5,45 +5,45 @@ using UnityEngine;
 public class RocketController : MonoBehaviour {
 
     [SerializeField]
-    private KeyCode[] keyCodes;
+    protected KeyCode[] keyCodes;
     [SerializeField]
-    private KeyCode keyLander;
+    protected KeyCode keyLander;
     [SerializeField]
-    private Transform[] thrustPositions;
+    protected Transform[] thrustPositions;
     [SerializeField]
-    private ParticleSystem[] thrustParticles;
+    protected ParticleSystem[] thrustParticles;
     [SerializeField]
-    private AudioSource[] thrusterAudioSrcs;
+    protected AudioSource[] thrusterAudioSrcs;
     [SerializeField]
-    private Light[] thrustLights;
+    protected Light[] thrustLights;
     [SerializeField]
-    private float thrustStrength = 10.0f;
+    protected float thrustStrength = 10.0f;
     [SerializeField]
-    private float[] thrustStrengthes;
+    protected float[] thrustStrengthes;
     [SerializeField]
-    private Transform midPoint;
+    protected Transform midPoint;
     [SerializeField]
-    private RocketProps rocketProps;
+    protected RocketProps rocketProps;
     [SerializeField]
-    private LanderMover[] landerMovers;
+    protected LanderMover[] landerMovers;
     [SerializeField]
-    private float thrusterAudioIncr = 0.1f;
+    protected float thrusterAudioIncr = 0.1f;
     [SerializeField]
     public float rocketVolume = 1f;
 
-    private bool[] thrusts = null;
+    protected bool[] thrusts = null;
 
-    private bool[] audioOn = null;
+    protected bool[] audioOn = null;
 
-    private Rigidbody ownRig;
+    protected Rigidbody ownRig;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    protected void Start ()
     {
         Init();
 	}
 
-    private void Update()
+    protected void Update()
     {
         Vector3 localVelocity = transform.InverseTransformDirection(ownRig.angularVelocity);
         localVelocity.x = 0f;
@@ -75,7 +75,7 @@ public class RocketController : MonoBehaviour {
 
         if (Input.GetKeyDown(keyLander))
         {
-            Debug.Log("KeyDown");
+            //Debug.Log("KeyDown");
             for (int i = 0; i < landerMovers.Length; i++)
             {
                 landerMovers[i].TurnOut = !landerMovers[i].TurnOut;
@@ -85,7 +85,7 @@ public class RocketController : MonoBehaviour {
 
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (rocketProps.OutOfFuel == false)
         {
@@ -147,9 +147,8 @@ public class RocketController : MonoBehaviour {
         }
     }
 
-    private void Init()
+    protected void Init()
     {
-        
         ownRig = GetComponent<Rigidbody>();
         if (midPoint != null)
         {

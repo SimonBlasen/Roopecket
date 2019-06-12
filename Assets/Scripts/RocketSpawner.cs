@@ -7,6 +7,8 @@ public class RocketSpawner : MonoBehaviour {
     [SerializeField]
     private GameObject[] rocketsPrefabs;
     [SerializeField]
+    private GameObject[] rocketsRemotePrefabs;
+    [SerializeField]
     private bool spawn2Rockets = false;
 
     public CameraMultiController cmc;
@@ -34,7 +36,8 @@ public class RocketSpawner : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         GameObject instRock = Instantiate(rocketsPrefabs[Statics.selectedRocket]);
         GameObject instRock2 = null;
         if (spawn2Rockets)
@@ -273,6 +276,12 @@ public class RocketSpawner : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    public Transform SpawnrocketNoRig(short rocketID)
+    {
+        GameObject instRock = Instantiate(rocketsRemotePrefabs[rocketID]);
+        return instRock.transform;
     }
 
     private float absAngleDiff(float angle1, float angle2)
