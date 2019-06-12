@@ -48,6 +48,16 @@ public class MultiManager : MonoBehaviour
                 rocketTransform = rs.SpawnedRocket.transform;
                 rocketProps = rocketTransform.GetComponent<RocketProps>();
                 rocketController = rocketTransform.GetComponent<RocketController>();
+                rocketProps.Indestroyable = true;
+
+
+                Transform startPlat = rs.StartPlatforms[OwnID];
+
+                rocketTransform.position = startPlat.position + new Vector3(0f, 2f, 0f);
+                rocketTransform.Rotate(0f, startPlat.rotation.eulerAngles.y, 0f);
+
+                Debug.Log("Reset self to start platform");
+
             }
         }
 
@@ -76,6 +86,17 @@ public class MultiManager : MonoBehaviour
                     Transform rocket = otherPlayers[i].rocket;
                     rocket.position = otherPlayers[i].position;
                     rocket.rotation = Quaternion.Euler(otherPlayers[i].rot);
+
+                    for (int j = 0; j < otherPlayers[i].thrusters.Length; j++)
+                    {
+                        rocket.GetComponent<RocketControllerRemote>().SetThrust(j, otherPlayers[i].thrusters[j]);
+                    }
+
+                    if (otherPlayers[i].landingMoversOut != otherPlayers[i].landingMoversOutOld)
+                    {
+                        rocket.GetComponent<RocketControllerRemote>().LandingMoversOut = otherPlayers[i].landingMoversOut;
+                        otherPlayers[i].landingMoversOutOld = otherPlayers[i].landingMoversOut;
+                    }
                 }
             }
         }
@@ -107,18 +128,33 @@ public class MultiManager : MonoBehaviour
         network.SendPose(metaState, rocketTransform.position, rocketTransform.rotation.eulerAngles);
     }
 
+    public void ResetToStartPlatform()
+    {
+        Transform startPlat = rs.StartPlatforms[OwnID];
+        if (rocketTransform != null)
+        {
+            rocketTransform.position = startPlat.position + new Vector3(0f, 2f, 0f);
+            rocketTransform.Rotate(0f, startPlat.rotation.eulerAngles.y, 0f);
+
+            Debug.Log("Reset self to start platform");
+        }
+    }
+
 
     public void SetOtherplayerName(byte playerID, ulong steam64ID, string name, short rocketID)
     {
-        Debug.Log("Spawning rocket");
+        if (otherPlayers[playerID].init == false)
+        {
+            Debug.Log("Spawning rocket");
 
-        otherPlayers[playerID].init = true;
-        otherPlayers[playerID].name = name;
-        otherPlayers[playerID].steam64ID = steam64ID;
-        otherPlayers[playerID].thrusters = new bool[16];
-        otherPlayers[playerID].rocketID = rocketID;
+            otherPlayers[playerID].init = true;
+            otherPlayers[playerID].name = name;
+            otherPlayers[playerID].steam64ID = steam64ID;
+            otherPlayers[playerID].thrusters = new bool[16];
+            otherPlayers[playerID].rocketID = rocketID;
 
-        otherPlayers[playerID].rocket = rs.SpawnrocketNoRig(rocketID);
+            otherPlayers[playerID].rocket = rs.SpawnrocketNoRig(rocketID);
+        }
     }
 
 
@@ -224,6 +260,7 @@ public struct OtherPlayer
     public Vector3 position;
     public Vector3 rot;
     public bool landingMoversOut;
+    public bool landingMoversOutOld;
     public bool[] thrusters;
     public short rocketID;
     public Transform rocket;

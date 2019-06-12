@@ -80,6 +80,9 @@ public class RocketController : MonoBehaviour {
             {
                 landerMovers[i].TurnOut = !landerMovers[i].TurnOut;
             }
+
+            // TODO for multiplayer, must be set by message
+            rocketProps.Indestroyable = false;
         }
     }
 

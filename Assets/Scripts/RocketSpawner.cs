@@ -35,6 +35,12 @@ public class RocketSpawner : MonoBehaviour {
     private float seperateZ = 50f;
 
 
+    public Transform[] StartPlatforms
+    {
+        get;
+        protected set;
+    }
+
     // Use this for initialization
     void Start ()
     {
@@ -46,11 +52,34 @@ public class RocketSpawner : MonoBehaviour {
         }
 
         GameObject startPlatform = GameObject.Find("Start Platform");
+        //StartPlatforms = new Transform[] { startPlatform.transform };
         GameObject startPlatformP2 = null;
         if (spawn2Rockets)
         {
             startPlatformP2 = GameObject.Find("Start Platform P2");
+            //StartPlatforms = new Transform[] { startPlatform.transform, startPlatformP2.transform };
         }
+
+        List<Transform> foundPlatforms = new List<Transform>();
+        Transform foundPlat = startPlatform.transform;
+        int cntPl = 2;
+        while (foundPlat != null)
+        {
+            foundPlatforms.Add(foundPlat);
+            GameObject objF = GameObject.Find("Start Platform P" + cntPl.ToString());
+            if (objF != null)
+            {
+                foundPlat = objF.transform;
+                cntPl++;
+            }
+            else
+            {
+                foundPlat = null;
+            }
+        }
+
+        StartPlatforms = foundPlatforms.ToArray();
+
         if (startPlatform == null)
         {
             Debug.LogError("[Hey Marc] Hab kei Anfangs-Lande Platform gfunde. Würdsch bitte eine mache? Grad so dass se \"Start Platform\" heißt. Merci gsaid");

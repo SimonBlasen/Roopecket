@@ -95,6 +95,8 @@ public class Network : MonoBehaviour
                     Debug.Log("Sent own player info");
 
                     multiManager.ConnectedToServer = true;
+
+                    multiManager.ResetToStartPlatform();
                 }
 
                 // Got pose

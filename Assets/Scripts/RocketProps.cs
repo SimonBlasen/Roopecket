@@ -87,6 +87,11 @@ public class RocketProps : MonoBehaviour
         }
     }
 
+    public bool Indestroyable
+    {
+        get;set;
+    }
+
     public bool IsDestroyed
     {
         get
@@ -146,25 +151,28 @@ public class RocketProps : MonoBehaviour
 
     public void Die()
     {
-        //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-        //Debug.Log("Died");
-        GameObject explosion = Instantiate(dieExplosion);
-        explosion.transform.position = transform.position;
+        if (!Indestroyable)
+        {
+            //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            //Debug.Log("Died");
+            GameObject explosion = Instantiate(dieExplosion);
+            explosion.transform.position = transform.position;
 
-        GameObject deadRocketInst = Instantiate(deadRocket);
-        deadRocketInst.transform.position = transform.position;
-        deadRocketInst.transform.rotation = transform.rotation;
+            GameObject deadRocketInst = Instantiate(deadRocket);
+            deadRocketInst.transform.position = transform.position;
+            deadRocketInst.transform.rotation = transform.rotation;
 
-        cameraMulti.IsRocketDead = true;
+            cameraMulti.IsRocketDead = true;
 
-        Destroy(explosion, 3.8f);
+            Destroy(explosion, 3.8f);
 
-        GameObject instForce = Instantiate(dieExplosionForce);
-        instForce.transform.position = transform.position;
-        
-        Destroy(instForce, 2f);
+            GameObject instForce = Instantiate(dieExplosionForce);
+            instForce.transform.position = transform.position;
 
-        gameObject.SetActive(false);
+            Destroy(instForce, 2f);
+
+            gameObject.SetActive(false);
+        }
     }
 
     [Header("Shake Settings")]
@@ -179,15 +187,17 @@ public class RocketProps : MonoBehaviour
 
     public void Damage(int damage)
     {
-        
-        CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
-
-
-        currentHealth -= damage;
-        if (currentHealth <= 0)
+        if (!Indestroyable)
         {
-            currentHealth = 0;
-            Die();
+            CameraShakeInstance c = CameraShaker.Instance.ShakeOnce(magnitude, roughness, fadeIn, fadeOut);
+
+
+            currentHealth -= damage;
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Die();
+            }
         }
     }
 
