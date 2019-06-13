@@ -29,8 +29,15 @@ public class CoopPressurePlate : MonoBehaviour
     private float brakeMultiplier = 1f;
     [SerializeField]
     private float[] activationDelay;
+    [SerializeField]
+    private bool useColorPressed = false;
+    [SerializeField]
+    private Color colorPressed;
 
 
+    private MeshRenderer[] colorMeshs = new MeshRenderer[2];
+    private Color colorReleased;
+    private Material clonedMat;
 
     private bool buttonIsPressed = false;
     private Rigidbody rigChild;
@@ -39,6 +46,12 @@ public class CoopPressurePlate : MonoBehaviour
     void Start ()
     {
         rigChild = child.GetComponent<Rigidbody>();
+        colorReleased = child.GetComponent<MeshRenderer>().sharedMaterial.color;
+        clonedMat = new Material(child.GetComponent<MeshRenderer>().sharedMaterial);
+        colorMeshs[0] = child.GetComponent<MeshRenderer>();
+        colorMeshs[1] = child.GetComponentInChildren<MeshRenderer>();
+        colorMeshs[0].sharedMaterial = clonedMat;
+        colorMeshs[1].sharedMaterial = clonedMat;
 
         if (activatables.Length > 0)
         {
@@ -82,6 +95,14 @@ public class CoopPressurePlate : MonoBehaviour
                 child.localPosition = new Vector3(child.localPosition.x, yMin, child.localPosition.z);
             }
 
+        }
+
+        if (useColorPressed)
+        {
+            for (int i = 0; i < colorMeshs.Length; i++)
+            {
+                colorMeshs[i].sharedMaterial.color = Color.Lerp(colorReleased, colorPressed, Mathf.Min(1f, Mathf.Max(0f, PressedAmount)));
+            }
         }
 
 

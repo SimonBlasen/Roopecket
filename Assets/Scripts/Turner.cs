@@ -12,14 +12,23 @@ public class Turner : MonoBehaviour {
 
     private List<Transform> inRockets = new List<Transform>();
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    private RocketSpawner rocketSpawner = null;
+    private CameraMultiController cmcGlobal = null;
+
+    // Use this for initialization
+    void Start ()
+    {
+        rocketSpawner = GameObject.FindObjectOfType<RocketSpawner>();
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+        if (cmcGlobal == null && rocketSpawner != null && rocketSpawner.Spawn2Rockets)
+        {
+            cmcGlobal = rocketSpawner.cmc;
+        }
+
 		for (int i = 0; i < inRockets.Count; i++)
         {
             Vector3 toRocket3 = (inRockets[i].position - midPoint.position);
@@ -31,15 +40,34 @@ public class Turner : MonoBehaviour {
 
             Vector2 toRocket = new Vector2(toRocket3.x, toRocket3.z);
             float curAngle = Vector2.Angle(toRocket, inVector);
+            if (curAngle > 45f)
+            {
+                if (Mathf.Abs(toRocket.x) < Mathf.Abs(toRocket.y))
+                {
+                    toRocket.x = 0f;
+                }
+                else
+                {
+                    toRocket.y = 0f;
+                }
+            }
 
 
             if (insideCurve)
             {
                 cmc.OffsetVector = new Vector3(toRocket.x * -1f, 0f, toRocket.y * -1f);
+                if (cmcGlobal != null)
+                {
+                    cmcGlobal.OffsetVector = new Vector3(toRocket.x * -1f, 0f, toRocket.y * -1f);
+                }
             }
             else
             {
                 cmc.OffsetVector = new Vector3(toRocket.x * 1f, 0f, toRocket.y * 1f);
+                if (cmcGlobal != null)
+                {
+                    cmcGlobal.OffsetVector = new Vector3(toRocket.x * 1f, 0f, toRocket.y * 1f);
+                }
             }
 
 
@@ -99,7 +127,7 @@ public class Turner : MonoBehaviour {
 
                 topParent.GetComponent<RocketController>().Turning = true;
 
-                Debug.Log("Rocket in");
+                //Debug.Log("Rocket in");
             }
 
         }
@@ -117,7 +145,7 @@ public class Turner : MonoBehaviour {
 
             if (inRockets.Contains(topParent))
             {
-                Debug.Log(cmc.OffsetVector.ToString());
+                //Debug.Log(cmc.OffsetVector.ToString());
                 Vector3 toRocket3 = (topParent.position - midPoint.position);
                 Vector2 toRocket = new Vector2(toRocket3.x, toRocket3.z);
                 toRocket.Normalize();
@@ -156,6 +184,10 @@ public class Turner : MonoBehaviour {
                 }
 
                 cmc.OffsetVector = newOffset;
+                if (cmcGlobal != null)
+                {
+                    cmcGlobal.OffsetVector = newOffset;
+                }
 
                 //Debug.Log("new rot: " + ((int)((topParent.rotation.eulerAngles.y + 45f) / 90f)) * 90f);
                 topParent.rotation = Quaternion.Euler(0f, ((int)((topParent.rotation.eulerAngles.y + 45f) / 90f)) * 90f, topParent.rotation.eulerAngles.z);
@@ -199,7 +231,7 @@ public class Turner : MonoBehaviour {
 
                 inRockets.Remove(topParent);
 
-                Debug.Log("Rocket out");
+                //Debug.Log("Rocket out");
             }
 
             

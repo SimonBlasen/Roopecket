@@ -19,19 +19,22 @@ public class Network : MonoBehaviour
 	void Start ()
     {
         network = new SappNetwork();
-
-        string ip = "192.168.1.25";
-        int port = 28000;
+        
+        string ip = Statics.ip;
+        int port = Statics.port;
         
         
         network.ConnectOnlyUdp(ip, port);
         network.SendUdpRel(new byte[] { 0, 42, 0 });
+
+        Debug.Log("Connected to server");
         
         started = true;
 	}
 
     void OnApplicationQuit()
     {
+        Debug.Log("Disconnected from server");
         Shutdown();
     }
     
@@ -89,14 +92,72 @@ public class Network : MonoBehaviour
                     bytes.AddRange(System.Text.Encoding.UTF8.GetBytes(Statics.SteamName));
 
                     network.SendUdpRel(bytes.ToArray());
+                    Debug.Log("Sent own player info");
+
+                    multiManager.ConnectedToServer = true;
+
+                    multiManager.ResetToStartPlatform();
+                }
+
+                // Got pose
+                else if (data.Length >= 2 && data[0] == 0 && data[1] == 4)
+                {
+                    for (int i = 2; i < data.Length; i += 29)
+                    {
+                        byte playerID = data[i];
+                        float posX = BitConverter.ToSingle(data, 1 + i);
+                        float posY = BitConverter.ToSingle(data, 5 + i);
+                        float posZ = BitConverter.ToSingle(data, 9 + i);
+                        float rotX = BitConverter.ToSingle(data, 13 + i);
+                        float rotY = BitConverter.ToSingle(data, 17 + i);
+                        float rotZ = BitConverter.ToSingle(data, 21 + i);
+
+                        uint metaState = (((uint)data[25 + i]) << 24) | (((uint)data[26 + i]) << 16) | (((uint)data[27 + i]) << 8) | (((uint)data[28 + i]));
+
+                        multiManager.SetOtherplayer(playerID, new Vector3(posX, posY, posZ), new Vector3(rotX, rotY, rotZ), metaState);
+                    }
+                }
+
+                // Other player info
+                else if (data.Length >= 2 && data[0] == 0 && data[1] == 6)
+                {
+                    byte otherPlayerID = data[2];
+                    ulong steam64ID = ((ulong)data[3] << 56) | ((ulong)data[4] << 48) | ((ulong)data[5] << 40) | ((ulong)data[6] << 32) | ((ulong)data[7] << 24) | ((ulong)data[8] << 16) | ((ulong)data[9] << 8) | ((ulong)data[10]);
+
+                    short rocketID = (short)((data[11] << 8) | (data[12]));
+
+                    string playerName = System.Text.Encoding.UTF8.GetString(data, 14, data[13]);
+
+                    multiManager.SetOtherplayerName(otherPlayerID, steam64ID, playerName, rocketID);
+                }
+
+                // Server shutdown
+                else if (data.Length >= 2 && data[0] == 0 && data[1] == 44)
+                {
+                    Debug.Log("Server is shutting down");
+
+                    multiManager.ConnectedToServer = false;
+                    Shutdown();
                 }
             }
         }
 	}
 
+    public void SendPlayerinfoRequest(byte otherID)
+    {
+        byte[] bytes = new byte[4];
+        bytes[0] = 0;
+        bytes[1] = 5;
+        bytes[2] = multiManager.OwnID;
+        bytes[3] = otherID;
+
+        network.SendUdpRel(bytes);
+    }
 
     public void SendPose(uint metaState, Vector3 pos, Vector3 rot)
     {
+        //Debug.Log("Sent pose");
+
         byte[] xBytes = System.BitConverter.GetBytes(pos.x);
         byte[] yBytes = System.BitConverter.GetBytes(pos.y);
         byte[] zBytes = System.BitConverter.GetBytes(pos.z);

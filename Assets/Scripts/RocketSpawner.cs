@@ -7,6 +7,8 @@ public class RocketSpawner : MonoBehaviour {
     [SerializeField]
     private GameObject[] rocketsPrefabs;
     [SerializeField]
+    private GameObject[] rocketsRemotePrefabs;
+    [SerializeField]
     private bool spawn2Rockets = false;
 
     public CameraMultiController cmc;
@@ -18,9 +20,30 @@ public class RocketSpawner : MonoBehaviour {
     private Transform rocket1;
     private Transform rocket2;
 
+    public float rectX = 0f;
+    public float rectY = 0f;
+    public float rectWidth = 1f;
+    public float rectHeight = 1f;
+    public float upRectX = 0f;
+    public float upRectY = 0f;
+    public float upRectWidth = 1f;
+    public float upRectHeight = 1f;
+
+    [SerializeField]
+    private float seperateX = 100f;
+    [SerializeField]
+    private float seperateZ = 50f;
+
+
+    public Transform[] StartPlatforms
+    {
+        get;
+        protected set;
+    }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         GameObject instRock = Instantiate(rocketsPrefabs[Statics.selectedRocket]);
         GameObject instRock2 = null;
         if (spawn2Rockets)
@@ -29,11 +52,34 @@ public class RocketSpawner : MonoBehaviour {
         }
 
         GameObject startPlatform = GameObject.Find("Start Platform");
+        //StartPlatforms = new Transform[] { startPlatform.transform };
         GameObject startPlatformP2 = null;
         if (spawn2Rockets)
         {
             startPlatformP2 = GameObject.Find("Start Platform P2");
+            //StartPlatforms = new Transform[] { startPlatform.transform, startPlatformP2.transform };
         }
+
+        List<Transform> foundPlatforms = new List<Transform>();
+        Transform foundPlat = startPlatform.transform;
+        int cntPl = 2;
+        while (foundPlat != null)
+        {
+            foundPlatforms.Add(foundPlat);
+            GameObject objF = GameObject.Find("Start Platform P" + cntPl.ToString());
+            if (objF != null)
+            {
+                foundPlat = objF.transform;
+                cntPl++;
+            }
+            else
+            {
+                foundPlat = null;
+            }
+        }
+
+        StartPlatforms = foundPlatforms.ToArray();
+
         if (startPlatform == null)
         {
             Debug.LogError("[Hey Marc] Hab kei Anfangs-Lande Platform gfunde. Würdsch bitte eine mache? Grad so dass se \"Start Platform\" heißt. Merci gsaid");
@@ -57,6 +103,10 @@ public class RocketSpawner : MonoBehaviour {
             }*/
 
             //CameraMultiController cmc = GameObject.FindObjectOfType<CameraMultiController>();
+            if (spawn2Rockets == false)
+            {
+                cmc = GameObject.FindObjectOfType<CameraMultiController>();
+            }
             cmcCam = cmc.transform.GetComponentInChildren<Camera>();
 
             instRock.GetComponent<RocketProps>().cameraMulti = cmc;
@@ -109,10 +159,17 @@ public class RocketSpawner : MonoBehaviour {
                 cmc1Cam = cmc1.transform.GetComponentInChildren<Camera>();
                 cmc1.transform.GetComponentInChildren<AudioListener>().enabled = false;
 
+                cmc1.vector1GoalOutside = new Vector2(rectX, rectY);
+                cmc1.vector2GoalOutside = new Vector2(rectWidth, rectHeight);
+
+
                 cmc2.rockets = new Transform[] { instRock2.transform };
                 cmc2.rocketRigidbody = instRock2.GetComponent<Rigidbody>();
                 cmc2Cam = cmc2.transform.GetComponentInChildren<Camera>();
                 cmc2.transform.GetComponentInChildren<AudioListener>().enabled = false;
+
+                cmc2.vector1GoalOutside = new Vector2(upRectX, upRectY);
+                cmc2.vector2GoalOutside = new Vector2(upRectWidth, upRectHeight);
 
                 cmc1Cam.enabled = false;
                 cmc2Cam.enabled = false;
@@ -126,34 +183,135 @@ public class RocketSpawner : MonoBehaviour {
 
 
     public GameObject SpawnedRocket { get; set; }
-	
-	// Update is called once per frame
-	void Update ()
+
+    private bool camsSepBefore = false;
+    private bool lerpedBack = false;
+
+    // Update is called once per frame
+    void Update ()
     {
 		if (spawn2Rockets)
         {
             float angleDiff = absAngleDiff(rocket1.rotation.eulerAngles.y, rocket2.rotation.eulerAngles.y);
 
-            if (angleDiff < 1f)
+            //Debug.Log(angleDiff);
+
+            if (shouldMerge() && camsSepBefore)
             {
+                Debug.Log("1");
+                camsSepBefore = false;
+
                 cmc1.LerpChild = false;
                 cmc2.LerpChild = false;
+                cmc1.finishedLerpProj = false;
+                cmc2.finishedLerpProj = false;
+                cmc1.LerpToTransform(cmcCam.transform);
+                cmc2.LerpToTransform(cmcCam.transform);
+
+                lerpedBack = false;
+            }
+            else if (shouldMerge() && lerpedBack == false && cmc1.FinishedLerpingBack && cmc2.FinishedLerpingBack)
+            {
+                Debug.Log("2");
+                lerpedBack = true;
                 cmc1Cam.enabled = false;
                 cmc2Cam.enabled = false;
                 cmcCam.enabled = true;
-                //cmc1Cam.transform.position = cmcCam.transform.position;
-                //cmc2Cam.transform.position = cmcCam.transform.position;
+                cmc1Cam.transform.position = cmcCam.transform.position;
+                cmc2Cam.transform.position = cmcCam.transform.position;
             }
-            else
+            else if (shouldSeperate() && camsSepBefore == false)
             {
-                //cmc1.LerpChild = true;
-                //cmc2.LerpChild = true;
+                Debug.Log("3");
+                camsSepBefore = true;
+                cmc1.LerpChild = true;
+                cmc2.LerpChild = true;
+                cmc1.finishedLerpProj = false;
+                cmc2.finishedLerpProj = false;
+                cmc1.timeLerpBackToTransform = 0f;
+                cmc2.timeLerpBackToTransform = 0f;
+
+                CameraMultiController.SetScissorRect(cmc1Cam, new Rect(rectX, rectY, rectWidth, rectHeight));
+                CameraMultiController.SetScissorRect(cmc2Cam, new Rect(upRectX, upRectY, upRectWidth, upRectHeight));
+                cmc1.proj1 = new Vector2(rectX, rectY);
+                cmc1.proj2 = new Vector2(rectWidth, rectHeight);
+                cmc2.proj1 = new Vector2(upRectX, upRectY);
+                cmc2.proj2 = new Vector2(upRectWidth, upRectHeight);
+
                 cmc1Cam.enabled = true;
                 cmc2Cam.enabled = true;
                 cmcCam.enabled = false;
             }
         }
 	}
+
+    private bool shouldSeperate()
+    {
+        float angleDiff = absAngleDiff(rocket1.rotation.eulerAngles.y, rocket2.rotation.eulerAngles.y);
+
+
+        float xDiff = Mathf.Abs(rocket1.position.x - rocket2.position.x);
+        float yDiff = Mathf.Abs(rocket1.position.y - rocket2.position.y);
+        float zDiff = Mathf.Abs(rocket1.position.z - rocket2.position.z);
+
+        float diffXPlane = 0f;
+        float diffZPlane = 0f;
+
+        float an = absAngleDiff(0f, rocket1.rotation.eulerAngles.y);
+        if (an < 45f || (an > 135f && an < 225f) || an > 315f)
+        {
+            diffXPlane = xDiff * xDiff + yDiff * yDiff;
+            diffZPlane = zDiff * zDiff + yDiff * yDiff;
+        }
+        else
+        {
+            diffXPlane = zDiff * zDiff + yDiff * yDiff;
+            diffZPlane = xDiff * xDiff + yDiff * yDiff;
+        }
+
+        if (angleDiff > 1f || diffXPlane >= seperateX || diffZPlane >= seperateZ)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private bool shouldMerge()
+    {
+        float angleDiff = absAngleDiff(rocket1.rotation.eulerAngles.y, rocket2.rotation.eulerAngles.y);
+
+
+        float xDiff = Mathf.Abs(rocket1.position.x - rocket2.position.x);
+        float yDiff = Mathf.Abs(rocket1.position.y - rocket2.position.y);
+        float zDiff = Mathf.Abs(rocket1.position.z - rocket2.position.z);
+
+        float diffXPlane = 0f;
+        float diffZPlane = 0f;
+
+        float an = absAngleDiff(0f, rocket1.rotation.eulerAngles.y);
+        if (an < 45f || (an > 135f && an < 225f) || an > 315f)
+        {
+            diffXPlane = xDiff * xDiff + yDiff * yDiff;
+            diffZPlane = zDiff * zDiff + yDiff * yDiff;
+        }
+        else
+        {
+            diffXPlane = zDiff * zDiff + yDiff * yDiff;
+            diffZPlane = xDiff * xDiff + yDiff * yDiff;
+        }
+
+        if (angleDiff < 0.2f && diffXPlane < seperateX && diffZPlane < seperateZ)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Transform SpawnrocketNoRig(short rocketID)
+    {
+        GameObject instRock = Instantiate(rocketsRemotePrefabs[rocketID]);
+        return instRock.transform;
+    }
 
     private float absAngleDiff(float angle1, float angle2)
     {
@@ -164,6 +322,14 @@ public class RocketSpawner : MonoBehaviour {
         else
         {
             return Mathf.Abs(angle1 - angle2);
+        }
+    }
+
+    public bool Spawn2Rockets
+    {
+        get
+        {
+            return spawn2Rockets;
         }
     }
 }
