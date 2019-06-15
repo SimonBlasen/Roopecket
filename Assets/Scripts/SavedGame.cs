@@ -19,6 +19,7 @@ public class SavedGame
     public static bool[] OwnedRockets = new bool[32];   // 2
     public static int Money = 0;                        // 3
     public static float CurrentLevelTime;               // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
+    public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
     // Hier kannst noch so viele Sachen hinzufügen wie du willst
 
 
