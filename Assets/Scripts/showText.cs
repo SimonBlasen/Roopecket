@@ -21,7 +21,16 @@ public class showText : MonoBehaviour
         btn.onClick.AddListener(TaskOnClick);
     }
 
-    
+    private void Update()
+    {
+        
+       if (Input.GetKeyDown(KeyCode.Delete) && isThereText)
+            {
+            closeText();
+            }
+
+
+    }
 
     void TaskOnClick()
     {
@@ -67,14 +76,21 @@ public class showText : MonoBehaviour
 
         else if (isThereText)
         {
-            Time.timeScale = 1;
-            isThereText = false;
-            Text1.SetActive(false);
-            Text2.SetActive(false);
-            Text3.SetActive(false);
-            Text4.SetActive(false);
-            Text5.SetActive(false);
+            closeText();
         }
+    }
+
+    void closeText()
+    {
+
+        Time.timeScale = 1;
+        isThereText = false;
+        Text1.SetActive(false);
+        Text2.SetActive(false);
+        Text3.SetActive(false);
+        Text4.SetActive(false);
+        Text5.SetActive(false);
+
     }
 
 }

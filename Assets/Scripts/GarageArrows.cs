@@ -75,6 +75,25 @@ public class GarageArrows : MonoBehaviour {
 
 
         }
+
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.D) && mouseIsDown == false)
+        {
+
+            ars.RightClick();
+
+        }
+
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.A) && mouseIsDown == false)
+        {
+
+            ars.LeftClick();
+
+        }
+
+
+
+
+
         else if (mousedown == false && mouseIsDown)
         {
             mouseIsDown = false;

@@ -18,7 +18,15 @@ public class pop_up_text : MonoBehaviour
         animationOver = false;
     }
 
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Delete))
+        { 
+            print("down");
+            anim.Play("text_pop_down");
+            Invoke("CloseText", animdelay);
+        }
+    }
     private void OnMouseDown()
     {
         print("down");
