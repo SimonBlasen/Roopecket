@@ -65,7 +65,7 @@ public class MainMenuText : MonoBehaviour {
                     if (MousePress)
                     {
 
-                        SceneManager.LoadScene("Platform First Level");
+                        SceneManager.LoadScene("ComicScene");
 
                     }
 
