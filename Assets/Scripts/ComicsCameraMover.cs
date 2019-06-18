@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ComicsCameraMover : MonoBehaviour {
 
@@ -36,6 +37,8 @@ public class ComicsCameraMover : MonoBehaviour {
     private Vector3 oldMoveDelta2 = Vector3.zero;
 
     private float reachedThresh = 1f;
+
+    public string LevelToLoad;
 
     private int index = -1;
 
@@ -87,13 +90,23 @@ public class ComicsCameraMover : MonoBehaviour {
 
     public void NextWindow()
     {
+        
+        
         index++;
-        if (index >= lookPoints.Length)
+
+        if (index == lookPoints.Length)
+        {
+            SceneManager.LoadScene(LevelToLoad);
+        }
+
+        else if (index >= lookPoints.Length)
         {
             index = lookPoints.Length - 1;
 
-            //TODO finish
+            //TODO finish //vllt hat Marc das halbwegs gefixed
         }
+
+       
 
         reachedIndices[0] = false;
         reachedIndices[1] = false;

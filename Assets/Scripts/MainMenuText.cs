@@ -13,9 +13,13 @@ public class MainMenuText : MonoBehaviour {
     private bool Entered;
     private bool MousePress = false;
     private bool FirstTouch = false;
+    private bool optionsOpened;
     public string pointName;
     public Vector3 hidedButton;
     private float buttonsHoverLerpSpeed = 0.05f;
+
+    public GameObject Options;
+    public GameObject Background;
 
     // Use this for initialization
     void Start () {
@@ -108,6 +112,14 @@ public class MainMenuText : MonoBehaviour {
                     transform.position = Vector3.Lerp(transform.position, selectedOptions, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 0.5f, 1f);
+                    if (MousePress)
+                    {
+
+
+                        optionOpenMenu();
+                     
+
+                    }
 
                 }
 
@@ -175,6 +187,16 @@ public class MainMenuText : MonoBehaviour {
     private void OnMouseExit()
     {
         MouseHover = false;
+    }
+
+    private void optionOpenMenu()
+    {
+
+        Options.SetActive(true);
+        Background.SetActive(true);
+        Time.timeScale = 0f;
+       
+
     }
 
 }
