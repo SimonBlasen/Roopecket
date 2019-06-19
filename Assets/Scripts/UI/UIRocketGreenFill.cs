@@ -11,6 +11,7 @@ public class UIRocketGreenFill : MonoBehaviour
     [SerializeField]
     private RectTransform insideRocket;
     public RocketProps rocketProps;
+    public bool secondPlayer = false;
 
     private float healthPerc = 0f;
 
@@ -35,9 +36,13 @@ public class UIRocketGreenFill : MonoBehaviour
     {
         if (rocketProps == null)
         {
-            if (rs.SpawnedRocket != null)
+            if (secondPlayer == false && rs.SpawnedRocket != null)
             {
                 rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+            }
+            else if (secondPlayer == true && rs.SpawnedRocket2 != null)
+            {
+                rocketProps = rs.SpawnedRocket2.GetComponent<RocketProps>();
             }
         }
         else

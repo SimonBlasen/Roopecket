@@ -9,6 +9,7 @@ public class UIFuelBar : MonoBehaviour {
     public Image image;
     public TextMeshProUGUI text;
     public RocketProps rocketProps;
+    public bool secondPlayer = false;
 
     private float lastFuel = 0f;
 
@@ -27,9 +28,13 @@ public class UIFuelBar : MonoBehaviour {
     {
         if (rocketProps == null)
         {
-            if (rs.SpawnedRocket != null)
+            if (secondPlayer == false && rs.SpawnedRocket != null)
             {
                 rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+            }
+            else if (secondPlayer == true && rs.SpawnedRocket2 != null)
+            {
+                rocketProps = rs.SpawnedRocket2.GetComponent<RocketProps>();
             }
         }
         else

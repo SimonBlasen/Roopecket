@@ -29,6 +29,9 @@ public class RocketSpawner : MonoBehaviour {
     public float upRectWidth = 1f;
     public float upRectHeight = 1f;
 
+    public GameObject canvasesSplited;
+    public GameObject canvasesCombined;
+
     [SerializeField]
     private float seperateX = 100f;
     [SerializeField]
@@ -44,6 +47,7 @@ public class RocketSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        SpawnedRocket2 = null;
         GameObject instRock = Instantiate(rocketsPrefabs[Statics.selectedRocket]);
         GameObject instRock2 = null;
         if (spawn2Rockets)
@@ -133,6 +137,8 @@ public class RocketSpawner : MonoBehaviour {
 
                 instRock2.GetComponent<RocketController>().LandingKey = KeyCode.Keypad0;
 
+                SpawnedRocket2 = instRock2;
+
                 for (int i = 0; i < instRock2.GetComponent<RocketController>().Controls.Length; i++)
                 {
                     if (i == 0)
@@ -183,6 +189,7 @@ public class RocketSpawner : MonoBehaviour {
 
 
     public GameObject SpawnedRocket { get; set; }
+    public GameObject SpawnedRocket2 { get; set; }
 
     private bool camsSepBefore = false;
     private bool lerpedBack = false;
@@ -217,6 +224,8 @@ public class RocketSpawner : MonoBehaviour {
                 cmc1Cam.enabled = false;
                 cmc2Cam.enabled = false;
                 cmcCam.enabled = true;
+                canvasesCombined.SetActive(true);
+                canvasesSplited.SetActive(false);
                 cmc1Cam.transform.position = cmcCam.transform.position;
                 cmc2Cam.transform.position = cmcCam.transform.position;
             }
@@ -241,6 +250,8 @@ public class RocketSpawner : MonoBehaviour {
                 cmc1Cam.enabled = true;
                 cmc2Cam.enabled = true;
                 cmcCam.enabled = false;
+                canvasesCombined.SetActive(false);
+                canvasesSplited.SetActive(true);
             }
         }
 	}
