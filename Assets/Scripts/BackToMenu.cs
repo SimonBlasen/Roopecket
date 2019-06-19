@@ -1,62 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BackToMenu : MonoBehaviour {
 
-    private Vector3 spawn;
-    public Vector3 selectedText;
-    private float lerpSpeed = 0.08f;
+    public Button yourButton;
+    public string LevelToLoad;
+    private bool informationShwon = false;
 
-    private bool click = false;
-    private bool mouseHover = false;
-
-
-    // Use this for initialization
-    void Start () {
-        spawn = transform.position;
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-        if (mouseHover)
-        {
-
-            transform.position = Vector3.Lerp(transform.position, selectedText, lerpSpeed);
-
-            if (click)
-            {
-
-                SceneManager.LoadScene("Main_Menu_3");
-
-            }
-
-        }
-
-        else
-        {
-
-            transform.position = Vector3.Lerp(transform.position, spawn, lerpSpeed);
-
-        }
-
-	}
-
-    private void OnMouseDown()
+    void Start()
     {
-        click = true;
+        Button btn = yourButton.GetComponent<Button>();
+        btn.onClick.AddListener(TaskOnClick);
     }
 
-    private void OnMouseEnter()
+    void TaskOnClick()
     {
-        mouseHover = true;
+        SceneManager.LoadScene(LevelToLoad);
     }
 
-    private void OnMouseExit()
-    {
-        mouseHover = false;
-    }
+
 }
