@@ -45,6 +45,12 @@ public class StaticsSingleplayer : MonoBehaviour
         damageTaken = 0f;
     }
 
+    public static void Reset()
+    {
+        instM();
+        damageTaken = 0f;
+    }
+
     /// <summary>
     /// Returns the time in seconds since you called StartTimer()
     /// </summary>
