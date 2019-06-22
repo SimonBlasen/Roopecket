@@ -14,6 +14,10 @@ public class MultiManager : MonoBehaviour
     private float lerpSpeedRot = 0.1f;
 
 
+
+
+    private MapSpawner mapSpawner;
+    
     private const int maxPlayers = 16;
     private ulong[] otherPlayersSteamIDs = new ulong[maxPlayers];
     private OtherPlayer[] otherPlayers = new OtherPlayer[maxPlayers];
@@ -21,6 +25,8 @@ public class MultiManager : MonoBehaviour
     private float sendRateCounter = 0f;
     private bool connectedToServer = false;
     private bool didSendPlayerinfo = false;
+
+    private bool sentMap = false;
 
 
     private Transform rocketTransform;
@@ -32,6 +38,8 @@ public class MultiManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        mapSpawner = GameObject.Find("Map Spawner").GetComponent<MapSpawner>();
+
         rocketTransform = null;
         rs = GameObject.FindObjectOfType<RocketSpawner>();
 
@@ -105,6 +113,18 @@ public class MultiManager : MonoBehaviour
                     }
                 }
             }
+
+
+
+            if (sentMap == false)
+            {
+                sentMap = true;
+
+                if (Statics.sendMapToServer)
+                {
+                    network.SendMapNumber(Statics.selectedMap);
+                }
+            }
         }
     }
 
@@ -161,6 +181,12 @@ public class MultiManager : MonoBehaviour
 
             otherPlayers[playerID].rocket = rs.SpawnrocketNoRig(rocketID);
         }
+    }
+
+    public void SetMapNumber(byte map)
+    {
+        Statics.selectedMap = map;
+        mapSpawner.ForceInit();
     }
 
 

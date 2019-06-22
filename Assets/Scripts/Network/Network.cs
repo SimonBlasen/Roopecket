@@ -139,9 +139,29 @@ public class Network : MonoBehaviour
                     multiManager.ConnectedToServer = false;
                     Shutdown();
                 }
+
+                // Map number
+                else if (data.Length >= 2 && data[0] == 0 && data[1] == 8)
+                {
+                    byte map = data[2];
+
+                    multiManager.SetMapNumber(map);
+                    multiManager.ResetToStartPlatform();
+                }
             }
         }
 	}
+
+    public void SendMapNumber(byte map)
+    {
+        byte[] bytes = new byte[4];
+        bytes[0] = 0;
+        bytes[1] = 7;
+        bytes[2] = multiManager.OwnID;
+        bytes[3] = map;
+
+        network.SendUdpRel(bytes);
+    }
 
     public void SendPlayerinfoRequest(byte otherID)
     {

@@ -47,6 +47,12 @@ public class RocketSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        GameObject mapSpawner = GameObject.Find("Map Spawner");
+        if (mapSpawner != null)
+        {
+            mapSpawner.GetComponent<MapSpawner>().Init();
+        }
+
         SpawnedRocket2 = null;
         GameObject instRock = Instantiate(rocketsPrefabs[Statics.selectedRocket]);
         GameObject instRock2 = null;
