@@ -24,13 +24,18 @@ public class Found_Prof : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
 
-        if (foundProf == false && Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit))
+        if (foundProf == false && Input.GetMouseButtonDown(0))
         {
-            if (hit.transform.GetInstanceID() == transform.GetInstanceID())
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+
+            for (int i = 0; i < hits.Length; i++)
             {
-                foundProf = true;
-                profParticles.SetActive(true);
-                SavedGame.DrEberhardtFound[Statics.currentLevel] = true;
+                if (hits[i].transform.GetInstanceID() == transform.GetInstanceID())
+                {
+                    foundProf = true;
+                    profParticles.SetActive(true);
+                    SavedGame.DrEberhardtFound[Statics.currentLevel] = true;
+                }
             }
         }
 
