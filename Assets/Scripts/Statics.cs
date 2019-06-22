@@ -13,4 +13,6 @@ public class Statics
     public static bool sendMapToServer = false;
     public static ulong Steam64ID = 0;
     public static string SteamName = "No Steam name";
+
+    public static int comicSceneToLoad = 1;
 }

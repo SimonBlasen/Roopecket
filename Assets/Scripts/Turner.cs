@@ -109,7 +109,6 @@ public class Turner : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Rocket invds");
         if (other.tag == "Rocket")
         {
             Transform topParent = other.transform;
@@ -128,7 +127,7 @@ public class Turner : MonoBehaviour {
 
                 topParent.GetComponent<RocketController>().Turning = true;
 
-                Debug.Log("Rocket in");
+                //Debug.Log("Rocket in");
             }
 
         }
