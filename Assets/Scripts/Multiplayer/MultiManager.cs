@@ -8,6 +8,10 @@ public class MultiManager : MonoBehaviour
     private float sendRate = 1/20f;
     [SerializeField]
     private Network network;
+    [SerializeField]
+    private float lerpSpeed = 0.1f;
+    [SerializeField]
+    private float lerpSpeedRot = 0.1f;
 
 
     private const int maxPlayers = 16;
@@ -84,8 +88,10 @@ public class MultiManager : MonoBehaviour
                 if (otherPlayers[i].init)
                 {
                     Transform rocket = otherPlayers[i].rocket;
-                    rocket.position = otherPlayers[i].position;
-                    rocket.rotation = Quaternion.Euler(otherPlayers[i].rot);
+                    rocket.position = Vector3.Lerp(rocket.position, otherPlayers[i].position, lerpSpeed);
+                    //rocket.position = otherPlayers[i].position;
+                    //rocket.rotation = Quaternion.Euler(otherPlayers[i].rot);
+                    rocket.rotation = Quaternion.Lerp(rocket.rotation, Quaternion.Euler(otherPlayers[i].rot), lerpSpeedRot);
 
                     for (int j = 0; j < otherPlayers[i].thrusters.Length; j++)
                     {
