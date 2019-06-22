@@ -10,6 +10,10 @@ public class MainMenuCam : MonoBehaviour
     public Vector3[] lookAts;
     public Transform lookatTrans;
 
+    private bool zoomedToPlanet = false;
+    private Transform planetTarget = null;
+    private Transform lookatPlanet = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +23,34 @@ public class MainMenuCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookAts[Index], lerpLookat);
-        transform.position = Vector3.Lerp(transform.position, positions[Index], lerpSpeed);
-        transform.LookAt(lookatTrans);
+        if (!zoomedToPlanet)
+        {
+            lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookAts[Index], lerpLookat);
+            transform.position = Vector3.Lerp(transform.position, positions[Index], lerpSpeed);
+            transform.LookAt(lookatTrans);
+        }
+        else
+        {
+            lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookatPlanet.position, lerpLookat);
+            transform.position = Vector3.Lerp(transform.position, planetTarget.position, lerpSpeed);
+            transform.LookAt(lookatTrans);
+        }
     }
 
     public int Index
     {
         get;set;
+    }
+
+    public void ZoomToPlanet(Transform camPos, Transform planetTarget)
+    {
+        zoomedToPlanet = true;
+        this.planetTarget = camPos;
+        lookatPlanet = planetTarget;
+    }
+
+    public void UnzoomPlanet()
+    {
+        zoomedToPlanet = false;
     }
 }

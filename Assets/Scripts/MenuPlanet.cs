@@ -8,13 +8,17 @@ public class MenuPlanet : MonoBehaviour
     private PlanetLevel[] planetLevels;
     [SerializeField]
     private float lerpScaleSpeed = 0.07f;
+    [SerializeField]
+    private Transform cameraPos;
 
     private Vector3 scaleTarget = new Vector3(1f, 1f, 1f);
+
+    private MainMenuCam mainMenuCam;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mainMenuCam = GameObject.FindObjectOfType<MainMenuCam>();
     }
 
     // Update is called once per frame
@@ -48,6 +52,10 @@ public class MenuPlanet : MonoBehaviour
 
     public void Clicked()
     {
-
+        mainMenuCam.ZoomToPlanet(cameraPos, transform);
+        for (int i = 0; i < planetLevels.Length; i++)
+        {
+            planetLevels[i].IsZoomed = true;
+        }
     }
 }

@@ -22,6 +22,8 @@ public class SavedGame
     public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
     // Hier kannst noch so viele Sachen hinzufügen wie du willst
 
+    public static bool[] DrEberhardtFound = new bool[256];
+
 
     public static void LoadSavegame()
     {
