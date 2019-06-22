@@ -6,6 +6,13 @@ public class PlanetLevel : MonoBehaviour
 {
     [SerializeField]
     private BoxCollider boxColliderTriggerMouse;
+    [SerializeField]
+    private Transform scaleChild;
+    [SerializeField]
+    private float lerpScaleSpeed = 0.07f;
+
+
+    private Vector3 scaleTarget = new Vector3(1.0f, 1.0f, 1.0f);
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +23,12 @@ public class PlanetLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        scaleChild.localScale = Vector3.Lerp(scaleChild.localScale, scaleTarget, lerpScaleSpeed);
+    }
+
+    public void Clicked()
+    {
+        Debug.Log("Clicked Level");
     }
 
 
@@ -32,6 +44,35 @@ public class PlanetLevel : MonoBehaviour
             isZoomed = value;
 
             boxColliderTriggerMouse.enabled = isZoomed;
+        }
+    }
+
+
+
+
+
+
+    private bool hovered = false;
+    public bool Hovered
+    {
+        get
+        {
+            return hovered;
+        }
+        set
+        {
+            hovered = value;
+
+            Debug.Log("Level hovered " + hovered.ToString());
+
+            if (hovered)
+            {
+                scaleTarget = new Vector3(1.3f, 1.0f, 1.3f);
+            }
+            else
+            {
+                scaleTarget = new Vector3(1f, 1f, 1f);
+            }
         }
     }
 }
