@@ -22,8 +22,13 @@ public class flyingGoal : MonoBehaviour {
     {
         if (other.transform.tag == "Rocket")
         {
-            StartCoroutine(Example());
-            SceneManager.LoadScene(levelToLoad);
+            //StartCoroutine(Example());
+
+            Statics.nextScene = levelToLoad;
+
+            Manager.Instance.Landed(other.transform, "Finish_" + levelToLoad);
+
+            //SceneManager.LoadScene(levelToLoad);
 
         }
     }

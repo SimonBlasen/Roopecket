@@ -17,6 +17,7 @@ public class LevelNumber : MonoBehaviour
         }
         else
         {
+            levelNumber--;
             Statics.currentLevel = levelNumber;
         }
     }

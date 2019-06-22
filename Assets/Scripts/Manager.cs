@@ -60,14 +60,29 @@ public class Manager : MonoBehaviour
 
         if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish")
         {
-            timeKeeper.ReachedFinish();
 
             string conc = landingPlatform.Split('_')[1];
             for (int i = 2; i < landingPlatform.Split('_').Length; i++)
             {
                 conc += "_" + landingPlatform.Split('_')[i];
             }
-            SceneManager.LoadScene(conc);
+        
+            SavedGame.NextLevel[Statics.selectedRocket] = Statics.currentLevel + 1;
+
+            timeKeeper.ReachedFinish();
+
+
+            Statics.nextScene = conc;
+
+
+            if (LevelNumber.GetStage(Statics.currentLevel) + 1 == LevelNumber.GetStage(Statics.currentLevel + 1))
+            {
+                GameObject.FindObjectOfType<resultScreen>().showEndScreen();
+            }
+            else
+            {
+                SceneManager.LoadScene(conc);
+            }
         }
 
         Debug.Log("Landed on " + landingPlatform);
