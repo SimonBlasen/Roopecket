@@ -9,26 +9,29 @@ public class Found_Prof : MonoBehaviour
     public int profNumber;
 
 
+    private Camera cam;
 
     private void Start()
     {
+        cam = GameObject.FindObjectOfType<CameraMultiController>().GetComponentInChildren<Camera>();
         profParticles.SetActive(false);
     }
     // Update is called once per frame
     void Update()
     {
-     
-        if(foundProf)
+
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+
+        if (foundProf == false && Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit))
         {
-            profParticles.SetActive(true);
+            if (hit.transform.GetInstanceID() == transform.GetInstanceID())
+            {
+                foundProf = true;
+                profParticles.SetActive(true);
+            }
         }
-
-    }
-
-    private void OnMouseDown()
-    {
-
-        foundProf = true;
 
     }
 }
