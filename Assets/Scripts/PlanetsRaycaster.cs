@@ -130,6 +130,7 @@ public class PlanetsRaycaster : MonoBehaviour
                     if (Physics.Raycast(ray, out hit) == false || hit.transform.GetComponentInParent<PlanetLevel>() == null)
                     {
                         selectedLevel = false;
+                        lastHoveredLevel.Unclicked();
                     }
                 }
 

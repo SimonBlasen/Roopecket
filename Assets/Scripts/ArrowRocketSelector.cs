@@ -42,7 +42,7 @@ public class ArrowRocketSelector : MonoBehaviour
         currentRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
         currentRocket.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
-        SavedGame.OwnedRockets[0] = true;
+        SavedGame.OwnedRockets[0] = 0;
     }
 
     void Update()
@@ -70,7 +70,7 @@ public class ArrowRocketSelector : MonoBehaviour
             currentRocket.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             
             
-            cage.SetActive(!SavedGame.OwnedRockets[number]);
+            cage.SetActive(SavedGame.OwnedRockets[number] != -1);
             
         }
     }

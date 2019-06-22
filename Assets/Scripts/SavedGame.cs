@@ -16,13 +16,51 @@ public class SavedGame
     // SavedGame variables
     public static int LastSelectedRocket = 0;           // 0
     public static int CurrentLevelIndex = 0;            // 1
-    public static bool[] OwnedRockets = new bool[32];   // 2
+    //public static bool[] OwnedRockets = new bool[32];   // 2
     public static int Money = 0;                        // 3
     public static float CurrentLevelTime;               // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
     public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
     // Hier kannst noch so viele Sachen hinzufügen wie du willst
 
     public static bool[] DrEberhardtFound = new bool[256];
+
+    public static int[] OwnedRockets = new int[256];
+    public static string[] RocketNames = new string[256];
+    public static int[] NextLevel = new int[256];
+    public static float[] CurrentDamage = new float[256];
+    public static float[] CurrentTime = new float[256];
+
+    public static float CurrentRocketGlobalTime
+    {
+        get
+        {
+            return 0f;
+        }
+    }
+
+    public static float CurrentRocketGlobalDamage
+    {
+        get
+        {
+            return 0f;
+        }
+    }
+
+    public static float CurrentRocketStageTime
+    {
+        get
+        {
+            return 0f;
+        }
+    }
+
+    public static float CurrentRocketStageDamage
+    {
+        get
+        {
+            return 0f;
+        }
+    }
 
 
     public static void LoadSavegame()
@@ -52,14 +90,7 @@ public class SavedGame
             con += "2=";
             for (int i = 0; i < OwnedRockets.Length; i++)
             {
-                if (OwnedRockets[i])
-                {
-                    con += "1,";
-                }
-                else
-                {
-                    con += "0,";
-                }
+                con += OwnedRockets[i].ToString() + ",";
             }
             con = con.Substring(0, con.Length - 1);
             con += seperator;
