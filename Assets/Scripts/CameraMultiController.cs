@@ -250,7 +250,7 @@ public class CameraMultiController : MonoBehaviour
 
         DepthOfFieldModel.Settings set = postProc.profile.depthOfField.settings;
 
-        if (rocketSpawner.Spawn2Rockets)
+        if (rocketSpawner != null && rocketSpawner.Spawn2Rockets)
         {
             set.focusDistance = distance;
         }

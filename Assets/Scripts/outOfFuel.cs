@@ -28,9 +28,16 @@ public class outOfFuel : MonoBehaviour
 
         if (rocketProps == null)
         {
-            if (rs.SpawnedRocket != null)
+            if (rs != null)
             {
-                rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+                if (rs.SpawnedRocket != null)
+                {
+                    rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+                }
+            }
+            else
+            {
+                rocketProps = GameObject.FindObjectOfType<RocketProps>();
             }
         }
         else

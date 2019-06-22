@@ -36,13 +36,20 @@ public class UIRocketGreenFill : MonoBehaviour
     {
         if (rocketProps == null)
         {
-            if (secondPlayer == false && rs.SpawnedRocket != null)
+            if (rs != null)
             {
-                rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+                if (secondPlayer == false && rs.SpawnedRocket != null)
+                {
+                    rocketProps = rs.SpawnedRocket.GetComponent<RocketProps>();
+                }
+                else if (secondPlayer == true && rs.SpawnedRocket2 != null)
+                {
+                    rocketProps = rs.SpawnedRocket2.GetComponent<RocketProps>();
+                }
             }
-            else if (secondPlayer == true && rs.SpawnedRocket2 != null)
+            else
             {
-                rocketProps = rs.SpawnedRocket2.GetComponent<RocketProps>();
+                rocketProps = GameObject.FindObjectOfType<RocketProps>();
             }
         }
         else
