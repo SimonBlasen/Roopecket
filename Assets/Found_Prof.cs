@@ -30,6 +30,7 @@ public class Found_Prof : MonoBehaviour
             {
                 foundProf = true;
                 profParticles.SetActive(true);
+                SavedGame.DrEberhardtFound[Statics.currentLevel] = true;
             }
         }
 
