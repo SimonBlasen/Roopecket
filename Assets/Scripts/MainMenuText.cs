@@ -8,7 +8,7 @@ public class MainMenuText : MonoBehaviour {
 
     private RectTransform menuText;
     private Vector3 spawn;
-    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen;
+    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen, selectedOnline;
     private bool MouseHover = false;
     private bool Entered;
     private bool MousePress = false;
@@ -36,6 +36,7 @@ public class MainMenuText : MonoBehaviour {
         selectedQuit = new Vector3(0f, -0.8f, -4f);
         selectedMultiplayer = new Vector3(0f, -0.05f, -4.15f);
         selectedSplitscreen = new Vector3(1.791f, 0.05f, -4.63f);
+        selectedOnline = new Vector3(1.791f, 0.137f, -4.63f);
 
         hidedButton = new Vector3(100f, 100f, 100f);
         FirstTouch = false;
@@ -166,6 +167,21 @@ public class MainMenuText : MonoBehaviour {
                 else if (pointName == "Splitscreen" && MouseHover)
                 {
                     transform.position = Vector3.Lerp(transform.position, selectedSplitscreen, buttonsHoverLerpSpeed);
+                    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = new Color(1f, 1f, 0.5f, 1f);
+
+                    if (MousePress)
+                    {
+                        Debug.Log("Multiplayer");
+                        //SceneManager.LoadScene("Tutorial1");
+                        mainMenuCam.Index = 0;
+
+                    }
+                }
+
+                else if (pointName == "Online" && MouseHover)
+                {
+                    transform.position = Vector3.Lerp(transform.position, selectedOnline, buttonsHoverLerpSpeed);
                     SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = new Color(1f, 1f, 0.5f, 1f);
 
