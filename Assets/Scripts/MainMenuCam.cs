@@ -17,7 +17,7 @@ public class MainMenuCam : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookAts[Index], lerpLookat);
         transform.position = Vector3.Lerp(transform.position, positions[Index], lerpSpeed);
