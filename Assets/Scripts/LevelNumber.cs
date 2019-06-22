@@ -26,4 +26,26 @@ public class LevelNumber : MonoBehaviour
     {
         
     }
+
+
+    public static int GetStage(int levelNumber)
+    {
+        if (levelNumber >= 0 && levelNumber <= 5)
+        {
+            return 0;
+        }
+        if (levelNumber >= 6 && levelNumber <= 10)
+        {
+            return 1;
+        }
+        if (levelNumber >= 11 && levelNumber <= 15)
+        {
+            return 2;
+        }
+        if (levelNumber >= 16)
+        {
+            return 3;
+        }
+        return -1;
+    }
 }

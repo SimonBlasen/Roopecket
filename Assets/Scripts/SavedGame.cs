@@ -27,40 +27,10 @@ public class SavedGame
     public static int[] OwnedRockets = new int[256];
     public static string[] RocketNames = new string[256];
     public static int[] NextLevel = new int[256];
-    public static float[] CurrentDamage = new float[256];
-    public static float[] CurrentTime = new float[256];
-
-    public static float CurrentRocketGlobalTime
-    {
-        get
-        {
-            return 0f;
-        }
-    }
-
-    public static float CurrentRocketGlobalDamage
-    {
-        get
-        {
-            return 0f;
-        }
-    }
-
-    public static float CurrentRocketStageTime
-    {
-        get
-        {
-            return 0f;
-        }
-    }
-
-    public static float CurrentRocketStageDamage
-    {
-        get
-        {
-            return 0f;
-        }
-    }
+    //public static float[] CurrentDamage = new float[256];
+    //public static float[] CurrentTime = new float[256];
+    public static float[,] CurrentDamageStage = new float[256,20];
+    public static float[,] CurrentTimeStage = new float[256,20];
 
 
     public static void LoadSavegame()
@@ -98,6 +68,104 @@ public class SavedGame
         }
     }
 
+
+
+
+    public static float CurrentRocketGlobalTime
+    {
+        get
+        {
+            return GetGlobalTime(Statics.selectedRocket);
+            //return CurrentTime[Statics.selectedRocket];
+        }
+    }
+
+    public static float CurrentRocketGlobalDamage
+    {
+        get
+        {
+            return GetGlobalDamage(Statics.selectedRocket);
+            //return CurrentDamage[Statics.selectedRocket];
+        }
+    }
+
+    public static float GetGlobalTime(int rocket)
+    {
+        float sum = 0f;
+        for (int i = 0; i < CurrentTimeStage.GetLength(1); i++)
+        {
+            if (i < NextLevel[rocket])
+            {
+                sum += CurrentTimeStage[rocket, i];
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalDamage(int rocket)
+    {
+        float sum = 0f;
+        for (int i = 0; i < CurrentDamageStage.GetLength(1); i++)
+        {
+            if (i < NextLevel[rocket])
+            {
+                sum += CurrentDamageStage[rocket, i];
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return sum;
+    }
+
+    public static float CurrentRocketStageTime
+    {
+        get
+        {
+            float sum = 0f;
+            for (int i = 0; i < CurrentTimeStage.GetLength(1); i++)
+            {
+                if (LevelNumber.GetStage(i) == LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[Statics.selectedRocket])
+                {
+                    sum += CurrentTimeStage[Statics.selectedRocket, i];
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return sum;
+        }
+    }
+
+    public static float CurrentRocketStageDamage
+    {
+        get
+        {
+            float sum = 0f;
+            for (int i = 0; i < CurrentDamageStage.GetLength(1); i++)
+            {
+                if (LevelNumber.GetStage(i) == LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[Statics.selectedRocket])
+                {
+                    sum += CurrentDamageStage[Statics.selectedRocket, i];
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return sum;
+        }
+    }
 
 
     private static void writeStringToFile(string text, string filePath)

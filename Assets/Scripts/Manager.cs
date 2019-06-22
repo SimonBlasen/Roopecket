@@ -9,6 +9,8 @@ public class Manager : MonoBehaviour
 
     private List<RocketProps> rocketsFueling = new List<RocketProps>();
 
+    private TimeKeeper timeKeeper;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -39,6 +41,8 @@ public class Manager : MonoBehaviour
                 go.AddComponent<Manager>();
                 go.name = "Manager";
                 instance = go.GetComponent<Manager>();
+
+                instance.timeKeeper = GameObject.FindObjectOfType<TimeKeeper>();
             }
 
             return instance;
@@ -56,6 +60,8 @@ public class Manager : MonoBehaviour
 
         if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish")
         {
+            timeKeeper.ReachedFinish();
+
             string conc = landingPlatform.Split('_')[1];
             for (int i = 2; i < landingPlatform.Split('_').Length; i++)
             {
