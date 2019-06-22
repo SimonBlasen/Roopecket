@@ -8,7 +8,7 @@ public class MainMenuText : MonoBehaviour {
 
     private RectTransform menuText;
     private Vector3 spawn;
-    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit;
+    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen;
     private bool MouseHover = false;
     private bool Entered;
     private bool MousePress = false;
@@ -17,6 +17,9 @@ public class MainMenuText : MonoBehaviour {
     public string pointName;
     public Vector3 hidedButton;
     private float buttonsHoverLerpSpeed = 0.05f;
+
+    [SerializeField]
+    private MainMenuCam mainMenuCam;
 
     public GameObject Options;
     public GameObject Background;
@@ -28,9 +31,11 @@ public class MainMenuText : MonoBehaviour {
 
         selectedContinue = new Vector3(0f, 0.05f, -4.15f);
         selectedGarage = new Vector3(0f, 0.15f, -4.15f);
-        selectedOptions = new Vector3(0f, -0.05f, -4.15f);
-        selectedTutorial = new Vector3(0f, -0.15f, -4.15f);
+        selectedOptions = new Vector3(0f, -0.15f, -4.15f);
+        selectedTutorial = new Vector3(0f, -0.25f, -4.15f);
         selectedQuit = new Vector3(0f, -0.8f, -4f);
+        selectedMultiplayer = new Vector3(0f, -0.05f, -4.15f);
+        selectedSplitscreen = new Vector3(1.791f, 0.05f, -4.63f);
 
         hidedButton = new Vector3(100f, 100f, 100f);
         FirstTouch = false;
@@ -135,6 +140,40 @@ public class MainMenuText : MonoBehaviour {
                     {
 
                         SceneManager.LoadScene("Tutorial1");
+
+                    }
+                }
+
+
+
+                else if (pointName == "Multiplayer" && MouseHover)
+                {
+                    transform.position = Vector3.Lerp(transform.position, selectedMultiplayer, buttonsHoverLerpSpeed);
+                    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = new Color(1f, 1f, 0.5f, 1f);
+
+                    if (MousePress)
+                    {
+                        Debug.Log("Multiplayer");
+                        //SceneManager.LoadScene("Tutorial1");
+                        mainMenuCam.Index = 1;
+
+                    }
+                }
+
+
+
+                else if (pointName == "Splitscreen" && MouseHover)
+                {
+                    transform.position = Vector3.Lerp(transform.position, selectedSplitscreen, buttonsHoverLerpSpeed);
+                    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = new Color(1f, 1f, 0.5f, 1f);
+
+                    if (MousePress)
+                    {
+                        Debug.Log("Multiplayer");
+                        //SceneManager.LoadScene("Tutorial1");
+                        mainMenuCam.Index = 0;
 
                     }
                 }
