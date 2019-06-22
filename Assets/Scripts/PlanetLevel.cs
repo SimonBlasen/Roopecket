@@ -13,11 +13,13 @@ public class PlanetLevel : MonoBehaviour
 
 
     private Vector3 scaleTarget = new Vector3(1.0f, 1.0f, 1.0f);
+    private MainMenuCam mainMenuCam;
 
     // Start is called before the first frame update
     void Start()
     {
         boxColliderTriggerMouse.enabled = false;
+        mainMenuCam = GameObject.FindObjectOfType<MainMenuCam>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,14 @@ public class PlanetLevel : MonoBehaviour
     public void Clicked()
     {
         Debug.Log("Clicked Level");
+
+        mainMenuCam.menuLevelInfo.panelWorldTarget = scaleChild.gameObject;
+    }
+
+
+    public void Unclicked()
+    {
+        mainMenuCam.menuLevelInfo.panelWorldTarget = null;
     }
 
 

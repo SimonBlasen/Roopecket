@@ -10,6 +10,8 @@ public class MainMenuCam : MonoBehaviour
     public Vector3[] lookAts;
     public Transform lookatTrans;
 
+    public MenuLevelInfo menuLevelInfo;
+
     private bool zoomedToPlanet = false;
     private Transform planetTarget = null;
     private Transform lookatPlanet = null;
