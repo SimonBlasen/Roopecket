@@ -184,6 +184,11 @@ public class MainMenuText : MonoBehaviour {
         MousePress = true;
     }
 
+    private void OnMouseUp()
+    {
+        MousePress = false;
+    }
+
     private void OnMouseExit()
     {
         MouseHover = false;
@@ -191,12 +196,23 @@ public class MainMenuText : MonoBehaviour {
 
     private void optionOpenMenu()
     {
+        OptionsMenuOpened(true);
+    }
 
-        Options.SetActive(true);
-        Background.SetActive(true);
-        Time.timeScale = 0f;
-       
-
+    public void OptionsMenuOpened(bool isOpen)
+    {
+        if (isOpen)
+        {
+            Options.SetActive(true);
+            Background.SetActive(true);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Options.SetActive(false);
+            Background.SetActive(false);
+            Time.timeScale = 1f;
+        }
     }
 
 }

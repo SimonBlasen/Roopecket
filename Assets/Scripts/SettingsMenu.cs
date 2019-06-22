@@ -9,7 +9,14 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer audioMixer;
     Resolution[] resolutions;
     public Dropdown resolutionDropdown;
-    
+
+    public MainMenuText mainMenuTextRef;
+
+
+    private int oldQualityIndex = 0;
+    private float oldVolume = 0f;
+    private bool oldIsFullscreen = false;
+
 
     private void Start()
     {
@@ -46,5 +53,33 @@ public class SettingsMenu : MonoBehaviour
         Screen.fullScreen = isFullscreen;
     }
 
+    public void MenuOpened(bool open)
+    {
+        if (open)
+        {
+            oldQualityIndex = QualitySettings.GetQualityLevel();
+            audioMixer.GetFloat("volume", out oldVolume);
+            oldIsFullscreen = Screen.fullScreen;
+        }
+        else
+        {
+            mainMenuTextRef.OptionsMenuOpened(false);
+        }
+    }
+
+
+    public void ButtonSave()
+    {
+        MenuOpened(false);
+    }
+
+    public void ButtonDiscard()
+    {
+        QualitySettings.SetQualityLevel(oldQualityIndex);
+        Screen.fullScreen = oldIsFullscreen;
+        audioMixer.SetFloat("volume", oldVolume);
+
+        MenuOpened(false);
+    }
 
 }
