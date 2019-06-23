@@ -33,6 +33,10 @@ public class SavedGame
     public static float[,] CurrentTimeStage = new float[256,20];
     public static float[,] CurrentUsedFuel = new float[256, 20];
 
+    public static float FreestyleTime;
+    public static float FreestyleDamage;
+    public static float FreestyleFuel;
+
 
     public static void LoadSavegame()
     {

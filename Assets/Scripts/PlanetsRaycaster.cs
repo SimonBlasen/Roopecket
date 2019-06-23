@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlanetsRaycaster : MonoBehaviour
 {
@@ -127,7 +128,7 @@ public class PlanetsRaycaster : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    if (Physics.Raycast(ray, out hit) == false || hit.transform.GetComponentInParent<PlanetLevel>() == null)
+                    if (EventSystem.current.IsPointerOverGameObject() == false /*Physics.Raycast(ray, out hit) == false || hit.transform.GetComponentInParent<PlanetLevel>() == null*/)
                     {
                         selectedLevel = false;
                         lastHoveredLevel.Unclicked();

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlanetLevel : MonoBehaviour
 {
     [SerializeField]
+    private int levelIndex = -1;
+    [SerializeField]
     private BoxCollider boxColliderTriggerMouse;
     [SerializeField]
     private Transform scaleChild;
@@ -32,6 +34,7 @@ public class PlanetLevel : MonoBehaviour
     {
         Debug.Log("Clicked Level");
 
+        mainMenuCam.menuLevelInfo.LevelIndex = levelIndex;
         mainMenuCam.menuLevelInfo.panelWorldTarget = scaleChild.gameObject;
     }
 
@@ -73,7 +76,7 @@ public class PlanetLevel : MonoBehaviour
         {
             hovered = value;
 
-            Debug.Log("Level hovered " + hovered.ToString());
+            //Debug.Log("Level hovered " + hovered.ToString());
 
             if (hovered)
             {

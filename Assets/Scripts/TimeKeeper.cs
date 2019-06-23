@@ -77,5 +77,11 @@ public class TimeKeeper : MonoBehaviour
 
 
         }
+        else
+        {
+            SavedGame.FreestyleTime = tookTime;
+            SavedGame.FreestyleDamage = takenDamage;
+            SavedGame.FreestyleFuel = usedFuel;
+        }
     }
 }

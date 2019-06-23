@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuLevelInfo : MonoBehaviour
 {
@@ -10,6 +13,20 @@ public class MenuLevelInfo : MonoBehaviour
     public GameObject panelWorldTarget = null;
     [SerializeField]
     public Vector2 offset;
+    [SerializeField]
+    private TextMeshProUGUI levelName;
+    [SerializeField]
+    private TextMeshProUGUI levelTime;
+    [SerializeField]
+    private TextMeshProUGUI levelDamage;
+    [SerializeField]
+    private TextMeshProUGUI levelFuel;
+    [SerializeField]
+    private TextMeshProUGUI levelWorthness;
+    [SerializeField]
+    private Button buttonContinue;
+    [SerializeField]
+    private Button buttonFreestyle;
 
     RectTransform canvasRect;
     Canvas selfCanvas;
@@ -45,6 +62,60 @@ public class MenuLevelInfo : MonoBehaviour
             {
                 selfCanvas.enabled = false;
             }
+        }
+    }
+
+    public void ButtonContinueClick()
+    {
+        SceneManager.LoadScene(StaticsSingleplayer.levelNames[LevelIndex]);
+    }
+
+    public void ButtonFreestyleClick()
+    {
+        Statics.isInFreestyle = true;
+        SceneManager.LoadScene(StaticsSingleplayer.levelNames[LevelIndex]);
+    }
+
+    private int levelIndex = -1;
+    public int LevelIndex
+    {
+        get
+        {
+            return levelIndex;
+        }
+        set
+        {
+            levelIndex = value;
+
+            if (levelIndex == SavedGame.NextLevel[Statics.selectedRocket])
+            {
+                buttonContinue.interactable = true;
+            }
+            else
+            {
+                buttonContinue.interactable = false;
+            }
+
+            if (levelIndex < SavedGame.NextLevel[Statics.selectedRocket])
+            {
+                buttonFreestyle.interactable = true;
+            }
+            else
+            {
+                buttonFreestyle.interactable = false;
+            }
+
+
+            float time = SavedGame.CurrentTimeStage[Statics.selectedRocket, levelIndex];
+            float damage = SavedGame.CurrentDamageStage[Statics.selectedRocket, levelIndex];
+            float fuel = SavedGame.CurrentUsedFuel[Statics.selectedRocket, levelIndex];
+            float worthness = resultScreen.CalculateRocketWorth(time, damage, fuel, 1);
+
+            levelName.text = "Level " + (levelIndex + 1).ToString();
+            levelTime.text = time.ToString("n3");
+            levelDamage.text = damage.ToString("n0");
+            levelFuel.text = fuel.ToString("n2");
+            levelWorthness.text = worthness.ToString("n2");
         }
     }
 }

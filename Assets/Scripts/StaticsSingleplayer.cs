@@ -8,6 +8,30 @@ public class StaticsSingleplayer : MonoBehaviour
     protected static float damageTaken = 0f;
     protected static float fuelUsed = 0f;
 
+    public static string[] levelNames = new string[]
+        {
+            "Platform First Level",
+            "Platform sec Level",
+            "Platform third Level",
+            "Platform fourth Level",
+            "Platform fivth Level",
+            "Platform sixth Level",
+            "Platform seventh Level",
+            "Platform eighth Level",
+            "Platform ninth Level",
+            "Platform Level 10",
+            "Platform Level 11",
+            "Platform Level 12 CR",
+            "Platform Level 13 CR",
+            "Platform Level 14 CR space",
+            "Platform Level 15",
+            "Platform Level 16",
+            "Platform Level 17",
+            "Platform Level 18",
+            "Platform Level 19",
+            "Platform Level 20",
+        };
+
 
     private static StaticsSingleplayer inst = null;
 

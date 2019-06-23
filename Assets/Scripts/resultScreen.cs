@@ -253,7 +253,14 @@ public class resultScreen : MonoBehaviour
         textMeshesGlobal[2].text = globalValuesOld[2].ToString("n2");
         textMeshesGlobal[3].text = globalValuesOld[3].ToString("n2");
 
-        levelText.text = "Level " + (Statics.currentLevel + 1).ToString();
+        if (Statics.isInFreestyle)
+        {
+            levelText.text = "Level " + (Statics.currentLevel + 1).ToString() + " (Freestyle)";
+        }
+        else
+        {
+            levelText.text = "Level " + (Statics.currentLevel + 1).ToString();
+        }
     }
 
     public void showEndScreen()
@@ -295,6 +302,16 @@ public class resultScreen : MonoBehaviour
         textMeshesGlobal[2].text = globalValuesOld[2].ToString("n2");
         textMeshesGlobal[3].text = globalValuesOld[3].ToString("n2");
 
+        if (Statics.isInFreestyle)
+        {
+            levelText.text = "Planet Summary (Freestyle)";
+        }
+        else
+        {
+            levelText.text = "Planet Summary";
+        }
+
+
 
 
 
@@ -319,6 +336,16 @@ public class resultScreen : MonoBehaviour
     public void ButtonContinueClick()
     {
         SceneManager.LoadScene(Statics.nextScene);
+    }
+
+    public void ButtonBackToMenuClick()
+    {
+        SceneManager.LoadScene("Main_Menu_3");
+    }
+
+    public void ButtonSellRocketClick()
+    {
+
     }
 
     /*private void Start()
