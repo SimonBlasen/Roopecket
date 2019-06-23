@@ -6,6 +6,7 @@ public class StaticsSingleplayer : MonoBehaviour
 {
     protected static float levelChunkBeginTime = 0f;
     protected static float damageTaken = 0f;
+    protected static float fuelUsed = 0f;
 
 
     private static StaticsSingleplayer inst = null;
@@ -13,6 +14,11 @@ public class StaticsSingleplayer : MonoBehaviour
     public void AddDamage(float damage)
     {
         damageTaken += damage;
+    }
+
+    public static void UseFuel(float fuel)
+    {
+        fuelUsed += fuel;
     }
 
     private static void instM()
@@ -43,12 +49,14 @@ public class StaticsSingleplayer : MonoBehaviour
         instM();
         levelChunkBeginTime = Time.time;
         damageTaken = 0f;
+        fuelUsed = 0f;
     }
 
     public static void Reset()
     {
         instM();
         damageTaken = 0f;
+        fuelUsed = 0f;
     }
 
     /// <summary>
@@ -64,5 +72,10 @@ public class StaticsSingleplayer : MonoBehaviour
     public static float ReadTakenDamage()
     {
         return damageTaken;
+    }
+
+    public static float ReadFuelUsed()
+    {
+        return fuelUsed;
     }
 }

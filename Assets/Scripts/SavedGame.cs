@@ -31,6 +31,7 @@ public class SavedGame
     //public static float[] CurrentTime = new float[256];
     public static float[,] CurrentDamageStage = new float[256,20];
     public static float[,] CurrentTimeStage = new float[256,20];
+    public static float[,] CurrentUsedFuel = new float[256, 20];
 
 
     public static void LoadSavegame()
@@ -89,6 +90,73 @@ public class SavedGame
         }
     }
 
+    public static float CurrentRocketGlobalFuel
+    {
+        get
+        {
+            return GetGlobalFuel(Statics.selectedRocket);
+            //return CurrentDamage[Statics.selectedRocket];
+        }
+    }
+
+    public static float CurrentRocketGlobalTimeLastStage
+    {
+        get
+        {
+            return GetGlobalTimeLastStage(Statics.selectedRocket);
+        }
+    }
+
+    public static float CurrentRocketGlobalDamageLastStage
+    {
+        get
+        {
+            return GetGlobalDamageLastStage(Statics.selectedRocket);
+        }
+    }
+
+    public static float CurrentRocketGlobalFuelLastStage
+    {
+        get
+        {
+            return GetGlobalFuelLastStage(Statics.selectedRocket);
+        }
+    }
+
+    public static float GetGlobalFuel(int rocket)
+    {
+        float sum = 0f;
+        for (int i = 0; i < CurrentUsedFuel.GetLength(1); i++)
+        {
+            if (i < NextLevel[rocket])
+            {
+                sum += CurrentUsedFuel[rocket, i];
+            }
+            else
+            {
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalFuelLastStage(int rocket)
+    {
+        float sum = 0f;
+        for (int i = 0; i < CurrentUsedFuel.GetLength(1); i++)
+        {
+            if (LevelNumber.GetStage(i) < LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[rocket])
+            {
+                sum += CurrentUsedFuel[rocket, i];
+            }
+            else
+            {
+            }
+        }
+
+        return sum;
+    }
+
     public static float GetGlobalTime(int rocket)
     {
         float sum = 0f;
@@ -100,7 +168,23 @@ public class SavedGame
             }
             else
             {
-                break;
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalTimeLastStage(int rocket)
+    {
+        float sum = 0f;
+        for (int i = 0; i < CurrentTimeStage.GetLength(1); i++)
+        {
+            if (LevelNumber.GetStage(i) < LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[rocket])
+            {
+                sum += CurrentTimeStage[rocket, i];
+            }
+            else
+            {
             }
         }
 
@@ -118,7 +202,23 @@ public class SavedGame
             }
             else
             {
-                break;
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalDamageLastStage(int rocket)
+    {
+        float sum = 0f;
+        for (int i = 0; i < CurrentDamageStage.GetLength(1); i++)
+        {
+            if (LevelNumber.GetStage(i) < LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[rocket])
+            {
+                sum += CurrentDamageStage[rocket, i];
+            }
+            else
+            {
             }
         }
 
@@ -138,7 +238,6 @@ public class SavedGame
                 }
                 else
                 {
-                    break;
                 }
             }
 
@@ -159,7 +258,26 @@ public class SavedGame
                 }
                 else
                 {
-                    break;
+                }
+            }
+
+            return sum;
+        }
+    }
+
+    public static float CurrentRocketStageFuel
+    {
+        get
+        {
+            float sum = 0f;
+            for (int i = 0; i < CurrentUsedFuel.GetLength(1); i++)
+            {
+                if (LevelNumber.GetStage(i) == LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[Statics.selectedRocket])
+                {
+                    sum += CurrentUsedFuel[Statics.selectedRocket, i];
+                }
+                else
+                {
                 }
             }
 

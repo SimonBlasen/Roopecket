@@ -21,7 +21,10 @@ public class Manager : MonoBehaviour
     {
 		for (int i = 0; i < rocketsFueling.Count; i++)
         {
-            rocketsFueling[i].AddFuel(Time.deltaTime * 40f);
+            if (rocketsFueling[i] != null)
+            {
+                rocketsFueling[i].AddFuel(Time.deltaTime * 40f);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.R))

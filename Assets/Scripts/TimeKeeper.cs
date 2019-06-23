@@ -67,11 +67,13 @@ public class TimeKeeper : MonoBehaviour
     {
         float takenDamage = StaticsSingleplayer.ReadTakenDamage();
         float tookTime = StaticsSingleplayer.ReadTimer();
+        float usedFuel = StaticsSingleplayer.ReadFuelUsed();
 
         if (Statics.isInFreestyle == false)
         {
             SavedGame.CurrentTimeStage[Statics.selectedRocket, levelNumber.levelNumber] = tookTime;
             SavedGame.CurrentDamageStage[Statics.selectedRocket, levelNumber.levelNumber] = takenDamage;
+            SavedGame.CurrentUsedFuel[Statics.selectedRocket, levelNumber.levelNumber] = usedFuel;
 
 
         }

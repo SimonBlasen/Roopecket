@@ -49,4 +49,17 @@ public class LevelNumber : MonoBehaviour
         }
         return -1;
     }
+
+    public static int GetFirstLevelOfStage(int stage)
+    {
+        for (int i = 0; i <= 20; i++)
+        {
+            if (GetStage(i) >= stage)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
