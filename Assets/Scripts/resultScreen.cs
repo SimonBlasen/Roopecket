@@ -99,6 +99,8 @@ public static class EndscreenStateMethods
                 return EndscreenState.WAIT_GLOBAL_WORTH;
             case EndscreenState.WAIT_GLOBAL_WORTH:
                 return EndscreenState.GLOBAL_WORTH;
+            case EndscreenState.WAIT_GLOBAL_TIME:
+                return EndscreenState.GLOBAL_TIME;
             default:
                 return EndscreenState.END;
         }
@@ -107,6 +109,7 @@ public static class EndscreenStateMethods
 
 public class resultScreen : MonoBehaviour
 {
+    public TextMeshProUGUI levelText;
 
     public TextMeshProUGUI moneyText, totalDamageText, DamageText, totalTimeText, timeText, fuelText, totalFuelText, rocketWorth, rocketWorthTotal;
     public TextMeshProUGUI[] textMeshes;
@@ -221,6 +224,36 @@ public class resultScreen : MonoBehaviour
             state = state.NextState();
             counter = 0f;
         }
+    }
+
+    public void showEndscreenSimple()
+    {
+        state = EndscreenState.WAIT_GLOBAL_TIME;
+
+        counter = 0f;
+
+        GetComponent<Canvas>().enabled = true;
+
+        for (int i = 0; i < textMeshes.Length; i++)
+        {
+            textMeshes[i].text = "";
+        }
+
+        globalValuesOld[0] = 0f;
+        globalValuesOld[1] = 0f;
+        globalValuesOld[2] = 0f;
+        globalValuesOld[3] = 0f;
+        globalValues[0] = SavedGame.CurrentTimeStage[Statics.selectedRocket, Statics.currentLevel];
+        globalValues[1] = SavedGame.CurrentDamageStage[Statics.selectedRocket, Statics.currentLevel];
+        globalValues[2] = SavedGame.CurrentUsedFuel[Statics.selectedRocket, Statics.currentLevel];
+        globalValues[3] = CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], 1);
+
+        textMeshesGlobal[0].text = globalValuesOld[0].ToString("n3");
+        textMeshesGlobal[1].text = globalValuesOld[1].ToString();
+        textMeshesGlobal[2].text = globalValuesOld[2].ToString("n2");
+        textMeshesGlobal[3].text = globalValuesOld[3].ToString("n2");
+
+        levelText.text = "Level " + (Statics.currentLevel + 1).ToString();
     }
 
     public void showEndScreen()

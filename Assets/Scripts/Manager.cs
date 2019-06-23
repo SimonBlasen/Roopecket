@@ -84,7 +84,8 @@ public class Manager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(conc);
+                GameObject.FindObjectOfType<resultScreen>().showEndscreenSimple();
+                //SceneManager.LoadScene(conc);
             }
         }
 
