@@ -12,6 +12,12 @@ public class PlanetLevel : MonoBehaviour
     private Transform scaleChild;
     [SerializeField]
     private float lerpScaleSpeed = 0.07f;
+    [SerializeField]
+    private Transform currentLevelTransf;
+    [SerializeField]
+    private Vector3 defScale = new Vector3(1f, 1f, 1f);
+    [SerializeField]
+    private Vector3 hoverScale = new Vector3(1.3f, 1f, 1.3f);
 
 
     private Vector3 scaleTarget = new Vector3(1.0f, 1.0f, 1.0f);
@@ -20,8 +26,18 @@ public class PlanetLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        scaleTarget = defScale;
         boxColliderTriggerMouse.enabled = false;
         mainMenuCam = GameObject.FindObjectOfType<MainMenuCam>();
+
+
+        if (levelIndex == SavedGame.NextLevel[Statics.selectedRocket])
+        {
+            GameObject instLittle = Instantiate(GameObject.FindObjectOfType<LittleRocketsSpawner>().LittleRockets[Statics.selectedRocket], currentLevelTransf.transform);
+            instLittle.transform.localPosition = Vector3.zero;
+            instLittle.transform.localRotation = Quaternion.identity;
+            instLittle.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
     }
 
     // Update is called once per frame
@@ -80,11 +96,11 @@ public class PlanetLevel : MonoBehaviour
 
             if (hovered)
             {
-                scaleTarget = new Vector3(1.3f, 1.0f, 1.3f);
+                scaleTarget = hoverScale;
             }
             else
             {
-                scaleTarget = new Vector3(1f, 1f, 1f);
+                scaleTarget = defScale;
             }
         }
     }

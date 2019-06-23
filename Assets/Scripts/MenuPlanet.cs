@@ -58,4 +58,12 @@ public class MenuPlanet : MonoBehaviour
             planetLevels[i].IsZoomed = true;
         }
     }
+
+    public void Unzoomed()
+    {
+        for (int i = 0; i < planetLevels.Length; i++)
+        {
+            planetLevels[i].IsZoomed = false;
+        }
+    }
 }

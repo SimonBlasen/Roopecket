@@ -8,7 +8,7 @@ public class MainMenuText : MonoBehaviour {
 
     private RectTransform menuText;
     private Vector3 spawn;
-    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen, selectedOnline;
+    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen, selectedOnline, selectedBack1;
     private bool MouseHover = false;
     private bool Entered;
     private bool MousePress = false;
@@ -37,6 +37,7 @@ public class MainMenuText : MonoBehaviour {
         selectedMultiplayer = new Vector3(0f, -0.05f, -4.15f);
         selectedSplitscreen = new Vector3(1.791f, 0.05f, -4.63f);
         selectedOnline = new Vector3(1.791f, 0.137f, -4.63f);
+        selectedBack1 = new Vector3(0f, 8.242f, -2.012f);
 
         hidedButton = new Vector3(100f, 100f, 100f);
         FirstTouch = false;
@@ -75,7 +76,10 @@ public class MainMenuText : MonoBehaviour {
                     if (MousePress)
                     {
 
-                        SceneManager.LoadScene("ComicScene");
+                        Debug.Log("Singleplayer");
+                        //SceneManager.LoadScene("Tutorial1");
+                        mainMenuCam.Index = 2;
+                        //SceneManager.LoadScene("ComicScene");
 
                     }
 
@@ -193,6 +197,26 @@ public class MainMenuText : MonoBehaviour {
 
                     }
                 }
+
+
+
+
+                else if (pointName == "Back1" && MouseHover)
+                {
+                    transform.position = Vector3.Lerp(transform.position, selectedBack1, buttonsHoverLerpSpeed);
+                    SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = new Color(1f, 1f, 0.5f, 1f);
+
+                    if (MousePress)
+                    {
+                        Debug.Log("Back");
+                        //SceneManager.LoadScene("Tutorial1");
+                        mainMenuCam.Index = 0;
+
+                    }
+                }
+
+
 
                 else
                 {

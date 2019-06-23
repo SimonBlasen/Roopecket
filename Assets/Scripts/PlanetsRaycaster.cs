@@ -63,7 +63,7 @@ public class PlanetsRaycaster : MonoBehaviour
             {
                 lastHoveredPlanet.Clicked();
                 lastHoveredPlanet.Hovered = false;
-                lastHoveredPlanet = null;
+                //lastHoveredPlanet = null;
                 zoomedInOnPlanet = true;
             }
         }
@@ -118,8 +118,10 @@ public class PlanetsRaycaster : MonoBehaviour
                 }
                 else if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit) == false)
                 {
+                    lastHoveredPlanet.Unzoomed();
                     ZoomedInOnPlanet = false;
                     mainMenuCam.UnzoomPlanet();
+                    lastHoveredPlanet = null;
                 }
             }
             else
