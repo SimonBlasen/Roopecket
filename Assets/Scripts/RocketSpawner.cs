@@ -129,7 +129,10 @@ public class RocketSpawner : MonoBehaviour {
 
             instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2f, 0f);
             instRock.transform.Rotate(0f, startPlatform.transform.rotation.eulerAngles.y, 0f);
-
+            /*if (Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) > -0.5f && Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) < 0.5f)
+            {
+                instRock.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            }*/
 
             if (spawn2Rockets)
             {
