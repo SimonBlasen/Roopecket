@@ -10,14 +10,21 @@ public class MenuPlanet : MonoBehaviour
     private float lerpScaleSpeed = 0.07f;
     [SerializeField]
     private Transform cameraPos;
+    [SerializeField]
+    private Transform optionalPlanetTarget = null;
 
     private Vector3 scaleTarget = new Vector3(1f, 1f, 1f);
+    private Vector3 lowScale;
+    private Vector3 highScale;
 
     private MainMenuCam mainMenuCam;
 
     // Start is called before the first frame update
     void Start()
     {
+        lowScale = transform.localScale;
+        scaleTarget = lowScale;
+        highScale = lowScale * 1.2f;
         mainMenuCam = GameObject.FindObjectOfType<MainMenuCam>();
     }
 
@@ -41,18 +48,25 @@ public class MenuPlanet : MonoBehaviour
 
             if (hovered)
             {
-                scaleTarget = new Vector3(1.1f, 1.1f, 1.1f);
+                scaleTarget = highScale;
             }
             else
             {
-                scaleTarget = new Vector3(1f, 1f, 1f);
+                scaleTarget = lowScale;
             }
         }
     }
 
     public void Clicked()
     {
-        mainMenuCam.ZoomToPlanet(cameraPos, transform);
+        if (optionalPlanetTarget != null)
+        {
+            mainMenuCam.ZoomToPlanet(cameraPos, optionalPlanetTarget);
+        }
+        else
+        {
+            mainMenuCam.ZoomToPlanet(cameraPos, transform);
+        }
         for (int i = 0; i < planetLevels.Length; i++)
         {
             planetLevels[i].IsZoomed = true;
