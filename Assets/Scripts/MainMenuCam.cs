@@ -9,6 +9,7 @@ public class MainMenuCam : MonoBehaviour
     public Vector3[] positions;
     public Vector3[] lookAts;
     public Transform lookatTrans;
+    private CameraMoverMainmenu cmm;
 
     public MenuLevelInfo menuLevelInfo;
 
@@ -19,29 +20,47 @@ public class MainMenuCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cmm = GetComponent<CameraMoverMainmenu>();
+
+        cmm.SetLookat(lookAts[Index]);
+        cmm.SetPosition(positions[Index]);
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {/*
         if (!zoomedToPlanet)
         {
-            lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookAts[Index], lerpLookat);
-            transform.position = Vector3.Lerp(transform.position, positions[Index], lerpSpeed);
-            transform.LookAt(lookatTrans);
+            cmm.SetLookat(lookAts[Index]);
+            cmm.SetPosition(positions[Index]);
+            //lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookAts[Index], lerpLookat);
+            //transform.position = Vector3.Lerp(transform.position, positions[Index], lerpSpeed);
+            //transform.LookAt(lookatTrans);
         }
         else
         {
-            lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookatPlanet.position, lerpLookat);
-            transform.position = Vector3.Lerp(transform.position, planetTarget.position, lerpSpeed);
-            transform.LookAt(lookatTrans);
-        }
+            cmm.SetLookat(lookatPlanet.position);
+            cmm.SetPosition(planetTarget.position);
+            //lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookatPlanet.position, lerpLookat);
+            //transform.position = Vector3.Lerp(transform.position, planetTarget.position, lerpSpeed);
+            //transform.LookAt(lookatTrans);
+        }*/
     }
+
+    private int index = 0;
 
     public int Index
     {
-        get;set;
+        get
+        {
+            return index;
+        }
+        set
+        {
+            index = value;
+            cmm.SetLookat(lookAts[Index]);
+            cmm.SetPosition(positions[Index]);
+        }
     }
 
     public void ZoomToPlanet(Transform camPos, Transform planetTarget)
@@ -49,10 +68,15 @@ public class MainMenuCam : MonoBehaviour
         zoomedToPlanet = true;
         this.planetTarget = camPos;
         lookatPlanet = planetTarget;
+
+        cmm.SetLookat(lookatPlanet.position);
+        cmm.SetPosition(this.planetTarget.position);
     }
 
     public void UnzoomPlanet()
     {
         zoomedToPlanet = false;
+        cmm.SetLookat(lookAts[Index]);
+        cmm.SetPosition(positions[Index]);
     }
 }
