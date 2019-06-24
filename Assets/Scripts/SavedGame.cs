@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -10,48 +11,14 @@ public class SavedGame
     public const string savegameDir = ".";
     public const string savegameFile = "savegame.rpt";
     public const string seperator = "|";
+    public const char seperatorC = '|';
 
 
 
-    // SavedGame variables
-    public static int LastSelectedRocket = 0;           // 0
-    public static int CurrentLevelIndex = 0;            // 1
-    //public static bool[] OwnedRockets = new bool[32];   // 2
-    public static int Money = 0;                        // 3
-    public static float CurrentLevelTime;               // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
-    public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
-    // Hier kannst noch so viele Sachen hinzufügen wie du willst
-
-    public static bool[] DrEberhardtFound = new bool[256];
-
-    public static int[] OwnedRockets = new int[256];
-    public static string[] RocketNames = new string[256];
-    public static int[] NextLevel = new int[256];
-    //public static float[] CurrentDamage = new float[256];
-    //public static float[] CurrentTime = new float[256];
-    public static float[,] CurrentDamageStage = new float[256,20];
-    public static float[,] CurrentTimeStage = new float[256,20];
-    public static float[,] CurrentUsedFuel = new float[256, 20];
-
-    public static float FreestyleTime;
-    public static float FreestyleDamage;
-    public static float FreestyleFuel;
-
-
-    public static void LoadSavegame()
-    {
-        if (Directory.Exists(savegameDir) == false)
-        {
-            Debug.LogError("Directory for savegame (" + savegameDir + ") doesn't exist");
-        }
-        else
-        {
-
-        }
-    }
 
     public static void SaveSavegame()
     {
+        Debug.Log("Saving savegame...");
         if (Directory.Exists(savegameDir) == false)
         {
             Debug.LogError("Directory for savegame (" + savegameDir + ") doesn't exist");
@@ -69,9 +36,202 @@ public class SavedGame
             }
             con = con.Substring(0, con.Length - 1);
             con += seperator;
-            con += "3=" + Money.ToString();
+            con += "3=" + Money.ToString() + seperator;
+
+            con += "4=";
+            for (int i = 0; i < DrEberhardtFound.Length; i++)
+            {
+                con += DrEberhardtFound[i].ToString() + ",";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
+            con += "5=";
+            for (int i = 0; i < RocketNames.Length; i++)
+            {
+                con += RocketNames[i] + ",";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
+            con += "6=";
+            for (int i = 0; i < NextLevel.Length; i++)
+            {
+                con += NextLevel[i].ToString() + ",";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
+            con += "7=";
+            for (int i = 0; i < CurrentDamageStage.GetLength(0); i++)
+            {
+                for (int j = 0; j < CurrentDamageStage.GetLength(1); j++)
+                {
+                    con += CurrentDamageStage[i, j].ToString() + "_";
+                }
+                con += "-";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
+            con += "8=";
+            for (int i = 0; i < CurrentTimeStage.GetLength(0); i++)
+            {
+                for (int j = 0; j < CurrentTimeStage.GetLength(1); j++)
+                {
+                    con += CurrentTimeStage[i, j].ToString() + "_";
+                }
+                con += "-";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
+            con += "9=";
+            for (int i = 0; i < CurrentUsedFuel.GetLength(0); i++)
+            {
+                for (int j = 0; j < CurrentUsedFuel.GetLength(1); j++)
+                {
+                    con += CurrentUsedFuel[i, j].ToString() + "_";
+                }
+                con += "-";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
+            File.WriteAllText(savegameDir + "/" + savegameFile, con);
         }
     }
+
+    public static void LoadSavegame()
+    {
+        Debug.Log("Loading savegame...");
+        if (Directory.Exists(savegameDir) == false)
+        {
+            Debug.LogError("Directory for savegame (" + savegameDir + ") doesn't exist");
+        }
+        else
+        {
+            string[] lines = File.ReadAllText(savegameDir + "/" + savegameFile).Split(seperatorC);
+
+            for (int l = 0; l < lines.Length; l++)
+            {
+                if (lines[l].Length > 0)
+                {
+                    string[] con = lines[l].Split('=');
+
+                    if (con[0] == "0")
+                    {
+                        LastSelectedRocket = Convert.ToInt32(con[1]);
+                    }
+                    else if (con[0] == "1")
+                    {
+                        CurrentLevelIndex = Convert.ToInt32(con[1]);
+                    }
+                    else if (con[0] == "2")
+                    {
+                        string[] els = con[1].Split(',');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            OwnedRockets[i] = Convert.ToInt32(els[i]);
+                        }
+                    }
+                    else if (con[0] == "3")
+                    {
+                        Money = Convert.ToInt32(con[1]);
+                    }
+                    else if (con[0] == "4")
+                    {
+                        string[] els = con[1].Split(',');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            DrEberhardtFound[i] = Convert.ToBoolean(els[i]);
+                        }
+                    }
+                    else if (con[0] == "5")
+                    {
+                        string[] els = con[1].Split(',');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            RocketNames[i] = els[i];
+                        }
+                    }
+                    else if (con[0] == "6")
+                    {
+                        string[] els = con[1].Split(',');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            NextLevel[i] = Convert.ToInt32(els[i]);
+                        }
+                    }
+                    else if (con[0] == "7")
+                    {
+                        string[] els = con[1].Split('-');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            for (int j = 0; j < els[i].Split('_').Length; j++)
+                            {
+                                if (els[i].Split('_')[j].Length > 0)
+                                    CurrentDamageStage[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
+                            }
+                        }
+                    }
+                    else if (con[0] == "8")
+                    {
+                        string[] els = con[1].Split('-');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            for (int j = 0; j < els[i].Split('_').Length; j++)
+                            {
+                                if (els[i].Split('_')[j].Length > 0)
+                                    CurrentTimeStage[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
+                            }
+                        }
+                    }
+                    else if (con[0] == "9")
+                    {
+                        string[] els = con[1].Split('-');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            for (int j = 0; j < els[i].Split('_').Length; j++)
+                            {
+                                if (els[i].Split('_')[j].Length > 0)
+                                    CurrentUsedFuel[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    public static bool firstStart = true;
+
+
+    // SavedGame variables
+    public static int LastSelectedRocket = 0;           // 0
+    public static int CurrentLevelIndex = 0;            // 1
+    //public static bool[] OwnedRockets = new bool[32];   // 2
+    public static int Money = 0;                        // 3
+    //public static float CurrentLevelTime;               // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
+    //public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
+    // Hier kannst noch so viele Sachen hinzufügen wie du willst
+
+    public static bool[] DrEberhardtFound = new bool[256];
+
+    public static int[] OwnedRockets = new int[256];
+    public static string[] RocketNames = new string[256];   // May not include "," and speerator
+    public static int[] NextLevel = new int[256];
+    //public static float[] CurrentDamage = new float[256];
+    //public static float[] CurrentTime = new float[256];
+    public static float[,] CurrentDamageStage = new float[256,20];
+    public static float[,] CurrentTimeStage = new float[256,20];
+    public static float[,] CurrentUsedFuel = new float[256, 20];
+
+    public static float FreestyleTime;
+    public static float FreestyleDamage;
+    public static float FreestyleFuel;
+
 
 
 

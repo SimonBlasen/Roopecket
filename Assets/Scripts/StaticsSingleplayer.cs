@@ -12,7 +12,7 @@ public class StaticsSingleplayer : MonoBehaviour
         {
             "Platform First Level",
             "Platform sec Level",
-            "Platform third Level",
+            "Platform thrid Level",
             "Platform fourth Level",
             "Platform fivth Level",
             "Platform sixth Level",

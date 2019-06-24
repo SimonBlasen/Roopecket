@@ -26,25 +26,9 @@ public class MainMenuCam : MonoBehaviour
         cmm.SetPosition(positions[Index]);
     }
 
-    // Update is called once per frame
-    void Update()
-    {/*
-        if (!zoomedToPlanet)
-        {
-            cmm.SetLookat(lookAts[Index]);
-            cmm.SetPosition(positions[Index]);
-            //lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookAts[Index], lerpLookat);
-            //transform.position = Vector3.Lerp(transform.position, positions[Index], lerpSpeed);
-            //transform.LookAt(lookatTrans);
-        }
-        else
-        {
-            cmm.SetLookat(lookatPlanet.position);
-            cmm.SetPosition(planetTarget.position);
-            //lookatTrans.position = Vector3.Lerp(lookatTrans.position, lookatPlanet.position, lerpLookat);
-            //transform.position = Vector3.Lerp(transform.position, planetTarget.position, lerpSpeed);
-            //transform.LookAt(lookatTrans);
-        }*/
+    private void OnApplicationQuit()
+    {
+        SavedGame.SaveSavegame();
     }
 
     private int index = 0;
