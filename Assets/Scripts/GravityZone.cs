@@ -24,6 +24,7 @@ public class GravityZone : MonoBehaviour {
 	}
 
     private Vector3 oldGravZone = Vector3.zero;
+    private int instanceIn = -1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,11 +36,17 @@ public class GravityZone : MonoBehaviour {
                 par = par.parent;
             }
 
-            oldGravZone = par.GetComponent<RocketController>().GravityZone;
-            
+            if (par.GetInstanceID() != instanceIn)
+            {
+                instanceIn = par.GetInstanceID();
+                oldGravZone = par.GetComponent<RocketController>().GravityZone;
+                Debug.Log("Remember: " + oldGravZone.ToString());
 
-            par.GetComponent<ConstantForce>().force = (-Physics.gravity + gravityHere) * par.GetComponent<Rigidbody>().mass;
-            par.GetComponent<RocketController>().GravityZone = gravityHere;
+
+                par.GetComponent<ConstantForce>().force = (-Physics.gravity + gravityHere) * par.GetComponent<Rigidbody>().mass;
+                par.GetComponent<RocketController>().GravityZone = gravityHere;
+            }
+
         }
     }
 
@@ -53,8 +60,16 @@ public class GravityZone : MonoBehaviour {
                 par = par.parent;
             }
 
-            par.GetComponent<ConstantForce>().force = (-Physics.gravity + oldGravZone) * par.GetComponent<Rigidbody>().mass;
-            par.GetComponent<RocketController>().GravityZone = oldGravZone;
+            if (par.GetInstanceID() == instanceIn)
+            {
+                par.GetComponent<ConstantForce>().force = (-Physics.gravity + oldGravZone) * par.GetComponent<Rigidbody>().mass;
+                par.GetComponent<RocketController>().GravityZone = oldGravZone;
+
+                instanceIn = -1;
+
+                Debug.Log("Reset to: " + oldGravZone.ToString());
+            }
+
         }
     }
 }

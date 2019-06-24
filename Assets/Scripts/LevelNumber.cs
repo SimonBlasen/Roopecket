@@ -47,6 +47,10 @@ public class LevelNumber : MonoBehaviour
         {
             return 3;
         }
+        if (levelNumber >= 20)
+        {
+            return 4;
+        }
         return -1;
     }
 
