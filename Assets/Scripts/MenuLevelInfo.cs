@@ -68,7 +68,7 @@ public class MenuLevelInfo : MonoBehaviour
     public void ButtonContinueClick()
     {
         Statics.isInFreestyle = false;
-        SceneManager.LoadScene(StaticsSingleplayer.levelNames[LevelIndex]);
+        SceneManager.LoadScene(StaticsSingleplayer.GetSceneToLoad(StaticsSingleplayer.levelNames[LevelIndex]));
     }
 
     public void ButtonFreestyleClick()

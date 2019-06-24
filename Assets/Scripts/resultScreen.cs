@@ -335,7 +335,7 @@ public class resultScreen : MonoBehaviour
 
     public void ButtonContinueClick()
     {
-        SceneManager.LoadScene(Statics.nextScene);
+        SceneManager.LoadScene(StaticsSingleplayer.GetSceneToLoad(Statics.nextScene));
     }
 
     public void ButtonBackToMenuClick()

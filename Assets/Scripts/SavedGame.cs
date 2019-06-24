@@ -8,7 +8,7 @@ public class SavedGame
 {
     // Config variables
 
-    public const string savegameDir = ".";
+    public const string savegameDir = "SaveGames";
     public const string savegameFile = "savegame.rpt";
     public const string seperator = "|";
     public const char seperatorC = '|';
@@ -233,6 +233,11 @@ public class SavedGame
     public static float FreestyleFuel;
 
 
+    public static void DeleteFile()
+    {
+        File.Delete(savegameDir + "/" + savegameFile);
+    }
+
 
 
 
@@ -295,6 +300,60 @@ public class SavedGame
             if (i < NextLevel[rocket])
             {
                 sum += CurrentUsedFuel[rocket, i];
+            }
+            else
+            {
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalFuelForStage(int stage)
+    {
+
+        float sum = 0f;
+        for (int i = 0; i < CurrentUsedFuel.GetLength(1); i++)
+        {
+            if (LevelNumber.GetStage(i) == stage && i < NextLevel[Statics.selectedRocket])
+            {
+                sum += CurrentUsedFuel[Statics.selectedRocket, i];
+            }
+            else
+            {
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalDamageForStage(int stage)
+    {
+
+        float sum = 0f;
+        for (int i = 0; i < CurrentDamageStage.GetLength(1); i++)
+        {
+            if (LevelNumber.GetStage(i) == stage && i < NextLevel[Statics.selectedRocket])
+            {
+                sum += CurrentDamageStage[Statics.selectedRocket, i];
+            }
+            else
+            {
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalTimeForStage(int stage)
+    {
+
+        float sum = 0f;
+        for (int i = 0; i < CurrentTimeStage.GetLength(1); i++)
+        {
+            if (LevelNumber.GetStage(i) == stage && i < NextLevel[Statics.selectedRocket])
+            {
+                sum += CurrentTimeStage[Statics.selectedRocket, i];
             }
             else
             {

@@ -32,6 +32,35 @@ public class StaticsSingleplayer : MonoBehaviour
             "Platform Level 20",
         };
 
+    public static string GetSceneToLoad(string levelName)
+    {
+        int index = -1;
+        for (int i = 0; i < levelNames.Length; i++)
+        {
+            if (levelName == levelNames[i])
+            {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1)
+        {
+            return levelName;
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (LevelNumber.GetFirstLevelOfStage(i) == index)
+            {
+                Statics.comicSceneToLoad = i;
+                return "ComicScene";
+            }
+        }
+
+        return levelName;
+    }
+
 
     private static StaticsSingleplayer inst = null;
 
