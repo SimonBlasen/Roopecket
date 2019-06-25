@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class flyingGoal : MonoBehaviour {
 
     public string levelToLoad;
+    [SerializeField]
+    private bool isTutorial = false;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
        
     }
 	
@@ -22,6 +24,8 @@ public class flyingGoal : MonoBehaviour {
     {
         if (other.transform.tag == "Rocket")
         {
+            if (isTutorial)
+                SceneManager.LoadScene(levelToLoad);
             //StartCoroutine(Example());
 
             Statics.nextScene = levelToLoad;
