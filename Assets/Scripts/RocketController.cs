@@ -220,8 +220,19 @@ public class RocketController : MonoBehaviour {
         }
     }
 
+    private Vector3 gravZone = new Vector3(200f, 200f, 200f);
+
     public Vector3 GravityZone
-    { get; set; }
+    {
+        get
+        {
+            return gravZone;
+        }
+        set
+        {
+            gravZone = value;
+        }
+    }
 
     public Vector3 Normal
     {

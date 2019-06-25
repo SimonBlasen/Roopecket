@@ -57,7 +57,7 @@ public class CameraMoverMainmenu : MonoBehaviour
 
         if (Vector3.Distance(transform.position, goalpos.position) < reachedThresh)
         {
-            Debug.Log("Reached");
+            //Debug.Log("Reached");
             reachedIndices[0] = true;
             Vector3 rand = new Vector3(Random.Range(-wobbleRange.x, wobbleRange.x), Random.Range(-wobbleRange.y, wobbleRange.y), Random.Range(-wobbleRange.z, wobbleRange.z));
 

@@ -62,8 +62,16 @@ public class GravityZone : MonoBehaviour {
 
             if (par.GetInstanceID() == instanceIn)
             {
-                par.GetComponent<ConstantForce>().force = (-Physics.gravity + oldGravZone) * par.GetComponent<Rigidbody>().mass;
-                par.GetComponent<RocketController>().GravityZone = oldGravZone;
+                if (oldGravZone != new Vector3(200f, 200f, 200f))
+                {
+                    par.GetComponent<ConstantForce>().force = (-Physics.gravity + oldGravZone) * par.GetComponent<Rigidbody>().mass;
+                    par.GetComponent<RocketController>().GravityZone = oldGravZone;
+                }
+                else
+                {
+                    par.GetComponent<ConstantForce>().force = Vector3.zero;
+                    par.GetComponent<RocketController>().GravityZone = oldGravZone;
+                }
 
                 instanceIn = -1;
 
