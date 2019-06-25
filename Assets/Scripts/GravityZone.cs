@@ -40,7 +40,7 @@ public class GravityZone : MonoBehaviour {
             {
                 instanceIn = par.GetInstanceID();
                 oldGravZone = par.GetComponent<RocketController>().GravityZone;
-                Debug.Log("Remember: " + oldGravZone.ToString());
+                //Debug.Log("Remember: " + oldGravZone.ToString());
 
 
                 par.GetComponent<ConstantForce>().force = (-Physics.gravity + gravityHere) * par.GetComponent<Rigidbody>().mass;
@@ -75,7 +75,7 @@ public class GravityZone : MonoBehaviour {
 
                 instanceIn = -1;
 
-                Debug.Log("Reset to: " + oldGravZone.ToString());
+                //Debug.Log("Reset to: " + oldGravZone.ToString());
             }
 
         }
