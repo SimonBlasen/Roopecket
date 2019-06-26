@@ -17,8 +17,6 @@ public class showText : MonoBehaviour
     {
         
         isThereText = false;
-        Button btn = yourButton.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClick);
     }
 
     private void Update()
@@ -32,11 +30,11 @@ public class showText : MonoBehaviour
 
     }
 
-    void TaskOnClick()
+    public void TaskOnClick()
     {
-        GameObject Rocket = GameObject.Find("SCRIPTPALLET");
-        ArrowRocketSelector currentRocket = Rocket.GetComponent<ArrowRocketSelector>();
-        rocketN = currentRocket.rocketNubmber;
+        //GameObject Rocket = GameObject.Find("SCRIPTPALLET");
+        //ArrowRocketSelector currentRocket = Rocket.GetComponent<ArrowRocketSelector>();
+        rocketN = Statics.selectedRocket;
 
         if (buttonType == "information" && isThereText == false)
         {

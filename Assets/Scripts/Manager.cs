@@ -72,21 +72,38 @@ public class Manager : MonoBehaviour
         
             SavedGame.NextLevel[Statics.selectedRocket] = Statics.currentLevel + 1;
 
-            timeKeeper.ReachedFinish();
-
-
-            Statics.nextScene = conc;
-
-
-            if (LevelNumber.GetStage(Statics.currentLevel) + 1 == LevelNumber.GetStage(Statics.currentLevel + 1))
+            if (GameObject.FindObjectOfType<TutorialEndscreen>() != null)
             {
-                GameObject.FindObjectOfType<resultScreen>().showEndScreen();
+                GameObject.FindObjectOfType<TutorialEndscreen>().SceneToLoad = conc;
+                GameObject.FindObjectOfType<TutorialEndscreen>().GetComponent<Canvas>().enabled = true;
+
+                rocket.GetComponent<RocketProps>().Indestroyable = true;
+                rocket.GetComponent<RocketProps>().enabled = false;
+                rocket.GetComponent<RocketController>().enabled = false;
             }
             else
             {
-                GameObject.FindObjectOfType<resultScreen>().showEndscreenSimple();
-                //SceneManager.LoadScene(conc);
+                timeKeeper.ReachedFinish();
+
+                rocket.GetComponent<RocketProps>().Indestroyable = true;
+                rocket.GetComponent<RocketProps>().enabled = false;
+                rocket.GetComponent<RocketController>().enabled = false;
+
+
+                Statics.nextScene = conc;
+
+
+                if (LevelNumber.GetStage(Statics.currentLevel) + 1 == LevelNumber.GetStage(Statics.currentLevel + 1))
+                {
+                    GameObject.FindObjectOfType<resultScreen>().showEndScreen();
+                }
+                else
+                {
+                    GameObject.FindObjectOfType<resultScreen>().showEndscreenSimple();
+                    //SceneManager.LoadScene(conc);
+                }
             }
+
         }
 
         Debug.Log("Landed on " + landingPlatform);

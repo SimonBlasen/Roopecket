@@ -27,10 +27,20 @@ public class flyingGoal : MonoBehaviour {
     {
         if (other.transform.tag == "Rocket")
         {
+            Transform par = other.transform;
+            while (par.parent != null)
+            {
+                par = par.parent;
+            }
+            par.GetComponent<RocketProps>().Indestroyable = true;
+            par.GetComponent<RocketProps>().enabled = false;
+            par.GetComponent<RocketController>().enabled = false;
+
             if (isTutorial)
             {
                 //SceneManager.LoadScene(levelToLoad);
-                canvasTutEndscreen.SetActive(true);
+                canvasTutEndscreen.GetComponent<Canvas>().enabled = true;
+                canvasTutEndscreen.GetComponent<TutorialEndscreen>().SceneToLoad = levelToLoad;
             }
             else
             {
