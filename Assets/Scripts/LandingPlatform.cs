@@ -8,7 +8,9 @@ public class LandingPlatform : MonoBehaviour
     private float speedThreshhold = 0.1f;
     [SerializeField]
     private string platformName;
-    
+    [SerializeField]
+    private bool isTutorial;
+
 
     [Space]
 
