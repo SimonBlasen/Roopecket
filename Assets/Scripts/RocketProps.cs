@@ -139,6 +139,11 @@ public class RocketProps : MonoBehaviour
         {
             return maxFuel;
         }
+        set
+        {
+            maxFuel = value;
+            currentFuel = maxFuel;
+        }
     }
 
     public void AddFuel(float amount)
