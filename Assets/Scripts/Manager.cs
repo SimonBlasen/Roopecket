@@ -59,6 +59,11 @@ public class Manager : MonoBehaviour
 
     public void Landed(Transform rocket, string landingPlatform)
     {
+        while (rocket.parent != null)
+        {
+            rocket = rocket.parent;
+        }
+
         rocketsFueling.Add(rocket.GetComponent<RocketProps>());
 
         if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish")
