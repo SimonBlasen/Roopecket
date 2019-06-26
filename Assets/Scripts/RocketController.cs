@@ -29,6 +29,8 @@ public class RocketController : MonoBehaviour {
     [SerializeField]
     protected float thrusterAudioIncr = 0.1f;
     [SerializeField]
+    protected ParticleSystem[] particlesLandingThrust;
+    [SerializeField]
     public float rocketVolume = 1f;
 
     protected bool[] thrusts = null;
@@ -92,11 +94,35 @@ public class RocketController : MonoBehaviour {
     {
         if (rocketProps.OutOfFuel == false)
         {
+            int thrAmount = 0;
             for (int i = 0; i < thrustPositions.Length; i++)
             {
                 if (thrusts[i])
                 {
                     ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                    thrAmount++;
+                }
+            }
+
+            float percThrustAmounts = thrAmount / ((float)thrustPositions.Length);
+            if (thrAmount > 0 && LandingMoversOut)
+            {
+                for (int i = 0; i < particlesLandingThrust.Length; i++)
+                {
+                    if (particlesLandingThrust[i].isPlaying == false)
+                    {
+                        particlesLandingThrust[i].Play();
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < particlesLandingThrust.Length; i++)
+                {
+                    if (particlesLandingThrust[i].isPlaying)
+                    {
+                        particlesLandingThrust[i].Stop();
+                    }
                 }
             }
 

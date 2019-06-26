@@ -32,6 +32,7 @@ public class flyingGoal : MonoBehaviour {
             {
                 par = par.parent;
             }
+            par.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             par.GetComponent<RocketProps>().Indestroyable = true;
             par.GetComponent<RocketProps>().enabled = false;
             par.GetComponent<RocketController>().enabled = false;

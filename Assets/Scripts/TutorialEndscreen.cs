@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TutorialEndscreen : MonoBehaviour
 {
+    [SerializeField]
+    private TextMeshProUGUI textMesh;
+    [SerializeField]
+    private TextMeshProUGUI textMeshTitle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +26,30 @@ public class TutorialEndscreen : MonoBehaviour
     public string SceneToLoad
     {
         get;set;
+    }
+
+    public string ShowText
+    {
+        get
+        {
+            return textMesh.text;
+        }
+        set
+        {
+            textMesh.text = value;
+        }
+    }
+
+    public string TitleText
+    {
+        get
+        {
+            return textMeshTitle.text;
+        }
+        set
+        {
+            textMeshTitle.text = value;
+        }
     }
 
     public void ButtonNextClick()
