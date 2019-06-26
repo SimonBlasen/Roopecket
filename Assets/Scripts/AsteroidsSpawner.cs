@@ -12,6 +12,7 @@ public class AsteroidsSpawner : MonoBehaviour
     public float minSpeedAng = 1f;
     public float maxSpeedAng = 1f;
     public float lifeTime = 1f;
+    public float drEberhardtProb = 0.05f;
 
     public GameObject[] asteroidsPrefabs;
     public GameObject asteroidDrEberhardt;
@@ -35,7 +36,17 @@ public class AsteroidsSpawner : MonoBehaviour
 
             int astIndex = Random.Range(0, asteroidsPrefabs.Length);
 
-            GameObject instAst = Instantiate(asteroidsPrefabs[astIndex]);
+            GameObject instAst = null;// Instantiate(asteroidsPrefabs[astIndex]);
+
+            if (Random.Range(0f, 1f) <= drEberhardtProb)
+            {
+                instAst = Instantiate(asteroidDrEberhardt);
+            }
+            else
+            {
+                instAst = Instantiate(asteroidsPrefabs[astIndex]);
+            }
+
 
             int side = Random.Range(0, 6);
             float rand0 = Random.Range(0f, 1f);
@@ -105,7 +116,16 @@ public class AsteroidsSpawner : MonoBehaviour
             instAst.GetComponent<Rigidbody>().velocity = (lookatPos - spawnPos).normalized * Random.Range(minSpeed, maxSpeed);
             instAst.GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(minSpeedAng, maxSpeedAng), Random.Range(minSpeedAng, maxSpeedAng), Random.Range(minSpeedAng, maxSpeedAng));
 
+            for (int i = 0; i < instAst.transform.childCount; i++)
+            {
+                if (instAst.transform.GetChild(i).name == "Center")
+                {
+                    instAst.GetComponent<Rigidbody>().centerOfMass = instAst.transform.GetChild(i).localPosition;
+                    break;
+                }
+            }
 
+            Destroy(instAst, lifeTime / instAst.GetComponent<Rigidbody>().velocity.magnitude);
         }
     }
 }

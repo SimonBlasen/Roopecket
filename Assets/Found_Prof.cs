@@ -13,7 +13,14 @@ public class Found_Prof : MonoBehaviour
 
     private void Start()
     {
-        cam = GameObject.FindObjectOfType<CameraMultiController>().GetComponentInChildren<Camera>();
+        if (GameObject.FindObjectOfType<CameraMultiController>() != null)
+        {
+            cam = GameObject.FindObjectOfType<CameraMultiController>().GetComponentInChildren<Camera>();
+        }
+        else if (cam == null)
+        {
+            cam = Camera.main;
+        }
         profParticles.SetActive(false);
     }
     // Update is called once per frame
