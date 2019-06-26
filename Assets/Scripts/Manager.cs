@@ -77,6 +77,7 @@ public class Manager : MonoBehaviour
                 GameObject.FindObjectOfType<TutorialEndscreen>().SceneToLoad = conc;
                 GameObject.FindObjectOfType<TutorialEndscreen>().GetComponent<Canvas>().enabled = true;
 
+                rocket.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 rocket.GetComponent<RocketProps>().Indestroyable = true;
                 rocket.GetComponent<RocketProps>().enabled = false;
                 rocket.GetComponent<RocketController>().enabled = false;
@@ -85,6 +86,7 @@ public class Manager : MonoBehaviour
             {
                 timeKeeper.ReachedFinish();
 
+                rocket.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 rocket.GetComponent<RocketProps>().Indestroyable = true;
                 rocket.GetComponent<RocketProps>().enabled = false;
                 rocket.GetComponent<RocketController>().enabled = false;

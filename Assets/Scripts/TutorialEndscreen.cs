@@ -76,4 +76,12 @@ public class TutorialEndscreen : MonoBehaviour
             SceneManager.LoadScene("Main_Menu_3");
         }
     }
+
+    public void ButtonGoFreestyleClick()
+    {
+        if (GetComponent<Canvas>().enabled)
+        {
+            SceneManager.LoadScene("Tutorial Freestyle");
+        }
+    }
 }

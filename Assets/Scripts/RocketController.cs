@@ -32,6 +32,10 @@ public class RocketController : MonoBehaviour {
     protected ParticleSystem[] particlesLandingThrust;
     [SerializeField]
     public float rocketVolume = 1f;
+    [SerializeField]
+    protected Transform comLandersOut;
+    [SerializeField]
+    protected Transform comLandersIn;
 
     protected bool[] thrusts = null;
 
@@ -81,6 +85,12 @@ public class RocketController : MonoBehaviour {
             for (int i = 0; i < landerMovers.Length; i++)
             {
                 landerMovers[i].TurnOut = !landerMovers[i].TurnOut;
+            }
+
+            //Debug.Log("COM: " + ownRig.centerOfMass.ToString("n4"));
+            if (comLandersIn != null)
+            {
+                ownRig.centerOfMass = landerMovers[0].TurnOut ? comLandersOut.localPosition : comLandersIn.localPosition;
             }
 
             // TODO for multiplayer, must be set by message
