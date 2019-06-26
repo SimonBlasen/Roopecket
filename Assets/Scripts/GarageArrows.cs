@@ -57,7 +57,7 @@ public class GarageArrows : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, spawn, lerpSpeed);
         }
 
-        if(mousedown && mouseIsDown == false)
+        if(mousedown && mouseIsDown == false && KeysLocked == false)
         {
             mouseIsDown = true;
 
@@ -76,14 +76,13 @@ public class GarageArrows : MonoBehaviour {
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.D) && mouseIsDown == false)
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.D) && mouseIsDown == false && KeysLocked == false)
         {
-
             ars.RightClick();
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.A) && mouseIsDown == false)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.A) && mouseIsDown == false && KeysLocked == false)
         {
 
             ars.LeftClick();
@@ -107,6 +106,11 @@ public class GarageArrows : MonoBehaviour {
 
 
 	}
+
+    public bool KeysLocked
+    {
+        get;set;
+    }
 
 
     private void OnMouseEnter()

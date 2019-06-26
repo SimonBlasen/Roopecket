@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArrowRocketSelector : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class ArrowRocketSelector : MonoBehaviour
     public GameObject prefabTextTooShort;
     private GameObject instRocketnameCanvas;
     private TMP_InputField inputRocketName;
+    public GarageArrows[] arrows;
 
     Vector3 spawn;
     Vector3 selected;
@@ -35,9 +37,12 @@ public class ArrowRocketSelector : MonoBehaviour
 
     private void Start()
     {
+
+        SavedGame.Money = 100000;
         instRocketnameCanvas = Instantiate(prefabRocketnameCanvas);
         instRocketnameCanvas.GetComponent<Canvas>().enabled = false;
         inputRocketName = instRocketnameCanvas.GetComponentInChildren<TMP_InputField>();
+        instRocketnameCanvas.GetComponentInChildren<Button>().onClick.AddListener(ConfirmRocketNameClick);
 
         rocketNubmber = Statics.selectedRocket;
         spawn = transform.position;
@@ -103,6 +108,10 @@ public class ArrowRocketSelector : MonoBehaviour
         if (SavedGame.Money >= SavedGame.RocketPrices[selectedBuyRocket])
         {
             //TODO Buy rocket
+            for (int i = 0; i < arrows.Length; i++)
+            {
+                arrows[i].KeysLocked = true;
+            }
             instRocketnameCanvas.GetComponent<Canvas>().enabled = true;
             inputRocketName.text = "";
         }
@@ -112,6 +121,10 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         if (inputRocketName.text.Length > 0)
         {
+            for (int i = 0; i < arrows.Length; i++)
+            {
+                arrows[i].KeysLocked = false;
+            }
             SavedGame.Money -= SavedGame.RocketPrices[selectedBuyRocket];
             SavedGame.RocketNames[selectedBuyRocket] = inputRocketName.text;
             for (int i = 0; i < SavedGame.OwnedRockets.Length; i++)
@@ -122,6 +135,9 @@ public class ArrowRocketSelector : MonoBehaviour
                     break;
                 }
             }
+
+            inputRocketName.text = "";
+            instRocketnameCanvas.GetComponent<Canvas>().enabled = false;
 
             //TODO Show rocket bought
         }

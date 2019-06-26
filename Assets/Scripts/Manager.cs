@@ -27,7 +27,7 @@ public class Manager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "Garage")
         {
             Debug.Log("Restart");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
