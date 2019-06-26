@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ArrowRocketSelector : MonoBehaviour
@@ -18,9 +19,15 @@ public class ArrowRocketSelector : MonoBehaviour
     public Transform currentRocket;
 
     public GameObject cage;
+    public GameObject prefabRocketnameCanvas;
+    public GameObject prefabTextTooShort;
+    private GameObject instRocketnameCanvas;
+    private TMP_InputField inputRocketName;
 
     Vector3 spawn;
     Vector3 selected;
+
+    private int selectedBuyRocket = -1;
 
     public Vector3 rocketSpawn;
 
@@ -28,6 +35,10 @@ public class ArrowRocketSelector : MonoBehaviour
 
     private void Start()
     {
+        instRocketnameCanvas = Instantiate(prefabRocketnameCanvas);
+        instRocketnameCanvas.GetComponent<Canvas>().enabled = false;
+        inputRocketName = instRocketnameCanvas.GetComponentInChildren<TMP_InputField>();
+
         rocketNubmber = Statics.selectedRocket;
         spawn = transform.position;
         selected = spawn + new Vector3(0f, 0f, -0.2f);
@@ -48,15 +59,16 @@ public class ArrowRocketSelector : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Return) && inputRocketName.isFocused)
+        {
+            ConfirmRocketNameClick();
 
-
-
-
+        }
     }
 
     private void setRocketActive(int number)
     {
+        selectedBuyRocket = number;
         if (number >= 0 && number < rockets.Length)
         {
             Statics.selectedRocket = number;
@@ -71,10 +83,52 @@ public class ArrowRocketSelector : MonoBehaviour
             currentRocket.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             
             
-            cage.SetActive(SavedGame.OwnedRockets[number] != -1);
+            //cage.SetActive(SavedGame.OwnedRockets[number] != -1);
+            
+            rocketNameTurner.ShowRocketName("Price: " + SavedGame.RocketPrices[number]);
 
-            SavedGame.RocketNames[number] = "Baby rocket";
-            rocketNameTurner.ShowRocketName(SavedGame.RocketNames[number]);
+            if (SavedGame.Money >= SavedGame.RocketPrices[number])
+            {
+                //TODO enable buy button
+            }
+            else
+            {
+                //TODO disable buy button
+            }
+        }
+    }
+
+    public void BuyRocketClick()
+    {
+        if (SavedGame.Money >= SavedGame.RocketPrices[selectedBuyRocket])
+        {
+            //TODO Buy rocket
+            instRocketnameCanvas.GetComponent<Canvas>().enabled = true;
+            inputRocketName.text = "";
+        }
+    }
+
+    public void ConfirmRocketNameClick()
+    {
+        if (inputRocketName.text.Length > 0)
+        {
+            SavedGame.Money -= SavedGame.RocketPrices[selectedBuyRocket];
+            SavedGame.RocketNames[selectedBuyRocket] = inputRocketName.text;
+            for (int i = 0; i < SavedGame.OwnedRockets.Length; i++)
+            {
+                if (SavedGame.OwnedRockets[i] != -1)
+                {
+                    SavedGame.OwnedRockets[i] = selectedBuyRocket;
+                    break;
+                }
+            }
+
+            //TODO Show rocket bought
+        }
+        else
+        {
+            GameObject instT = Instantiate(prefabTextTooShort);
+            Destroy(instT, 4f);
         }
     }
     
