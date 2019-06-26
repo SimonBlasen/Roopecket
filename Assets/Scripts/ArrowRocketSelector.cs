@@ -12,6 +12,7 @@ public class ArrowRocketSelector : MonoBehaviour
     public float left = 0;
     public float right = 0;
     public int rocketNubmber = 1;
+    public GarageRocketnameTurner rocketNameTurner;
 
     public Transform[] rockets;
     public Transform currentRocket;
@@ -71,7 +72,9 @@ public class ArrowRocketSelector : MonoBehaviour
             
             
             cage.SetActive(SavedGame.OwnedRockets[number] != -1);
-            
+
+            SavedGame.RocketNames[number] = "Baby rocket";
+            rocketNameTurner.ShowRocketName(SavedGame.RocketNames[number]);
         }
     }
     

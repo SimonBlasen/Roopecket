@@ -217,6 +217,18 @@ public class SavedGame
     //public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
     // Hier kannst noch so viele Sachen hinzufügen wie du willst
 
+        
+
+    public static int[] RocketPrices = new int[]
+        {
+            100,
+            250,
+            300,
+            1500,
+            99,
+        };
+
+
     public static bool[] DrEberhardtFound = new bool[256];
 
     public static int[] OwnedRockets = new int[256];
