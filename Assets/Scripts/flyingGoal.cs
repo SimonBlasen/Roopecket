@@ -8,11 +8,14 @@ public class flyingGoal : MonoBehaviour {
     public string levelToLoad;
     [SerializeField]
     private bool isTutorial = false;
+    [SerializeField]
+    private GameObject canvasTutEndscreen;
 
 
     // Use this for initialization
-    void Start () {
-       
+    void Start ()
+    {
+
     }
 	
 	// Update is called once per frame
@@ -25,14 +28,20 @@ public class flyingGoal : MonoBehaviour {
         if (other.transform.tag == "Rocket")
         {
             if (isTutorial)
-                SceneManager.LoadScene(levelToLoad);
-            //StartCoroutine(Example());
+            {
+                //SceneManager.LoadScene(levelToLoad);
+                canvasTutEndscreen.SetActive(true);
+            }
+            else
+            {
+                //StartCoroutine(Example());
 
-            Statics.nextScene = levelToLoad;
+                Statics.nextScene = levelToLoad;
 
-            Manager.Instance.Landed(other.transform, "Finish_" + levelToLoad);
+                Manager.Instance.Landed(other.transform, "Finish_" + levelToLoad);
 
-            //SceneManager.LoadScene(levelToLoad);
+                //SceneManager.LoadScene(levelToLoad);
+            }
 
         }
     }
