@@ -126,12 +126,13 @@ public class ArrowRocketSelector : MonoBehaviour
                 arrows[i].KeysLocked = false;
             }
             SavedGame.Money -= SavedGame.RocketPrices[selectedBuyRocket];
-            SavedGame.RocketNames[selectedBuyRocket] = inputRocketName.text;
+            //SavedGame.RocketNames[selectedBuyRocket] = inputRocketName.text;
             for (int i = 0; i < SavedGame.OwnedRockets.Length; i++)
             {
                 if (SavedGame.OwnedRockets[i] != -1)
                 {
                     SavedGame.OwnedRockets[i] = selectedBuyRocket;
+                    SavedGame.RocketNames[i] = inputRocketName.text;
                     break;
                 }
             }
