@@ -228,6 +228,7 @@ public class SavedGame
             99,
             200,
             1,
+            400,
         };
 
 
