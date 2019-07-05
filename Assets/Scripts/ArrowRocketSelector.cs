@@ -42,7 +42,18 @@ public class ArrowRocketSelector : MonoBehaviour
         instRocketnameCanvas = Instantiate(prefabRocketnameCanvas);
         instRocketnameCanvas.GetComponent<Canvas>().enabled = false;
         inputRocketName = instRocketnameCanvas.GetComponentInChildren<TMP_InputField>();
-        instRocketnameCanvas.GetComponentInChildren<Button>().onClick.AddListener(ConfirmRocketNameClick);
+        Button[] buttons = instRocketnameCanvas.GetComponentsInChildren<Button>();
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            if (buttons[i].gameObject.name == "Button Confirm")
+            {
+                buttons[i].onClick.AddListener(ConfirmRocketNameClick);
+            }
+            else if (buttons[i].gameObject.name == "Button Abort")
+            {
+                buttons[i].onClick.AddListener(AbortBuyClick);
+            }
+        }
 
         rocketNubmber = Statics.selectedRocket;
         spawn = transform.position;
@@ -115,6 +126,11 @@ public class ArrowRocketSelector : MonoBehaviour
             instRocketnameCanvas.GetComponent<Canvas>().enabled = true;
             inputRocketName.text = "";
         }
+    }
+
+    public void AbortBuyClick()
+    {
+        Debug.Log("Abort buy click");
     }
 
     public void ConfirmRocketNameClick()
