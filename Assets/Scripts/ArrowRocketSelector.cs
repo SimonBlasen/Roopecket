@@ -18,6 +18,7 @@ public class ArrowRocketSelector : MonoBehaviour
 
     public Transform[] rockets;
     public Transform currentRocket;
+    public Transform[] rocketsBought;
 
     public GameObject cage;
     public GameObject prefabRocketnameCanvas;
@@ -62,6 +63,12 @@ public class ArrowRocketSelector : MonoBehaviour
         for (int i = 0; i < rockets.Length; i++)
         {
             rockets[i].gameObject.SetActive(false);
+        }
+
+
+        for (int i = 0; i < rocketsBought.Length; i++)
+        {
+            rocketsBought[i].gameObject.SetActive(false);
         }
 
         currentRocket = rockets[rocketNubmber];
