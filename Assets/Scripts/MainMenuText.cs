@@ -45,7 +45,7 @@ public class MainMenuText : MonoBehaviour {
            
             SpriteRenderer renderer = GetComponent<SpriteRenderer>();
 
-            if(pointName != "Quit")
+            if(pointName != "Quit" && pointName != "Back1")
             renderer.color = new Color(1f, 1f, 0.5f, 0.05f);
 
 
