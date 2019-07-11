@@ -7,6 +7,7 @@ public class SphereSpitter : MonoBehaviour
     public GameObject ObjectToCreate;
     public Transform SpawnPoint;
     public float respawnTime = 1f;
+    public float shootTime = 2f;
 
 
     // Start is called before the first frame update
@@ -17,10 +18,18 @@ public class SphereSpitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (shootTime > 0)
         {
-            SpawnObject();
-            
+
+            shootTime -= Time.deltaTime;
+            if (shootTime <= 0)
+            {
+                SpawnObject();
+                shootTime = 2f;
+            }
+              
+                
+
         }
     }
 
