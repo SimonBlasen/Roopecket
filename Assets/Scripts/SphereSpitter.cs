@@ -25,7 +25,7 @@ public class SphereSpitter : MonoBehaviour
             if (shootTime <= 0)
             {
                 SpawnObject();
-                shootTime = 2f;
+                shootTime = respawnTime;
             }
               
                 
