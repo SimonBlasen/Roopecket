@@ -10,6 +10,11 @@ public class SphereSpitter : MonoBehaviour
     public float shootTime = 2f;
 
 
+    public float ForceX = 0f;
+    public float ForceY = 0f;
+    public float ForceZ = 0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +30,9 @@ public class SphereSpitter : MonoBehaviour
             if (shootTime <= 0)
             {
                 SpawnObject();
+
+                
+
                 shootTime = respawnTime;
             }
               
@@ -32,6 +40,8 @@ public class SphereSpitter : MonoBehaviour
 
         }
     }
+
+    
 
 
     void SpawnObject()

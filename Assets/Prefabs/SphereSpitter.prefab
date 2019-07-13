@@ -61,6 +61,9 @@ MonoBehaviour:
   SpawnPoint: {fileID: 7531382868307073771}
   respawnTime: 4
   shootTime: 2
+  ForceX: 0
+  ForceY: 50
+  ForceZ: 0
 --- !u!114 &937270290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,7 +916,6 @@ GameObject:
   - component: {fileID: 7531382868062368993}
   - component: {fileID: 7531382868062368992}
   - component: {fileID: 7531382868062368999}
-  - component: {fileID: 7531382868062368998}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -993,22 +995,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7531382868062368998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7531382868062368996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b233e86707c931247906034c5c4a23ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectToCreate: {fileID: 0}
-  SpawnPoint: {fileID: 0}
-  respawnTime: 1
-  shootTime: 2
 --- !u!1 &7531382868140526808
 GameObject:
   m_ObjectHideFlags: 0
