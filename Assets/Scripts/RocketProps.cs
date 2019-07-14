@@ -26,6 +26,12 @@ public class RocketProps : MonoBehaviour
     private RocketController rocketController;
     [SerializeField]
     public CameraMultiController cameraMulti;
+    [SerializeField]
+    private AudioClip damageAudio;
+    [SerializeField]
+    private AudioSource damageAudioSource;
+    [SerializeField]
+    private float damageAudioVolume;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -46,6 +52,7 @@ public class RocketProps : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        damageAudioSource = GetComponent<AudioSource>();
         currentHealth = maxHealth;
         if (damageSmoke != null) damageSmoke.SetActive(false);
         currentFuel = maxFuel;
@@ -214,7 +221,12 @@ public class RocketProps : MonoBehaviour
     }
 
 
+    private void PlayDamageSound()
+    {
 
+        damageAudioSource.PlayOneShot(damageAudio, damageAudioVolume);
+
+    }
 
     private void OnCollisionStay(Collision collision)
     {/*
@@ -276,6 +288,7 @@ public class RocketProps : MonoBehaviour
             //Debug.Log("Collision");
             //tickCounter = 0f;
             Damage((int)(collisionDamage * collision.impulse.magnitude));
+            PlayDamageSound();
         }
         else
         {
