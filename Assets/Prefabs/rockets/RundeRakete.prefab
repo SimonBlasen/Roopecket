@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056417517306024}
   m_LocalRotation: {x: 0.50000006, y: 0.5, z: 0.50000006, w: 0.5}
-  m_LocalPosition: {x: -1.578, y: -0.018, z: 0}
+  m_LocalPosition: {x: -1.578, y: -0.31, z: 0}
   m_LocalScale: {x: 0.25891683, y: 0.25891674, z: 0.2589167}
   m_Children: []
   m_Father: {fileID: 4105223167280198}
@@ -14860,7 +14860,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0.9999999}
   m_Children:
   - {fileID: 4086214766136918}
-  - {fileID: 4633312745237916}
   m_Father: {fileID: 4105223167280198}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 165.00002, z: 451.82}
@@ -14892,7 +14891,6 @@ Transform:
   m_LocalScale: {x: 0.99999994, y: 0.9999999, z: 1}
   m_Children:
   - {fileID: 4129206458161042}
-  - {fileID: 4335960130446110}
   m_Father: {fileID: 4105223167280198}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 165.00002, z: 451.82}
@@ -14922,12 +14920,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256107816227918}
-  m_LocalRotation: {x: 0.56775117, y: 0.42149574, z: 0.5540782, w: 0.4393146}
-  m_LocalPosition: {x: -0.6401393, y: 0.03728849, z: 0.0024679913}
-  m_LocalScale: {x: 0.061958056, y: 0.061958082, z: 0.61958104}
+  m_LocalRotation: {x: -0.55614215, y: -0.4366989, z: -0.56575876, w: -0.4241663}
+  m_LocalPosition: {x: -5.96114, y: 0.0243215, z: 0.022945452}
+  m_LocalScale: {x: 0.57599765, y: 0.5759979, z: 5.7599826}
   m_Children: []
-  m_Father: {fileID: 4042665426736370}
-  m_RootOrder: 1
+  m_Father: {fileID: 4129206458161042}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33933511658235458
 MeshFilter:
@@ -24818,12 +24816,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380606695032226}
-  m_LocalRotation: {x: 0.56775117, y: 0.42149574, z: 0.5540782, w: 0.4393146}
-  m_LocalPosition: {x: -0.6401393, y: 0.03728849, z: 0.0024679913}
-  m_LocalScale: {x: 0.061958056, y: 0.061958082, z: 0.61958104}
+  m_LocalRotation: {x: -0.55614215, y: -0.4366989, z: -0.56575876, w: -0.42416632}
+  m_LocalPosition: {x: -5.9611397, y: 0.024312094, z: 0.022942862}
+  m_LocalScale: {x: 0.57599765, y: 0.57599795, z: 5.759982}
   m_Children: []
-  m_Father: {fileID: 4196300688314014}
-  m_RootOrder: 1
+  m_Father: {fileID: 4086214766136918}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33247716916176218
 MeshFilter:
@@ -43928,7 +43926,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: 0.027049592, w: -0.9996341}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.10756651, y: 0.10756651, z: 0.10756651}
-  m_Children: []
+  m_Children:
+  - {fileID: 4335960130446110}
   m_Father: {fileID: 4042665426736370}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 356.9}
@@ -48772,7 +48771,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591933841025178}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.844, y: -0.148, z: -0.004}
+  m_LocalPosition: {x: -1.844, y: -0.348, z: -0.004}
   m_LocalScale: {x: 0.99999976, y: 0.9999998, z: 0.99999976}
   m_Children:
   - {fileID: 4221635955844774}
@@ -53744,7 +53743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627949098593940}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.70710677}
-  m_LocalPosition: {x: 1.844, y: -0.148, z: -0.004}
+  m_LocalPosition: {x: 1.844, y: -0.348, z: -0.004}
   m_LocalScale: {x: 0.99999976, y: 0.9999998, z: 0.99999976}
   m_Children:
   - {fileID: 4293192227727410}
@@ -53978,14 +53977,14 @@ MonoBehaviour:
   - {fileID: 108522504692988542}
   thrustStrength: 450
   thrustStrengthes:
-  - 400
-  - 900
-  - 400
+  - 500
+  - 1000
+  - 500
   midPoint: {fileID: 0}
   rocketProps: {fileID: 114583893794006604}
   landerMovers:
   - {fileID: 114220511151424970}
-  - {fileID: 0}
+  - {fileID: 114930969913402904}
   thrusterAudioIncr: 7
   particlesLandingThrust: []
   rocketVolume: 0.3
@@ -54012,6 +54011,9 @@ MonoBehaviour:
   okToHitTransforms: []
   rocketController: {fileID: 114366375911520516}
   cameraMulti: {fileID: 0}
+  damageAudio: {fileID: 0}
+  damageAudioSource: {fileID: 0}
+  damageAudioVolume: 0
   dieExplosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
     type: 3}
   deadRocket: {fileID: 0}
@@ -58931,7 +58933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726441985161328}
   m_LocalRotation: {x: -0.5000001, y: 0.4999999, z: 0.5000001, w: -0.4999999}
-  m_LocalPosition: {x: 1.578, y: -0.014, z: 0}
+  m_LocalPosition: {x: 1.578, y: -0.30599993, z: 0}
   m_LocalScale: {x: 0.25891683, y: 0.25891674, z: 0.2589167}
   m_Children: []
   m_Father: {fileID: 4105223167280198}
@@ -73466,7 +73468,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: 0.027049592, w: -0.9996341}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.10756651, y: 0.10756651, z: 0.10756651}
-  m_Children: []
+  m_Children:
+  - {fileID: 4633312745237916}
   m_Father: {fileID: 4196300688314014}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 356.9}
@@ -73531,5 +73534,5 @@ MonoBehaviour:
   angleOut: 356.9
   epsilon: 0.01
   rotationSpeed: 100
-  turnDirection: 0
+  turnDirection: 1
   arm: {fileID: 4086214766136918}
