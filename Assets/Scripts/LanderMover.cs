@@ -26,26 +26,26 @@ public class LanderMover : MonoBehaviour {
         {
             float diff = Mathf.Abs(angleIn - arm.localRotation.eulerAngles.z);
 
-            arm.localRotation = Quaternion.Euler(0f, 0f, arm.localRotation.eulerAngles.z + (turnDirection ? 1f : -1f) * rotationSpeed * Time.deltaTime);
+            arm.localRotation = Quaternion.Euler(arm.localRotation.eulerAngles.x, 0f, arm.localRotation.eulerAngles.z + (turnDirection ? 1f : -1f) * rotationSpeed * Time.deltaTime);
 
             float diff2 = Mathf.Abs(angleIn - arm.localRotation.eulerAngles.z);
 
             if (diff2 > diff)
             {
-                arm.localRotation = Quaternion.Euler(0f, 0f, angleIn);
+                arm.localRotation = Quaternion.Euler(arm.localRotation.eulerAngles.x, 0f, angleIn);
             }
         }
         else if (Mathf.Abs(angleOut - arm.localRotation.eulerAngles.z) > epsilon && turnedOut)
         {
             float diff = Mathf.Abs(angleOut - arm.localRotation.eulerAngles.z);
 
-            arm.localRotation = Quaternion.Euler(0f, 0f, arm.localRotation.eulerAngles.z + (turnDirection ? -1f : 1f) * rotationSpeed * Time.deltaTime);
+            arm.localRotation = Quaternion.Euler(arm.localRotation.eulerAngles.x, 0f, arm.localRotation.eulerAngles.z + (turnDirection ? -1f : 1f) * rotationSpeed * Time.deltaTime);
 
             float diff2 = Mathf.Abs(angleOut - arm.localRotation.eulerAngles.z);
 
             if (diff2 > diff)
             {
-                arm.localRotation = Quaternion.Euler(0f, 0f, angleOut);
+                arm.localRotation = Quaternion.Euler(arm.localRotation.eulerAngles.x, 0f, angleOut);
             }
         }
 

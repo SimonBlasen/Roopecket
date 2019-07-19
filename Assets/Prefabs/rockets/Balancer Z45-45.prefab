@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &661680515873398872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7202502739300094825}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7202502739300094825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661680515873398872}
+  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4323678685234608940}
+  m_Father: {fileID: 4331986937456516618}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
 --- !u!1 &3596876220699947054
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,14 +5133,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329100606088429126}
-  m_LocalRotation: {x: 0.7010574, y: 0.7010574, z: 0.09229593, w: 0.09229593}
+  m_LocalRotation: {x: 0.7071068, y: 0.7071068, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 2.29, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_Children:
-  - {fileID: 4323678685234608940}
+  - {fileID: 7202502739300094825}
   m_Father: {fileID: 4332392390704581978}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 165.00002, z: 90}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: -90}
 --- !u!1 &4329299120398041504
 GameObject:
   m_ObjectHideFlags: 0
@@ -5225,7 +5256,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329303941809334004}
-  m_LocalRotation: {x: -0, y: -0.13052596, z: -0, w: 0.99144495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.437, z: 0.004}
   m_LocalScale: {x: 1.2599996, y: 1.2599998, z: 1.2599996}
   m_Children:
@@ -10184,7 +10215,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329446048500327682}
-  m_LocalRotation: {x: -0, y: -0.13052596, z: -0, w: 0.99144495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.866, z: 0.003}
   m_LocalScale: {x: 1.130108, y: 1.130108, z: 1.130108}
   m_Children: []
@@ -10284,14 +10315,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329463572273452244}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.04, z: 0}
-  m_LocalScale: {x: 0.14326786, y: 0.14326786, z: 0.14326784}
+  m_LocalRotation: {x: 0.38268343, y: -0.92387956, z: 0, w: 0}
+  m_LocalPosition: {x: 0.04000027, y: 0, z: 0}
+  m_LocalScale: {x: 0.14326783, y: 0.1432678, z: 0.1432678}
   m_Children:
   - {fileID: 4323577647602098928}
-  m_Father: {fileID: 4331986937456516618}
+  m_Father: {fileID: 7202502739300094825}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 135}
 --- !u!33 &4351980523738068472
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10350,10 +10381,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleIn: 45
-  angleOut: -45
+  angleOut: 135
   epsilon: 0.01
   rotationSpeed: 200
-  turnDirection: 1
+  turnDirection: 0
   arm: {fileID: 4323678685234608940}
 --- !u!1 &4329554138271353920
 GameObject:
@@ -24730,7 +24761,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4329886245125225810}
-  m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
+  m_LocalRotation: {x: 0, y: 0.13052616, z: 0, w: 0.9914449}
   m_LocalPosition: {x: -4.67, y: 1.16, z: 19.01}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
@@ -24829,6 +24860,8 @@ MonoBehaviour:
   rocketVolume: 0.3
   comLandersOut: {fileID: 0}
   comLandersIn: {fileID: 0}
+  audioData: {fileID: 0}
+  audioClip: {fileID: 0}
 --- !u!114 &4433111189414106026
 MonoBehaviour:
   m_ObjectHideFlags: 0

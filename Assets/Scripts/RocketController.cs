@@ -90,7 +90,7 @@ public class RocketController : MonoBehaviour {
         if (Input.GetKeyDown(keyLander))
         {
 
-            audioData.UnPause();
+            //audioData.UnPause();
 
             //Debug.Log("KeyDown");
             for (int i = 0; i < landerMovers.Length; i++)
