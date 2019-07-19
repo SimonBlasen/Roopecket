@@ -36,6 +36,11 @@ public class RocketController : MonoBehaviour {
     protected Transform comLandersOut;
     [SerializeField]
     protected Transform comLandersIn;
+    [SerializeField]
+    private AudioSource audioData;
+    [SerializeField]
+    private AudioClip audioClip;
+
 
     protected bool[] thrusts = null;
 
@@ -47,6 +52,9 @@ public class RocketController : MonoBehaviour {
     protected void Start ()
     {
         Init();
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
+        
 	}
 
     protected void Update()
@@ -81,10 +89,14 @@ public class RocketController : MonoBehaviour {
 
         if (Input.GetKeyDown(keyLander))
         {
+
+            audioData.UnPause();
+
             //Debug.Log("KeyDown");
             for (int i = 0; i < landerMovers.Length; i++)
             {
                 landerMovers[i].TurnOut = !landerMovers[i].TurnOut;
+
             }
 
             //Debug.Log("COM: " + ownRig.centerOfMass.ToString("n4"));
