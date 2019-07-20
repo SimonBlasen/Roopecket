@@ -221,12 +221,6 @@ public class RocketProps : MonoBehaviour
     }
 
 
-    private void PlayDamageSound()
-    {
-
-        damageAudioSource.PlayOneShot(damageAudio, damageAudioVolume);
-
-    }
 
     private void OnCollisionStay(Collision collision)
     {/*
@@ -264,6 +258,7 @@ public class RocketProps : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Debug.Log("Impact: " + collision.impulse.magnitude.ToString());
+       
         bool notOkay = false;
         for (int i = 0; i < collision.contacts.Length; i++)
         {
@@ -288,12 +283,13 @@ public class RocketProps : MonoBehaviour
             //Debug.Log("Collision");
             //tickCounter = 0f;
             Damage((int)(collisionDamage * collision.impulse.magnitude));
-            PlayDamageSound();
+           
         }
         else
         {
             if (collision.impulse.magnitude > impactToleranceThrusters)
             {
+                FindObjectOfType<AudioManager>().Play("DamageSound");
                 Damage((int)(collisionDamage * (collision.impulse.magnitude - impactToleranceThrusters)));
             }
         }

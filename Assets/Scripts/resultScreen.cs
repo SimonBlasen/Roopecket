@@ -119,10 +119,10 @@ public class resultScreen : MonoBehaviour
     private float[] globalValuesOld;
     private string t_damage, t_damageTotal, t_time, t_timeTotal, t_fuel, t_fuelTotal, t_worth, t_worthTotal;
     private float currentRocketWorth;
-    private const float damageFactor = 1f;
-    private const float timeFactor = 1f;
-    private const float fuelFactor = 1f;
-    private const float worthFactor = 1200f;
+    private const float damageFactor = 1.5f;
+    private const float timeFactor = 0.8f;
+    private const float fuelFactor = 1.5f;
+    private const float worthFactor = 4000f;
 
     private EndscreenState state = EndscreenState.END;
     private float counter = 0f;
@@ -330,7 +330,7 @@ public class resultScreen : MonoBehaviour
     public static float CalculateRocketWorth(float time, float damage, float fuel, int levelsDone)
     {
         Debug.Log("Levels done: " + levelsDone.ToString());
-        return (worthFactor * levelsDone) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor);
+        return ((worthFactor * levelsDone) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 100;
     }
 
     public void ButtonContinueClick()

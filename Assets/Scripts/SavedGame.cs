@@ -221,14 +221,14 @@ public class SavedGame
 
     public static int[] RocketPrices = new int[]
         {
-            100,
-            250,
-            300,
+            500,
+            1250,
+            1300,
             1500,
-            99,
-            200,
-            1,
-            400,
+            3000,
+            20000,
+            10000,
+            4000,
         };
 
 
