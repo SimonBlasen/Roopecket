@@ -92,6 +92,7 @@ public class MoneyMachineNumber : MonoBehaviour
     {
         get
         {
+            init();
             return System.Convert.ToInt32(numberText.text);
         }
     }
