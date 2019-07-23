@@ -75,7 +75,7 @@ public class TimeKeeper : MonoBehaviour
             SavedGame.CurrentDamageStage[Statics.selectedRocket, levelNumber.levelNumber] = takenDamage;
             SavedGame.CurrentUsedFuel[Statics.selectedRocket, levelNumber.levelNumber] = usedFuel;
 
-
+            SavedGame.Money += 1000;
         }
         else
         {

@@ -29,6 +29,8 @@ public class ArrowRocketSelector : MonoBehaviour
     public GarageCameraLook garageCameraLook;
     public Button buttonBuyRocket;
 
+    public MoneyMachine moneyMachine;
+
     Vector3 spawn;
     Vector3 selected;
 
@@ -45,14 +47,16 @@ public class ArrowRocketSelector : MonoBehaviour
         //
         //TODO remove again
 
-        SavedGame.FillWithInitValues();
+        //SavedGame.FillWithInitValues();
 
-        SavedGame.Money = 2000;
+        //SavedGame.Money = 2000;
 
         // TODO
         //
         //
 
+
+        moneyMachine.Number = SavedGame.Money;
 
 
 
@@ -121,6 +125,9 @@ public class ArrowRocketSelector : MonoBehaviour
         {
             selectedBoughtRocket = index;
             int rocketType = SavedGame.OwnedRockets[selectedBoughtRocket];
+
+            Statics.selectedRocket = rocketType;
+
             for (int i = 0; i < rocketsBought.Length; i++)
             {
                 if (i == rocketType)
@@ -147,7 +154,7 @@ public class ArrowRocketSelector : MonoBehaviour
         selectedBuyRocket = number;
         if (number >= 0 && number < rockets.Length)
         {
-            Statics.selectedRocket = number;
+            //Statics.selectedRocket = number;
 
             currentRocket.gameObject.SetActive(false);
 
@@ -178,6 +185,7 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         if (SavedGame.Money >= SavedGame.RocketPrices[selectedBuyRocket])
         {
+            moneyMachine.Number = SavedGame.Money - SavedGame.RocketPrices[selectedBuyRocket];
             //TODO Buy rocket
             for (int i = 0; i < arrows.Length; i++)
             {
@@ -192,8 +200,13 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         Debug.Log("Abort buy click");
         instRocketnameCanvas.GetComponent<Canvas>().enabled = false;
+        moneyMachine.Number = SavedGame.Money;
 
         setRocketActive(selectedBuyRocket);
+        for (int i = 0; i < arrows.Length; i++)
+        {
+            arrows[i].KeysLocked = false;
+        }
     }
 
     public void ConfirmRocketNameClick()

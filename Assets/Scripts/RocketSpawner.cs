@@ -127,7 +127,7 @@ public class RocketSpawner : MonoBehaviour {
             cmc.rockets = new Transform[] { instRock.transform };
             cmc.rocketRigidbody = instRock.GetComponent<Rigidbody>();
 
-            instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2f, 0f);
+            instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2f + (Statics.selectedRocket == 4 ? 0.5f : 0f), 0f);
             instRock.transform.Rotate(0f, startPlatform.transform.rotation.eulerAngles.y, 0f);
             /*if (Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) > -0.5f && Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) < 0.5f)
             {
