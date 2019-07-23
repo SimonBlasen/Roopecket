@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657904, g: 0.4964146, b: 0.57481736, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -535,7 +535,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.1894817, y: 3.6661646e+18, z: -2.535282e-23, w: 0.000000038466258}
+  m_BoundingSphereOverride: {x: 0, y: 2.2750278e-36, z: 7.33e-43, w: 2.8451799e-36}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -21265,13 +21265,13 @@ MonoBehaviour:
   m_margin: {x: 11.099848, y: 2.619866, z: -1.3739595, w: 0}
   m_textInfo:
     textComponent: {fileID: 995535516}
-    characterCount: 0
+    characterCount: 27
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 2
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -45944,6 +45944,11 @@ PrefabInstance:
     - target: {fileID: 4736505774536192, guid: d501ceb6126aafa4ebd501f85c9e3878, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114286137764606034, guid: d501ceb6126aafa4ebd501f85c9e3878,
+        type: 3}
+      propertyPath: platformName
+      value: Finish_Platform Level 14 CR space
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d501ceb6126aafa4ebd501f85c9e3878, type: 3}

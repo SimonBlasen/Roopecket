@@ -21,7 +21,10 @@ public class MoneyMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Number = startNumber;
+        if (currentNumber == -1)
+        {
+            Number = startNumber;
+        }
     }
 
     // Update is called once per frame
@@ -44,7 +47,7 @@ public class MoneyMachine : MonoBehaviour
 
     private int cropNumber = 0;
 
-    private int currentNumber = 0;
+    private int currentNumber = -1;
     public int Number
     {
         get
