@@ -21,6 +21,15 @@ public class MoneyMachineCylinder : MonoBehaviour
     private float turnAngleOffset = 0f;
     [SerializeField]
     private float timeOnFullspeed = 0f;
+    [Space]
+
+
+    [SerializeField]
+    private float aT = 2f;
+    [SerializeField]
+    private float dT = 3f;
+    [SerializeField]
+    private float fT = 5f;
     //[SerializeField]
     //private int timeStepsToDec = 60;
 
@@ -31,20 +40,74 @@ public class MoneyMachineCylinder : MonoBehaviour
 
     private float assumedTimeDelta = 1f / 60f;
 
+
+    float xDest = 0f;
+    float startOffset = 0f;
+    float curT = 0f;
+
+    private float xT(float t)
+    {
+        if (t < aT)
+        {
+            return 0.5f * acceleration * t * t;
+        }
+        /*else if (t < dT)
+        {
+            return acceleration * aT * t + 0.5f * acceleration * aT * aT;
+        }*/
+        else if (t < fT)
+        {
+            return -decceleration * 0.5f * t * t + fT * decceleration * t + 0.5f * acceleration * aT * aT + acceleration * aT * dT - acceleration * aT * aT;
+        }
+        else
+        {
+            return 0.5f * acceleration * aT * aT + acceleration * aT * dT - acceleration * aT * aT - 0.5f * acceleration * fT * fT + 0.5f * acceleration * dT * dT;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         init();
     }
 
+    private float xA = 0f;
+    private bool moving = false;
+
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            startOffset = targetAngle;
             ShownNumber++;
             Debug.Log("Show number " + ShownNumber.ToString());
+
+            xDest = targetAngle + 360f * 1f;
+            curT = 0f;
+            dT = aT;
+            decceleration = acceleration;
+            fT = 2f * aT;
+            acceleration = (xDest) / (aT * aT);
+            moving = true;
+            Debug.Log("Start moving");
         }
+
+        if (moving)
+        {
+            transform.localRotation = Quaternion.Euler(xT(curT) + startOffset, 0f, 90f);
+            curT += Time.deltaTime;
+            if (curT >= fT)
+            {
+                moving = false;
+                Debug.Log("Stop moving");
+            }
+        }
+
+        /*
+
+        transform.localRotation = Quaternion.Euler(xA, 0f, 90f);
+
 
         if (state == MMCylState.ACC || state == MMCylState.FS_WAIT || state == MMCylState.FULL_SPEED)
         {
@@ -120,7 +183,7 @@ public class MoneyMachineCylinder : MonoBehaviour
                 Debug.Log(state);
                 currentVel = 0f;
             }
-        }
+        }*/
     }
 
     private float angleX0 = 0f;
