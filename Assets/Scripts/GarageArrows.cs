@@ -9,6 +9,7 @@ public class GarageArrows : MonoBehaviour {
     public bool mousedown = false;
     private bool locked = false;
     private float lerpSpeed = 0.05f;
+    public bool controlableWithKeyboard = true;
 
     public float left = 0;
     public float right = 0;
@@ -17,6 +18,7 @@ public class GarageArrows : MonoBehaviour {
     public Transform[] rockets;
     public Transform currentRocket;
 
+    public Vector3 selectedOffset = Vector3.zero;
     Vector3 spawn;
     Vector3 selected;
 
@@ -28,7 +30,14 @@ public class GarageArrows : MonoBehaviour {
     {
 
         spawn = transform.position;
-        selected = spawn + new Vector3(0f, 0f, -0.2f);
+        if (selectedOffset == Vector3.zero)
+        {
+            selected = spawn + new Vector3(0f, 0f, -0.2f);
+        }
+        else
+        {
+            selected = spawn + selectedOffset;
+        }
 
         //for (int i = 0; i < rockets.Length; i++)
         //{
@@ -76,13 +85,13 @@ public class GarageArrows : MonoBehaviour {
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.D) && mouseIsDown == false && KeysLocked == false)
+        else if (((Input.GetKeyDown(KeyCode.RightArrow) && mouseIsDown == false && controlableWithKeyboard) || (Input.GetKeyDown(KeyCode.D) && mouseIsDown == false && controlableWithKeyboard)) && KeysLocked == false)
         {
             ars.RightClick();
 
         }
 
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && mouseIsDown == false || Input.GetKeyDown(KeyCode.A) && mouseIsDown == false && KeysLocked == false)
+        else if (((Input.GetKeyDown(KeyCode.LeftArrow) && mouseIsDown == false && controlableWithKeyboard) || (Input.GetKeyDown(KeyCode.A) && mouseIsDown == false && controlableWithKeyboard)) && KeysLocked == false)
         {
 
             ars.LeftClick();

@@ -23,7 +23,7 @@ public class GarageRocketnameTurner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text1.text = "";
+        //text1.text = "";
     }
 
     // Update is called once per frame

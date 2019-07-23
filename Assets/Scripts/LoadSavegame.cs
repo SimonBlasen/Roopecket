@@ -20,6 +20,7 @@ public class LoadSavegame : MonoBehaviour
         catch (Exception ex)
         {
             Debug.LogError("Safe game wasn't loaded");
+            SavedGame.FillWithInitValues();
         }
 
         SceneManager.LoadScene("Main_Menu_3");

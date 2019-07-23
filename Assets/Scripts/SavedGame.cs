@@ -102,6 +102,16 @@ public class SavedGame
         }
     }
 
+    public static void FillWithInitValues()
+    {
+        OwnedRockets[0] = 0;
+        RocketNames[0] = "Rudy";
+        for (int i = 1; i < OwnedRockets.Length; i++)
+        {
+            OwnedRockets[i] = -1;
+        }
+    }
+
     public static void LoadSavegame()
     {
         Debug.Log("Loading savegame...");

@@ -5,6 +5,9 @@ using UnityEngine;
 public class GarageCameraLook : MonoBehaviour
 {
     [SerializeField]
+    private ArrowRocketSelector arrowRocketSelector;
+
+    [SerializeField]
     [Range(0f, 1f)]
     private float changeToLeftPercent = 0.2f;
     [SerializeField]
@@ -70,11 +73,13 @@ public class GarageCameraLook : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, posRight.position, lerpSpeedMove);
             lookatParent.position = Vector3.Lerp(lookatParent.position, lookatPosRight.position, lerpSpeedMove);
+            lookatParent.rotation = Quaternion.Lerp(lookatParent.rotation, lookatPosRight.rotation, 0.1f);
         }
         else
         {
             transform.position = Vector3.Lerp(transform.position, posLeft.position, lerpSpeedMove);
             lookatParent.position = Vector3.Lerp(lookatParent.position, lookatPosLeft.position, lerpSpeedMove);
+            lookatParent.rotation = Quaternion.Lerp(lookatParent.rotation, lookatPosLeft.rotation, 0.1f);
         }
 
 
@@ -85,11 +90,21 @@ public class GarageCameraLook : MonoBehaviour
             if (isRight && mousePos.x < changeToLeftPercent)
             {
                 isRight = false;
+                arrowRocketSelector.CameraSwitchedToRight(isRight);
             }
             else if (isRight == false && 1f - mousePos.x < changeToRightPercent)
             {
                 isRight = true;
+                arrowRocketSelector.CameraSwitchedToRight(isRight);
             }
+        }
+    }
+
+    public bool IsRight
+    {
+        get { return isRight; }
+        set { isRight = value;
+            arrowRocketSelector.CameraSwitchedToRight(isRight);
         }
     }
 }
