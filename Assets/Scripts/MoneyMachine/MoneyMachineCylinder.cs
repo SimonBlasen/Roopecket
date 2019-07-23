@@ -23,6 +23,7 @@ public class MoneyMachineCylinder : MonoBehaviour
     private float timeOnFullspeed = 0f;
     [Space]
 
+    public int n0;
 
     [SerializeField]
     private float aT = 2f;
@@ -55,12 +56,14 @@ public class MoneyMachineCylinder : MonoBehaviour
         {
             return acceleration * aT * t + 0.5f * acceleration * aT * aT;
         }*/
-        else if (t < fT)
+        else if (t <= fT)
         {
-            return -decceleration * 0.5f * t * t + fT * decceleration * t + 0.5f * acceleration * aT * aT + acceleration * aT * dT - acceleration * aT * aT;
+            t = t - aT;
+            return -acceleration * 0.5f * t * t + aT * 1f * acceleration * t + 0.5f * acceleration * aT * aT;
         }
         else
         {
+            return xDest;
             return 0.5f * acceleration * aT * aT + acceleration * aT * dT - acceleration * aT * aT - 0.5f * acceleration * fT * fT + 0.5f * acceleration * dT * dT;
         }
     }
@@ -80,26 +83,26 @@ public class MoneyMachineCylinder : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             startOffset = targetAngle;
-            ShownNumber++;
+            ShownNumber = n0;
             Debug.Log("Show number " + ShownNumber.ToString());
 
-            xDest = targetAngle + 360f * 1f;
+            xDest = targetAngle + 360f * 2f - startOffset;
             curT = 0f;
             dT = aT;
             decceleration = acceleration;
             fT = 2f * aT;
             acceleration = (xDest) / (aT * aT);
             moving = true;
-            Debug.Log("Start moving");
+            Debug.Log("Start moving to " + targetAngle);
         }
 
         if (moving)
         {
             transform.localRotation = Quaternion.Euler(xT(curT) + startOffset, 0f, 90f);
             curT += Time.deltaTime;
-            if (curT >= fT)
+            if (curT > fT)
             {
-                moving = false;
+                //moving = false;
                 Debug.Log("Stop moving");
             }
         }
