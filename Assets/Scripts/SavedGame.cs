@@ -221,11 +221,25 @@ public class SavedGame
     // SavedGame variables
     public static int LastSelectedRocket = 0;           // 0
     public static int CurrentLevelIndex = 0;            // 1
-    //public static bool[] OwnedRockets = new bool[32];   // 2
-    public static int Money = 0;                        // 3
-    //public static float CurrentLevelTime;               // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
-    //public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
-    // Hier kannst noch so viele Sachen hinzufügen wie du willst
+                                                        //public static bool[] OwnedRockets = new bool[32];   // 2
+                                                        //public static int Money = 0;                        // 3
+                                                        //public static float CurrentLevelTime;               // Fürs speichern der bisher geflogenen Zeit mit einer Rakete (oder machst du das seperat in die Raketen rein?)
+                                                        //public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
+                                                        // Hier kannst noch so viele Sachen hinzufügen wie du willst
+
+    private static int money = 0;
+    public static int Money
+    {
+        get
+        {
+            return money;
+        }
+        set
+        {
+            Debug.Log("Altering money. Was: " + money.ToString() + ", Added: " + value.ToString());
+            money = value;
+        }
+    }
 
         
 

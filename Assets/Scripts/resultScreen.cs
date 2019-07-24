@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public enum EndscreenState
 {
-    START = 255, STAGE_TIME = 0, STAGE_DAMAGE = 1, STAGE_FUEL = 2, STAGE_WORTH = 3, WAIT_STAGE_TO_GLOBAL = 4, GLOBAL_TIME = 5, GLOBAL_DAMAGE = 6, GLOBAL_FUEL = 7, GLOBAL_WORTH = 8,
-    WAIT_STAGE_TIME = 257, WAIT_STAGE_DAMAGE = 258, WAIT_STAGE_FUEL = 259, WAIT_STAGE_WORTH = 260, WAIT_GLOBAL_TIME = 261, WAIT_GLOBAL_DAMAGE = 262, WAIT_GLOBAL_FUEL = 263, WAIT_GLOBAL_WORTH = 264,
+    START = 255, STAGE_TIME = 0, STAGE_DAMAGE = 1, STAGE_FUEL = 2, STAGE_WORTH = 3, WAIT_STAGE_TO_GLOBAL = 4, GLOBAL_TIME = 5, GLOBAL_DAMAGE = 6, GLOBAL_FUEL = 7, GLOBAL_WORTH = 8, MONEY = 9, 
+    WAIT_STAGE_TIME = 257, WAIT_STAGE_DAMAGE = 258, WAIT_STAGE_FUEL = 259, WAIT_STAGE_WORTH = 260, WAIT_GLOBAL_TIME = 261, WAIT_GLOBAL_DAMAGE = 262, WAIT_GLOBAL_FUEL = 263, WAIT_GLOBAL_WORTH = 264, WAIT_MONEY = 265,
     END = 256
 }
 
@@ -34,7 +34,7 @@ public static class EndscreenStateMethods
             case EndscreenState.STAGE_WORTH:
                 return textTime;
             case EndscreenState.WAIT_STAGE_TO_GLOBAL:
-                return 5f;
+                return 2.5f;
             case EndscreenState.GLOBAL_TIME:
                 return textAddTime;
             case EndscreenState.GLOBAL_DAMAGE:
@@ -42,6 +42,8 @@ public static class EndscreenStateMethods
             case EndscreenState.GLOBAL_FUEL:
                 return textAddTime;
             case EndscreenState.GLOBAL_WORTH:
+                return textAddTime;
+            case EndscreenState.MONEY:
                 return textAddTime;
             case EndscreenState.WAIT_STAGE_TIME:
                 return textWaitsBetween;
@@ -59,6 +61,8 @@ public static class EndscreenStateMethods
                 return textWaitsBetween;
             case EndscreenState.WAIT_GLOBAL_WORTH:
                 return textWaitsBetween;
+            case EndscreenState.WAIT_MONEY:
+                return 1.5f;
             default:
                 return 1000f;
         }
@@ -101,6 +105,10 @@ public static class EndscreenStateMethods
                 return EndscreenState.GLOBAL_WORTH;
             case EndscreenState.WAIT_GLOBAL_TIME:
                 return EndscreenState.GLOBAL_TIME;
+            case EndscreenState.GLOBAL_WORTH:
+                return EndscreenState.WAIT_MONEY;
+            case EndscreenState.WAIT_MONEY:
+                return EndscreenState.MONEY;
             default:
                 return EndscreenState.END;
         }
@@ -111,7 +119,7 @@ public class resultScreen : MonoBehaviour
 {
     public TextMeshProUGUI levelText;
 
-    public TextMeshProUGUI moneyText, totalDamageText, DamageText, totalTimeText, timeText, fuelText, totalFuelText, rocketWorth, rocketWorthTotal;
+    public TextMeshProUGUI moneyText, moneyTextValue, totalDamageText, DamageText, totalTimeText, timeText, fuelText, totalFuelText, rocketWorth, rocketWorthTotal;
     public TextMeshProUGUI[] textMeshes;
     public TextMeshProUGUI[] textMeshesGlobal;
     private string[] t_texts;
@@ -123,6 +131,8 @@ public class resultScreen : MonoBehaviour
     private const float timeFactor = 0.8f;
     private const float fuelFactor = 1.5f;
     private const float worthFactor = 4000f;
+
+    private int oldMoney = 0;
 
     private EndscreenState state = EndscreenState.END;
     private float counter = 0f;
@@ -207,6 +217,24 @@ public class resultScreen : MonoBehaviour
                         textMeshesGlobal[index].text = val.ToString(toStringFormat);
                     }
                 }
+                else if (state == EndscreenState.MONEY)
+                {
+                    if (counter > state.Time())
+                    {
+                        moneyTextValue.text = SavedGame.Money.ToString();
+
+                        state = state.NextState();
+                        counter = 0f;
+                    }
+                    else
+                    {
+                        float perc = counter / state.Time();
+
+                        int val = (int)(oldMoney + (SavedGame.Money - oldMoney) * perc);
+
+                        moneyTextValue.text = val.ToString();
+                    }
+                }
 
                 // Waiting
                 else
@@ -228,6 +256,9 @@ public class resultScreen : MonoBehaviour
 
     public void showEndscreenSimple()
     {
+        oldMoney = SavedGame.Money;
+        moneyTextValue.text = SavedGame.Money.ToString();
+
         state = EndscreenState.WAIT_GLOBAL_TIME;
 
         counter = 0f;
@@ -265,6 +296,9 @@ public class resultScreen : MonoBehaviour
 
     public void showEndScreen()
     {
+        oldMoney = SavedGame.Money;
+        moneyTextValue.text = SavedGame.Money.ToString();
+
         state = EndscreenState.START;
 
         counter = 0f;
@@ -282,6 +316,9 @@ public class resultScreen : MonoBehaviour
         t_texts[2] = SavedGame.CurrentRocketStageFuel.ToString("n2");
 
         float rocketWorthStage = CalculateRocketWorth(SavedGame.CurrentRocketStageTime, SavedGame.CurrentRocketStageDamage, SavedGame.CurrentRocketStageFuel, 1 + Statics.currentLevel - (LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel))));
+        
+
+        
         //float rocketWorthStage = worthFaktor / (SavedGame.CurrentRocketGlobalTime * (SavedGame.CurrentRocketGlobalDamage + 0.01f));
         
 
@@ -309,6 +346,9 @@ public class resultScreen : MonoBehaviour
         else
         {
             levelText.text = "Planet Summary";
+
+            Debug.Log("Received money");
+            SavedGame.Money += (int)rocketWorthStage;
         }
 
 

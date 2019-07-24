@@ -57,6 +57,8 @@ public class Manager : MonoBehaviour
 
     }
 
+    private bool reachedFinish = false;
+
     public void Landed(Transform rocket, string landingPlatform)
     {
         while (rocket.parent != null)
@@ -66,8 +68,9 @@ public class Manager : MonoBehaviour
 
         rocketsFueling.Add(rocket.GetComponent<RocketProps>());
 
-        if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish")
+        if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish" && reachedFinish == false)
         {
+            reachedFinish = true;
 
             string conc = landingPlatform.Split('_')[1];
             for (int i = 2; i < landingPlatform.Split('_').Length; i++)
