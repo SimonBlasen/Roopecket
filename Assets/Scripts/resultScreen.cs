@@ -136,6 +136,7 @@ public class resultScreen : MonoBehaviour
 
     private EndscreenState state = EndscreenState.END;
     private float counter = 0f;
+    private bool startShowingEndscreen = false;
 
     private void Start()
     {
@@ -144,6 +145,7 @@ public class resultScreen : MonoBehaviour
         globalValuesOld = new float[textMeshes.Length];
         GetComponent<Canvas>().enabled = false;
     }
+
 
     private void Update()
     {
@@ -252,10 +254,17 @@ public class resultScreen : MonoBehaviour
             state = state.NextState();
             counter = 0f;
         }
+
+
+        if (startShowingEndscreen && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)))
+        {
+            ButtonContinueClick();
+        }
     }
 
     public void showEndscreenSimple()
     {
+        startShowingEndscreen = true;
         oldMoney = SavedGame.Money;
         moneyTextValue.text = SavedGame.Money.ToString();
 
@@ -296,6 +305,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndScreen()
     {
+        startShowingEndscreen = true;
         oldMoney = SavedGame.Money;
         moneyTextValue.text = SavedGame.Money.ToString();
 
@@ -328,11 +338,20 @@ public class resultScreen : MonoBehaviour
         globalValuesOld[0] = SavedGame.CurrentRocketGlobalTimeLastStage;
         globalValuesOld[1] = SavedGame.CurrentRocketGlobalDamageLastStage;
         globalValuesOld[2] = SavedGame.CurrentRocketGlobalFuelLastStage;
-        globalValuesOld[3] = CalculateRocketWorth(globalValuesOld[0], globalValuesOld[1], globalValuesOld[2], (LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel))));
+
+        float rocketWorthSumOld = 0f;
+        for (int i = 0; i < LevelNumber.GetStage(Statics.currentLevel); i++)
+        {
+            rocketWorthSumOld += SavedGame.GetGlobalWorthStage(Statics.selectedRocket, i);
+        }
+
+        float rocketWorthSumNew = rocketWorthSumOld + SavedGame.GetGlobalWorthStage(Statics.selectedRocket, LevelNumber.GetStage(Statics.currentLevel));
+
+        globalValuesOld[3] = rocketWorthSumOld;// SavedGame.GetGlobalWorthStage(Statics.selectedRocket, LevelNumber.GetStage(LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel)) - 1));//CalculateRocketWorth(globalValuesOld[0], globalValuesOld[1], globalValuesOld[2], (LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel))));
         globalValues[0] = SavedGame.CurrentRocketGlobalTime;
         globalValues[1] = SavedGame.CurrentRocketGlobalDamage;
         globalValues[2] = SavedGame.CurrentRocketGlobalFuel;
-        globalValues[3] = CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], Statics.currentLevel + 1);
+        globalValues[3] = rocketWorthSumNew;// CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], Statics.currentLevel + 1);
 
         textMeshesGlobal[0].text = globalValuesOld[0].ToString("n3");
         textMeshesGlobal[1].text = globalValuesOld[1].ToString();

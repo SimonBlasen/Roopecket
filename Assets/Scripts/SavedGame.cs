@@ -331,6 +331,14 @@ public class SavedGame
         }
     }
 
+    public static float CurrentRocketGlobalWorthLastStage
+    {
+        get
+        {
+            return GetGlobalFuelLastStage(Statics.selectedRocket);
+        }
+    }
+
     public static float GetGlobalFuel(int rocket)
     {
         float sum = 0f;
@@ -405,6 +413,47 @@ public class SavedGame
     public static float GetGlobalFuelLastStage(int rocket)
     {
         float sum = 0f;
+        for (int i = 0; i < CurrentUsedFuel.GetLength(1); i++)
+        {
+            if (LevelNumber.GetStage(i) < LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[rocket])
+            {
+                sum += CurrentUsedFuel[rocket, i];
+            }
+            else
+            {
+            }
+        }
+
+        return sum;
+    }
+
+    public static float GetGlobalWorthStage(int rocket, int stage)
+    {
+        float sum = 0f;
+
+        float sumTime = 0f;
+        float sumFuel = 0f;
+        float sumDamage = 0f;
+        int beginStage = -1;
+        int endStage = -1;
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (LevelNumber.GetStage(i) == stage)
+            {
+                if (beginStage == -1)
+                {
+                    beginStage = i;
+                }
+                endStage = i;
+                sumTime += CurrentTimeStage[rocket, i];
+                sumFuel += CurrentUsedFuel[rocket, i];
+                sumDamage += CurrentDamageStage[rocket, i];
+            }
+        }
+
+        return resultScreen.CalculateRocketWorth(sumTime, sumDamage, sumFuel, (endStage - beginStage) + 1);
+
         for (int i = 0; i < CurrentUsedFuel.GetLength(1); i++)
         {
             if (LevelNumber.GetStage(i) < LevelNumber.GetStage(Statics.currentLevel) && i < NextLevel[rocket])

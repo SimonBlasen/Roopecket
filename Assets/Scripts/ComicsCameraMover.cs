@@ -59,6 +59,11 @@ public class ComicsCameraMover : MonoBehaviour {
         {
             NextWindow();
         }
+        else if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("Loading scene " + LevelToLoad);
+            SceneManager.LoadScene(LevelToLoad);
+        }
 
         Vector3 oldPos = transform.position;
 
@@ -96,6 +101,7 @@ public class ComicsCameraMover : MonoBehaviour {
 
         if (index == lookPoints.Length)
         {
+            Debug.Log("Loading scene " + LevelToLoad);
             SceneManager.LoadScene(LevelToLoad);
         }
 
@@ -105,15 +111,18 @@ public class ComicsCameraMover : MonoBehaviour {
 
             //TODO finish //vllt hat Marc das halbwegs gefixed
         }
+        else
+        {
+
+            reachedIndices[0] = false;
+            reachedIndices[1] = false;
+
+            lookatStatic.position = lookPoints[index].position;
+            goalposStatic.position = lookPoints[index].position + new Vector3(0f, 0f, -howNear[index]);
+            goalpos.position = goalposStatic.position;
+            lookatPos.position = lookatStatic.position;
+        }
 
        
-
-        reachedIndices[0] = false;
-        reachedIndices[1] = false;
-
-        lookatStatic.position = lookPoints[index].position;
-        goalposStatic.position = lookPoints[index].position + new Vector3(0f, 0f, -howNear[index]);
-        goalpos.position = goalposStatic.position;
-        lookatPos.position = lookatStatic.position;
     }
 }

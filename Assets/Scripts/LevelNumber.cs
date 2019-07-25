@@ -43,7 +43,7 @@ public class LevelNumber : MonoBehaviour
         {
             return 2;
         }
-        if (levelNumber >= 16)
+        if (levelNumber >= 16 && levelNumber <= 19)
         {
             return 3;
         }

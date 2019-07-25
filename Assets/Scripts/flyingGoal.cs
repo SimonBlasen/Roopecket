@@ -20,8 +20,11 @@ public class flyingGoal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        /*if (Input.GetKeyDown(KeyCode.P))
+        {
+            Manager.Instance.Landed(GameObject.FindObjectOfType<RocketProps>().transform, levelToLoad);
+        }*/
+    }
 
     private void OnTriggerEnter(Collider other)
     {

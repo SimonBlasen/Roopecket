@@ -12,12 +12,12 @@ public class skipComic : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        /*if (Input.GetKeyDown(KeyCode.Return))
         {
 
             SceneManager.LoadScene(LevelToLoad);
 
-        }
+        }*/
 
     }
 

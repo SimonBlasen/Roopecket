@@ -37,6 +37,11 @@ public class LandingPlatform : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        /*if (Input.GetKeyDown(KeyCode.P))
+        {
+            Manager.Instance.Landed(GameObject.FindObjectOfType<RocketProps>().transform, platformName);
+        }*/
+
         bool isOneLanded = false;
 		for (int i = 0; i < landedTransforms.Count; i++)
         {
