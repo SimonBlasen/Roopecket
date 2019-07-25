@@ -19,6 +19,7 @@ public class MainMenuLogo: MonoBehaviour {
     public Vector3 start;
     public float percent;
 
+    public MainMenuText[] mainMenuTexts;
 
 
     void Start()
@@ -26,6 +27,11 @@ public class MainMenuLogo: MonoBehaviour {
         start = transform.position;
         Point = new Vector3(5, 5, 5);
         Difference = Point - start;
+
+        if (Statics.movedCTFLogo)
+        {
+            OnMouseEnter();
+        }
     }
 
     void Update()
@@ -66,6 +72,15 @@ public class MainMenuLogo: MonoBehaviour {
 
     private void OnMouseEnter()
     {
+        if (!Entered)
+        {
+            Statics.movedCTFLogo = true;
+            for (int i = 0; i < mainMenuTexts.Length; i++)
+            {
+                mainMenuTexts[i].FirstTouch = true;
+            }
+        }
+
         print("Step 1");
         Entered = true;
 

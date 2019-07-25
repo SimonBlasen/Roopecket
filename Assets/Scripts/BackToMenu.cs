@@ -18,6 +18,7 @@ public class BackToMenu : MonoBehaviour {
 
     void TaskOnClick()
     {
+        SavedGame.SaveSavegame();
         SceneManager.LoadScene(LevelToLoad);
     }
 

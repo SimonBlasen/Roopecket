@@ -19,7 +19,7 @@ public static class EndscreenStateMethods
         float textTime = 1.5f;
         float textAddTime = 1f;
 
-        float textWaitsBetween = 1f;
+        float textWaitsBetween = 0.3f;
 
         switch (state)
         {
@@ -137,6 +137,9 @@ public class resultScreen : MonoBehaviour
     private EndscreenState state = EndscreenState.END;
     private float counter = 0f;
     private bool startShowingEndscreen = false;
+    private RocketSpawner rs;
+    private int maxLifeRocket = -1;
+    private bool isSimpleEndscreen = false;
 
     private void Start()
     {
@@ -144,11 +147,17 @@ public class resultScreen : MonoBehaviour
         globalValues = new float[textMeshes.Length];
         globalValuesOld = new float[textMeshes.Length];
         GetComponent<Canvas>().enabled = false;
+        rs = GameObject.FindObjectOfType<RocketSpawner>();
     }
+
 
 
     private void Update()
     {
+        if (maxLifeRocket == -1 && rs.SpawnedRocket != null)
+        {
+            maxLifeRocket = rs.SpawnedRocket.GetComponent<RocketProps>().MaxHealth;
+        }
         counter += Time.deltaTime;
 
         if (state != EndscreenState.END && state != EndscreenState.START)
@@ -205,7 +214,14 @@ public class resultScreen : MonoBehaviour
 
                     if (counter > state.Time())
                     {
-                        textMeshesGlobal[index].text = globalValues[index].ToString(toStringFormat);
+                        if (index != 1 || isSimpleEndscreen == false)
+                        {
+                            textMeshesGlobal[index].text = globalValues[index].ToString(toStringFormat);
+                        }
+                        else
+                        {
+                            textMeshesGlobal[index].text = globalValues[index].ToString(toStringFormat) + " %";
+                        }
 
                         state = state.NextState();
                         counter = 0f;
@@ -216,7 +232,14 @@ public class resultScreen : MonoBehaviour
 
                         float val = globalValuesOld[index] + (globalValues[index] - globalValuesOld[index]) * perc;
 
-                        textMeshesGlobal[index].text = val.ToString(toStringFormat);
+                        if (index != 1 || isSimpleEndscreen == false)
+                        {
+                            textMeshesGlobal[index].text = val.ToString(toStringFormat);
+                        }
+                        else
+                        {
+                            textMeshesGlobal[index].text = val.ToString(toStringFormat) + " %";
+                        }
                     }
                 }
                 else if (state == EndscreenState.MONEY)
@@ -264,6 +287,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndscreenSimple()
     {
+        isSimpleEndscreen = true;
         startShowingEndscreen = true;
         oldMoney = SavedGame.Money;
         moneyTextValue.text = SavedGame.Money.ToString();
@@ -284,12 +308,12 @@ public class resultScreen : MonoBehaviour
         globalValuesOld[2] = 0f;
         globalValuesOld[3] = 0f;
         globalValues[0] = SavedGame.CurrentTimeStage[Statics.selectedRocket, Statics.currentLevel];
-        globalValues[1] = SavedGame.CurrentDamageStage[Statics.selectedRocket, Statics.currentLevel];
+        globalValues[1] = SavedGame.CurrentDamageStage[Statics.selectedRocket, Statics.currentLevel] * 100f / maxLifeRocket;
         globalValues[2] = SavedGame.CurrentUsedFuel[Statics.selectedRocket, Statics.currentLevel];
         globalValues[3] = CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], 1);
 
         textMeshesGlobal[0].text = globalValuesOld[0].ToString("n3");
-        textMeshesGlobal[1].text = globalValuesOld[1].ToString();
+        textMeshesGlobal[1].text = globalValuesOld[1].ToString() + " %";
         textMeshesGlobal[2].text = globalValuesOld[2].ToString("n2");
         textMeshesGlobal[3].text = globalValuesOld[3].ToString("n2");
 
@@ -305,6 +329,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndScreen()
     {
+        isSimpleEndscreen = false;
         startShowingEndscreen = true;
         oldMoney = SavedGame.Money;
         moneyTextValue.text = SavedGame.Money.ToString();
@@ -394,11 +419,13 @@ public class resultScreen : MonoBehaviour
 
     public void ButtonContinueClick()
     {
+        SavedGame.SaveSavegame();
         SceneManager.LoadScene(StaticsSingleplayer.GetSceneToLoad(Statics.nextScene));
     }
 
     public void ButtonBackToMenuClick()
     {
+        SavedGame.SaveSavegame();
         SceneManager.LoadScene("Main_Menu_3");
     }
 

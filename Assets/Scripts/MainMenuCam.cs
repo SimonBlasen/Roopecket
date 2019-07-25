@@ -26,6 +26,14 @@ public class MainMenuCam : MonoBehaviour
             SceneManager.LoadScene("FirstScene");
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (zoomedToPlanet)
+            {
+                //UnzoomPlanet();
+            }
+        }
+
         cmm = GetComponent<CameraMoverMainmenu>();
 
         cmm.SetLookat(lookAts[Index]);

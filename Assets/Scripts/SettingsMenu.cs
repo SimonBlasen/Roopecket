@@ -9,10 +9,14 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer audioMixer;
     Resolution[] resolutions;
     public TMPro.TMP_Dropdown resolutionDropdown;
+    public TMPro.TMP_Dropdown qualityDropdown;
+    public Slider sliderVolume;
+    public Toggle toggleFullscreen;
 
     public MainMenuText mainMenuTextRef;
 
 
+    private Resolution oldRes;
     private int oldQualityIndex = 0;
     private float oldVolume = 0f;
     private bool oldIsFullscreen = false;
@@ -53,8 +57,9 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        Debug.Log(volume);
-        audioMixer.SetFloat("volume", volume);
+        //Debug.Log(volume);
+        AudioListener.volume = volume;
+        //audioMixer.SetFloat("volume", volume);
 
     }
 
@@ -75,8 +80,22 @@ public class SettingsMenu : MonoBehaviour
         if (open)
         {
             oldQualityIndex = QualitySettings.GetQualityLevel();
-            audioMixer.GetFloat("volume", out oldVolume);
+            oldVolume = AudioListener.volume;
             oldIsFullscreen = Screen.fullScreen;
+            oldRes = Screen.currentResolution;
+
+            sliderVolume.value = oldVolume;
+            toggleFullscreen.isOn = oldIsFullscreen;
+            qualityDropdown.value = oldQualityIndex;
+
+            for (int i = 0; i < resolutions.Length; i++)
+            {
+                if (resolutions[i].height == Screen.currentResolution.height && resolutions[i].width == Screen.currentResolution.width)
+                {
+                    resolutionDropdown.value = i;
+                    break;
+                }
+            }
         }
         else
         {
@@ -94,7 +113,8 @@ public class SettingsMenu : MonoBehaviour
     {
         QualitySettings.SetQualityLevel(oldQualityIndex);
         Screen.fullScreen = oldIsFullscreen;
-        audioMixer.SetFloat("volume", oldVolume);
+        AudioListener.volume = oldVolume;
+        Screen.SetResolution(oldRes.width, oldRes.height, Screen.fullScreen);
 
         MenuOpened(false);
     }
