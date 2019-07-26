@@ -98,6 +98,8 @@ public class SavedGame
             con = con.Substring(0, con.Length - 1);
             con += seperator;
 
+            con += "10=" + LastPlayedRocket.ToString() + seperator;
+
             File.WriteAllText(savegameDir + "/" + savegameFile, con);
         }
     }
@@ -209,6 +211,10 @@ public class SavedGame
                             }
                         }
                     }
+                    else if (con[0] == "10")
+                    {
+                        LastPlayedRocket = Convert.ToInt32(con[1]);
+                    }
                 }
             }
         }
@@ -257,6 +263,8 @@ public class SavedGame
 
 
     public static bool[] DrEberhardtFound = new bool[256];
+
+    public static int LastPlayedRocket = 0;
 
     public static int[] OwnedRockets = new int[256];
     public static string[] RocketNames = new string[256];   // May not include "," and speerator

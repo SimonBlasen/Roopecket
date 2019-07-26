@@ -103,7 +103,7 @@ public class ArrowRocketSelector : MonoBehaviour
         SavedGame.OwnedRockets[0] = 0;*/
 
         setRocketActive(0);
-        setRocketBoughtActive(SavedGame.OwnedRockets[Statics.selectedRocket]);
+        setRocketBoughtActive(SavedGame.LastPlayedRocket);
 
 
     }
@@ -121,7 +121,7 @@ public class ArrowRocketSelector : MonoBehaviour
 
     private void setRocketBoughtActive(int index)
     {
-        if (index >= 0 && index < rockets.Length)
+        if (index >= 0 && index < SavedGame.OwnedRockets.Length)
         {
             selectedBoughtRocket = index;
             int rocketType = SavedGame.OwnedRockets[selectedBoughtRocket];
@@ -145,6 +145,7 @@ public class ArrowRocketSelector : MonoBehaviour
             }
             rocketNameTurner.ShowRocketName(SavedGame.RocketNames[selectedBoughtRocket]);
 
+            SavedGame.LastPlayedRocket = index;
         }
 
     }

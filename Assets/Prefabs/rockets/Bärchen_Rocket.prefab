@@ -54311,6 +54311,9 @@ MonoBehaviour:
   - {fileID: 5243725380724337677}
   rocketController: {fileID: 5286558832600445149}
   cameraMulti: {fileID: 0}
+  damageAudio: {fileID: 0}
+  damageAudioSource: {fileID: 0}
+  damageAudioVolume: 0
   dieExplosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
     type: 3}
   deadRocket: {fileID: 1568727331595100, guid: 3bc9db66712f91344805d412bd600e66, type: 3}
@@ -54368,7 +54371,10 @@ MonoBehaviour:
   - {fileID: 5286534572235156593}
   - {fileID: 5286290235534945547}
   thrusterAudioIncr: 7
+  particlesLandingThrust: []
   rocketVolume: 0.3
+  comLandersOut: {fileID: 0}
+  comLandersIn: {fileID: 0}
 --- !u!75 &5314517980223646331
 ConstantForce:
   m_ObjectHideFlags: 0

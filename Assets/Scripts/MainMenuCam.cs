@@ -38,6 +38,9 @@ public class MainMenuCam : MonoBehaviour
 
         cmm.SetLookat(lookAts[Index]);
         cmm.SetPosition(positions[Index]);
+
+        //TODO remove
+        SavedGame.Money += 3000;
     }
 
     private void OnApplicationQuit()

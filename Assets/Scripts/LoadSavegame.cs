@@ -15,6 +15,7 @@ public class LoadSavegame : MonoBehaviour
             {
                 SavedGame.firstStart = false;
                 SavedGame.LoadSavegame();
+                Statics.selectedRocket = SavedGame.OwnedRockets[SavedGame.LastPlayedRocket];
             }
         }
         catch (Exception ex)

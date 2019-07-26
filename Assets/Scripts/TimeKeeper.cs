@@ -11,7 +11,8 @@ public class TimeKeeper : MonoBehaviour
     private LevelNumber levelNumber;
 
     private bool tkStarted = false;
-
+    private bool reachedFinish = false;
+    private float timeInFinish = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -62,12 +63,33 @@ public class TimeKeeper : MonoBehaviour
         }
     }
 
+    public float GetCurrentTime()
+    {
+        if (tkStarted == false)
+        {
+            return 0f;
+        }
+        else
+        {
+            if (reachedFinish == false)
+            {
+                return StaticsSingleplayer.ReadTimer();
+            }
+            else
+            {
+                return timeInFinish;
+            }
+        }
+    }
+
 
     public void ReachedFinish()
     {
+        reachedFinish = true;
         float takenDamage = StaticsSingleplayer.ReadTakenDamage();
         float tookTime = StaticsSingleplayer.ReadTimer();
         float usedFuel = StaticsSingleplayer.ReadFuelUsed();
+        timeInFinish = tookTime;
 
         if (Statics.isInFreestyle == false)
         {
