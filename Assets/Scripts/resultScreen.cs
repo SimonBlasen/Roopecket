@@ -307,9 +307,9 @@ public class resultScreen : MonoBehaviour
         globalValuesOld[1] = 0f;
         globalValuesOld[2] = 0f;
         globalValuesOld[3] = 0f;
-        globalValues[0] = SavedGame.CurrentTimeStage[Statics.selectedRocket, Statics.currentLevel];
-        globalValues[1] = SavedGame.CurrentDamageStage[Statics.selectedRocket, Statics.currentLevel] * 100f / maxLifeRocket;
-        globalValues[2] = SavedGame.CurrentUsedFuel[Statics.selectedRocket, Statics.currentLevel];
+        globalValues[0] = SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel];
+        globalValues[1] = SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel] * 100f / maxLifeRocket;
+        globalValues[2] = SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel];
         globalValues[3] = CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], 1);
 
         textMeshesGlobal[0].text = globalValuesOld[0].ToString("n3");
@@ -367,10 +367,10 @@ public class resultScreen : MonoBehaviour
         float rocketWorthSumOld = 0f;
         for (int i = 0; i < LevelNumber.GetStage(Statics.currentLevel); i++)
         {
-            rocketWorthSumOld += SavedGame.GetGlobalWorthStage(Statics.selectedRocket, i);
+            rocketWorthSumOld += SavedGame.GetGlobalWorthStage(SavedGame.LastPlayedRocket, i);
         }
 
-        float rocketWorthSumNew = rocketWorthSumOld + SavedGame.GetGlobalWorthStage(Statics.selectedRocket, LevelNumber.GetStage(Statics.currentLevel));
+        float rocketWorthSumNew = rocketWorthSumOld + SavedGame.GetGlobalWorthStage(SavedGame.LastPlayedRocket, LevelNumber.GetStage(Statics.currentLevel));
 
         globalValuesOld[3] = rocketWorthSumOld;// SavedGame.GetGlobalWorthStage(Statics.selectedRocket, LevelNumber.GetStage(LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel)) - 1));//CalculateRocketWorth(globalValuesOld[0], globalValuesOld[1], globalValuesOld[2], (LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel))));
         globalValues[0] = SavedGame.CurrentRocketGlobalTime;

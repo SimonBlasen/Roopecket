@@ -7,6 +7,8 @@ public class RocketController : MonoBehaviour {
     [SerializeField]
     protected KeyCode[] keyCodes;
     [SerializeField]
+    protected KeyCode[] keyCodesOr;
+    [SerializeField]
     protected KeyCode keyLander;
     [SerializeField]
     protected Transform[] thrustPositions;
@@ -152,7 +154,21 @@ public class RocketController : MonoBehaviour {
                 }
                 else
                 {
-                    SetThrust(i, false);
+                    if (keyCodesOr.Length == keyCodes.Length)
+                    {
+                        if (Input.GetKey(keyCodesOr[i]))
+                        {
+                            SetThrust(i, true);
+                        }
+                        else
+                        {
+                            SetThrust(i, false);
+                        }
+                    }
+                    else
+                    {
+                        SetThrust(i, false);
+                    }
                 }
             }
         }

@@ -24,7 +24,7 @@ public class MainmenuPlanetInfo : MonoBehaviour
         int amountOfLevels = 0;
         for (int i = 0; i < 20; i++)
         {
-            if (LevelNumber.GetStage(i) == stageNumber && i < SavedGame.NextLevel[Statics.selectedRocket])
+            if (LevelNumber.GetStage(i) == stageNumber && i < SavedGame.NextLevel[SavedGame.LastPlayedRocket])
             {
                 amountOfLevels++;
             }

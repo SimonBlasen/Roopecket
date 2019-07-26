@@ -93,9 +93,9 @@ public class TimeKeeper : MonoBehaviour
 
         if (Statics.isInFreestyle == false)
         {
-            SavedGame.CurrentTimeStage[Statics.selectedRocket, levelNumber.levelNumber] = tookTime;
-            SavedGame.CurrentDamageStage[Statics.selectedRocket, levelNumber.levelNumber] = takenDamage;
-            SavedGame.CurrentUsedFuel[Statics.selectedRocket, levelNumber.levelNumber] = usedFuel;
+            SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, levelNumber.levelNumber] = tookTime;
+            SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, levelNumber.levelNumber] = takenDamage;
+            SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, levelNumber.levelNumber] = usedFuel;
         }
         else
         {

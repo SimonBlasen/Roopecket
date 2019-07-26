@@ -77,6 +77,11 @@ public class MenuLevelInfo : MonoBehaviour
         SceneManager.LoadScene(StaticsSingleplayer.levelNames[LevelIndex]);
     }
 
+    public bool IsLevelMastered(int level)
+    {
+        return level < SavedGame.NextLevel[SavedGame.LastPlayedRocket];
+    }
+
     private int levelIndex = -1;
     public int LevelIndex
     {
@@ -88,7 +93,7 @@ public class MenuLevelInfo : MonoBehaviour
         {
             levelIndex = value;
 
-            if (levelIndex == SavedGame.NextLevel[Statics.selectedRocket])
+            if (levelIndex == SavedGame.NextLevel[SavedGame.LastPlayedRocket])
             {
                 buttonContinue.interactable = true;
             }
@@ -97,7 +102,7 @@ public class MenuLevelInfo : MonoBehaviour
                 buttonContinue.interactable = false;
             }
 
-            if (levelIndex < SavedGame.NextLevel[Statics.selectedRocket])
+            if (levelIndex < SavedGame.NextLevel[SavedGame.LastPlayedRocket])
             {
                 buttonFreestyle.interactable = true;
             }
@@ -107,9 +112,9 @@ public class MenuLevelInfo : MonoBehaviour
             }
 
 
-            float time = SavedGame.CurrentTimeStage[Statics.selectedRocket, levelIndex];
-            float damage = SavedGame.CurrentDamageStage[Statics.selectedRocket, levelIndex];
-            float fuel = SavedGame.CurrentUsedFuel[Statics.selectedRocket, levelIndex];
+            float time = SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, levelIndex];
+            float damage = SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, levelIndex];
+            float fuel = SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, levelIndex];
             float worthness = resultScreen.CalculateRocketWorth(time, damage, fuel, 1);
 
             levelName.text = "Level " + (levelIndex + 1).ToString();

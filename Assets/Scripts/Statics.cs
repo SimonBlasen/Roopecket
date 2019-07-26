@@ -8,7 +8,10 @@ public class Statics
     public static int port = 28000;
 
     public static int currentLevel = 0;
-    public static int selectedRocket = 0;
+    public static int selectedRocket
+    {
+        get;set;
+    }
     public static int selectedRocketP2 = 0;
     public static byte selectedMap = 0;
     public static bool sendMapToServer = false;

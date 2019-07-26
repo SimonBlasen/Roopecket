@@ -34,6 +34,8 @@ public class MainMenuLogo: MonoBehaviour {
         }
     }
 
+    private float accelerateFactor = 0f;
+
     void Update()
     { 
         if (Entered)
@@ -43,10 +45,18 @@ public class MainMenuLogo: MonoBehaviour {
 
             if (tag == "Logo")
             {
+                if (accelerateFactor < 1f)
+                {
+                    accelerateFactor += Time.deltaTime;
+                    if (accelerateFactor > 1f)
+                    {
+                        accelerateFactor = 1f;
+                    }
+                }
                 if (timer <= seconds)
                 {
 
-                    timer += Time.deltaTime;
+                    timer += Time.deltaTime * accelerateFactor;
 
                     percent = timer / seconds;
 
