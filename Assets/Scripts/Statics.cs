@@ -19,6 +19,7 @@ public class Statics
     public static string SteamName = "No Steam name";
     public static bool isInFreestyle = false;
 
+    public static bool startGarageLeft = false;
     public static string nextScene;
 
     public static int comicSceneToLoad = 1;

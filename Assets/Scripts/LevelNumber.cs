@@ -19,6 +19,12 @@ public class LevelNumber : MonoBehaviour
         {
             levelNumber--;
             Statics.currentLevel = levelNumber;
+
+            if (levelNumber == SavedGame.NextLevel[SavedGame.LastPlayedRocket])
+            {
+                Debug.Log("Set to no freesytle anymore");
+                Statics.isInFreestyle = false;
+            }
         }
     }
 

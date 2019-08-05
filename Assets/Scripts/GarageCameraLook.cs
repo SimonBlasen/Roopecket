@@ -38,7 +38,13 @@ public class GarageCameraLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (Statics.startGarageLeft)
+        {
+            Statics.startGarageLeft = false;
+
+            isRight = false;
+            arrowRocketSelector.CameraSwitchedToRight(isRight);
+        }
     }
 
     // Update is called once per frame

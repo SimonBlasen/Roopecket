@@ -78,7 +78,11 @@ public class Manager : MonoBehaviour
                 conc += "_" + landingPlatform.Split('_')[i];
             }
         
-            SavedGame.NextLevel[SavedGame.LastPlayedRocket] = Statics.currentLevel + 1;
+            if (Statics.isInFreestyle == false)
+            {
+                SavedGame.NextLevel[SavedGame.LastPlayedRocket] = Statics.currentLevel + 1;
+            }
+
 
             if (GameObject.FindObjectOfType<TutorialEndscreen>() != null)
             {

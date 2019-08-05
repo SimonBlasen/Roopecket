@@ -23,13 +23,17 @@ public class ArrowRocketSelector : MonoBehaviour
     public GameObject cage;
     public GameObject prefabRocketnameCanvas;
     public GameObject prefabTextTooShort;
+    public GameObject prefabRocketSellCanvas;
     private GameObject instRocketnameCanvas;
+    private GameObject instRocketSellCanvas;
     private TMP_InputField inputRocketName;
     public GarageArrows[] arrows;
     public GarageCameraLook garageCameraLook;
     public Button buttonBuyRocket;
+    public GameObject ownNoRocket;
 
     public MoneyMachine moneyMachine;
+    public MoneyMachine moneyMachineSell;
 
     Vector3 spawn;
     Vector3 selected;
@@ -58,6 +62,21 @@ public class ArrowRocketSelector : MonoBehaviour
 
         moneyMachine.Number = SavedGame.Money;
 
+
+        instRocketSellCanvas = Instantiate(prefabRocketSellCanvas);
+        instRocketSellCanvas.GetComponent<Canvas>().enabled = false;
+        Button[] buttonsSell = instRocketSellCanvas.GetComponentsInChildren<Button>();
+        for (int i = 0; i < buttonsSell.Length; i++)
+        {
+            if (buttonsSell[i].gameObject.name == "Button Yes")
+            {
+                buttonsSell[i].onClick.AddListener(RocketSellYes);
+            }
+            else if (buttonsSell[i].gameObject.name == "Button No")
+            {
+                buttonsSell[i].onClick.AddListener(RocketSellNo);
+            }
+        }
 
 
         instRocketnameCanvas = Instantiate(prefabRocketnameCanvas);
@@ -118,6 +137,7 @@ public class ArrowRocketSelector : MonoBehaviour
     }
 
     private int selectedBoughtRocket = 0;
+    private int selectedBoughtRocketWorth = 0;
 
     private void setRocketBoughtActive(int index)
     {
@@ -126,26 +146,51 @@ public class ArrowRocketSelector : MonoBehaviour
             selectedBoughtRocket = index;
             int rocketType = SavedGame.OwnedRockets[selectedBoughtRocket];
 
-            Statics.selectedRocket = rocketType;
-
-            for (int i = 0; i < rocketsBought.Length; i++)
+            if (rocketType == -1)
             {
-                if (i == rocketType)
-                {
-                    rocketsBought[i].gameObject.SetActive(true);
-
-                    rocketsBought[i].position = rocketBoughtSpawn.position;
-                    rocketsBought[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    rocketsBought[i].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-                }
-                else
-                {
-                    rocketsBought[i].gameObject.SetActive(false);
-                }
+                ownNoRocket.SetActive(true);
             }
-            rocketNameTurner.ShowRocketName(SavedGame.RocketNames[selectedBoughtRocket]);
+            else
+            {
+                ownNoRocket.SetActive(false);
 
-            SavedGame.LastPlayedRocket = index;
+                Statics.selectedRocket = rocketType;
+
+                for (int i = 0; i < rocketsBought.Length; i++)
+                {
+                    if (i == rocketType)
+                    {
+                        rocketsBought[i].gameObject.SetActive(true);
+
+                        rocketsBought[i].position = rocketBoughtSpawn.position;
+                        rocketsBought[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        rocketsBought[i].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                    }
+                    else
+                    {
+                        rocketsBought[i].gameObject.SetActive(false);
+                    }
+                }
+                rocketNameTurner.ShowRocketName(SavedGame.RocketNames[selectedBoughtRocket]);
+
+                float worthSum = 0f;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (LevelNumber.GetFirstLevelOfStage(i + 1) <= SavedGame.NextLevel[index])
+                    {
+                        worthSum += SavedGame.GetGlobalWorthStage(index, i);
+                        Debug.Log("Worth calculated for stage: " + i.ToString());
+                    }
+                }
+
+                selectedBoughtRocketWorth = (int)worthSum;
+                moneyMachineSell.Number = selectedBoughtRocketWorth;
+
+                SavedGame.LastPlayedRocket = index;
+            }
+
+            
         }
 
     }
@@ -180,6 +225,39 @@ public class ArrowRocketSelector : MonoBehaviour
                 buttonBuyRocket.interactable = false;
             }
         }
+    }
+
+    public void SellRocketClick()
+    {
+        instRocketSellCanvas.GetComponent<Canvas>().enabled = true;
+    }
+
+    public void RocketSellYes()
+    {
+        SavedGame.Money += selectedBoughtRocketWorth;
+        moneyMachine.Number = SavedGame.Money;
+
+        SavedGame.OwnedRockets[selectedBoughtRocket] = -1;
+        SavedGame.NextLevel[selectedBoughtRocket] = 0;
+        SavedGame.RocketNames[selectedBoughtRocket] = "";
+
+        for (int i = 0; i < 20; i++)
+        {
+            SavedGame.CurrentDamageStage[selectedBoughtRocket, i] = 0f;
+            SavedGame.CurrentTimeStage[selectedBoughtRocket, i] = 0f;
+            SavedGame.CurrentUsedFuel[selectedBoughtRocket, i] = 0f;
+        }
+
+        RightClick();
+
+        garageCameraLook.IsRight = true;
+
+        instRocketSellCanvas.GetComponent<Canvas>().enabled = false;
+    }
+
+    public void RocketSellNo()
+    {
+        instRocketSellCanvas.GetComponent<Canvas>().enabled = false;
     }
 
     public void BuyRocketClick()
@@ -283,6 +361,10 @@ public class ArrowRocketSelector : MonoBehaviour
         else
         {
             selectedBoughtRocket--;
+            while (selectedBoughtRocket >= 0 && SavedGame.OwnedRockets[selectedBoughtRocket] == -1)
+            {
+                selectedBoughtRocket--;
+            }
             if (selectedBoughtRocket < 0)
             {
                 for (int i = SavedGame.OwnedRockets.Length - 1; i >= 0; i--)
@@ -315,6 +397,13 @@ public class ArrowRocketSelector : MonoBehaviour
         else
         {
             selectedBoughtRocket++;
+            int cnt = 0;
+            while (SavedGame.OwnedRockets[selectedBoughtRocket] == -1 && cnt <= 256)
+            {
+                cnt++;
+                selectedBoughtRocket++;
+                selectedBoughtRocket = selectedBoughtRocket % SavedGame.OwnedRockets.Length;
+            }
             if (SavedGame.OwnedRockets[selectedBoughtRocket] == -1)
             {
                 selectedBoughtRocket = 0;
