@@ -148,13 +148,17 @@ public class resultScreen : MonoBehaviour
         globalValuesOld = new float[textMeshes.Length];
         GetComponent<Canvas>().enabled = false;
         rs = GameObject.FindObjectOfType<RocketSpawner>();
+        if (rs == null)
+        {
+            maxLifeRocket = GameObject.FindObjectOfType<RocketProps>().MaxHealth;
+        }
     }
 
 
 
     private void Update()
     {
-        if (maxLifeRocket == -1 && rs.SpawnedRocket != null)
+        if (maxLifeRocket == -1 && rs != null && rs.SpawnedRocket != null)
         {
             maxLifeRocket = rs.SpawnedRocket.GetComponent<RocketProps>().MaxHealth;
         }
