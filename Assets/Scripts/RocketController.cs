@@ -240,6 +240,12 @@ public class RocketController : MonoBehaviour {
         Normal = new Vector3(0f, 0f, -1f);
         Turning = false;
 
+        for (int i = 0; i < landerMovers.Length; i++)
+        {
+            landerMovers[i].TurnOut = true;
+
+        }
+
         Manager.Instance.ActivateManager();
     }
 
@@ -305,6 +311,21 @@ public class RocketController : MonoBehaviour {
         {
             return thrusts;
         }
+    }
+
+    public bool IsThrusting()
+    {
+        bool oneThrusting = false;
+        for (int i = 0; i < Thrusts.Length; i++)
+        {
+            if (Thrusts[i])
+            {
+                oneThrusting = true;
+                break;
+            }
+        }
+
+        return oneThrusting;
     }
     
 

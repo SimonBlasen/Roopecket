@@ -12,6 +12,9 @@ public class LanderMover : MonoBehaviour {
 
     public Transform arm;
 
+    public HingeJoint[] joints;
+    public float[] velocities;
+
 
 	// Use this for initialization
 	void Start ()
@@ -22,6 +25,9 @@ public class LanderMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
+
+        /*
 		if (Mathf.Abs(angleIn - arm.localRotation.eulerAngles.z) > epsilon && turnedOut == false)
         {
             float diff = Mathf.Abs(angleIn - arm.localRotation.eulerAngles.z);
@@ -48,7 +54,7 @@ public class LanderMover : MonoBehaviour {
                 arm.localRotation = Quaternion.Euler(arm.localRotation.eulerAngles.x, 0f, angleOut);
             }
         }
-
+        */
     }
 
     private bool gettingCloser = false;
@@ -64,6 +70,13 @@ public class LanderMover : MonoBehaviour {
         set
         {
             turnedOut = value;
+
+            for (int i = 0; i < joints.Length; i++)
+            {
+                JointMotor jm = joints[i].motor;
+                jm.targetVelocity = velocities[i] * (turnedOut ? 1f : -1f);
+                joints[i].motor = jm;
+            }
         }
     }
 }

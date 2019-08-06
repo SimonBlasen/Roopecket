@@ -112,7 +112,8 @@ public class LandingPlatform : MonoBehaviour
         {
             if (rocket.GetInstanceID() == landedTransforms[i].GetInstanceID())
             {
-                return rocket.GetComponent<Rigidbody>().velocity.magnitude < speedThreshhold;
+                return rocket.GetComponent<Rigidbody>().velocity.y < speedThreshhold && rocket.GetComponent<RocketController>().IsThrusting() == false;
+                //return rocket.GetComponent<Rigidbody>().velocity.magnitude < speedThreshhold;
             }
         }
 
@@ -125,10 +126,26 @@ public class LandingPlatform : MonoBehaviour
         {
             if (rocket.GetInstanceID() == landedTransforms[i].GetInstanceID())
             {
-                return standingStill[i] >= 1f;
+                return standingStill[i] >= 2f;
             }
         }
 
+        return false;
+    }
+
+    public bool TriggerIsIn(Transform other)
+    {
+        if (other.tag == "Rocket")
+        {
+            if (landedTransforms.Contains(other))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         return false;
     }
 
@@ -158,7 +175,7 @@ public class LandingPlatform : MonoBehaviour
         }
     }
 
-    public void TriggerEnter(Transform other)
+    public bool TriggerEnter(Transform other)
     {
         if (other.tag == "Rocket")
         {
@@ -167,7 +184,15 @@ public class LandingPlatform : MonoBehaviour
                 standingStill.Add(0f);
                 landedTransforms.Add(other);
                 landedSended.Add(false);
+
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
+        return false;
+
     }
 }

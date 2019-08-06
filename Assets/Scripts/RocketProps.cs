@@ -278,20 +278,30 @@ public class RocketProps : MonoBehaviour
             }
         }
 
-        if (notOkay)
+        Transform topParent = collision.transform;
+        while (topParent.parent != null)
         {
-            //Debug.Log("Collision");
-            //tickCounter = 0f;
-            Damage((int)(collisionDamage * collision.impulse.magnitude));
-           
+            topParent = topParent.parent;
         }
-        else
+
+        if (topParent.GetInstanceID() != transform.GetInstanceID())
         {
-            if (collision.impulse.magnitude > impactToleranceThrusters)
+            if (notOkay)
             {
-                FindObjectOfType<AudioManager>().Play("DamageSound");
-                Damage((int)(collisionDamage * (collision.impulse.magnitude - impactToleranceThrusters)));
+                //Debug.Log("Collision");
+                //tickCounter = 0f;
+                Damage((int)(collisionDamage * collision.impulse.magnitude));
+
+            }
+            else
+            {
+                if (collision.impulse.magnitude > impactToleranceThrusters)
+                {
+                    FindObjectOfType<AudioManager>().Play("DamageSound");
+                    Damage((int)(collisionDamage * (collision.impulse.magnitude - impactToleranceThrusters)));
+                }
             }
         }
+
     }
 }

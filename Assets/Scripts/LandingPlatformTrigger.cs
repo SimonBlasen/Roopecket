@@ -18,6 +18,8 @@ public class LandingPlatformTrigger : MonoBehaviour {
 
     }
 
+    private int rocketInCount = 0;
+
     private void OnTriggerExit(Collider other)
     {
         Transform topParent = other.transform;
@@ -25,7 +27,16 @@ public class LandingPlatformTrigger : MonoBehaviour {
         {
             topParent = topParent.parent;
         }
-        landingPlatform.TriggerExit(topParent);
+
+        if (landingPlatform.TriggerIsIn(topParent) && rocketInCount <= 1)
+        {
+            landingPlatform.TriggerExit(topParent);
+        }
+        
+        if (rocketInCount > 0)
+        {
+            rocketInCount--;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,5 +47,6 @@ public class LandingPlatformTrigger : MonoBehaviour {
             topParent = topParent.parent;
         }
         landingPlatform.TriggerEnter(topParent);
+        rocketInCount++;
     }
 }
