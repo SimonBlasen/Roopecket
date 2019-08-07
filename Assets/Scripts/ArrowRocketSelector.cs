@@ -149,6 +149,10 @@ public class ArrowRocketSelector : MonoBehaviour
             if (rocketType == -1)
             {
                 ownNoRocket.SetActive(true);
+                for (int i = 0; i < rocketsBought.Length; i++)
+                {
+                    rocketsBought[i].gameObject.SetActive(false);
+                }
             }
             else
             {
@@ -186,6 +190,8 @@ public class ArrowRocketSelector : MonoBehaviour
 
                 selectedBoughtRocketWorth = (int)worthSum;
                 moneyMachineSell.Number = selectedBoughtRocketWorth;
+
+                selectedBoughtRocketWorthPlusPrice = selectedBoughtRocketWorth + SavedGame.RocketPrices[rocketType];
 
                 SavedGame.LastPlayedRocket = index;
             }
@@ -227,14 +233,36 @@ public class ArrowRocketSelector : MonoBehaviour
         }
     }
 
+    private int selectedBoughtRocketWorthPlusPrice = 0;
+
     public void SellRocketClick()
     {
         instRocketSellCanvas.GetComponent<Canvas>().enabled = true;
+        TextMeshProUGUI[] tmps = instRocketSellCanvas.GetComponentsInChildren<TextMeshProUGUI>();
+        for (int i = 0; i < tmps.Length; i++)
+        {
+            if (tmps[i].gameObject.name == "Text Main")
+            {
+                string priceStr = selectedBoughtRocketWorthPlusPrice.ToString();
+                int pointsInst = 0;
+                for (int j = 3; j < priceStr.Length; j += 3)
+                {
+                    priceStr = priceStr.Insert(priceStr.Length - j + pointsInst, ".");
+                    j++;
+                    
+                }
+
+
+                tmps[i].text = "Are you sure to sell your rocket\nfor " + priceStr + "$?";
+
+                break;
+            }
+        }
     }
 
     public void RocketSellYes()
     {
-        SavedGame.Money += selectedBoughtRocketWorth;
+        SavedGame.Money += selectedBoughtRocketWorthPlusPrice;
         moneyMachine.Number = SavedGame.Money;
 
         SavedGame.OwnedRockets[selectedBoughtRocket] = -1;
@@ -251,6 +279,15 @@ public class ArrowRocketSelector : MonoBehaviour
         RightClick();
 
         garageCameraLook.IsRight = true;
+
+        if (SavedGame.Money >= SavedGame.RocketPrices[selectedBuyRocket])
+        {
+            buttonBuyRocket.interactable = true;
+        }
+        else
+        {
+            buttonBuyRocket.interactable = false;
+        }
 
         instRocketSellCanvas.GetComponent<Canvas>().enabled = false;
     }

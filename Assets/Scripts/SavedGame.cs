@@ -104,9 +104,14 @@ public class SavedGame
         }
     }
 
+
+    private static bool firstEverStart = false;
+    public static bool FirstEverStart
+    { get { return firstEverStart; } set { firstEverStart = value; } }
+
     public static void FillWithInitValues()
     {
-        OwnedRockets[0] = 0;
+        OwnedRockets[0] = -1;
         RocketNames[0] = "Rudy";
         for (int i = 1; i < OwnedRockets.Length; i++)
         {

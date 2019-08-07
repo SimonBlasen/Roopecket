@@ -26,12 +26,11 @@ public class MainMenuCam : MonoBehaviour
             SceneManager.LoadScene("FirstScene");
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (SavedGame.FirstEverStart)
         {
-            if (zoomedToPlanet)
-            {
-                //UnzoomPlanet();
-            }
+            index = 3;
+
+            SavedGame.FirstEverStart = false;
         }
 
         cmm = GetComponent<CameraMoverMainmenu>();
@@ -40,7 +39,7 @@ public class MainMenuCam : MonoBehaviour
         cmm.SetPosition(positions[Index]);
 
         //TODO remove
-        SavedGame.Money += 3000;
+        //SavedGame.Money += 3000;
     }
 
     private void OnApplicationQuit()
