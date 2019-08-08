@@ -41,6 +41,9 @@ public class PlanetLevel : MonoBehaviour
             instLittle.transform.localPosition = Vector3.zero;
             instLittle.transform.localRotation = Quaternion.identity;
             instLittle.transform.localScale = new Vector3(1f, 1f, 1f);
+
+            GameObject objInd = GameObject.Find("Planet Indicator");
+            objInd.transform.position = currentLevelTransf.position + new Vector3(0f, 0.1f, 0f);
         }
 
         List<MeshRenderer> listMeshs = new List<MeshRenderer>();

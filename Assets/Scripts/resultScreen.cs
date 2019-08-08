@@ -395,8 +395,8 @@ public class resultScreen : MonoBehaviour
         {
             levelText.text = "Planet Summary";
 
-            Debug.Log("Received money");
-            SavedGame.Money += (int)rocketWorthStage;
+            //Debug.Log("Received money");
+            //SavedGame.Money += (int)rocketWorthStage;
         }
 
 
