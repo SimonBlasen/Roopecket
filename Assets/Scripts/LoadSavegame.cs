@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steamworks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,28 @@ public class LoadSavegame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (SteamManager.Initialized)
+        {
+            switch (SteamApps.GetCurrentGameLanguage())
+            {
+                case "english":
+                    LanguageManager.Language = Language.ENGLISH;
+                    break;
+                case "german":
+                    LanguageManager.Language = Language.GERMAN;
+                    break;
+                case "spanish":
+                    LanguageManager.Language = Language.SPANISH;
+                    break;
+                case "latam":
+                    LanguageManager.Language = Language.SPANISH;
+                    break;
+                default:
+                    LanguageManager.Language = Language.ENGLISH;
+                    break;
+            }
+        }
+
         try
         {
             if (SavedGame.firstStart)
