@@ -253,7 +253,7 @@ public class ArrowRocketSelector : MonoBehaviour
                 }
 
 
-                tmps[i].text = "Are you sure to sell your rocket\nfor " + priceStr + "$?";
+                tmps[i].text = LanguageManager.Translate("Are you sure to sell your rocket for") + " " + priceStr + "$?";
 
                 break;
             }
@@ -373,7 +373,7 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         if (toRight)
         {
-            rocketNameTurner.ShowRocketName("Price: " + SavedGame.RocketPrices[selectedBuyRocket]);
+            rocketNameTurner.ShowRocketName(LanguageManager.Translate("Price: ") + SavedGame.RocketPrices[selectedBuyRocket]);
         }
         else
         {
