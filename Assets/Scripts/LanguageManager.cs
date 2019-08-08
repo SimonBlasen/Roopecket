@@ -39,7 +39,7 @@ public class LanguageManager : MonoBehaviour
         }
     }
 
-    private static Language curLanguage = Language.ENGLISH;
+    private static Language curLanguage = Language.GERMAN;
     public static Language Language { get { return curLanguage; } set { curLanguage = value; } }
 
     public static string Translate(string text)

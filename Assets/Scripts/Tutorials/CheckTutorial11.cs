@@ -20,8 +20,8 @@ public class CheckTutorial11 : MonoBehaviour
         oldText = tutorialEndscreen.ShowText;
         oldTextTitle = tutorialEndscreen.TitleText;
 
-        tutorialEndscreen.ShowText = "Are you sure you closed you landing movers?\nMaybe try it once again";
-        tutorialEndscreen.TitleText = "Nearly";
+        tutorialEndscreen.ShowText = LanguageManager.Translate("Are you sure your closed you landing movers?") + "\n" + LanguageManager.Translate("Maybe try it once again");
+        tutorialEndscreen.TitleText = LanguageManager.Translate("Nearly");
     }
 
     // Update is called once per frame
