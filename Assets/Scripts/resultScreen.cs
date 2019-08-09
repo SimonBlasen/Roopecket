@@ -418,7 +418,7 @@ public class resultScreen : MonoBehaviour
     public static float CalculateRocketWorth(float time, float damage, float fuel, int levelsDone)
     {
         Debug.Log("Levels done: " + levelsDone.ToString());
-        return ((worthFactor * levelsDone) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 100;
+        return ((worthFactor * levelsDone) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 10 * SavedGame.RocketMultiplier[Statics.selectedRocket];
     }
 
     public void ButtonContinueClick()

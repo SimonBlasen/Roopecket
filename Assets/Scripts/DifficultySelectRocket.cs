@@ -105,11 +105,11 @@ public class DifficultySelectRocket : MonoBehaviour
             int selRock = 0;
             if (selectedDiff == 0)
             {
-                selRock = 7;
+                selRock = 2;
             }
             else if (selectedDiff == 1)
             {
-                selRock = 6;
+                selRock = 7;
             }
             else
             {

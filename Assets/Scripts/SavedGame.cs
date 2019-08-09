@@ -257,14 +257,27 @@ public class SavedGame
     public static int[] RocketPrices = new int[]
         {
             500,
-            1250,
-            1300,
-            1500,
-            3000,
-            20000,
+            800,
+            500,
+            1400,
+            2000,
+            3400,
             10000,
-            4000,
+            500,
         };
+
+    public static float[] RocketMultiplier = new float[]
+        {
+            0.7159f,
+            0.5289f,
+            1.2322f,
+            1.5089f,
+            1f,
+            1f,
+            1f,
+            0.7488f,
+        };
+
 
 
     public static bool[] DrEberhardtFound = new bool[256];
