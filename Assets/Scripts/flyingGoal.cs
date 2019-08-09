@@ -35,10 +35,15 @@ public class flyingGoal : MonoBehaviour {
             {
                 par = par.parent;
             }
-            par.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            par.GetComponent<RocketProps>().Indestroyable = true;
-            par.GetComponent<RocketProps>().enabled = false;
-            par.GetComponent<RocketController>().enabled = false;
+
+            if (levelToLoad != "_Restart")
+            {
+                par.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                par.GetComponent<RocketProps>().Indestroyable = true;
+                par.GetComponent<RocketProps>().enabled = false;
+                par.GetComponent<RocketController>().enabled = false;
+            }
+        
 
             if (isTutorial)
             {
@@ -48,16 +53,31 @@ public class flyingGoal : MonoBehaviour {
             }
             else
             {
-                //StartCoroutine(Example());
+                if (levelToLoad == "_Restart")
+                {
+                    rocketPar = par;
+                    Invoke("DestroyRocket", 0.45f);
+                    //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+                else
+                {
+                    //StartCoroutine(Example());
 
-                Statics.nextScene = levelToLoad;
+                    Statics.nextScene = levelToLoad;
 
-                Manager.Instance.Landed(other.transform, "Finish_" + levelToLoad);
+                    Manager.Instance.Landed(other.transform, "Finish_" + levelToLoad);
 
-                //SceneManager.LoadScene(levelToLoad);
+                    //SceneManager.LoadScene(levelToLoad);
+                }
             }
 
         }
+    }
+
+    private Transform rocketPar = null;
+    private void DestroyRocket()
+    {
+        rocketPar.GetComponent<RocketProps>().Damage(rocketPar.GetComponent<RocketProps>().MaxHealth + 10);
     }
 
     IEnumerator Example()

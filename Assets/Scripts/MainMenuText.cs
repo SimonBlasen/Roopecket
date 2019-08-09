@@ -31,8 +31,8 @@ public class MainMenuText : MonoBehaviour {
 
         selectedContinue = new Vector3(0f, 0.05f, -4.15f);
         selectedGarage = new Vector3(0f, 0.15f, -4.15f);
-        selectedOptions = new Vector3(0f, -0.15f, -4.15f);
-        selectedTutorial = new Vector3(0f, -0.25f, -4.15f);
+        selectedOptions = new Vector3(0f, -0.15f + 0.1f, -4.15f);
+        selectedTutorial = new Vector3(0f, -0.25f + 0.1f, -4.15f);
         selectedQuit = new Vector3(0f, -0.8f, -4f);
         selectedMultiplayer = new Vector3(0f, -0.05f, -4.15f);
         selectedSplitscreen = new Vector3(1.791f, 0.05f, -4.63f);

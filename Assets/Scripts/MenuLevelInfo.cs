@@ -117,11 +117,17 @@ public class MenuLevelInfo : MonoBehaviour
             float fuel = SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, levelIndex];
             float worthness = resultScreen.CalculateRocketWorth(time, damage, fuel, 1);
 
+            string worthnessString = worthness.ToString("n2");
+            if (float.IsNaN(worthness) || float.IsInfinity(worthness) || float.IsNegativeInfinity(worthness) || float.IsPositiveInfinity(worthness))
+            {
+                worthnessString = "0";
+            }
+
             levelName.text = "Level " + (levelIndex + 1).ToString();
             levelTime.text = time.ToString("n3");
             levelDamage.text = damage.ToString("n0");
             levelFuel.text = fuel.ToString("n2");
-            levelWorthness.text = worthness.ToString("n2");
+            levelWorthness.text = worthnessString;
         }
     }
 }

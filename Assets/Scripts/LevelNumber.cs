@@ -6,26 +6,49 @@ public class LevelNumber : MonoBehaviour
 {
     public int levelNumber = -1;
 
+    public int LevelNumberProp
+    {
+        get
+        {
+            init();
+            return levelNumber;
+        }
+        set
+        {
+            levelNumber = value;
+        }
+    }
+
+    private bool inited = false;
+
+    private void init()
+    {
+        if (!inited)
+        {
+            inited = true;
+            if (levelNumber == -1)
+            {
+                Debug.LogError("Need to set the level number for the level");
+            }
+            else
+            {
+                levelNumber--;
+                Statics.currentLevel = levelNumber;
+
+                if (levelNumber == SavedGame.NextLevel[SavedGame.LastPlayedRocket])
+                {
+                    Debug.Log("Set to no freesytle anymore");
+                    Statics.isInFreestyle = false;
+                }
+            }
+        }
+    }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (levelNumber == -1)
-        {
-            Debug.LogError("Need to set the level number for the level");
-        }
-        else
-        {
-            levelNumber--;
-            Statics.currentLevel = levelNumber;
-
-            if (levelNumber == SavedGame.NextLevel[SavedGame.LastPlayedRocket])
-            {
-                Debug.Log("Set to no freesytle anymore");
-                Statics.isInFreestyle = false;
-            }
-        }
+        init();
     }
 
     // Update is called once per frame

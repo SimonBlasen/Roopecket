@@ -32,13 +32,19 @@ public class MainmenuPlanetInfo : MonoBehaviour
 
         float rocketWorth = resultScreen.CalculateRocketWorth(time, damage, fuel, amountOfLevels);
 
+        string worthnessString = rocketWorth.ToString("n2");
+        if (float.IsNaN(rocketWorth) || float.IsInfinity(rocketWorth) || float.IsNegativeInfinity(rocketWorth) || float.IsPositiveInfinity(rocketWorth))
+        {
+            worthnessString = "0";
+        }
+
         textValues.text = "" + "\n" +
                             "" + "\n" +
                             "                               " + time.ToString("n3") + "\n" + 
                             "                               " + damage.ToString("n0") + "\n" + 
                             "                               " + fuel.ToString("n2") + "\n" +
                             "                               " + "\n" +
-                            "                               " + rocketWorth.ToString("n2");
+                            "                               " + worthnessString;
     }
 
     // Update is called once per frame

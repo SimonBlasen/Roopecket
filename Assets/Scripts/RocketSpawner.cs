@@ -129,7 +129,7 @@ public class RocketSpawner : MonoBehaviour {
 
             instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2f + (Statics.selectedRocket == 4 ? 1.0f : 0f), 0f);
             instRock.transform.Rotate(0f, startPlatform.transform.rotation.eulerAngles.y, 0f);
-            if (GameObject.FindObjectOfType<LevelNumber>().levelNumber == 19)
+            if (GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp == 19)
             {
                 instRock.transform.Rotate(0f, 0f, 180f);
             }
