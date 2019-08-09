@@ -44,6 +44,14 @@ public class MainMenuCam : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        AbsoluteTimeTracker att = GameObject.FindObjectOfType<AbsoluteTimeTracker>();
+        if (att != null)
+        {
+            Debug.Log("Uploaded Score");
+
+            att.UploadScore();
+        }
+
         SavedGame.SaveSavegame();
     }
 

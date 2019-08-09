@@ -10,6 +10,7 @@ public class LoadSavegame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneLoadManager.Initialize();
         if (SteamManager.Initialized)
         {
             switch (SteamApps.GetCurrentGameLanguage())
