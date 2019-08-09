@@ -37,7 +37,42 @@ public class MainMenuLogo: MonoBehaviour {
     private float accelerateFactor = 0f;
 
     void Update()
-    { 
+    {
+        if (true)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+                    // Construct a ray from the current touch coordinates
+                    RaycastHit hit;
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if (hit.transform.GetInstanceID() == transform.GetInstanceID())
+                        {
+                            if (!Entered)
+                            {
+                                Statics.movedCTFLogo = true;
+                                for (int i = 0; i < mainMenuTexts.Length; i++)
+                                {
+                                    mainMenuTexts[i].FirstTouch = true;
+                                }
+                            }
+                            Entered = true;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
         if (Entered)
         {
 

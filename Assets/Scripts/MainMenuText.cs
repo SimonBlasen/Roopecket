@@ -57,6 +57,37 @@ public class MainMenuText : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (true)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.phase == TouchPhase.Began)
+                {
+                    // Construct a ray from the current touch coordinates
+                    RaycastHit hit;
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if (hit.transform.GetInstanceID() == transform.GetInstanceID())
+                        {
+                            MouseHover = true;
+                            MousePress = true;
+                        }
+                        else
+                        {
+                            MouseHover = false;
+                            MousePress = false;
+                        }
+                    }
+                    else
+                    {
+                        MouseHover = false;
+                        MousePress = false;
+                    }
+                }
+            }
+        }
+
 
 
 
@@ -295,6 +326,7 @@ public class MainMenuText : MonoBehaviour {
         if (isOpen)
         {
             Options.SetActive(true);
+            Options.GetComponent<SettingsMenu>().MenuOpened(true);
             Background.SetActive(true);
             Time.timeScale = 0f;
         }
