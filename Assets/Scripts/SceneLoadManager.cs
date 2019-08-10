@@ -24,8 +24,12 @@ public class SceneLoadManager : MonoBehaviour
     {
         if (initialized == false)
         {
+#if MOBILE
+#else
+
             AbsoluteTimeTracker.StartTime = -1;
             AbsoluteTimeTracker.AccTime = 0;
+#endif
             initialized = true;
             // adds this to the 'activeSceneChanged' callbacks if not already initialized.
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneWasLoaded;

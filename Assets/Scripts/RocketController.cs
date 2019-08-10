@@ -146,6 +146,58 @@ public class RocketController : MonoBehaviour {
                 }
             }
 
+#if MOBILE
+            bool[] newT = new bool[keyCodes.Length];
+            for (int i = 0; i < newT.Length; i++)
+            {
+                newT[i] = false;
+            }
+
+            float sWidth = Screen.width;
+            float sHeight = Screen.height;
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch touch = Input.GetTouch(i);
+                float percentageH = touch.position.y / sHeight;
+
+                if (percentageH > 0.1f)
+                {
+                    float percentage = touch.position.x / sWidth;
+                    float thrusterF = percentage * keyCodes.Length;
+                    int thr = (int)thrusterF;
+                    if (thr >= keyCodes.Length)
+                    {
+                        thr = keyCodes.Length - 1;
+                    }
+
+                    newT[thr] = true;
+                }
+                else
+                {
+                    FindObjectOfType<AudioManager>().Play("LanderMovers");
+
+                    for (int j = 0; j < landerMovers.Length; j++)
+                    {
+                        landerMovers[j].TurnOut = !landerMovers[j].TurnOut;
+
+                    }
+
+                    if (comLandersIn != null)
+                    {
+                        ownRig.centerOfMass = landerMovers[0].TurnOut ? comLandersOut.localPosition : comLandersIn.localPosition;
+                    }
+
+                    rocketProps.Indestroyable = false;
+                }
+            }
+
+            for (int i = 0; i < newT.Length; i++)
+            {
+                SetThrust(i, newT[i]);
+            }
+
+#else
+
             for (int i = 0; i < keyCodes.Length; i++)
             {
                 if (Input.GetKey(keyCodes[i]))
@@ -171,6 +223,8 @@ public class RocketController : MonoBehaviour {
                     }
                 }
             }
+#endif
+
         }
         else
         {
@@ -180,10 +234,10 @@ public class RocketController : MonoBehaviour {
             }
         }
 
-        
 
 
-        if (!Turning)
+
+            if (!Turning)
         {
             float angleAbs = Vector3.Angle((new Vector3(0f, 0f, 1f)), transform.forward);
             if (Vector3.Angle((new Vector3(1f, 0f, 0f)), transform.forward) > 90f)

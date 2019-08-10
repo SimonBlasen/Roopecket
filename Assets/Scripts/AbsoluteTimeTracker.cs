@@ -1,11 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if MOBILE
+#else
 using Steamworks;
+#endif
 using System;
 
 public class AbsoluteTimeTracker : MonoBehaviour
 {
+
+#if MOBILE
+    internal void UploadScore()
+    {
+
+    }
+#else
     protected CallResult<LeaderboardFindResult_t> m_LeaderboardFindResult;
     protected CallResult<LeaderboardScoresDownloaded_t> m_LeaderboardScoresDownloadedResult;
 
@@ -110,4 +120,5 @@ public class AbsoluteTimeTracker : MonoBehaviour
             }
         }
     }
+#endif
 }

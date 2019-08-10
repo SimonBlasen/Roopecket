@@ -1,4 +1,9 @@
-﻿using Steamworks;
+﻿#if MOBILE
+#else
+using Steamworks;
+
+#endif
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +16,9 @@ public class LoadSavegame : MonoBehaviour
     void Start()
     {
         SceneLoadManager.Initialize();
+
+#if MOBILE
+#else
         if (SteamManager.Initialized)
         {
             switch (SteamApps.GetCurrentGameLanguage())
@@ -32,6 +40,8 @@ public class LoadSavegame : MonoBehaviour
                     break;
             }
         }
+
+#endif
 
         try
         {
