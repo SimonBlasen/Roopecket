@@ -329,6 +329,12 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         if (inputRocketName.text.Length > 0)
         {
+            // TODO Remove cheat Cheat
+            if (inputRocketName.text == "MakeMeRich.")
+            {
+                SavedGame.Money += 30000;
+            }
+
             for (int i = 0; i < arrows.Length; i++)
             {
                 arrows[i].KeysLocked = false;

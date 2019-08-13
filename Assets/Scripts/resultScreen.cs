@@ -435,7 +435,9 @@ public class resultScreen : MonoBehaviour
 
     public void ButtonSellRocketClick()
     {
-
+        SavedGame.SaveSavegame();
+        Statics.startGarageLeft = true;
+        SceneManager.LoadScene("Garage");
     }
 
     /*private void Start()
