@@ -315,6 +315,7 @@ public class resultScreen : MonoBehaviour
         globalValues[1] = SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel] * 100f / maxLifeRocket;
         globalValues[2] = SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel];
         globalValues[3] = CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], 1);
+        //globalValues[3] += SavedGame.RocketPrices[Statics.selectedRocket];
 
         textMeshesGlobal[0].text = globalValuesOld[0].ToString("n3");
         textMeshesGlobal[1].text = globalValuesOld[1].ToString() + " %";
@@ -355,11 +356,11 @@ public class resultScreen : MonoBehaviour
         t_texts[2] = SavedGame.CurrentRocketStageFuel.ToString("n2");
 
         float rocketWorthStage = CalculateRocketWorth(SavedGame.CurrentRocketStageTime, SavedGame.CurrentRocketStageDamage, SavedGame.CurrentRocketStageFuel, 1 + Statics.currentLevel - (LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel))));
-        
+        //rocketWorthStage += SavedGame.RocketPrices[Statics.selectedRocket];
 
-        
+
         //float rocketWorthStage = worthFaktor / (SavedGame.CurrentRocketGlobalTime * (SavedGame.CurrentRocketGlobalDamage + 0.01f));
-        
+
 
         t_texts[3] = rocketWorthStage.ToString("n2");
 
@@ -369,6 +370,7 @@ public class resultScreen : MonoBehaviour
         globalValuesOld[2] = SavedGame.CurrentRocketGlobalFuelLastStage;
 
         float rocketWorthSumOld = 0f;
+        rocketWorthSumOld += SavedGame.RocketPrices[Statics.selectedRocket];
         for (int i = 0; i < LevelNumber.GetStage(Statics.currentLevel); i++)
         {
             rocketWorthSumOld += SavedGame.GetGlobalWorthStage(SavedGame.LastPlayedRocket, i);

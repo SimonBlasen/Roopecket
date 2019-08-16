@@ -5,7 +5,7 @@ using UnityEngine;
 public class CheckTutorial11 : MonoBehaviour
 {
     [SerializeField]
-    private RocketController rocketController;
+    public RocketController rocketController;
     [SerializeField]
     private TutorialEndscreen tutorialEndscreen;
 

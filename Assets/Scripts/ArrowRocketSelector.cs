@@ -34,6 +34,7 @@ public class ArrowRocketSelector : MonoBehaviour
 
     public MoneyMachine moneyMachine;
     public MoneyMachine moneyMachineSell;
+    public TextMeshPro textMeshRocketSellWorth;
 
     Vector3 spawn;
     Vector3 selected;
@@ -189,9 +190,18 @@ public class ArrowRocketSelector : MonoBehaviour
                 }
 
                 selectedBoughtRocketWorth = (int)worthSum;
-                moneyMachineSell.Number = selectedBoughtRocketWorth;
 
                 selectedBoughtRocketWorthPlusPrice = selectedBoughtRocketWorth + SavedGame.RocketPrices[rocketType];
+
+                if (moneyMachineSell != null)
+                {
+                    moneyMachineSell.Number = selectedBoughtRocketWorthPlusPrice;
+                }
+                if (textMeshRocketSellWorth != null)
+                {
+                    textMeshRocketSellWorth.text = selectedBoughtRocketWorthPlusPrice.ToString();
+                }
+
 
                 SavedGame.LastPlayedRocket = index;
             }
