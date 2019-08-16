@@ -5369,26 +5369,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4778742024657742899, guid: a9c01b816e515ae4085d425eed6ca03d,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.9645239
-      objectReference: {fileID: 0}
-    - target: {fileID: 4778742024657742899, guid: a9c01b816e515ae4085d425eed6ca03d,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: -0.399488
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242975501173547631, guid: a9c01b816e515ae4085d425eed6ca03d,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.9645239
-      objectReference: {fileID: 0}
-    - target: {fileID: 5242975501173547631, guid: a9c01b816e515ae4085d425eed6ca03d,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: -0.399488
-      objectReference: {fileID: 0}
     - target: {fileID: 57179932, guid: a9c01b816e515ae4085d425eed6ca03d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5412,6 +5392,26 @@ PrefabInstance:
     - target: {fileID: 57179929, guid: a9c01b816e515ae4085d425eed6ca03d, type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778742024657742899, guid: a9c01b816e515ae4085d425eed6ca03d,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.9645239
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778742024657742899, guid: a9c01b816e515ae4085d425eed6ca03d,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.399488
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242975501173547631, guid: a9c01b816e515ae4085d425eed6ca03d,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.9645239
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242975501173547631, guid: a9c01b816e515ae4085d425eed6ca03d,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.399488
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9c01b816e515ae4085d425eed6ca03d, type: 3}
@@ -5901,7 +5901,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 6.98e-43, w: 0.0000019284307}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -11010,6 +11010,31 @@ PrefabInstance:
       objectReference: {fileID: 185878849}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0e164894349f554dbfcf34cfa965e48, type: 3}
+--- !u!1 &1034823876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1940648963341260, guid: b0e164894349f554dbfcf34cfa965e48,
+    type: 3}
+  m_PrefabInstance: {fileID: 1034823875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1034823877
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034823876}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3dd72fea0a2571e41ab24fdbc498e3ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1049557369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12865,7 +12890,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -466.25366, z: 6.98e-43, w: -247.86877}
+  m_BoundingSphereOverride: {x: 0, y: -0.000028661743, z: 4.5905e-41, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -16735,7 +16760,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 9.669351e+23, z: 6.17e-43, w: 5.4248473e+23}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
