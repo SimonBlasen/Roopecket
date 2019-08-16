@@ -256,14 +256,14 @@ public class SavedGame
 
     public static int[] RocketPrices = new int[]
         {
-            500,
-            800,
-            500,
-            1400,
-            2000,
-            3400,
-            10000,
-            500,
+            500,   // MarcRocket
+            800,   // Vogelrocket
+            500,   // Runder Rakete
+            1400,   // Rakete 04
+            2700,   // 7er Rakete
+            3400,   // rostlumpen Rocket
+            9000,   // Bärchen Rocket
+            500,    // Long Rocket
         };
 
     public static float[] RocketMultiplier = new float[]
