@@ -81,7 +81,7 @@ public class TutorialEndscreen : MonoBehaviour
     {
         if (GetComponent<Canvas>().enabled)
         {
-            SceneManager.LoadScene("Tutorial2.1");
+            SceneManager.LoadScene("Testarea");
         }
     }
 }

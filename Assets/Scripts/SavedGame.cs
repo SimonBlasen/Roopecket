@@ -271,7 +271,7 @@ public class SavedGame
             0.7159f,
             0.5289f,
             1.2322f,
-            1.5089f,
+            2.2f,
             1f,
             1f,
             1f,
