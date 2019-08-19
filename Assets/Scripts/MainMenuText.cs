@@ -112,12 +112,17 @@ public class MainMenuText : MonoBehaviour {
             {
                 if (pointName == "Continue" && MouseHover)
                 {
+
+                    
+
                     transform.position = Vector3.Lerp(transform.position, selectedContinue, buttonsHoverLerpSpeed);
                     renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
 
+                   
+
                     if (MousePress)
                     {
-
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         Debug.Log("Singleplayer");
                         //SceneManager.LoadScene("Tutorial1");
                         mainMenuCam.Index = 2;
@@ -131,6 +136,9 @@ public class MainMenuText : MonoBehaviour {
 
                 else if (pointName == "Garage" && MouseHover)
                 {
+
+                   
+
                     transform.position = Vector3.Lerp(transform.position, selectedGarage, buttonsHoverLerpSpeed);
                     //SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
@@ -138,6 +146,7 @@ public class MainMenuText : MonoBehaviour {
                     if (MousePress)
                     {
 
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         SceneManager.LoadScene("Garage");
 
                     }
@@ -151,7 +160,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
-
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         Application.Quit();
 
                     }
@@ -167,7 +176,7 @@ public class MainMenuText : MonoBehaviour {
                     if (MousePress)
                     {
 
-
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         optionOpenMenu();
                      
 
@@ -185,7 +194,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
-
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         SceneManager.LoadScene("Tutorial1");
 
                     }
@@ -199,7 +208,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
-
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         SceneManager.LoadScene("TestArea");
 
                     }
@@ -215,6 +224,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         Debug.Log("Multiplayer");
                         //SceneManager.LoadScene("Tutorial1");
                         mainMenuCam.Index = 1;
@@ -232,6 +242,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         Debug.Log("Multiplayer");
                         //SceneManager.LoadScene("Tutorial1");
                         mainMenuCam.Index = 0;
@@ -247,6 +258,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         Debug.Log("Multiplayer");
                         //SceneManager.LoadScene("Tutorial1");
                         mainMenuCam.Index = 0;
@@ -266,6 +278,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
                         Debug.Log("Back");
                         //SceneManager.LoadScene("Tutorial1");
                         mainMenuCam.Index = 0;

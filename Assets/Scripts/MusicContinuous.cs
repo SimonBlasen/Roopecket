@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicContinuous : MonoBehaviour
 {
     private AudioSource audioSource;
+    private AudioClip[] MusicList;
 
 
     private void Awake()
