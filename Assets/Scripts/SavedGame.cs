@@ -257,25 +257,35 @@ public class SavedGame
     public static int[] RocketPrices = new int[]
         {
             500,   // MarcRocket
-            800,   // Vogelrocket
+            500,   // LearningRocket
             500,   // Runder Rakete
-            1400,   // Rakete 04
-            2700,   // 7er Rakete
-            3400,   // rostlumpen Rocket
-            9000,   // Bärchen Rocket
-            500,    // Long Rocket
+            1000,    // Long Rocket
+            1500,   // rostlumpen Rocket
+            3000,   // Bärchen Rocket
+            1500,   // Vogelrocket
+            4000,   // 7er Rakete
+            5000,   // Rakete 04
+           
+           
+          
+           
         };
 
     public static float[] RocketMultiplier = new float[]
         {
-            0.7159f,
-            0.5289f,
-            1.2322f,
-            1.9f,
-            1f,
-            1f,
-            1f,
-            0.7488f,
+            0.7159f, // MarcRocket  
+            0.5289f, // LearningRocket
+            1.2322f, // Runder Rakete
+             0.7488f, // Long Rocket
+               1f,  // rostlumpen Rocket
+               1f, // Bärchen Rocket
+            0.5289f, // Vogelrocket
+                1f, // 7er Rakete
+            1.9f,  // Rakete 04
+       
+          
+            
+           
         };
 
 
