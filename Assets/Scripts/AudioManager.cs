@@ -29,7 +29,9 @@ public class AudioManager : MonoBehaviour
         {
 
           s.source = gameObject.AddComponent<AudioSource>();
-           
+
+            Debug.Log("Im here goodi");
+
             s.source.volume = s.volume;
             s.source.loop = s.loop;
             s.source.clip = s.clip;

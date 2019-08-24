@@ -62,10 +62,12 @@ public class MenuPlanet : MonoBehaviour
         if (optionalPlanetTarget != null)
         {
             mainMenuCam.ZoomToPlanet(cameraPos, optionalPlanetTarget);
+            FindObjectOfType<AudioManager>().Play("Whoosh");
         }
         else
         {
             mainMenuCam.ZoomToPlanet(cameraPos, transform);
+            FindObjectOfType<AudioManager>().Play("Whoosh");
         }
         for (int i = 0; i < planetLevels.Length; i++)
         {
