@@ -154,6 +154,12 @@ public class ArrowRocketSelector : MonoBehaviour
                 {
                     rocketsBought[i].gameObject.SetActive(false);
                 }
+                rocketNameTurner.ShowRocketName("");
+                if (textMeshRocketSellWorth != null)
+                {
+                    textMeshRocketSellWorth.text = "";
+                }
+                SavedGame.LastPlayedRocket = -1;
             }
             else
             {
@@ -247,25 +253,28 @@ public class ArrowRocketSelector : MonoBehaviour
 
     public void SellRocketClick()
     {
-        instRocketSellCanvas.GetComponent<Canvas>().enabled = true;
-        TextMeshProUGUI[] tmps = instRocketSellCanvas.GetComponentsInChildren<TextMeshProUGUI>();
-        for (int i = 0; i < tmps.Length; i++)
+        if (SavedGame.LastPlayedRocket != -1)
         {
-            if (tmps[i].gameObject.name == "Text Main")
+            instRocketSellCanvas.GetComponent<Canvas>().enabled = true;
+            TextMeshProUGUI[] tmps = instRocketSellCanvas.GetComponentsInChildren<TextMeshProUGUI>();
+            for (int i = 0; i < tmps.Length; i++)
             {
-                string priceStr = selectedBoughtRocketWorthPlusPrice.ToString();
-                int pointsInst = 0;
-                for (int j = 3; j < priceStr.Length; j += 3)
+                if (tmps[i].gameObject.name == "Text Main")
                 {
-                    priceStr = priceStr.Insert(priceStr.Length - j + pointsInst, ".");
-                    j++;
-                    
+                    string priceStr = selectedBoughtRocketWorthPlusPrice.ToString();
+                    int pointsInst = 0;
+                    for (int j = 3; j < priceStr.Length; j += 3)
+                    {
+                        priceStr = priceStr.Insert(priceStr.Length - j + pointsInst, ".");
+                        j++;
+
+                    }
+
+
+                    tmps[i].text = LanguageManager.Translate("Are you sure to sell your rocket for") + " " + priceStr + "$?";
+
+                    break;
                 }
-
-
-                tmps[i].text = LanguageManager.Translate("Are you sure to sell your rocket for") + " " + priceStr + "$?";
-
-                break;
             }
         }
     }
