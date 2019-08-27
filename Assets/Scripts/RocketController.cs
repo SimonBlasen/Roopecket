@@ -88,7 +88,7 @@ public class RocketController : MonoBehaviour {
         if (Input.GetKeyDown(keyLander))
         {
 
-            FindObjectOfType<AudioManager>().Play("LanderMovers");
+           // FindObjectOfType<AudioManager>().Play("LanderMovers");
 
             //Debug.Log("KeyDown");
             for (int i = 0; i < landerMovers.Length; i++)
