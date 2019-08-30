@@ -21,6 +21,7 @@ public class MainMenuCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Statics.resetMultiplier = 0f;
         if (SavedGame.firstStart)
         {
             SceneManager.LoadScene("FirstScene");

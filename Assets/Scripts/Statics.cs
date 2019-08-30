@@ -19,6 +19,8 @@ public class Statics
     public static string SteamName = "No Steam name";
     public static bool isInFreestyle = false;
 
+    public static float resetMultiplier = 0f;
+
     public static bool startGarageLeft = false;
     public static string nextScene;
 

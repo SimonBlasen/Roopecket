@@ -128,8 +128,8 @@ public class resultScreen : MonoBehaviour
     private string t_damage, t_damageTotal, t_time, t_timeTotal, t_fuel, t_fuelTotal, t_worth, t_worthTotal;
     private float currentRocketWorth;
     private const float damageFactor = 1.5f;
-    private const float timeFactor = 0.8f;
-    private const float fuelFactor = 1.5f;
+    private const float timeFactor = 0.6f;
+    private const float fuelFactor = 1.0f;
     private const float worthFactor = 4000f;
 
     private int oldMoney = 0;
@@ -291,6 +291,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndscreenSimple()
     {
+        Statics.resetMultiplier = 0f;
         isSimpleEndscreen = true;
         startShowingEndscreen = true;
         oldMoney = SavedGame.Money;
@@ -314,7 +315,7 @@ public class resultScreen : MonoBehaviour
         globalValues[0] = SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel];
         globalValues[1] = SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel] * 100f / maxLifeRocket;
         globalValues[2] = SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel];
-        globalValues[3] = CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], 1);
+        globalValues[3] = CalculateRocketWorth(globalValues[0], globalValues[1], globalValues[2], 1, new int[] { Statics.currentLevel });
         //globalValues[3] += SavedGame.RocketPrices[Statics.selectedRocket];
 
         textMeshesGlobal[0].text = globalValuesOld[0].ToString("n3");
@@ -334,6 +335,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndScreen()
     {
+        Statics.resetMultiplier = 0f;
         isSimpleEndscreen = false;
         startShowingEndscreen = true;
         oldMoney = SavedGame.Money;
@@ -355,7 +357,14 @@ public class resultScreen : MonoBehaviour
         t_texts[1] = SavedGame.CurrentRocketStageDamage.ToString();
         t_texts[2] = SavedGame.CurrentRocketStageFuel.ToString("n2");
 
-        float rocketWorthStage = CalculateRocketWorth(SavedGame.CurrentRocketStageTime, SavedGame.CurrentRocketStageDamage, SavedGame.CurrentRocketStageFuel, 1 + Statics.currentLevel - (LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel))));
+        List<int> whichLevels = new List<int>();
+        float rocketWorthStage = 0f;// CalculateRocketWorth(SavedGame.CurrentRocketStageTime, SavedGame.CurrentRocketStageDamage, SavedGame.CurrentRocketStageFuel, 1, whichLevels.ToArray());
+        for (int i = (LevelNumber.GetFirstLevelOfStage(LevelNumber.GetStage(Statics.currentLevel))); i <= Statics.currentLevel; i++)
+        {
+            whichLevels.Add(i);
+            //rocketWorthStage += CalculateRocketWorth(SavedGame.CurrentRocketStageTime, SavedGame.CurrentRocketStageDamage, SavedGame.CurrentRocketStageFuel, 1, new int[] { i });
+        }
+        rocketWorthStage = SavedGame.GetGlobalWorthStage(SavedGame.LastPlayedRocket, LevelNumber.GetStage(Statics.currentLevel));
         //rocketWorthStage += SavedGame.RocketPrices[Statics.selectedRocket];
 
 
@@ -417,10 +426,18 @@ public class resultScreen : MonoBehaviour
 
     }
 
-    public static float CalculateRocketWorth(float time, float damage, float fuel, int levelsDone)
+    public static float CalculateRocketWorth(float time, float damage, float fuel, int levelsDone, int[] whichLevels)
     {
         Debug.Log("Levels done: " + levelsDone.ToString());
-        return ((worthFactor * levelsDone) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 10 * SavedGame.RocketMultiplier[Statics.selectedRocket];
+        float sum = 0f;
+
+        for (int i = 0; i < whichLevels.Length; i++)
+        {
+            sum += ((worthFactor * PlanetsWorth.PlanetsFactors[whichLevels[i]]) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 10 * SavedGame.RocketMultiplier[Statics.selectedRocket];
+        }
+
+
+        return sum;// ((worthFactor * levelsDone) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 10 * SavedGame.RocketMultiplier[Statics.selectedRocket];
     }
 
     public void ButtonContinueClick()

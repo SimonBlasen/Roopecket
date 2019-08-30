@@ -15,11 +15,13 @@ public class rocketDestroyed : MonoBehaviour {
 
     private float timerWaitToShowUI = 2f;
 
+    private TimeKeeper timeKeeper;
 
     private void Start()
     {
         rocketProps = null;
         rs = GameObject.FindObjectOfType<RocketSpawner>();
+        timeKeeper = GameObject.FindObjectOfType<TimeKeeper>();
     }
 
     // Update is called once per frame
@@ -69,6 +71,7 @@ public class rocketDestroyed : MonoBehaviour {
     public void Retry()
     {
 
+        Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         noLifeMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;

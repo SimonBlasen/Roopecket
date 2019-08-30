@@ -473,22 +473,31 @@ public class SavedGame
         int beginStage = -1;
         int endStage = -1;
 
+        
+
+        List<int> whichLevels = new List<int>();
         for (int i = 0; i < 20; i++)
         {
             if (LevelNumber.GetStage(i) == stage)
             {
+                //whichLevels.Add(i);
                 if (beginStage == -1)
                 {
                     beginStage = i;
                 }
                 endStage = i;
-                sumTime += CurrentTimeStage[rocket, i];
+
+                sum += resultScreen.CalculateRocketWorth(CurrentTimeStage[rocket, i], CurrentDamageStage[rocket, i], CurrentUsedFuel[rocket, i], (endStage - beginStage) + 1, new int[] {i  });
+
+                /*sumTime += CurrentTimeStage[rocket, i];
                 sumFuel += CurrentUsedFuel[rocket, i];
-                sumDamage += CurrentDamageStage[rocket, i];
+                sumDamage += CurrentDamageStage[rocket, i];*/
             }
         }
 
-        return resultScreen.CalculateRocketWorth(sumTime, sumDamage, sumFuel, (endStage - beginStage) + 1);
+        return sum;
+
+        //return resultScreen.CalculateRocketWorth(sumTime, sumDamage, sumFuel, (endStage - beginStage) + 1, whichLevels.ToArray());
 
         for (int i = 0; i < CurrentUsedFuel.GetLength(1); i++)
         {

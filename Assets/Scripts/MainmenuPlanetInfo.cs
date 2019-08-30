@@ -21,16 +21,25 @@ public class MainmenuPlanetInfo : MonoBehaviour
         damage = SavedGame.GetGlobalDamageForStage(stageNumber);
         fuel = SavedGame.GetGlobalFuelForStage(stageNumber);
 
+        List<int> whichLevels = new List<int>();
+
         int amountOfLevels = 0;
+
+        float rocketWorth = 0f;
         for (int i = 0; i < 20; i++)
         {
             if (LevelNumber.GetStage(i) == stageNumber && i < SavedGame.NextLevel[SavedGame.LastPlayedRocket])
             {
+                whichLevels.Add(i);
                 amountOfLevels++;
+
+                //rocketWorth += resultScreen.CalculateRocketWorth(time, damage, fuel, amountOfLevels, whichLevels.ToArray());
             }
         }
 
-        float rocketWorth = resultScreen.CalculateRocketWorth(time, damage, fuel, amountOfLevels);
+        rocketWorth = SavedGame.GetGlobalWorthStage(SavedGame.LastPlayedRocket, stageNumber);
+
+        //float rocketWorth = resultScreen.CalculateRocketWorth(time, damage, fuel, amountOfLevels, whichLevels.ToArray());
 
         string worthnessString = rocketWorth.ToString("n2");
         if (float.IsNaN(rocketWorth) || float.IsInfinity(rocketWorth) || float.IsNegativeInfinity(rocketWorth) || float.IsPositiveInfinity(rocketWorth))

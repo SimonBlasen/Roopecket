@@ -14,11 +14,13 @@ public class outOfFuel : MonoBehaviour
 
     private bool outOfFuelBefore = false;
 
+    private TimeKeeper timeKeeper;
 
     private void Start()
     {
         rocketProps = null;
         rs = GameObject.FindObjectOfType<RocketSpawner>();
+        timeKeeper = GameObject.FindObjectOfType<TimeKeeper>();
     }
 
 
@@ -74,6 +76,7 @@ public class outOfFuel : MonoBehaviour
     public void Retry()
     {
 
+        Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         noFuelMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;

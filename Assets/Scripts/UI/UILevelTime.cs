@@ -57,7 +57,7 @@ public class UILevelTime : MonoBehaviour
         }
         else
         {
-            float time = tk.GetCurrentTime();
+            float time = tk.GetCurrentTime() + Statics.resetMultiplier;
 
             int seconds = (int)time;
             int hundsSeconds = (int)((time - seconds) * 100f);

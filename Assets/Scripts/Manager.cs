@@ -30,6 +30,7 @@ public class Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "Garage")
         {
             Debug.Log("Restart");
+            Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 	}

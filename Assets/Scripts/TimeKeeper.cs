@@ -67,17 +67,17 @@ public class TimeKeeper : MonoBehaviour
     {
         if (tkStarted == false)
         {
-            return 0f;
+            return 0f + Statics.resetMultiplier;
         }
         else
         {
             if (reachedFinish == false)
             {
-                return StaticsSingleplayer.ReadTimer();
+                return StaticsSingleplayer.ReadTimer() + Statics.resetMultiplier;
             }
             else
             {
-                return timeInFinish;
+                return timeInFinish + Statics.resetMultiplier;
             }
         }
     }
@@ -89,7 +89,7 @@ public class TimeKeeper : MonoBehaviour
         float takenDamage = StaticsSingleplayer.ReadTakenDamage();
         float tookTime = StaticsSingleplayer.ReadTimer();
         float usedFuel = StaticsSingleplayer.ReadFuelUsed();
-        timeInFinish = tookTime;
+        timeInFinish = tookTime + Statics.resetMultiplier;
 
         if (Statics.isInFreestyle == false)
         {
