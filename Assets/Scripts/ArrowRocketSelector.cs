@@ -383,6 +383,12 @@ public class ArrowRocketSelector : MonoBehaviour
 
             garageCameraLook.IsRight = false;
 
+
+            if (inputRocketName.text == "MakeMeRich.")
+            {
+                SavedGame.NextLevel[newRocketIndex] = 19;
+            }
+
             setRocketBoughtActive(newRocketIndex);
         }
         else
