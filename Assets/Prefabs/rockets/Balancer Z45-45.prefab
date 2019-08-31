@@ -10385,7 +10385,10 @@ MonoBehaviour:
   epsilon: 0.01
   rotationSpeed: 200
   turnDirection: 0
+  oldVersion: 0
   arm: {fileID: 4323678685234608940}
+  joints: []
+  velocities: []
 --- !u!1 &4329554138271353920
 GameObject:
   m_ObjectHideFlags: 0
@@ -24839,6 +24842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyCodes: 73000000
+  keyCodesOr: 
   keyLander: 32
   thrustPositions:
   - {fileID: 4332323721937852870}
@@ -24860,8 +24864,6 @@ MonoBehaviour:
   rocketVolume: 0.3
   comLandersOut: {fileID: 0}
   comLandersIn: {fileID: 0}
-  audioData: {fileID: 0}
-  audioClip: {fileID: 0}
 --- !u!114 &4433111189414106026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24886,6 +24888,7 @@ MonoBehaviour:
   damageAudio: {fileID: 0}
   damageAudioSource: {fileID: 0}
   damageAudioVolume: 0
+  lowHealthClip: {fileID: 8300000, guid: 193a4f93e4b414540b36da02a15ebf93, type: 3}
   dieExplosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
     type: 3}
   deadRocket: {fileID: 0}

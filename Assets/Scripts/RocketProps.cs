@@ -32,6 +32,8 @@ public class RocketProps : MonoBehaviour
     private AudioSource damageAudioSource;
     [SerializeField]
     private float damageAudioVolume;
+    [SerializeField]
+    private AudioClip lowHealthClip;
 
     [Header("Prefabs")]
     [SerializeField]
@@ -84,19 +86,6 @@ public class RocketProps : MonoBehaviour
         else
         {
             currentFuel = 0f;
-        }
-
-        if(currentHealth <= (maxHealth / 2))
-        {
-
-            damageSmoke.SetActive(true);
-
-        }
-        if (currentHealth <= ((maxHealth / 2)-(maxHealth / 4)))
-        {
-
-            damageFire.SetActive(true);
-
         }
     }
 
@@ -203,6 +192,8 @@ public class RocketProps : MonoBehaviour
     [SerializeField]
     private float fadeOut = 0.3f;
 
+    private GameObject instAudioLowHealth = null;
+
     public void Damage(int damage)
     {
         if (!Indestroyable)
@@ -216,6 +207,28 @@ public class RocketProps : MonoBehaviour
             {
                 currentHealth = 0;
                 Die();
+            }
+
+
+            if (currentHealth <= (maxHealth / 2))
+            {
+
+                damageSmoke.SetActive(true);
+
+            }
+            if (currentHealth <= ((maxHealth / 2) - (maxHealth / 4)))
+            {
+                if (instAudioLowHealth == null)
+                {
+                    instAudioLowHealth = new GameObject("Low Health Audio");
+                    instAudioLowHealth.AddComponent<AudioSource>();
+                    instAudioLowHealth.GetComponent<AudioSource>().clip = lowHealthClip;
+                    instAudioLowHealth.GetComponent<AudioSource>().volume = 0.62f;
+                    instAudioLowHealth.GetComponent<AudioSource>().Play();
+                }
+
+                damageFire.SetActive(true);
+
             }
         }
     }

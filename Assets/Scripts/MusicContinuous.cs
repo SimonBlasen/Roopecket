@@ -27,6 +27,11 @@ public class MusicContinuous : MonoBehaviour
 
     private int oldLevel = -90;
 
+    private AudioClip clipToFade;
+    private bool isFading = false;
+    private bool fadingOut = false;
+    private float fade = 0f;
+
     private void setLevel(int level)
     {
         Debug.Log("Level: " + level.ToString() + "\nOld: " + oldLevel);
@@ -36,16 +41,22 @@ public class MusicContinuous : MonoBehaviour
             oldLevel = levels[level];
             if (level == -1)
             {
-                audioSource.clip = MusicList[0];
+                clipToFade = MusicList[0];
+                //audioSource.clip = MusicList[0];
             }
             else
             {
-                audioSource.clip = MusicList[levels[level]];
+                clipToFade = MusicList[levels[level]];
+                //audioSource.clip = MusicList[levels[level]];
             }
+
+            isFading = true;
+            fadingOut = true;
+            fade = 1f;
 
             Debug.Log("Level: " + level.ToString() + "\nClip: " + audioSource.clip.name);
 
-            audioSource.Play();
+            //audioSource.Play();
         }
     }
 
@@ -54,6 +65,39 @@ public class MusicContinuous : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isFading)
+        {
+            if (fadingOut)
+            {
+                fade -= Time.deltaTime;
+                if (fade <= 0f)
+                {
+                    fade = 0f;
+                    fadingOut = false;
+                    audioSource.clip = clipToFade;
+                    audioSource.Play();
+                }
+                else
+                {
+                    audioSource.volume = fade;
+                }
+            }
+            else
+            {
+                fade += Time.deltaTime;
+                if (fade > 1f)
+                {
+                    fade = 1f;
+                    audioSource.volume = fade;
+                    isFading = false;
+                }
+                else
+                {
+                    audioSource.volume = fade;
+                }
+            }
+        }
+
         if (SceneManager.GetActiveScene().name != oldScene)
         {
             oldScene = SceneManager.GetActiveScene().name;
