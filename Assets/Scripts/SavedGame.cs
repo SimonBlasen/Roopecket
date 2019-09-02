@@ -275,7 +275,7 @@ public class SavedGame
         {
            0.6f,    // 0.7159f, // MarcRocket  
            0.4f,  // 1f, // LearningRocket
-           0.6f,  // 1.2322f, // Runder Rakete
+           0.5f,  // 1.2322f, // Runder Rakete
            0.6f,  //  0.7488f, // Long Rocket
            0.8f,  //    1f,  // rostlumpen Rocket
            0.8f,  //   1f, // Bärchen Rocket
