@@ -11,14 +11,8 @@ public class PlanetsWorth : MonoBehaviour
                                                             0.15f,
                                                             0.15f,
 
-                                                            0.15f,
-                                                            0.15f,
-                                                            0.25f,
-                                                            0.3f,
                                                             0.2f,
-
                                                             0.2f,
-                                                            0.25f,
                                                             0.25f,
                                                             0.3f,
                                                             0.3f,
@@ -26,6 +20,12 @@ public class PlanetsWorth : MonoBehaviour
                                                             0.3f,
                                                             0.3f,
                                                             0.3f,
+                                                            0.3f,
+                                                            0.3f,
+
+                                                            0.3f,
+                                                            0.4f,
+                                                            0.4f,
                                                             0.55f,
                                                             
                                                             };
