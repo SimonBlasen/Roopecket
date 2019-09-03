@@ -273,15 +273,15 @@ public class SavedGame
 
     public static float[] RocketMultiplier = new float[]
         {
-           0.6f,    // 0.7159f, // MarcRocket  
+           0.8f,    // 0.7159f, // MarcRocket  
            0.4f,  // 1f, // LearningRocket
            0.5f,  // 1.2322f, // Runder Rakete
            0.6f,  //  0.7488f, // Long Rocket
            0.8f,  //    1f,  // rostlumpen Rocket
            0.8f,  //   1f, // Bärchen Rocket
-           1f,  //  0.5289f, // Vogelrocket
-           1f,  //    1f, // 7er Rakete
-           1.2f,  //  1.9f,  // Rakete 04
+           1.2f,  //  0.5289f, // Vogelrocket
+           1.2f,  //    1f, // 7er Rakete
+           1.4f,  //  1.9f,  // Rakete 04
        
           
             
