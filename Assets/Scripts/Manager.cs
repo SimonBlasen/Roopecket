@@ -12,9 +12,10 @@ public class Manager : MonoBehaviour
     private TimeKeeper timeKeeper;
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	void Start ()
+    {
+        Cursor.visible = false;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -72,6 +73,7 @@ public class Manager : MonoBehaviour
         if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish" && reachedFinish == false)
         {
             reachedFinish = true;
+            Cursor.visible = true;
 
             string conc = landingPlatform.Split('_')[1];
             for (int i = 2; i < landingPlatform.Split('_').Length; i++)

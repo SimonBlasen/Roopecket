@@ -80,6 +80,7 @@ public class showText : MonoBehaviour
 
     void closeText()
     {
+        Cursor.visible = false;
 
         Time.timeScale = 1;
         isThereText = false;
