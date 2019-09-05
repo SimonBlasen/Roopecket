@@ -14,7 +14,17 @@ public class Manager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        Cursor.visible = false;
+        if (SceneManager.GetActiveScene().name != "Tutorial1"
+            && SceneManager.GetActiveScene().name != "Tutorial1.1"
+            && SceneManager.GetActiveScene().name !=  "Tutorial1.2"
+            && SceneManager.GetActiveScene().name !=  "Tutorial2"
+            && SceneManager.GetActiveScene().name !=  "Tutorial2.1"
+            && SceneManager.GetActiveScene().name !=  "Tutorial3"
+            && SceneManager.GetActiveScene().name !=  "Tutorial4"
+            && SceneManager.GetActiveScene().name !=  "Tutorial5")
+        {
+            Cursor.visible = false;
+        }
     }
 	
 	// Update is called once per frame
@@ -31,7 +41,7 @@ public class Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "Garage")
         {
             Debug.Log("Restart");
-            Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
+            if (timeKeeper != null) Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 	}
@@ -91,6 +101,14 @@ public class Manager : MonoBehaviour
             {
                 GameObject.FindObjectOfType<TutorialEndscreen>().SceneToLoad = conc;
                 GameObject.FindObjectOfType<TutorialEndscreen>().GetComponent<Canvas>().enabled = true;
+
+                if (SceneManager.GetActiveScene().name == "Tutorial5")
+                {
+                    if (SteamManager.Initialized)
+                    {
+                        Steamworks.SteamUserStats.SetAchievement("PLAY_COMPLETE_TUT");
+                    }
+                }
 
                 rocket.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 rocket.GetComponent<RocketProps>().Indestroyable = true;

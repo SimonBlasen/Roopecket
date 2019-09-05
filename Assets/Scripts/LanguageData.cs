@@ -48,6 +48,10 @@ public class LanguageData
 
     public string Translate(string english)
     {
+        if (english == null)
+        {
+            return "";
+        }
         if (english.Split('\n').Length > 0 && english.Split('\n')[0].Length < english.Length)
         {
             string comb = Translate(english.Split('\n')[0]);

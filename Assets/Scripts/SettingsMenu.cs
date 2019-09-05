@@ -10,6 +10,7 @@ public class SettingsMenu : MonoBehaviour
     Resolution[] resolutions = null;
     public TMPro.TMP_Dropdown resolutionDropdown;
     public TMPro.TMP_Dropdown qualityDropdown;
+    public TMPro.TMP_Dropdown languageDropdown;
     public Slider sliderVolume;
     public Toggle toggleFullscreen;
 
@@ -140,6 +141,24 @@ public class SettingsMenu : MonoBehaviour
         }
     }
 
+    public void SetLanguage(int index)
+    {
+        if (index == 0)
+        {
+            LanguageManager.Language = Language.ENGLISH;
+        }
+        else if (index == 1)
+        {
+            LanguageManager.Language = Language.GERMAN;
+        }
+        else
+        {
+            LanguageManager.Language = Language.SPANISH;
+        }
+    }
+
+    Language oldLanguage = Language.ENGLISH;
+
     public void MenuOpened(bool open)
     {
         if (open)
@@ -153,6 +172,20 @@ public class SettingsMenu : MonoBehaviour
             sliderVolume.value = oldVolume;
             toggleFullscreen.isOn = oldIsFullscreen;
             qualityDropdown.value = oldQualityIndex;
+            Language language = LanguageManager.Language;
+            oldLanguage = language;
+            if (language == Language.ENGLISH)
+            {
+                languageDropdown.value = 0;
+            }
+            else if (language == Language.GERMAN)
+            {
+                languageDropdown.value = 1;
+            }
+            else if (language == Language.SPANISH)
+            {
+                languageDropdown.value = 2;
+            }
 
             for (int i = 0; i < resolutions.Length; i++)
             {
@@ -183,6 +216,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void ButtonDiscard()
     {
+        LanguageManager.Language = oldLanguage;
         //QualitySettings.SetQualityLevel(oldQualityIndex);
         //Screen.fullScreen = oldIsFullscreen;
         //AudioListener.volume = oldVolume;
