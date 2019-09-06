@@ -91,7 +91,7 @@ public class Manager : MonoBehaviour
                 conc += "_" + landingPlatform.Split('_')[i];
             }
         
-            if (Statics.isInFreestyle == false)
+            if (Statics.isInFreestyle == false && SceneManager.GetActiveScene().name.StartsWith("Tutorial") == false && SceneManager.GetActiveScene().name.StartsWith("Test") == false)
             {
                 SavedGame.NextLevel[SavedGame.LastPlayedRocket] = Statics.currentLevel + 1;
             }
