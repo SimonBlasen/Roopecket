@@ -436,6 +436,11 @@ public class resultScreen : MonoBehaviour
             sum += ((worthFactor * PlanetsWorth.PlanetsFactors[whichLevels[i]]) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 10 * SavedGame.RocketMultiplier[Statics.selectedRocket];
         }
 
+        if (float.IsInfinity(sum) || float.IsNegativeInfinity(sum) || float.IsPositiveInfinity(sum) || float.IsNaN(sum) || sum < -100000f || sum > 100000f)
+        {
+            // Something went wrong at calculating
+            sum = 0f;
+        }
 
         return sum;// ((worthFactor * levelsDone) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 10 * SavedGame.RocketMultiplier[Statics.selectedRocket];
     }
