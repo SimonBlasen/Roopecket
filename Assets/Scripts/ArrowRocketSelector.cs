@@ -48,6 +48,7 @@ public class ArrowRocketSelector : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = true;
         //
         //
         //TODO remove again

@@ -44,42 +44,58 @@ public class MenuPlanet : MonoBehaviour
         }
         set
         {
-            hovered = value;
+            if (!disabled)
+            {
+                hovered = value;
 
-            if (hovered)
-            {
-                scaleTarget = highScale;
-            }
-            else
-            {
-                scaleTarget = lowScale;
+                if (hovered)
+                {
+                    scaleTarget = highScale;
+                }
+                else
+                {
+                    scaleTarget = lowScale;
+                }
             }
         }
     }
 
+    bool disabled = false;
+
+    public void Disable()
+    {
+        disabled = true;
+    }
+
     public void Clicked()
     {
-        if (optionalPlanetTarget != null)
+        if (!disabled)
         {
-            mainMenuCam.ZoomToPlanet(cameraPos, optionalPlanetTarget);
-            FindObjectOfType<AudioManager>().Play("Whoosh");
-        }
-        else
-        {
-            mainMenuCam.ZoomToPlanet(cameraPos, transform);
-            FindObjectOfType<AudioManager>().Play("Whoosh");
-        }
-        for (int i = 0; i < planetLevels.Length; i++)
-        {
-            planetLevels[i].IsZoomed = true;
+            if (optionalPlanetTarget != null)
+            {
+                mainMenuCam.ZoomToPlanet(cameraPos, optionalPlanetTarget);
+                FindObjectOfType<AudioManager>().Play("Whoosh");
+            }
+            else
+            {
+                mainMenuCam.ZoomToPlanet(cameraPos, transform);
+                FindObjectOfType<AudioManager>().Play("Whoosh");
+            }
+            for (int i = 0; i < planetLevels.Length; i++)
+            {
+                planetLevels[i].IsZoomed = true;
+            }
         }
     }
 
     public void Unzoomed()
     {
-        for (int i = 0; i < planetLevels.Length; i++)
+        if (!disabled)
         {
-            planetLevels[i].IsZoomed = false;
+            for (int i = 0; i < planetLevels.Length; i++)
+            {
+                planetLevels[i].IsZoomed = false;
+            }
         }
     }
 }

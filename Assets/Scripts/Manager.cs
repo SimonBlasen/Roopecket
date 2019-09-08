@@ -12,9 +12,20 @@ public class Manager : MonoBehaviour
     private TimeKeeper timeKeeper;
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	void Start ()
+    {
+        if (SceneManager.GetActiveScene().name != "Tutorial1"
+            && SceneManager.GetActiveScene().name != "Tutorial1.1"
+            && SceneManager.GetActiveScene().name !=  "Tutorial1.2"
+            && SceneManager.GetActiveScene().name !=  "Tutorial2"
+            && SceneManager.GetActiveScene().name !=  "Tutorial2.1"
+            && SceneManager.GetActiveScene().name !=  "Tutorial3"
+            && SceneManager.GetActiveScene().name !=  "Tutorial4"
+            && SceneManager.GetActiveScene().name !=  "Tutorial5")
+        {
+            Cursor.visible = false;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -30,7 +41,7 @@ public class Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "Garage")
         {
             Debug.Log("Restart");
-            Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
+            if (timeKeeper != null) Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 	}
@@ -72,6 +83,7 @@ public class Manager : MonoBehaviour
         if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish" && reachedFinish == false)
         {
             reachedFinish = true;
+            Cursor.visible = true;
 
             string conc = landingPlatform.Split('_')[1];
             for (int i = 2; i < landingPlatform.Split('_').Length; i++)
@@ -79,7 +91,7 @@ public class Manager : MonoBehaviour
                 conc += "_" + landingPlatform.Split('_')[i];
             }
         
-            if (Statics.isInFreestyle == false)
+            if (Statics.isInFreestyle == false && SceneManager.GetActiveScene().name.StartsWith("Tutorial") == false && SceneManager.GetActiveScene().name.StartsWith("Test") == false)
             {
                 SavedGame.NextLevel[SavedGame.LastPlayedRocket] = Statics.currentLevel + 1;
             }
@@ -89,6 +101,14 @@ public class Manager : MonoBehaviour
             {
                 GameObject.FindObjectOfType<TutorialEndscreen>().SceneToLoad = conc;
                 GameObject.FindObjectOfType<TutorialEndscreen>().GetComponent<Canvas>().enabled = true;
+
+                if (SceneManager.GetActiveScene().name == "Tutorial5")
+                {
+                    if (SteamManager.Initialized)
+                    {
+                        Steamworks.SteamUserStats.SetAchievement("PLAY_COMPLETE_TUT");
+                    }
+                }
 
                 rocket.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 rocket.GetComponent<RocketProps>().Indestroyable = true;

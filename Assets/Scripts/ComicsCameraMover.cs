@@ -51,9 +51,8 @@ public class ComicsCameraMover : MonoBehaviour {
         reachedIndices[1] = false;
         NextWindow();
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -64,6 +63,11 @@ public class ComicsCameraMover : MonoBehaviour {
             Debug.Log("Loading scene " + LevelToLoad);
             SceneManager.LoadScene(LevelToLoad);
         }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate ()
+    {
 
         Vector3 oldPos = transform.position;
 

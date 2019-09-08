@@ -291,6 +291,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndscreenSimple()
     {
+        Cursor.visible = true;
         Statics.resetMultiplier = 0f;
         isSimpleEndscreen = true;
         startShowingEndscreen = true;
@@ -335,6 +336,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndScreen()
     {
+        Cursor.visible = true;
         Statics.resetMultiplier = 0f;
         isSimpleEndscreen = false;
         startShowingEndscreen = true;
