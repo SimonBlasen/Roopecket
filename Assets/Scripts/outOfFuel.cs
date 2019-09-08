@@ -46,6 +46,7 @@ public class outOfFuel : MonoBehaviour
         {
             if (rocketProps.OutOfFuel && outOfFuelBefore == false)
             {
+                Cursor.visible = true;
                 outOfFuelBefore = true;
                 noFuelMenuUI.SetActive(true);
                 //Time.timeScale = 0f;
@@ -53,6 +54,7 @@ public class outOfFuel : MonoBehaviour
             }
             else if (outOfFuelBefore && rocketProps.OutOfFuel == false)
             {
+                Cursor.visible = false;
                 outOfFuelBefore = false;
                 noFuelMenuUI.SetActive(false);
             }
@@ -75,7 +77,7 @@ public class outOfFuel : MonoBehaviour
 
     public void Retry()
     {
-
+        Cursor.visible = false;
         Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         noFuelMenuUI.SetActive(false);
         Time.timeScale = 1f;

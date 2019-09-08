@@ -48,6 +48,7 @@ public class rocketDestroyed : MonoBehaviour {
                 timerWaitToShowUI -= Time.deltaTime;
                 if (timerWaitToShowUI <= 0f)
                 {
+                    Cursor.visible = true;
                     noLifeMenuUI.SetActive(true);
                     //Time.timeScale = 0f;
                     //GameIsPaused = true;
@@ -70,6 +71,7 @@ public class rocketDestroyed : MonoBehaviour {
 
     public void Retry()
     {
+        Cursor.visible = false;
 
         Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         noLifeMenuUI.SetActive(false);
