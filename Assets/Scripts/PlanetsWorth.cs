@@ -6,10 +6,10 @@ public class PlanetsWorth : MonoBehaviour
 {
     public static float[] PlanetsFactors = new float[] {    0.05f,
                                                             0.05f,
+                                                            0.05f,
+                                                            0.05f,
                                                             0.1f,
-                                                            0.1f,
-                                                            0.1f,
-                                                            0.1f,
+                                                            0.05f,
 
                                                             0.2f,
                                                             0.2f,
