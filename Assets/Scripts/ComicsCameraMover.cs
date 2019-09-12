@@ -18,6 +18,7 @@ public class ComicsCameraMover : MonoBehaviour {
     public float lazyWeight = 0.9f;
     public float damperTime = 0.9f;
     public float maxSpeed = 0.9f;
+    public AudioClip[] audioClips;
 
     [Space]
 
@@ -101,7 +102,17 @@ public class ComicsCameraMover : MonoBehaviour {
     {
         
         
+        
+
         index++;
+
+        if (audioClips[index] != null)
+        {
+
+            GetComponent<AudioSource>().clip = audioClips[index];
+            GetComponent<AudioSource>().Play();
+
+        }
 
         if (index == lookPoints.Length)
         {
