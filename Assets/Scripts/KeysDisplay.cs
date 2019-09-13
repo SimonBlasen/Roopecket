@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class KeysDisplay : MonoBehaviour
 {
-    public TextMeshPro textAmount;
+    public TextMeshProUGUI textAmount;
 
     // Start is called before the first frame update
     void Start()
