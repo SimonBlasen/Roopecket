@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class PlanetsWorth : MonoBehaviour
 {
-    public static float[] PlanetsFactors = new float[] {    0.05f,
+    public static float[] PlanetsFactors = new float[] {    0.03f,
+                                                            0.03f,
                                                             0.05f,
                                                             0.05f,
                                                             0.05f,
-                                                            0.1f,
                                                             0.05f,
 
-                                                            0.2f * 1.5f,
-                                                            0.2f * 1.5f,
-                                                            0.25f * 2f,
-                                                            0.4f * 2f,
-                                                            0.3f * 2.1f,
+                                                            0.2f,
+                                                            0.2f,
+                                                            0.3f,
+                                                            0.4f,
+                                                            0.3f,
 
-                                                            0.4f * 2.5f,
-                                                            0.4f * 2.5f,
-                                                            0.3f * 2.5f,
-                                                            0.4f * 2.6f,
-                                                            0.45f * 2.6f,
+                                                            0.4f,
+                                                            0.4f,
+                                                            0.3f,
+                                                            0.4f,
+                                                            0.45f,
 
-                                                            0.5f * 3f,
-                                                            0.5f * 3f,
-                                                            0.4f * 2.8f,
-                                                            0.6f * 4f,
+                                                            0.5f,
+                                                            0.5f,
+                                                            0.4f,
+                                                            0.6f,
                                                             
                                                             };
 }
