@@ -17,6 +17,7 @@ public class ArrowRocketSelector : MonoBehaviour
     public GarageRocketnameTurner rocketNameTurner;
 
     public Transform[] rockets;
+    public Transform[] rocketsWhite;
     public Transform currentRocket;
     public Transform[] rocketsBought;
 
@@ -110,6 +111,12 @@ public class ArrowRocketSelector : MonoBehaviour
         for (int i = 0; i < rocketsBought.Length; i++)
         {
             rocketsBought[i].gameObject.SetActive(false);
+        }
+
+
+        for (int i = 0; i < rocketsWhite.Length; i++)
+        {
+            rocketsWhite[i].gameObject.SetActive(false);
         }
 
         /*rocketNubmber = Statics.selectedRocket;
@@ -227,26 +234,51 @@ public class ArrowRocketSelector : MonoBehaviour
 
             currentRocket.gameObject.SetActive(false);
 
-            currentRocket = rockets[number];
+            if (SavedGame.UnlockedRockets[number] == 1)
+            {
+                currentRocket = rockets[number];
+            }
+            else
+            {
+                currentRocket = rocketsWhite[number];
+            }
 
             currentRocket.gameObject.SetActive(true);
             currentRocket.transform.position = rocketSpawn;
             currentRocket.GetComponent<Rigidbody>().velocity = Vector3.zero;
             currentRocket.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            
-            
-            //cage.SetActive(SavedGame.OwnedRockets[number] != -1);
-            
-            rocketNameTurner.ShowRocketName("Price: " + SavedGame.RocketPrices[number]);
 
-            if (SavedGame.Money >= SavedGame.RocketPrices[number])
+
+            //cage.SetActive(SavedGame.OwnedRockets[number] != -1);
+
+            if (SavedGame.UnlockedRockets[number] == 1)
             {
-                buttonBuyRocket.interactable = true;
+                buttonBuyRocket.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Translate("BUY ROCKET");
+                rocketNameTurner.ShowRocketName("Price: " + SavedGame.RocketPrices[number]);
+                if (SavedGame.Money >= SavedGame.RocketPrices[number])
+                {
+                    buttonBuyRocket.interactable = true;
+                }
+                else
+                {
+                    buttonBuyRocket.interactable = false;
+                }
             }
             else
             {
-                buttonBuyRocket.interactable = false;
+                buttonBuyRocket.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Translate("UNLOCK ROCKET");
+                rocketNameTurner.ShowRocketName("Locked rocket");
+                if (SavedGame.RocketUnlockKeys > 0)
+                {
+                    buttonBuyRocket.interactable = true;
+                }
+                else
+                {
+                    buttonBuyRocket.interactable = false;
+                }
             }
+
+            
         }
     }
 
@@ -319,16 +351,29 @@ public class ArrowRocketSelector : MonoBehaviour
 
     public void BuyRocketClick()
     {
-        if (SavedGame.Money >= SavedGame.RocketPrices[selectedBuyRocket])
+        // If rocket is unlocked already
+        if (SavedGame.UnlockedRockets[selectedBuyRocket] == 1)
         {
-            moneyMachine.Number = SavedGame.Money - SavedGame.RocketPrices[selectedBuyRocket];
-            //TODO Buy rocket
-            for (int i = 0; i < arrows.Length; i++)
+            if (SavedGame.Money >= SavedGame.RocketPrices[selectedBuyRocket])
             {
-                arrows[i].KeysLocked = true;
+                moneyMachine.Number = SavedGame.Money - SavedGame.RocketPrices[selectedBuyRocket];
+                //TODO Buy rocket
+                for (int i = 0; i < arrows.Length; i++)
+                {
+                    arrows[i].KeysLocked = true;
+                }
+                instRocketnameCanvas.GetComponent<Canvas>().enabled = true;
+                inputRocketName.text = "";
             }
-            instRocketnameCanvas.GetComponent<Canvas>().enabled = true;
-            inputRocketName.text = "";
+        }
+        else
+        {
+            if (SavedGame.RocketUnlockKeys > 0)
+            {
+                SavedGame.RocketUnlockKeys--;
+                SavedGame.UnlockedRockets[selectedBuyRocket] = 1;
+                setRocketActive(selectedBuyRocket);
+            }
         }
     }
 
@@ -353,6 +398,10 @@ public class ArrowRocketSelector : MonoBehaviour
             if (inputRocketName.text == "MakeMeRich.")
             {
                 SavedGame.Money += 30000;
+            }
+            if (inputRocketName.text == "MakeMeKeys.")
+            {
+                SavedGame.RocketUnlockKeys += 5;
             }
 
             for (int i = 0; i < arrows.Length; i++)
@@ -405,7 +454,14 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         if (toRight)
         {
-            rocketNameTurner.ShowRocketName(LanguageManager.Translate("Price: ") + SavedGame.RocketPrices[selectedBuyRocket]);
+            if (SavedGame.UnlockedRockets[selectedBuyRocket] == 1)
+            {
+                rocketNameTurner.ShowRocketName(LanguageManager.Translate("Price: ") + SavedGame.RocketPrices[selectedBuyRocket]);
+            }
+            else
+            {
+                rocketNameTurner.ShowRocketName(LanguageManager.Translate("Locked rocket"));
+            }
         }
         else
         {

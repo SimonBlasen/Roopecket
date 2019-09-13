@@ -100,6 +100,16 @@ public class SavedGame
 
             con += "10=" + LastPlayedRocket.ToString() + seperator;
 
+            con += "11=";
+            for (int i = 0; i < UnlockedRockets.Length; i++)
+            {
+                con += UnlockedRockets[i].ToString() + ",";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
+            con += "12=" + RocketUnlockKeys.ToString() + seperator;
+
             File.WriteAllText(savegameDir + "/" + savegameFile, con);
         }
     }
@@ -116,6 +126,14 @@ public class SavedGame
         for (int i = 1; i < OwnedRockets.Length; i++)
         {
             OwnedRockets[i] = -1;
+        }
+
+        UnlockedRockets[0] = 1;
+        UnlockedRockets[1] = 1;
+        UnlockedRockets[2] = 1;
+        for (int i = 3; i < UnlockedRockets.Length; i++)
+        {
+            UnlockedRockets[i] = 0;
         }
     }
 
@@ -220,6 +238,18 @@ public class SavedGame
                     {
                         LastPlayedRocket = Convert.ToInt32(con[1]);
                     }
+                    else if (con[0] == "11")
+                    {
+                        string[] els = con[1].Split(',');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            UnlockedRockets[i] = Convert.ToInt32(els[i]);
+                        }
+                    }
+                    else if (con[0] == "12")
+                    {
+                        RocketUnlockKeys = Convert.ToInt32(con[1]);
+                    }
                 }
             }
         }
@@ -249,6 +279,19 @@ public class SavedGame
         {
             Debug.Log("Altering money. Was: " + money.ToString() + ", Added: " + value.ToString());
             money = value;
+        }
+    }
+
+    private static int rocketUnlockKeys = 0;
+    public static int RocketUnlockKeys
+    {
+        get
+        {
+            return rocketUnlockKeys;
+        }
+        set
+        {
+            rocketUnlockKeys = value;
         }
     }
 
@@ -298,6 +341,7 @@ public class SavedGame
 
     public static int LastPlayedRocket = 0;
 
+    public static int[] UnlockedRockets = new int[256];
     public static int[] OwnedRockets = new int[256];
     public static string[] RocketNames = new string[256];   // May not include "," and speerator
     public static int[] NextLevel = new int[256];

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LandingPlatform : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class LandingPlatform : MonoBehaviour
     private string platformName;
     [SerializeField]
     private bool isTutorial;
+    [SerializeField]
+    private GameObject roopocketKey;
 
 
     [Space]
@@ -31,7 +34,41 @@ public class LandingPlatform : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-		
+        if (Statics.isInFreestyle == false)
+        {
+            bool spawnKey = false;
+            if (SceneManager.GetActiveScene().name == "Platform sixth Level"
+                || SceneManager.GetActiveScene().name == "Platform Level 11"
+                || SceneManager.GetActiveScene().name == "Platform Level 16")
+            {
+                float rand = Random.Range(0f, 1f);
+                if (rand <= 0.33333f)
+                {
+
+
+                    spawnKey = true;
+                }
+            }
+            if (SceneManager.GetActiveScene().name == "Platform Level 20")
+            {
+
+                float rand = Random.Range(0f, 1f);
+                if (rand <= 1f)
+                {
+
+
+                    spawnKey = true;
+                }
+            }
+
+            if (spawnKey && platformName.StartsWith("Finish"))
+            {
+                Debug.Log("Spawned key");
+                GameObject instKey = Instantiate(roopocketKey);
+                instKey.transform.position = transform.position + new Vector3(0f, 2f, 0f);
+                instKey.transform.rotation = transform.rotation;
+            }
+        }
 	}
 	
 	// Update is called once per frame

@@ -25,6 +25,20 @@ public class MusicContinuous : MonoBehaviour
         
     }
 
+    private bool isSilent = false;
+
+    public bool Silent
+    {
+        get
+        {
+            return isSilent;
+        }
+        set
+        {
+            isSilent = value;
+        }
+    }
+
     private int oldLevel = -90;
 
     private AudioClip clipToFade;
@@ -94,6 +108,25 @@ public class MusicContinuous : MonoBehaviour
                 else
                 {
                     audioSource.volume = fade;
+                }
+            }
+        }
+        else
+        {
+            if (isSilent == false && audioSource.volume < 1f)
+            {
+                audioSource.volume += Time.deltaTime;
+                if (audioSource.volume > 1f)
+                {
+                    audioSource.volume = 1f;
+                }
+            }
+            else if (isSilent && audioSource.volume > 0.1f)
+            {
+                audioSource.volume -= Time.deltaTime;
+                if (audioSource.volume < 0.1f)
+                {
+                    audioSource.volume = 0.1f;
                 }
             }
         }

@@ -106,12 +106,19 @@ public class ComicsCameraMover : MonoBehaviour {
 
         index++;
 
-        if (audioClips[index] != null)
+        if (index >= 0 && index < audioClips.Length && audioClips[index] != null && LanguageManager.Language == Language.GERMAN)
         {
+            MusicContinuous musicContinuous = GameObject.FindObjectOfType<MusicContinuous>();
+            musicContinuous.Silent = true;
 
             GetComponent<AudioSource>().clip = audioClips[index];
             GetComponent<AudioSource>().Play();
 
+        }
+        else
+        {
+            MusicContinuous musicContinuous = GameObject.FindObjectOfType<MusicContinuous>();
+            musicContinuous.Silent = false;
         }
 
         if (index == lookPoints.Length)
