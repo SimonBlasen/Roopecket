@@ -138,6 +138,11 @@ public class ArrowRocketSelector : MonoBehaviour
 
     void Update()
     {
+        if (Cursor.visible == false)
+        {
+            Cursor.visible = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.Return) && inputRocketName.isFocused)
         {
             ConfirmRocketNameClick();
