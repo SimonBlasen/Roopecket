@@ -87,7 +87,7 @@ public class LevelLeaderboardDownloader : MonoBehaviour
     {
         if (SteamManager.Initialized)
         {
-            SteamAPICall_t handle = SteamUserStats.FindLeaderboard("level_" + GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp + "_rocket_" + SavedGame.LastPlayedRocket);
+            SteamAPICall_t handle = SteamUserStats.FindLeaderboard("level_" + GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp + "_rocket_" + Statics.selectedRocket);
 
             m_LeaderboardFindResult.Set(handle);
             Debug.Log("Created CallResult for FindLeaderboard");
