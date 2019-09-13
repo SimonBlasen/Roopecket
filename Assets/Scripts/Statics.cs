@@ -25,6 +25,7 @@ public class Statics
     public static string nextScene;
 
     public static int comicSceneToLoad = 1;
+    public static bool testingGarageRocket = false;
 
     public static bool movedCTFLogo = false;
 }

@@ -58,9 +58,17 @@ public class PauseContinue : MonoBehaviour
 
     public void loadMenu()
     {
-
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Main_Menu_3");
+        if (Statics.testingGarageRocket == false)
+        {
+            SceneManager.LoadScene("Main_Menu_3");
+        }
+        else
+        {
+            Statics.testingGarageRocket = false;
+            SceneManager.LoadScene("Garage");
+        }
+
 
     }
 

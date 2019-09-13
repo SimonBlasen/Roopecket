@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ArrowRocketSelector : MonoBehaviour
@@ -31,6 +32,7 @@ public class ArrowRocketSelector : MonoBehaviour
     public GarageArrows[] arrows;
     public GarageCameraLook garageCameraLook;
     public Button buttonBuyRocket;
+    public Button buttonTestRocket;
     public GameObject ownNoRocket;
 
     public MoneyMachine moneyMachine;
@@ -258,6 +260,7 @@ public class ArrowRocketSelector : MonoBehaviour
 
             if (SavedGame.UnlockedRockets[number] == 1)
             {
+                buttonTestRocket.interactable = true;
                 buttonBuyRocket.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Translate("BUY ROCKET");
                 rocketNameTurner.ShowRocketName("Price: " + SavedGame.RocketPrices[number]);
                 if (SavedGame.Money >= SavedGame.RocketPrices[number])
@@ -271,6 +274,7 @@ public class ArrowRocketSelector : MonoBehaviour
             }
             else
             {
+                buttonTestRocket.interactable = false;
                 buttonBuyRocket.GetComponentInChildren<TextMeshProUGUI>().text = LanguageManager.Translate("UNLOCK ROCKET");
                 rocketNameTurner.ShowRocketName("Locked rocket");
                 if (SavedGame.RocketUnlockKeys > 0)
@@ -315,6 +319,14 @@ public class ArrowRocketSelector : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TestRocketClick()
+    {
+        Statics.selectedRocket = selectedBuyRocket;
+        Statics.testingGarageRocket = true;
+
+        SceneManager.LoadScene("TestArea");
     }
 
     public void RocketSellYes()
