@@ -8,10 +8,11 @@ public class MainMenuText : MonoBehaviour {
 
     private RectTransform menuText;
     private Vector3 spawn;
-    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen, selectedOnline, selectedBack1, selectedTestarea;
+    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen, selectedOnline, selectedBack1, selectedTestarea, selectedfrageZeichen;
     private bool MouseHover = false;
     private bool Entered;
     private bool MousePress = false;
+    private bool frageZeichenOpen;
     public bool FirstTouch = false;
     private bool optionsOpened;
     public string pointName;
@@ -23,6 +24,7 @@ public class MainMenuText : MonoBehaviour {
 
     public GameObject Options;
     public GameObject Background;
+    public GameObject FragezeichenText;
 
     // Use this for initialization
     void Start () {
@@ -35,6 +37,7 @@ public class MainMenuText : MonoBehaviour {
         selectedTutorial = new Vector3(0f, -0.25f + 0.1f, -4.15f);
         selectedTestarea = new Vector3(0f, -0.35f + 0.1f, -4.15f);
         selectedQuit = new Vector3(0f, -0.8f, -4f);
+        selectedfrageZeichen = new Vector3(0f, 0.75f, -4.05f);
         selectedMultiplayer = new Vector3(0f, -0.05f, -4.15f);
         selectedSplitscreen = new Vector3(1.791f, 0.05f, -4.63f);
         selectedOnline = new Vector3(1.791f, 0.137f, -4.63f);
@@ -122,6 +125,7 @@ public class MainMenuText : MonoBehaviour {
 
                     if (MousePress)
                     {
+                       
                         FindObjectOfType<AudioManager>().Play("MenuButton");
                         Debug.Log("Singleplayer");
                         //SceneManager.LoadScene("Tutorial1");
@@ -175,6 +179,7 @@ public class MainMenuText : MonoBehaviour {
                     renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
                     if (MousePress)
                     {
+                        
 
                         FindObjectOfType<AudioManager>().Play("MenuButton");
                         optionOpenMenu();
@@ -210,6 +215,23 @@ public class MainMenuText : MonoBehaviour {
                     {
                         FindObjectOfType<AudioManager>().Play("MenuButton");
                         SceneManager.LoadScene("TestArea");
+
+                    }
+                }
+
+                else if (pointName == "Fragezeichen" && MouseHover)
+                {
+                    transform.position = Vector3.Lerp(transform.position, selectedfrageZeichen, buttonsHoverLerpSpeed);
+                    //SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
+
+                    if (MousePress)
+                    {
+                        renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
+                        frageZeichenOpenMenu();
+
+
 
                     }
                 }
@@ -349,6 +371,11 @@ public class MainMenuText : MonoBehaviour {
         OptionsMenuOpened(true);
     }
 
+    private void frageZeichenOpenMenu()
+    {
+        frageZeichenMenuOpened(true);
+    }
+
     public void OptionsMenuOpened(bool isOpen)
     {
         if (isOpen)
@@ -365,5 +392,23 @@ public class MainMenuText : MonoBehaviour {
             Time.timeScale = 1f;
         }
     }
+
+   
+
+    public void frageZeichenMenuOpened(bool opened)
+    {
+        if (opened)
+        {
+            FragezeichenText.SetActive(true);
+            
+        }
+        else
+        {
+            FragezeichenText.SetActive(false);
+            
+        }
+    }
+
+    
 
 }
