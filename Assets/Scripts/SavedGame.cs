@@ -168,6 +168,10 @@ public class SavedGame
                         for (int i = 0; i < els.Length; i++)
                         {
                             OwnedRockets[i] = Convert.ToInt32(els[i]);
+                            if (OwnedRockets[i] != -1)
+                            {
+                                UnlockedRockets[i] = 1;
+                            }
                         }
                     }
                     else if (con[0] == "3")
