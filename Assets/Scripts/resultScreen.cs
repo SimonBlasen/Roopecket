@@ -122,6 +122,7 @@ public class resultScreen : MonoBehaviour
     public TextMeshProUGUI moneyText, moneyTextValue, totalDamageText, DamageText, totalTimeText, timeText, fuelText, totalFuelText, rocketWorth, rocketWorthTotal;
     public TextMeshProUGUI[] textMeshes;
     public TextMeshProUGUI[] textMeshesGlobal;
+    public GameObject panelLeaderboard;
     private string[] t_texts;
     private float[] globalValues;
     private float[] globalValuesOld;
@@ -143,6 +144,13 @@ public class resultScreen : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < lbName.Length; i++)
+        {
+            lbName[i].text = "";
+            lbPos[i].text = "";
+            lbTime[i].text = "";
+        }
+
         t_texts = new string[textMeshes.Length];
         globalValues = new float[textMeshes.Length];
         globalValuesOld = new float[textMeshes.Length];
@@ -289,8 +297,50 @@ public class resultScreen : MonoBehaviour
         }
     }
 
+    public TextMeshProUGUI[] lbPos;
+    public TextMeshProUGUI[] lbTime;
+    public TextMeshProUGUI[] lbName;
+
+    public void RefreshLeaderboard()
+    {
+
+        LevelLeaderboardDownloader lld = GameObject.FindObjectOfType<LevelLeaderboardDownloader>();
+
+        lbPos[0].text = "1.";
+        lbTime[0].text = (lld.timeFirst / 1000f).ToString();
+        lbName[0].text = lld.nameFirst;
+
+        for (int i = 0; i < lbPos.Length - 1; i++)
+        {
+            if (i < lld.places.Length)
+            {
+                lbPos[i + 1].text = lld.places[i] + ".";
+                lbTime[i + 1].text = (lld.times[i] / 1000f).ToString();
+                lbName[i + 1].text = lld.names[i];
+            }
+        }
+    }
+
+    public void ShowLeaderboard()
+    {
+        Debug.Log("Showing leaderboard");
+        panelLeaderboard.SetActive(true);
+
+        RefreshLeaderboard();
+
+        
+    }
+
+    private void updateLeaderboard()
+    {
+        float time = SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel];
+
+        GameObject.FindObjectOfType<LevelLeaderboardDownloader>().UploadScore((int)(time * 1000f), this);
+    }
+
     public void showEndscreenSimple()
     {
+        updateLeaderboard();
         Cursor.visible = true;
         Statics.resetMultiplier = 0f;
         isSimpleEndscreen = true;
@@ -336,6 +386,7 @@ public class resultScreen : MonoBehaviour
 
     public void showEndScreen()
     {
+        updateLeaderboard();
         Cursor.visible = true;
         Statics.resetMultiplier = 0f;
         isSimpleEndscreen = false;
