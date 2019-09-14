@@ -18,13 +18,20 @@ public class ChallengesWatcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
+        if (Statics.isInFreestyle == false)
         {
-            curChallenge = SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp];
+            if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
+            {
+                curChallenge = SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp];
+            }
+
+            curLevel = GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp;
         }
-
-        curLevel = GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp;
-
+        else
+        {
+            curChallenge = -1;
+            textChallengeGUI.text = "";
+        }
     }
     TimeKeeper tk = null;
 
