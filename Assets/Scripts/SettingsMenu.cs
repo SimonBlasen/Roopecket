@@ -168,6 +168,7 @@ public class SettingsMenu : MonoBehaviour
             oldVolume = AudioListener.volume;
             oldIsFullscreen = Screen.fullScreen;
             oldRes = Screen.currentResolution;
+            newIsFullscreen = oldIsFullscreen;
 
             sliderVolume.value = oldVolume;
             toggleFullscreen.isOn = oldIsFullscreen;
