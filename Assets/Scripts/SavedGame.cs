@@ -345,6 +345,7 @@ public class SavedGame
 
     public static int LastPlayedRocket = 0;
 
+
     public static int[] UnlockedRockets = new int[256];
     public static int[] OwnedRockets = new int[256];
     public static string[] RocketNames = new string[256];   // May not include "," and speerator
@@ -359,6 +360,164 @@ public class SavedGame
     public static float FreestyleDamage;
     public static float FreestyleFuel;
 
+
+    public static string GetChallengeText(int challenge)
+    {
+        if (challenge == 0)
+        {
+            return "No damage run";
+        }
+        if (challenge == 1)
+        {
+            return "Fast run";
+        }
+        if (challenge == 2)
+        {
+            return "Low fuel run";
+        }
+        if (challenge == 3)
+        {
+            return "Somersault run";
+        }
+
+        return "Error";
+    }
+
+    public static string GetChallengeName(int challenge)
+    {
+        if (challenge == 0)
+        {
+            return "No damage run";
+        }
+        if (challenge == 1)
+        {
+            return "Fast run";
+        }
+        if (challenge == 2)
+        {
+            return "Low fuel run";
+        }
+        if (challenge == 3)
+        {
+            return "Somersault run";
+        }
+
+        return "Error";
+    }
+
+    public static int GetChallengeValue(int level, int challenge)
+    {
+        if (challenge == 3)
+        {
+            return 10;
+        }
+        if (challenge == 0)
+        {
+            return 1;
+        }
+        if (challenge == 1)
+        {
+            // Time
+            return 30;
+        }
+        if (challenge == 2)
+        {
+            // Fuel
+            return 200;
+        }
+
+
+
+
+
+
+
+        return 0;
+    }
+
+    public static int[] GetChallenges(int rocket)
+    {
+        int rocketType = OwnedRockets[rocket];
+        string username = "";
+
+        if (SteamManager.Initialized)
+        {
+            username = Steamworks.SteamFriends.GetPersonaName();
+        }
+
+        int nameHash = HashString(username) + rocketType * 1213 + rocket * 1777;
+
+        int[] challenges = new int[20];
+
+        for (int i = 0; i < challenges.Length; i++)
+        {
+            PerlinNoise pn = new PerlinNoise(0);
+            float perl = pn.noise2((rocket * 0.1f + rocketType * 0.13f) * 20f + i * 41f, (rocket * 0.21f + rocketType * 0.27f) * 21f - i * 31f) + 1f;
+            float perl2 = pn.noise2((rocket * 0.71f + rocketType * 0.53f) * 11f + i * 31f, (rocket * 0.11f + rocketType * 0.24f) * 17f - i * 13f) + 1f;
+            perl *= 0.5f;
+            perl2 *= 0.5f;
+
+            //perl = 0f;
+
+            if (perl < 0f || perl > 1f)
+            {
+                Debug.LogError("jfkds jfkolwe");
+            }
+
+            Debug.Log(i + ": " + perl);
+
+            //float perl = Mathf.PerlinNoise();
+            float border = 1f;
+
+            if (i < 6)
+            {
+                border = 0.13345f;
+            }
+            else if (i < 11)
+            {
+                border = 0.3f;
+            }
+            else if (i < 16)
+            {
+                border = 0.55f;
+            }
+            else
+            {
+                border = 0.8f;
+            }
+
+            if (perl <= border)
+            {
+                int rest = ((int)(perl2 * 400f)) % 4;
+                challenges[i] = rest;
+                if (challenges[i] < 0)
+                {
+                    challenges[i] = -challenges[i];
+                }
+            }
+            else
+            {
+                challenges[i] = -1;
+            }
+        }
+
+        return challenges;
+    }
+
+    private static int HashString(string text)
+    {
+        // TODO: Determine nullity policy.
+
+        unchecked
+        {
+            int hash = 23;
+            foreach (char c in text)
+            {
+                hash = hash * 31 + c;
+            }
+            return hash;
+        }
+    }
 
     public static void DeleteFile()
     {

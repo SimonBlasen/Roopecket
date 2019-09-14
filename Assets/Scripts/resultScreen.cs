@@ -123,6 +123,8 @@ public class resultScreen : MonoBehaviour
     public TextMeshProUGUI[] textMeshes;
     public TextMeshProUGUI[] textMeshesGlobal;
     public GameObject panelLeaderboard;
+    public TextMeshProUGUI textChallenge;
+    public TextMeshProUGUI textChallengeReward;
     private string[] t_texts;
     private float[] globalValues;
     private float[] globalValuesOld;
@@ -382,6 +384,13 @@ public class resultScreen : MonoBehaviour
         {
             levelText.text = "Level " + (Statics.currentLevel + 1).ToString();
         }
+
+
+
+        if (GameObject.FindObjectOfType<ChallengesWatcher>() != null)
+        {
+            GameObject.FindObjectOfType<ChallengesWatcher>().FinishedLevel(textChallenge, textChallengeReward, SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel]);
+        }
     }
 
     public void showEndScreen()
@@ -464,6 +473,11 @@ public class resultScreen : MonoBehaviour
         }
 
 
+
+        if (GameObject.FindObjectOfType<ChallengesWatcher>() != null)
+        {
+            GameObject.FindObjectOfType<ChallengesWatcher>().FinishedLevel(textChallenge, textChallengeReward, SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel]);
+        }
 
 
 
