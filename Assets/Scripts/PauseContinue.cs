@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,11 +8,26 @@ public class PauseContinue : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public TextMeshProUGUI textChallenge;
 
 
-    
 
+    private void Start()
+    {
+        GameObject instChalWatcher = new GameObject("Challenges Watcher");
+        instChalWatcher.AddComponent<ChallengesWatcher>();
 
+        instChalWatcher.GetComponent<ChallengesWatcher>().textChallengeGUI = textChallenge;
+
+        if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
+        {
+            textChallenge.text = "Challenge\n  " + SavedGame.GetChallengeName(SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp]);
+        }
+        else
+        {
+            textChallenge.text = "";
+        }
+    }
 
     // Update is called once per frame
     void Update()

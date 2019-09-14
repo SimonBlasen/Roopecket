@@ -27,6 +27,14 @@ public class PlanetLevel : MonoBehaviour
     private Vector3 scaleTarget = new Vector3(1.0f, 1.0f, 1.0f);
     private MainMenuCam mainMenuCam;
 
+    public Vector3 LandingPlatformPosition
+    {
+        get
+        {
+            return currentLevelTransf.position;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

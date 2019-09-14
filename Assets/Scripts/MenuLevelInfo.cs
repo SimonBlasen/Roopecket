@@ -24,6 +24,8 @@ public class MenuLevelInfo : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelWorthness;
     [SerializeField]
+    private TextMeshProUGUI challengeText;
+    [SerializeField]
     private Button buttonContinue;
     [SerializeField]
     private Button buttonFreestyle;
@@ -110,6 +112,17 @@ public class MenuLevelInfo : MonoBehaviour
             {
                 buttonFreestyle.interactable = false;
             }
+
+
+            if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[LevelIndex] != -1)
+            {
+                challengeText.text = "Challenge\n  " + SavedGame.GetChallengeName(SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[LevelIndex]);
+            }
+            else
+            {
+                challengeText.text = "";
+            }
+
 
 
             float time = SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, levelIndex];

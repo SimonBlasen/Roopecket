@@ -61,6 +61,14 @@ public class AchievementsWatcher : MonoBehaviour
                         SteamUserStats.SetAchievement("FLYING_A_LOOPING");
                         Debug.Log("FLYING_A_LOOPING");
                     }
+
+                    xLoop = 0f;
+                    zLoop = 0f;
+
+                    if (GameObject.FindObjectOfType<ChallengesWatcher>() != null)
+                    {
+                        GameObject.FindObjectOfType<ChallengesWatcher>().FlewSomersault();
+                    }
                 }
 
 
