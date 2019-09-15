@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class showText : MonoBehaviour
@@ -80,7 +81,17 @@ public class showText : MonoBehaviour
 
     void closeText()
     {
-        Cursor.visible = false;
+        if (SceneManager.GetActiveScene().name != "Tutorial1"
+                  && SceneManager.GetActiveScene().name != "Tutorial1.1"
+                  && SceneManager.GetActiveScene().name != "Tutorial1.2"
+                  && SceneManager.GetActiveScene().name != "Tutorial2"
+                  && SceneManager.GetActiveScene().name != "Tutorial2.1"
+                  && SceneManager.GetActiveScene().name != "Tutorial3"
+                  && SceneManager.GetActiveScene().name != "Tutorial4"
+                  && SceneManager.GetActiveScene().name != "Tutorial5")
+        {
+            Cursor.visible = false;
+        }
 
         Time.timeScale = 1;
         isThereText = false;

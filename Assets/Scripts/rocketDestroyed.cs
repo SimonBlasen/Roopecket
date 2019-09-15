@@ -71,7 +71,17 @@ public class rocketDestroyed : MonoBehaviour {
 
     public void Retry()
     {
-        Cursor.visible = false;
+        if (SceneManager.GetActiveScene().name != "Tutorial1"
+                  && SceneManager.GetActiveScene().name != "Tutorial1.1"
+                  && SceneManager.GetActiveScene().name != "Tutorial1.2"
+                  && SceneManager.GetActiveScene().name != "Tutorial2"
+                  && SceneManager.GetActiveScene().name != "Tutorial2.1"
+                  && SceneManager.GetActiveScene().name != "Tutorial3"
+                  && SceneManager.GetActiveScene().name != "Tutorial4"
+                  && SceneManager.GetActiveScene().name != "Tutorial5")
+        {
+            Cursor.visible = false;
+        }
 
         Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         noLifeMenuUI.SetActive(false);

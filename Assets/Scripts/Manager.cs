@@ -101,6 +101,7 @@ public class Manager : MonoBehaviour
             {
                 GameObject.FindObjectOfType<TutorialEndscreen>().SceneToLoad = conc;
                 GameObject.FindObjectOfType<TutorialEndscreen>().GetComponent<Canvas>().enabled = true;
+                Cursor.visible = true;
 
                 if (SceneManager.GetActiveScene().name == "Tutorial5")
                 {

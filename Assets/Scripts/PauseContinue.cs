@@ -65,13 +65,33 @@ public class PauseContinue : MonoBehaviour
 
     public void Resume()
     {
-        Cursor.visible = false;
+        if (SceneManager.GetActiveScene().name != "Tutorial1"
+               && SceneManager.GetActiveScene().name != "Tutorial1.1"
+               && SceneManager.GetActiveScene().name != "Tutorial1.2"
+               && SceneManager.GetActiveScene().name != "Tutorial2"
+               && SceneManager.GetActiveScene().name != "Tutorial2.1"
+               && SceneManager.GetActiveScene().name != "Tutorial3"
+               && SceneManager.GetActiveScene().name != "Tutorial4"
+               && SceneManager.GetActiveScene().name != "Tutorial5")
+        {
+            Cursor.visible = false;
+        }
 
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
 
-        Cursor.visible = false;
+        if (SceneManager.GetActiveScene().name != "Tutorial1"
+                && SceneManager.GetActiveScene().name != "Tutorial1.1"
+                && SceneManager.GetActiveScene().name != "Tutorial1.2"
+                && SceneManager.GetActiveScene().name != "Tutorial2"
+                && SceneManager.GetActiveScene().name != "Tutorial2.1"
+                && SceneManager.GetActiveScene().name != "Tutorial3"
+                && SceneManager.GetActiveScene().name != "Tutorial4"
+                && SceneManager.GetActiveScene().name != "Tutorial5")
+        {
+            Cursor.visible = false;
+        }
     }
 
     public void loadMenu()
@@ -92,6 +112,7 @@ public class PauseContinue : MonoBehaviour
 
     public void quitGame()
     {
+        SavedGame.SaveSavegame();
 
         Application.Quit();
 

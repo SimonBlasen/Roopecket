@@ -14,7 +14,7 @@ public class PopUPText : MonoBehaviour
     void Start()
     {
 
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
         Button btn = yourButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
     }

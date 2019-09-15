@@ -52,13 +52,15 @@ public class LoadSavegame : MonoBehaviour
                 Statics.selectedRocket = SavedGame.OwnedRockets[SavedGame.LastPlayedRocket];
                 if (Statics.selectedRocket == -1)
                 {
+                    Statics.selectedRocket = 0;
+                    /*
                     Debug.LogError("Selected Rocket was -1");
 
                     SavedGame.FillWithInitValues();
                     SavedGame.FirstEverStart = true;
 
 
-                    SceneManager.LoadScene("Main_Menu Difficulty");
+                    SceneManager.LoadScene("Main_Menu Difficulty");*/
                 }
                 else
                 {
