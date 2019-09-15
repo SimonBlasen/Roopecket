@@ -110,6 +110,18 @@ public class SavedGame
 
             con += "12=" + RocketUnlockKeys.ToString() + seperator;
 
+            con += "13=";
+            for (int i = 0; i < ChallengeRewards.GetLength(0); i++)
+            {
+                for (int j = 0; j < ChallengeRewards.GetLength(1); j++)
+                {
+                    con += ChallengeRewards[i, j].ToString() + "_";
+                }
+                con += "-";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
             File.WriteAllText(savegameDir + "/" + savegameFile, con);
         }
     }
@@ -254,6 +266,18 @@ public class SavedGame
                     {
                         RocketUnlockKeys = Convert.ToInt32(con[1]);
                     }
+                    else if (con[0] == "13")
+                    {
+                        string[] els = con[1].Split('-');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            for (int j = 0; j < els[i].Split('_').Length; j++)
+                            {
+                                if (els[i].Split('_')[j].Length > 0)
+                                    ChallengeRewards[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -343,6 +367,8 @@ public class SavedGame
 
     public static bool[] DrEberhardtFound = new bool[256];
 
+
+    // Index bis 256
     public static int LastPlayedRocket = 0;
 
 
@@ -355,6 +381,7 @@ public class SavedGame
     public static float[,] CurrentDamageStage = new float[256,20];
     public static float[,] CurrentTimeStage = new float[256,20];
     public static float[,] CurrentUsedFuel = new float[256, 20];
+    public static float[,] ChallengeRewards = new float[256, 20];
 
     public static float FreestyleTime;
     public static float FreestyleDamage;
@@ -423,16 +450,25 @@ public class SavedGame
         if (challenge == 2)
         {
             // Fuel
-            return 200;
+            return 70;
         }
 
 
-
-
-
-
-
         return 0;
+    }
+
+    public static int GetChallengeReward()
+    {
+        float rand = UnityEngine.Random.Range(0f, 1f);
+
+        if (rand <= 0.25f)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
     public static int[] GetChallenges(int rocket)

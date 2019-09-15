@@ -10,6 +10,7 @@ public class PauseContinue : MonoBehaviour
     public GameObject pauseMenuUI;
     public TextMeshProUGUI textChallenge;
 
+    public AudioClip[] challengeClips;
 
 
     private void Start()
@@ -18,6 +19,7 @@ public class PauseContinue : MonoBehaviour
         instChalWatcher.AddComponent<ChallengesWatcher>();
 
         instChalWatcher.GetComponent<ChallengesWatcher>().textChallengeGUI = textChallenge;
+        instChalWatcher.GetComponent<ChallengesWatcher>().audioClip = challengeClips[SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp]];
 
         if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
         {

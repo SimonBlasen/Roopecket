@@ -343,6 +343,10 @@ public class resultScreen : MonoBehaviour
     public void showEndscreenSimple()
     {
         updateLeaderboard();
+        if (GameObject.FindObjectOfType<ChallengesWatcher>() != null)
+        {
+            GameObject.FindObjectOfType<ChallengesWatcher>().FinishedLevel(textChallenge, textChallengeReward, SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel]);
+        }
         Cursor.visible = true;
         Statics.resetMultiplier = 0f;
         isSimpleEndscreen = true;
@@ -387,15 +391,15 @@ public class resultScreen : MonoBehaviour
 
 
 
-        if (GameObject.FindObjectOfType<ChallengesWatcher>() != null)
-        {
-            GameObject.FindObjectOfType<ChallengesWatcher>().FinishedLevel(textChallenge, textChallengeReward, SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel]);
-        }
     }
 
     public void showEndScreen()
     {
         updateLeaderboard();
+        if (GameObject.FindObjectOfType<ChallengesWatcher>() != null)
+        {
+            GameObject.FindObjectOfType<ChallengesWatcher>().FinishedLevel(textChallenge, textChallengeReward, SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel]);
+        }
         Cursor.visible = true;
         Statics.resetMultiplier = 0f;
         isSimpleEndscreen = false;
@@ -474,10 +478,6 @@ public class resultScreen : MonoBehaviour
 
 
 
-        if (GameObject.FindObjectOfType<ChallengesWatcher>() != null)
-        {
-            GameObject.FindObjectOfType<ChallengesWatcher>().FinishedLevel(textChallenge, textChallengeReward, SavedGame.CurrentTimeStage[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentUsedFuel[SavedGame.LastPlayedRocket, Statics.currentLevel], SavedGame.CurrentDamageStage[SavedGame.LastPlayedRocket, Statics.currentLevel]);
-        }
 
 
 
@@ -501,6 +501,11 @@ public class resultScreen : MonoBehaviour
         for (int i = 0; i < whichLevels.Length; i++)
         {
             sum += ((worthFactor * PlanetsWorth.PlanetsFactors[whichLevels[i]]) / (time * timeFactor + damage * damageFactor + fuel * fuelFactor)) * 10 * SavedGame.RocketMultiplier[Statics.selectedRocket];
+
+            if (SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, whichLevels[i]] > 0f)
+            {
+                sum += SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, whichLevels[i]];
+            }
         }
 
         if (float.IsInfinity(sum) || float.IsNegativeInfinity(sum) || float.IsPositiveInfinity(sum) || float.IsNaN(sum) || sum < -100000f || sum > 100000f)

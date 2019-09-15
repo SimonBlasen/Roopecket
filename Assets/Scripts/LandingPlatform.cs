@@ -37,7 +37,7 @@ public class LandingPlatform : MonoBehaviour
         if (Statics.isInFreestyle == false)
         {
             bool spawnKey = false;
-            if (SceneManager.GetActiveScene().name == "Platform sixth Level"
+            /*if (SceneManager.GetActiveScene().name == "Platform sixth Level"
                 || SceneManager.GetActiveScene().name == "Platform Level 11"
                 || SceneManager.GetActiveScene().name == "Platform Level 16")
             {
@@ -48,17 +48,17 @@ public class LandingPlatform : MonoBehaviour
 
                     spawnKey = true;
                 }
-            }
+            }*/
             if (SceneManager.GetActiveScene().name == "Platform Level 20")
             {
 
-                float rand = Random.Range(0f, 1f);
-                if (rand <= 1f)
-                {
-
-
                     spawnKey = true;
-                }
+                
+            }
+
+            if (SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] < -1f)
+            {
+                spawnKey = true;
             }
 
             if (spawnKey && platformName.StartsWith("Finish"))

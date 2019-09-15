@@ -15,9 +15,15 @@ public class ChallengesWatcher : MonoBehaviour
 
     private int curLevel = 0;
 
+    public AudioClip audioClip;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.AddComponent<AudioSource>();
+        GetComponent<AudioSource>().clip = audioClip;
+        GetComponent<AudioSource>().loop = false;
+        GetComponent<AudioSource>().Play();
         if (Statics.isInFreestyle == false)
         {
             if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
@@ -26,6 +32,11 @@ public class ChallengesWatcher : MonoBehaviour
             }
 
             curLevel = GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp;
+
+            if (curChallenge == 3)
+            {
+                textChallengeGUI.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  " + (somersaults).ToString("n0") + " / " + SavedGame.GetChallengeValue(curLevel, curChallenge).ToString("n0");
+            }
         }
         else
         {
@@ -51,6 +62,10 @@ public class ChallengesWatcher : MonoBehaviour
                     challengeCompl = false;
                     textChallengeGUI.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  Failed!";
                 }
+                else
+                {
+                    textChallengeGUI.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  " + (SavedGame.GetChallengeValue(curLevel, curChallenge) - tk.GetCurrentTime()).ToString("n2");
+                }
 
             }
             else if (curChallenge == 0)
@@ -67,6 +82,10 @@ public class ChallengesWatcher : MonoBehaviour
                 {
                     challengeCompl = false;
                     textChallengeGUI.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  Failed!";
+                }
+                else
+                {
+                    textChallengeGUI.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  " + (StaticsSingleplayer.ReadFuelUsed()).ToString("n2") + " / " + SavedGame.GetChallengeValue(curLevel, curChallenge).ToString("n0");
                 }
             }
         }
@@ -101,20 +120,45 @@ public class ChallengesWatcher : MonoBehaviour
             if (challengeCompl)
             {
                 textChallenge.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  Completed!";
+
+                int reward = SavedGame.GetChallengeReward();
+
+                if (reward == 0 && curLevel != 19)
+                {
+                    textChallengeRew.text = "Rocket key in\nnext level";
+
+                    SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, curLevel + 1] = -2;
+                }
+                else if (reward == 1)
+                {
+                    int rw = Random.Range(1, 8);
+                    rw *= 100;
+
+                    textChallengeRew.text = "Additional rocketworth\nof " + rw.ToString();
+
+                    SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, curLevel] = rw;
+                }
+
             }
             else
             {
                 textChallenge.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  Failed!";
+                textChallengeRew.text = "";
             }
+
+
+
+
+
         }
         else
         {
             textChallenge.text = "";
+            textChallengeRew.text = "";
         }
 
 
 
-        textChallengeRew.text = "";
     }
 
     public void FlewSomersault()
@@ -128,6 +172,10 @@ public class ChallengesWatcher : MonoBehaviour
                 challengeCompl = true;
 
                 textChallengeGUI.text = chalComplText;
+            }
+            else
+            {
+                textChallengeGUI.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  " + (somersaults).ToString("n0") + " / " + SavedGame.GetChallengeValue(curLevel, curChallenge).ToString("n0");
             }
         }
     }

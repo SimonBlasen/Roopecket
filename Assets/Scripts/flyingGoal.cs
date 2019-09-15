@@ -23,7 +23,7 @@ public class flyingGoal : MonoBehaviour {
         if (Statics.isInFreestyle == false)
         {
             bool spawnKey = false;
-            if (SceneManager.GetActiveScene().name == "Platform sixth Level"
+            /*if (SceneManager.GetActiveScene().name == "Platform sixth Level"
                 || SceneManager.GetActiveScene().name == "Platform Level 11"
                 || SceneManager.GetActiveScene().name == "Platform Level 16")
             {
@@ -34,14 +34,19 @@ public class flyingGoal : MonoBehaviour {
 
                     spawnKey = true;
                 }
-            }
+            }*/
             if (SceneManager.GetActiveScene().name == "Platform Level 20")
             {
 
                 spawnKey = true;
             }
 
-            if (spawnKey)
+            if (SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] < -1f)
+            {
+                spawnKey = true;
+            }
+
+            if (spawnKey && roopocketKey != null)
             {
                 Debug.Log("Spawned key");
                 GameObject instKey = Instantiate(roopocketKey);
