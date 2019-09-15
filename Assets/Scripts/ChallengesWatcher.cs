@@ -37,6 +37,10 @@ public class ChallengesWatcher : MonoBehaviour
             {
                 textChallengeGUI.text = "Challenge: " + SavedGame.GetChallengeName(curChallenge) + "\n  " + (somersaults).ToString("n0") + " / " + SavedGame.GetChallengeValue(curLevel, curChallenge).ToString("n0");
             }
+            else if (curChallenge == -1)
+            {
+                textChallengeGUI.text = "";
+            }
         }
         else
         {
