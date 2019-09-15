@@ -20,12 +20,12 @@ public class ChallengesWatcher : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.AddComponent<AudioSource>();
-        GetComponent<AudioSource>().clip = audioClip;
-        GetComponent<AudioSource>().loop = false;
-        GetComponent<AudioSource>().Play();
         if (Statics.isInFreestyle == false)
         {
+            gameObject.AddComponent<AudioSource>();
+            GetComponent<AudioSource>().clip = audioClip;
+            GetComponent<AudioSource>().loop = false;
+            GetComponent<AudioSource>().Play();
             if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
             {
                 curChallenge = SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp];

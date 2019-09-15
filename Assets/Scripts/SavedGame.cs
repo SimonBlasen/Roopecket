@@ -507,11 +507,11 @@ public class SavedGame
 
             if (i < 6)
             {
-                border = 0.13345f;
+                border = (1f / 6f) * 1.1f; // = ungefähr 0.18
             }
             else if (i < 11)
             {
-                border = 0.3f;
+                border = 0.38f;
             }
             else if (i < 16)
             {
