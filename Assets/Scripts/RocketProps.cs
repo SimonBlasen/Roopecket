@@ -223,7 +223,7 @@ public class RocketProps : MonoBehaviour
                     instAudioLowHealth = new GameObject("Low Health Audio");
                     instAudioLowHealth.AddComponent<AudioSource>();
                     instAudioLowHealth.GetComponent<AudioSource>().clip = lowHealthClip;
-                    instAudioLowHealth.GetComponent<AudioSource>().volume = 0.62f;
+                    instAudioLowHealth.GetComponent<AudioSource>().volume = 1.5f;
                     instAudioLowHealth.GetComponent<AudioSource>().Play();
                 }
 

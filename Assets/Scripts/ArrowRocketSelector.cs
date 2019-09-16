@@ -25,6 +25,7 @@ public class ArrowRocketSelector : MonoBehaviour
     public GameObject cage;
     public GameObject prefabRocketnameCanvas;
     public GameObject prefabTextTooShort;
+    public GameObject sellingParticles;
     public GameObject prefabRocketSellCanvas;
     private GameObject instRocketnameCanvas;
     private GameObject instRocketSellCanvas;
@@ -76,6 +77,7 @@ public class ArrowRocketSelector : MonoBehaviour
             if (buttonsSell[i].gameObject.name == "Button Yes")
             {
                 buttonsSell[i].onClick.AddListener(RocketSellYes);
+               
             }
             else if (buttonsSell[i].gameObject.name == "Button No")
             {
@@ -333,6 +335,8 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         SavedGame.Money += selectedBoughtRocketWorthPlusPrice;
         moneyMachine.Number = SavedGame.Money;
+       // Instantiate<GameObject>(sellingParticles);
+       
 
         SavedGame.OwnedRockets[selectedBoughtRocket] = -1;
         SavedGame.NextLevel[selectedBoughtRocket] = 0;
