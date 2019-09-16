@@ -335,9 +335,9 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         SavedGame.Money += selectedBoughtRocketWorthPlusPrice;
         moneyMachine.Number = SavedGame.Money;
-       // Instantiate<GameObject>(sellingParticles);
-       
+        // Instantiate<GameObject>(sellingParticles);
 
+        Debug.Log("Selled rocket. Owned rockets is -1 at [" + selectedBoughtRocket + "]");
         SavedGame.OwnedRockets[selectedBoughtRocket] = -1;
         SavedGame.NextLevel[selectedBoughtRocket] = 0;
         SavedGame.RocketNames[selectedBoughtRocket] = "";
@@ -437,6 +437,7 @@ public class ArrowRocketSelector : MonoBehaviour
             {
                 if (SavedGame.OwnedRockets[i] == -1)
                 {
+                    Debug.Log("Set OwnedRockets at[" + i + "] to " + selectedBuyRocket);
                     SavedGame.OwnedRockets[i] = selectedBuyRocket;
                     SavedGame.RocketNames[i] = inputRocketName.text;
 

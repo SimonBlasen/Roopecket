@@ -70,7 +70,7 @@ public static class EndscreenStateMethods
 
     public static EndscreenState NextState(this EndscreenState state)
     {
-        Debug.Log("State was: " + state.ToString());
+        //Debug.Log("State was: " + state.ToString());
         switch (state)
         {
             case EndscreenState.START:

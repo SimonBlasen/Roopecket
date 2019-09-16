@@ -133,6 +133,7 @@ public class SavedGame
 
     public static void FillWithInitValues()
     {
+        Debug.LogError("Reset savegame");
         OwnedRockets[0] = -1;
         RocketNames[0] = "Rudy";
         for (int i = 1; i < OwnedRockets.Length; i++)
@@ -179,6 +180,10 @@ public class SavedGame
                         string[] els = con[1].Split(',');
                         for (int i = 0; i < els.Length; i++)
                         {
+                            if (i < 10)
+                            {
+                                Debug.Log("Read Ownedrockets [" + i + "]=" + OwnedRockets[i]);
+                            }
                             OwnedRockets[i] = Convert.ToInt32(els[i]);
                             if (OwnedRockets[i] != -1)
                             {
@@ -374,6 +379,11 @@ public class SavedGame
 
     public static int[] UnlockedRockets = new int[256];
     public static int[] OwnedRockets = new int[256];
+
+    //private static int[] saOwnedRockets = new int[256];
+    //private static int[] sOwnedRockets = new int[256];
+    //public static int[] OwnedRockets { get {
+    //        return sOwnedRockets; } set { sOwnedRockets = value; } }
     public static string[] RocketNames = new string[256];   // May not include "," and speerator
     public static int[] NextLevel = new int[256];
     //public static float[] CurrentDamage = new float[256];
@@ -493,14 +503,14 @@ public class SavedGame
             perl *= 0.5f;
             perl2 *= 0.5f;
 
-            //perl = 0f;
+            perl = 0f;
 
             if (perl < 0f || perl > 1f)
             {
                 Debug.LogError("jfkds jfkolwe");
             }
 
-            Debug.Log(i + ": " + perl);
+            //Debug.Log(i + ": " + perl);
 
             //float perl = Mathf.PerlinNoise();
             float border = 1f;
