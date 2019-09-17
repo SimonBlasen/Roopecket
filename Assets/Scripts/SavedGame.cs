@@ -436,8 +436,8 @@ public class SavedGame
     {
         if (challenge == 3)
         {
-            int loops = UnityEngine.Random.Range(2, 10);
-            return loops;
+            // int loops = UnityEngine.Random.Range(2, 10);
+            return 5;
         }
         if (challenge == 0)
         {
