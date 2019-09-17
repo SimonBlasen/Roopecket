@@ -26,6 +26,7 @@ public class ArrowRocketSelector : MonoBehaviour
     public GameObject prefabRocketnameCanvas;
     public GameObject prefabTextTooShort;
     public GameObject sellingParticles;
+    public GameObject unlockParticles;
     public GameObject prefabRocketSellCanvas;
     private GameObject instRocketnameCanvas;
     private GameObject instRocketSellCanvas;
@@ -335,9 +336,11 @@ public class ArrowRocketSelector : MonoBehaviour
     {
         SavedGame.Money += selectedBoughtRocketWorthPlusPrice;
         moneyMachine.Number = SavedGame.Money;
-        // Instantiate<GameObject>(sellingParticles);
+        GameObject pS = Instantiate<GameObject>(sellingParticles);
+        Destroy(pS, 5);
+        GetComponent<AudioSource>().Play();
+       
 
-        Debug.LogError("Selled rocket. Owned rockets is -1 at [" + selectedBoughtRocket + "]");
         SavedGame.OwnedRockets[selectedBoughtRocket] = -1;
         SavedGame.NextLevel[selectedBoughtRocket] = 0;
         SavedGame.RocketNames[selectedBoughtRocket] = "";
@@ -394,6 +397,9 @@ public class ArrowRocketSelector : MonoBehaviour
                 SavedGame.RocketUnlockKeys--;
                 SavedGame.UnlockedRockets[selectedBuyRocket] = 1;
                 setRocketActive(selectedBuyRocket);
+                GameObject pS = Instantiate<GameObject>(unlockParticles);
+                pS.transform.position = rockets[0].position;
+                Destroy(pS, 5);
             }
         }
     }
@@ -437,15 +443,7 @@ public class ArrowRocketSelector : MonoBehaviour
             {
                 if (SavedGame.OwnedRockets[i] == -1)
                 {
-                    Debug.LogError("Set OwnedRockets at[" + i + "] to " + selectedBuyRocket);
                     SavedGame.OwnedRockets[i] = selectedBuyRocket;
-
-
-                    for (int j = 0; j < 20; j++)
-                    {
-                        SavedGame.ChallengeRewards[i, j] = 0;
-                    }
-
                     SavedGame.RocketNames[i] = inputRocketName.text;
 
                     Debug.Log("Bought rocket at array index " + i.ToString());
@@ -461,6 +459,7 @@ public class ArrowRocketSelector : MonoBehaviour
             //TODO Show rocket bought
 
             garageCameraLook.IsRight = false;
+            GetComponent<AudioSource>().Play();
 
 
             if (inputRocketName.text == "MakeMeRich.")

@@ -35,6 +35,10 @@ public class Manager : MonoBehaviour
             if (rocketsFueling[i] != null)
             {
                 rocketsFueling[i].AddFuel(Time.deltaTime * 40f);
+                if (rocketsFueling[i].CurrentFuel >= rocketsFueling[i].MaxFuel)
+                {
+                    GetComponent<AudioSource>().Stop();
+                }
             }
         }
 
@@ -54,6 +58,8 @@ public class Manager : MonoBehaviour
             {
                 GameObject go = new GameObject();
                 go.AddComponent<Manager>();
+                go.AddComponent<AudioSource>();
+                go.GetComponent<AudioSource>().loop = true;
                 go.name = "Manager";
                 instance = go.GetComponent<Manager>();
 
@@ -79,6 +85,9 @@ public class Manager : MonoBehaviour
         }
 
         rocketsFueling.Add(rocket.GetComponent<RocketProps>());
+
+        GetComponent<AudioSource>().clip = GameObject.FindObjectOfType<LevelNumber>().clipRefill;
+        GetComponent<AudioSource>().Play();
 
         if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish" && reachedFinish == false)
         {
@@ -147,6 +156,7 @@ public class Manager : MonoBehaviour
 
     public void Takeoff(Transform rocket, string landingPlatform)
     {
+        GetComponent<AudioSource>().Stop();
         rocketsFueling.Remove(rocket.GetComponent<RocketProps>());
         Debug.Log("Took off from " + landingPlatform);
     }

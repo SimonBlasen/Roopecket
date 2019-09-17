@@ -16,7 +16,7 @@ public static class EndscreenStateMethods
 {
     public static float Time(this EndscreenState state)
     {
-        float textTime = 1.5f;
+        float textTime = 1f;
         float textAddTime = 1f;
 
         float textWaitsBetween = 0.3f;
@@ -70,7 +70,7 @@ public static class EndscreenStateMethods
 
     public static EndscreenState NextState(this EndscreenState state)
     {
-        //Debug.Log("State was: " + state.ToString());
+        Debug.Log("State was: " + state.ToString());
         switch (state)
         {
             case EndscreenState.START:
@@ -162,9 +162,11 @@ public class resultScreen : MonoBehaviour
         {
             maxLifeRocket = GameObject.FindObjectOfType<RocketProps>().MaxHealth;
         }
+
+        ass = GetComponent<AudioSource>();
     }
 
-
+    private AudioSource ass;
 
     private void Update()
     {
@@ -176,6 +178,63 @@ public class resultScreen : MonoBehaviour
 
         if (state != EndscreenState.END && state != EndscreenState.START)
         {
+            if (state == EndscreenState.STAGE_TIME)
+            {
+                if (ass.isPlaying == false) ass.time = 0f;
+                if (ass.isPlaying == false) ass.Play();
+            }
+            else if (state == EndscreenState.STAGE_DAMAGE)
+            {
+                if (globalValues[1] > 0)
+                {
+                    if (ass.isPlaying == false) ass.time = 0.76f;
+                    if (ass.isPlaying == false) ass.Play();
+                }
+              
+            }
+            else if (state == EndscreenState.STAGE_FUEL)
+            {
+                if (ass.isPlaying == false) ass.time = 1.5f;
+                if (ass.isPlaying == false) ass.Play();
+            }
+            else if (state == EndscreenState.STAGE_WORTH)
+            {
+                if (ass.isPlaying == false) ass.time = 2.3f;
+                if (ass.isPlaying == false) ass.Play();
+            }
+            else if (state == EndscreenState.WAIT_STAGE_TO_GLOBAL)
+            {
+                ass.Stop();
+            }
+            else if (state == EndscreenState.GLOBAL_TIME)
+            {
+                if (ass.isPlaying == false) ass.time = 0f;
+                if (ass.isPlaying == false) ass.Play();
+            }
+            else if (state == EndscreenState.GLOBAL_DAMAGE)
+            {
+                if (globalValues[1] > 0)
+                {
+                    if (ass.isPlaying == false) ass.time = 0.76f;
+                    if (ass.isPlaying == false) ass.Play();
+                }
+            }
+            else if (state == EndscreenState.GLOBAL_FUEL)
+            {
+                if (ass.isPlaying == false) ass.time = 1.5f;
+                if (ass.isPlaying == false) ass.Play();
+            }
+            else if (state == EndscreenState.GLOBAL_WORTH)
+            {
+                if (ass.isPlaying == false) ass.time = 2.3f;
+                if (ass.isPlaying == false) ass.Play();
+            }
+            else
+            {
+                ass.Stop();
+            }
+
+
             if (((int)state) <= 3)
             {
                 if (counter > state.Time())

@@ -135,8 +135,9 @@ public class ChallengesWatcher : MonoBehaviour
                 }
                 else if (reward == 1)
                 {
-                    int rw = Random.Range(1, 8);
-                    rw *= 100;
+                    int rw = Random.Range(1, 25);
+                    rw *= 10;
+                    // geld challenge
 
                     textChallengeRew.text = "Additional rocketworth\nof " + rw.ToString();
 

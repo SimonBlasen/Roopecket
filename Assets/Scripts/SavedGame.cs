@@ -117,7 +117,7 @@ public class SavedGame
                 {
                     con += ChallengeRewards[i, j].ToString() + "_";
                 }
-                con += "<";
+                con += "-";
             }
             con = con.Substring(0, con.Length - 1);
             con += seperator;
@@ -133,7 +133,6 @@ public class SavedGame
 
     public static void FillWithInitValues()
     {
-        Debug.LogError("Reset savegame");
         OwnedRockets[0] = -1;
         RocketNames[0] = "Rudy";
         for (int i = 1; i < OwnedRockets.Length; i++)
@@ -181,10 +180,6 @@ public class SavedGame
                         for (int i = 0; i < els.Length; i++)
                         {
                             OwnedRockets[i] = Convert.ToInt32(els[i]);
-                            if (i < 10)
-                            {
-                                Debug.Log("Read Ownedrockets [" + i + "]=" + OwnedRockets[i]);
-                            }
                             if (OwnedRockets[i] != -1)
                             {
                                 UnlockedRockets[i] = 1;
@@ -273,30 +268,15 @@ public class SavedGame
                     }
                     else if (con[0] == "13")
                     {
-                        string[] els = con[1].Split('<');
-                        if (els.Length < 100)
+                        string[] els = con[1].Split('-');
+                        for (int i = 0; i < els.Length; i++)
                         {
-                            Debug.Log("Was less than 100");
-                            for (int i = 0; i < ChallengeRewards.GetLength(0); i++)
+                            for (int j = 0; j < els[i].Split('_').Length; j++)
                             {
-                                for (int j = 0; j < ChallengeRewards.GetLength(1); j++)
-                                {
-                                    ChallengeRewards[i, j] = 0;
-                                }
+                                if (els[i].Split('_')[j].Length > 0)
+                                    ChallengeRewards[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
                             }
                         }
-                        else
-                        {
-                            for (int i = 0; i < els.Length; i++)
-                            {
-                                for (int j = 0; j < els[i].Split('_').Length; j++)
-                                {
-                                    if (els[i].Split('_')[j].Length > 0)
-                                        ChallengeRewards[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
-                                }
-                            }
-                        }
-
                     }
                 }
             }
@@ -394,10 +374,6 @@ public class SavedGame
 
     public static int[] UnlockedRockets = new int[256];
     public static int[] OwnedRockets = new int[256];
-
-    //private static int[] saOwnedRockets = new int[256];
-    //private static int[] sOwnedRockets = new int[256];
-    //public static int[] OwnedRockets { get; set; }
     public static string[] RocketNames = new string[256];   // May not include "," and speerator
     public static int[] NextLevel = new int[256];
     //public static float[] CurrentDamage = new float[256];
@@ -460,7 +436,8 @@ public class SavedGame
     {
         if (challenge == 3)
         {
-            return 10;
+            int loops = UnityEngine.Random.Range(2, 10);
+            return loops;
         }
         if (challenge == 0)
         {
@@ -469,12 +446,202 @@ public class SavedGame
         if (challenge == 1)
         {
             // Time
-            return 30;
+            if (level == 0)
+            {
+                return 18;
+            }
+
+            else if (level ==  1 || level == 2)
+            {
+                return 19;
+            }
+
+            else if (level == 3)
+            {
+                return 26;
+            }
+
+            else if (level == 4)
+            {
+                return 26;
+            }
+
+            else if (level == 5)
+            {
+                return 13;
+            }
+
+            else if (level == 6)
+            {
+                return 32;
+            }
+
+            else if (level == 7)
+            {
+                return 40;
+            }
+
+            else if (level == 8)
+            {
+                return 40;
+            }
+
+            else if (level == 9)
+            {
+                return 60;
+            }
+
+            else if (level == 10)
+            {
+                return 33;
+            }
+
+            else if (level == 11)
+            {
+                return 30;
+            }
+
+            else if (level == 12)
+            {
+                return 80;
+            }
+
+            else if (level == 13)
+            {
+                return 69;
+            }
+
+            else if (level == 14)
+            {
+                return 30;
+            }
+
+            else if (level == 15)
+            {
+                return 60;
+            }
+
+            else if (level == 16)
+            {
+                return 75;
+            }
+
+            else if (level == 17)
+            {
+                return 55;
+            }
+
+            else if (level == 18)
+            { 
+                return 22;
+            }
+
+            else if (level == 19)
+            {
+                return 49;
+            }
         }
         if (challenge == 2)
         {
-            // Fuel
-            return 70;
+            if (level == 0)
+            {
+                return 30;
+            }
+
+            else if (level == 1)
+            {
+                return 30;
+            }
+
+            else if (level == 2)
+            {
+                return 35;
+            }
+
+            else if (level == 3)
+            {
+                return 40;
+            }
+
+            else if (level == 4)
+            {
+                return 50;
+            }
+
+            else if (level == 5)
+            {
+                return 25;
+            }
+
+            else if (level == 6)
+            {
+                return 50;
+            }
+
+            else if (level == 7)
+            {
+                return 35;
+            }
+
+            else if (level == 8)
+            {
+                return 65;
+            }
+
+            else if (level == 9)
+            {
+                return 78;
+            }
+
+            else if (level == 10)
+            {
+                return 50;
+            }
+
+            else if (level == 11)
+            {
+                return 40;
+            }
+
+            else if (level == 12)
+            {
+                return 80;
+            }
+
+            else if (level == 13)
+            {
+                return 69;
+            }
+
+            else if (level == 14)
+            {
+                return 69;
+            }
+
+            else if (level == 15)
+            {
+                return 80;
+            }
+
+            else if (level == 16)
+            {
+                return 90;
+            }
+
+            else if (level == 17)
+            {
+                return 75;
+            }
+
+            else if (level == 18)
+            {
+                return 25;
+            }
+
+            else if (level == 19)
+            {
+                return 77;
+            }
         }
 
 
@@ -485,12 +652,15 @@ public class SavedGame
     {
         float rand = UnityEngine.Random.Range(0f, 1f);
 
+        // Wahrscheinlichkeit für key oder geld
         if (rand <= 0.25f)
         {
+            //key
             return 0;
         }
         else
         {
+            //geld
             return 1;
         }
     }
@@ -517,24 +687,28 @@ public class SavedGame
             perl *= 0.5f;
             perl2 *= 0.5f;
 
-            //perl = 0f;
+
+            // Überall challegnes
+            perl = 0f;
 
             if (perl < 0f || perl > 1f)
             {
                 Debug.LogError("jfkds jfkolwe");
             }
 
-            //Debug.Log(i + ": " + perl);
+            Debug.Log(i + ": " + perl);
 
             //float perl = Mathf.PerlinNoise();
             float border = 1f;
 
             if (i < 6)
             {
-                border = (1f / 6f) * 1.1f; // = ungefähr 0.18
+                //planet 1
+                border = (1f / 6f) * 1.3f; // = ungefähr 0.18
             }
             else if (i < 11)
             {
+                // planet 2
                 border = 0.38f;
             }
             else if (i < 16)
@@ -548,7 +722,13 @@ public class SavedGame
 
             if (perl <= border)
             {
-                int rest = ((int)(perl2 * 411f - perl * 71f)) % 4;
+                int rest = ((int)(perl2 * 400f)) % 4;
+
+
+                // rest = challenge typ
+
+                //rest = 2; // time run
+
                 challenges[i] = rest;
                 if (challenges[i] < 0)
                 {
