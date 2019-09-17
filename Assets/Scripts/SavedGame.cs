@@ -689,7 +689,7 @@ public class SavedGame
 
 
             // Überall challegnes
-            perl = 0f;
+            // perl = 0f;
 
             if (perl < 0f || perl > 1f)
             {
