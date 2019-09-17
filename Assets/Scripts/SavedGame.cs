@@ -274,14 +274,29 @@ public class SavedGame
                     else if (con[0] == "13")
                     {
                         string[] els = con[1].Split('<');
-                        for (int i = 0; i < els.Length; i++)
+                        if (els.Length < 100)
                         {
-                            for (int j = 0; j < els[i].Split('_').Length; j++)
+                            Debug.Log("Was less than 100");
+                            for (int i = 0; i < ChallengeRewards.GetLength(0); i++)
                             {
-                                if (els[i].Split('_')[j].Length > 0)
-                                    ChallengeRewards[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
+                                for (int j = 0; j < ChallengeRewards.GetLength(1); j++)
+                                {
+                                    ChallengeRewards[i, j] = 0;
+                                }
                             }
                         }
+                        else
+                        {
+                            for (int i = 0; i < els.Length; i++)
+                            {
+                                for (int j = 0; j < els[i].Split('_').Length; j++)
+                                {
+                                    if (els[i].Split('_')[j].Length > 0)
+                                        ChallengeRewards[i, j] = Convert.ToSingle(els[i].Split('_')[j]);
+                                }
+                            }
+                        }
+
                     }
                 }
             }
