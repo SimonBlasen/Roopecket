@@ -439,6 +439,13 @@ public class ArrowRocketSelector : MonoBehaviour
                 {
                     Debug.LogError("Set OwnedRockets at[" + i + "] to " + selectedBuyRocket);
                     SavedGame.OwnedRockets[i] = selectedBuyRocket;
+
+
+                    for (int j = 0; j < 20; j++)
+                    {
+                        SavedGame.ChallengeRewards[i, j] = 0;
+                    }
+
                     SavedGame.RocketNames[i] = inputRocketName.text;
 
                     Debug.Log("Bought rocket at array index " + i.ToString());
