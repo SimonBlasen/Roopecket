@@ -444,6 +444,12 @@ public class ArrowRocketSelector : MonoBehaviour
                 if (SavedGame.OwnedRockets[i] == -1)
                 {
                     SavedGame.OwnedRockets[i] = selectedBuyRocket;
+
+                    for (int j = 0; j < 20; j++)
+                    {
+                        SavedGame.ChallengeRewards[i, j] = 0;
+                    }
+
                     SavedGame.RocketNames[i] = inputRocketName.text;
 
                     Debug.Log("Bought rocket at array index " + i.ToString());

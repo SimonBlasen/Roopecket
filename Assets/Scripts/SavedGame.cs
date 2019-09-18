@@ -117,7 +117,7 @@ public class SavedGame
                 {
                     con += ChallengeRewards[i, j].ToString() + "_";
                 }
-                con += "-";
+                con += "<";
             }
             con = con.Substring(0, con.Length - 1);
             con += seperator;
@@ -268,7 +268,7 @@ public class SavedGame
                     }
                     else if (con[0] == "13")
                     {
-                        string[] els = con[1].Split('-');
+                        string[] els = con[1].Split('<');
                         for (int i = 0; i < els.Length; i++)
                         {
                             for (int j = 0; j < els[i].Split('_').Length; j++)
