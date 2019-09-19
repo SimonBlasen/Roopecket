@@ -711,7 +711,7 @@ public class SavedGame
             else if (i < 11)
             {
                 // planet 2
-                border = 0.38f;
+                border = 0.45f;
             }
             else if (i < 16)
             {
@@ -719,7 +719,7 @@ public class SavedGame
             }
             else
             {
-                border = 0.8f;
+                border = 0.7f;
             }
 
             if (perl <= border)
