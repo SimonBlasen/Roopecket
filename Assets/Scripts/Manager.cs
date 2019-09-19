@@ -86,8 +86,11 @@ public class Manager : MonoBehaviour
 
         rocketsFueling.Add(rocket.GetComponent<RocketProps>());
 
-        GetComponent<AudioSource>().clip = GameObject.FindObjectOfType<LevelNumber>().clipRefill;
-        GetComponent<AudioSource>().Play();
+        if (SceneManager.GetActiveScene().name.StartsWith("Tutorial") == false)
+        {
+            GetComponent<AudioSource>().clip = GameObject.FindObjectOfType<LevelNumber>().clipRefill;
+            GetComponent<AudioSource>().Play();
+        }
 
         if (landingPlatform.Split('_').Length >= 2 && landingPlatform.Split('_')[0] == "Finish" && reachedFinish == false)
         {

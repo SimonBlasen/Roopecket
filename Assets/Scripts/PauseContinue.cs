@@ -15,6 +15,10 @@ public class PauseContinue : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().name.StartsWith("Tutorial"))
+        {
+            textChallenge.text = "";
+        }
         GameObject instChalWatcher = new GameObject("Challenges Watcher");
         instChalWatcher.AddComponent<ChallengesWatcher>();
 
