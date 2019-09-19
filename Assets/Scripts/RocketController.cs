@@ -267,6 +267,7 @@ public class RocketController : MonoBehaviour {
     protected void Init()
     {
         ownRig = GetComponent<Rigidbody>();
+
         if (midPoint != null)
         {
             ownRig.centerOfMass = midPoint.localPosition;

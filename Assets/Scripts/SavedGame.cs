@@ -338,6 +338,7 @@ public class SavedGame
             5000,   // Rakete 04
             5000,   // Rakete dongel
             1500,   // Rubelrakete
+            399,   // Bass Rakete
            
            
           
@@ -357,6 +358,7 @@ public class SavedGame
            1.4f,  //  1.9f,  // Rakete 04
            2.0f,  //  1.9f,  // Rakete dongel
            0.7f,  //  1.9f,  // Rubelrakete
+           0.9f,  //  1.9f,  // Bass rakete
        
           
             
