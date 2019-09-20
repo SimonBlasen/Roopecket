@@ -17,6 +17,11 @@ public class PopUPText : MonoBehaviour
         Time.timeScale = 1f;
         Button btn = yourButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
+
+        if (SavedGame.Money != 500 || SavedGame.Money != 0)
+        {
+            TaskOnClick();
+        }
     }
 
 

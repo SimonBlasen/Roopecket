@@ -42,7 +42,7 @@ public class Manager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "Garage")
+        if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "Garage" && shownEndscreen == false)
         {
             Debug.Log("Restart");
             //if (timeKeeper != null) Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
@@ -150,12 +150,16 @@ public class Manager : MonoBehaviour
                     GameObject.FindObjectOfType<resultScreen>().showEndscreenSimple();
                     //SceneManager.LoadScene(conc);
                 }
+
+                shownEndscreen = true;
             }
 
         }
 
         Debug.Log("Landed on " + landingPlatform);
     }
+
+    private bool shownEndscreen = false;
 
     public void Takeoff(Transform rocket, string landingPlatform)
     {

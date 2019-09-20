@@ -148,10 +148,17 @@ public class ArrowRocketSelector : MonoBehaviour
             Cursor.visible = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && inputRocketName.isFocused)
+        if (Input.GetKeyDown(KeyCode.Return) && instRocketnameCanvas.GetComponent<Canvas>().enabled)
         {
             ConfirmRocketNameClick();
 
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SavedGame.SaveSavegame();
+            SceneManager.LoadScene("Main_Menu_3");
         }
     }
 
@@ -387,6 +394,7 @@ public class ArrowRocketSelector : MonoBehaviour
                     arrows[i].KeysLocked = true;
                 }
                 instRocketnameCanvas.GetComponent<Canvas>().enabled = true;
+                instRocketnameCanvas.GetComponentInChildren<TMP_InputField>().Select();
                 inputRocketName.text = "";
             }
         }
