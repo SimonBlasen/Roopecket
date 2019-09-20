@@ -49,7 +49,7 @@ public class UIFuelBar : MonoBehaviour {
         }
         else
         {
-            if (hasChecked == false)
+            if (hasChecked == false && isExtraTankFuel)
             {
                 hasChecked = true;
 

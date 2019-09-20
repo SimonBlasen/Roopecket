@@ -290,6 +290,11 @@ public class RocketController : MonoBehaviour {
 
     protected void Init()
     {
+        if (rocketProps.usesExtraFuel == null || rocketProps.usesExtraFuel.Length == 0)
+        {
+            rocketProps.usesExtraFuel = new bool[thrustPositions.Length];
+
+        }
         ownRig = GetComponent<Rigidbody>();
 
         if (midPoint != null)
