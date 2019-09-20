@@ -17,9 +17,15 @@ public class LanderMover : MonoBehaviour {
     public HingeJoint[] joints;
     public float[] velocities;
 
+    public Transform[] valve;
+    public float valveOutScale = 1f;
+    public float valveInScale = 1f;
+    public float valveAngleIn = 0f;
+    public float valveAngleOut = 1f;
 
-	// Use this for initialization
-	void Start ()
+
+    // Use this for initialization
+    void Start ()
     {
 
 	}
@@ -27,6 +33,8 @@ public class LanderMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
+
 
         if (oldVersion)
         {
@@ -56,6 +64,9 @@ public class LanderMover : MonoBehaviour {
                     arm.localRotation = Quaternion.Euler(arm.localRotation.eulerAngles.x, 0f, angleOut);
                 }
             }
+        }
+        else
+        {
         }
         /*
 		

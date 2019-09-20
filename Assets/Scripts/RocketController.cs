@@ -119,8 +119,18 @@ public class RocketController : MonoBehaviour {
             {
                 if (thrusts[i])
                 {
-                    ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
-                    thrAmount++;
+                    if (rocketProps.usesExtraFuel[i])
+                    {
+                        if (!rocketProps.OutOfFuelExtra)
+                        {
+                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                        }
+                    }
+                    else
+                    {
+                        ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                        thrAmount++;
+                    }
                 }
             }
 
@@ -202,7 +212,21 @@ public class RocketController : MonoBehaviour {
             {
                 if (Input.GetKey(keyCodes[i]))
                 {
-                    SetThrust(i, true);
+                    if (rocketProps.usesExtraFuel[i] == false)
+                    {
+                        SetThrust(i, true);
+                    }
+                    else
+                    {
+                        if (rocketProps.OutOfFuelExtra == false)
+                        {
+                            SetThrust(i, true);
+                        }
+                        else
+                        {
+                            SetThrust(i, false);
+                        }
+                    }
                 }
                 else
                 {

@@ -17,7 +17,13 @@ public class RocketProps : MonoBehaviour
     [SerializeField]
     private float maxFuel = 200f;
     [SerializeField]
+    private float maxFuelExtra = 200f;
+    [SerializeField]
     private float thrustFuelPerSecond = 4f;
+    [SerializeField]
+    private float thrustFuelPerSecondExtra = 4f;
+    [SerializeField]
+    public bool[] usesExtraFuel;
 
     [Header("References")]
     [SerializeField]
@@ -48,6 +54,7 @@ public class RocketProps : MonoBehaviour
     private int currentHealth;
 
     private float currentFuel = 0f;
+    private float currentFuelExtra = 0f;
 
     private float tickCounter = 0f;
 
@@ -58,6 +65,7 @@ public class RocketProps : MonoBehaviour
         currentHealth = maxHealth;
         if (damageSmoke != null) damageSmoke.SetActive(false);
         currentFuel = maxFuel;
+        currentFuelExtra = maxFuelExtra;
         if (cameraMulti != null)
         {
             cameraMulti.IsRocketDead = false;
@@ -74,11 +82,18 @@ public class RocketProps : MonoBehaviour
                 if (rocketController.Thrusts[i])
                 {
                     float factor = 1f;
-                    if (rocketController.LandingMoversOut)
+                    if (rocketController.LandingMoversOut && usesExtraFuel[i] == false)
                     {
                         factor = 4f;
                     }
-                    currentFuel -= Time.deltaTime * thrustFuelPerSecond * factor;
+                    if (usesExtraFuel[i])
+                    {
+                        currentFuelExtra -= Time.deltaTime * thrustFuelPerSecondExtra * factor;
+                    }
+                    else
+                    {
+                        currentFuel -= Time.deltaTime * thrustFuelPerSecond * factor;
+                    }
                     StaticsSingleplayer.UseFuel(Time.deltaTime * thrustFuelPerSecond * factor);
                 }
             }
@@ -110,6 +125,14 @@ public class RocketProps : MonoBehaviour
         }
     }
 
+    public bool OutOfFuelExtra
+    {
+        get
+        {
+            return currentFuelExtra <= 0f;
+        }
+    }
+
     public int CurrentHealth
     {
         get
@@ -134,6 +157,14 @@ public class RocketProps : MonoBehaviour
         }
     }
 
+    public float CurrentFuelExtra
+    {
+        get
+        {
+            return currentFuelExtra;
+        }
+    }
+
     public float MaxFuel
     {
         get
@@ -144,6 +175,19 @@ public class RocketProps : MonoBehaviour
         {
             maxFuel = value;
             currentFuel = maxFuel;
+        }
+    }
+
+    public float MaxFuelExtra
+    {
+        get
+        {
+            return maxFuelExtra;
+        }
+        set
+        {
+            maxFuelExtra = value;
+            currentFuelExtra = maxFuelExtra;
         }
     }
 

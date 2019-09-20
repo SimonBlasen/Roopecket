@@ -10,10 +10,13 @@ public class UIFuelBar : MonoBehaviour {
     public TextMeshProUGUI text;
     public RocketProps rocketProps;
     public bool secondPlayer = false;
+    public bool isExtraTankFuel = false;
 
     private float lastFuel = 0f;
 
     RocketSpawner rs;
+
+    private bool hasChecked = false;
 
     // Use this for initialization
     void Start()
@@ -46,10 +49,42 @@ public class UIFuelBar : MonoBehaviour {
         }
         else
         {
-            if (rocketProps.CurrentFuel != lastFuel)
+            if (hasChecked == false)
             {
-                lastFuel = rocketProps.CurrentFuel;
-                float percent = lastFuel / rocketProps.MaxFuel;
+                hasChecked = true;
+
+
+                bool has = false;
+                for (int i = 0; i < rocketProps.usesExtraFuel.Length; i++)
+                {
+                    if (rocketProps.usesExtraFuel[i])
+                    {
+                        has = true;
+                        break;
+                    }
+                }
+
+                if (!has)
+                {
+                    gameObject.SetActive(false);
+                }
+            }
+
+            float curFuel = rocketProps.CurrentFuel;
+            float maxFuel = rocketProps.MaxFuel;
+            if (isExtraTankFuel)
+            {
+                curFuel = rocketProps.CurrentFuelExtra;
+                maxFuel = rocketProps.MaxFuelExtra;
+            }
+            else
+            {
+
+            }
+            if (curFuel != lastFuel)
+            {
+                lastFuel = curFuel;
+                float percent = lastFuel / maxFuel;
                 image.fillAmount = percent;
                 int percentInt = (int)(percent * 100f + 0.999f);
                 text.text = percentInt.ToString() + "%";
