@@ -340,6 +340,7 @@ public class SavedGame
             1500,   // Rubelrakete
             399,   // Bass Rakete
             2000,   // Maudado Rakete
+            3000,   // SpaceX Rakete
            
            
           
@@ -361,6 +362,7 @@ public class SavedGame
            0.7f,  //  1.9f,  // Rubelrakete
            0.65f,  //  1.9f,  // Bass rakete
            0.65f,  //            Maudado rakete
+           0.95f,  //            SpaceX
        
           
             
