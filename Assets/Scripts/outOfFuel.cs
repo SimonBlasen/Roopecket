@@ -97,7 +97,7 @@ public class outOfFuel : MonoBehaviour
                   && SceneManager.GetActiveScene().name != "Tutorial5")
         {
             Cursor.visible = false;
-            Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
+            //Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         }
         noFuelMenuUI.SetActive(false);
         Time.timeScale = 1f;

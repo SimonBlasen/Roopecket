@@ -83,7 +83,7 @@ public class rocketDestroyed : MonoBehaviour {
             Cursor.visible = false;
         }
 
-        Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
+        //Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         noLifeMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
