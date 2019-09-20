@@ -339,6 +339,7 @@ public class SavedGame
             5000,   // Rakete dongel
             1500,   // Rubelrakete
             399,   // Bass Rakete
+            2000,   // Maudado Rakete
            
            
           
@@ -359,6 +360,7 @@ public class SavedGame
            2.0f,  //  1.9f,  // Rakete dongel
            0.7f,  //  1.9f,  // Rubelrakete
            0.65f,  //  1.9f,  // Bass rakete
+           0.65f,  //            Maudado rakete
        
           
             
