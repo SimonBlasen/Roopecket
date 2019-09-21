@@ -31,6 +31,7 @@ public class RocketSpawner : MonoBehaviour {
 
     public GameObject canvasesSplited;
     public GameObject canvasesCombined;
+    public GameObject canvasSafeFuel;
 
     [SerializeField]
     private float seperateX = 100f;
@@ -47,6 +48,8 @@ public class RocketSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        GameObject instSafeFuel = Instantiate(canvasSafeFuel);
+
         GameObject mapSpawner = GameObject.Find("Map Spawner");
         if (mapSpawner != null)
         {
@@ -120,7 +123,9 @@ public class RocketSpawner : MonoBehaviour {
             cmcCam = cmc.transform.GetComponentInChildren<Camera>();
 
             instRock.GetComponent<RocketProps>().cameraMulti = cmc;
-            rocket1 = instRock.transform;
+            instSafeFuel.GetComponent<TextBlinkScr>().rocketController = instRock.GetComponent<RocketController>();
+
+                rocket1 = instRock.transform;
 
             SpawnedRocket = instRock;
 
