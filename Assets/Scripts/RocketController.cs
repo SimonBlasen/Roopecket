@@ -38,7 +38,9 @@ public class RocketController : MonoBehaviour {
     protected Transform comLandersOut;
     [SerializeField]
     protected Transform comLandersIn;
-   
+    [SerializeField]
+    public Transform cameraPoint;
+
 
 
     protected bool[] thrusts = null;

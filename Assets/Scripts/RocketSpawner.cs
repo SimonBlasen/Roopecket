@@ -128,11 +128,13 @@ public class RocketSpawner : MonoBehaviour {
             instSafeFuel.GetComponent<TextBlinkScr>().rocketController = instRock.GetComponent<RocketController>();
             instManeuver.GetComponent<TextBlinkSrcManeuver>().rocketController = instRock.GetComponent<RocketController>();
 
+            Transform cameraTarget = instRock.GetComponent<RocketController>().cameraPoint;
+
             rocket1 = instRock.transform;
 
             SpawnedRocket = instRock;
 
-            cmc.rockets = new Transform[] { instRock.transform };
+            cmc.rockets = new Transform[] { cameraTarget != null ? cameraTarget : instRock.transform };
             cmc.rocketRigidbody = instRock.GetComponent<Rigidbody>();
 
             instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2.5f + (Statics.selectedRocket == 4 ? 1.0f : 0f), 0f);
