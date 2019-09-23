@@ -88,7 +88,7 @@ public class RocketController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(keyLander) || Input.GetButton("Fire1"))
+        if (Input.GetKeyDown(keyLander) || Input.GetButtonDown("Fire1"))
         {
 
            // FindObjectOfType<AudioManager>().Play("LanderMovers");
