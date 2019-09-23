@@ -49,6 +49,13 @@ public class RocketSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            Debug.Log("Detected controller");
+            GameObject instController = new GameObject("Controller");
+            instController.AddComponent<ControllerControl>();
+        }
+
         GameObject instSafeFuel = Instantiate(canvasSafeFuel);
         GameObject instManeuver = Instantiate(canvasManeuverHint);
 
