@@ -31,6 +31,8 @@ public class RocketSpawner : MonoBehaviour {
 
     public GameObject canvasesSplited;
     public GameObject canvasesCombined;
+    public GameObject canvasSafeFuel;
+    public GameObject canvasManeuverHint;
 
     [SerializeField]
     private float seperateX = 100f;
@@ -47,6 +49,9 @@ public class RocketSpawner : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        GameObject instSafeFuel = Instantiate(canvasSafeFuel);
+        GameObject instManeuver = Instantiate(canvasManeuverHint);
+
         GameObject mapSpawner = GameObject.Find("Map Spawner");
         if (mapSpawner != null)
         {
@@ -120,11 +125,16 @@ public class RocketSpawner : MonoBehaviour {
             cmcCam = cmc.transform.GetComponentInChildren<Camera>();
 
             instRock.GetComponent<RocketProps>().cameraMulti = cmc;
+            instSafeFuel.GetComponent<TextBlinkScr>().rocketController = instRock.GetComponent<RocketController>();
+            instManeuver.GetComponent<TextBlinkSrcManeuver>().rocketController = instRock.GetComponent<RocketController>();
+
+            Transform cameraTarget = instRock.GetComponent<RocketController>().cameraPoint;
+
             rocket1 = instRock.transform;
 
             SpawnedRocket = instRock;
 
-            cmc.rockets = new Transform[] { instRock.transform };
+            cmc.rockets = new Transform[] { cameraTarget != null ? cameraTarget : instRock.transform };
             cmc.rocketRigidbody = instRock.GetComponent<Rigidbody>();
 
             instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2.5f + (Statics.selectedRocket == 4 ? 1.0f : 0f), 0f);

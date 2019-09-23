@@ -438,6 +438,11 @@ public class ArrowRocketSelector : MonoBehaviour
             {
                 SavedGame.RocketUnlockKeys += 5;
             }
+            if (inputRocketName.text == "PlayPlayShow")
+            {
+                SavedGame.Money += 399;
+                SavedGame.UnlockedRockets[11] = 1;
+            }
 
             for (int i = 0; i < arrows.Length; i++)
             {
