@@ -9,6 +9,7 @@ public class PauseContinue : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public TextMeshProUGUI textChallenge;
+    private float mousex, mousey;
 
     public AudioClip[] challengeClips;
 
@@ -50,11 +51,39 @@ public class PauseContinue : MonoBehaviour
             {
                 PauseGame();
             }
+
+            mousex = Input.mousePosition.x;
+            mousex = Input.mousePosition.y;
+
+          if (Cursor.visible == false && mousex != Input.mousePosition.x && mousey != Input.mousePosition.y)
+            {
+
+                Cursor.visible = true;
+                float timer = 3f;  
+                if(timer >= 0f)
+                {
+
+                    timer -= Time.deltaTime;
+
+                }
+                Cursor.visible = false;
+            }
+
+
+
+
+
+
         }
 
+    }
 
 
-}
+        
+
+
+
+
 
 
     public void PauseGame()
