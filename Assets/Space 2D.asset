@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -71,7 +72,7 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 1
     m_Settings:
-      focusDistance: 11.493415
+      focusDistance: 8.141789
       aperture: 25.2
       focalLength: 1
       useCameraFov: 0
@@ -121,10 +122,10 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0.31
-        temperature: 100
-        tint: 35
+        temperature: 44
+        tint: 22
         hueShift: 0
-        saturation: 0
+        saturation: 0.4
         contrast: 0.81
       channelMixer:
         red: {x: 0.9, y: 0.41, z: -0.83}
