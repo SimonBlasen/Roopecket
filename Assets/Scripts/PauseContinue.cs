@@ -39,7 +39,7 @@ public class PauseContinue : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
 
             if (GameIsPaused)

@@ -40,14 +40,26 @@ public class ControllerControl : MonoBehaviour
 
             float[] vals = new float[amountThrusters];
             string str = "";
-            amountThrusters--;
-            for (int i = 0; i <= amountThrusters; i++)
+            for (int i = 0; i < amountThrusters; i++)
             {
-                rocketController.SetThrust(i, ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters)));
-                vals[i] = ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters));
+                rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
+                //rocketController.SetThrust(i, ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters)));
+                //vals[i] = ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters));
+                vals[i] = sampleThruster(i, amountThrusters, ls, rs);
                 str += vals[i] + ", ";
             }
             Debug.Log(str);
         }
+    }
+
+    private float sampleThruster(int index, int thrusters, float left, float right)
+    {
+        float pos = index / (thrusters - 1f);
+
+        float fromLeft = Mathf.Pow(Mathf.Cos(pos * (Mathf.PI / 2f)), 2f) * left;
+        float fromRight = Mathf.Pow(Mathf.Sin(pos * (Mathf.PI / 2f)), 2f) * right;
+
+        return fromLeft + fromRight;
+
     }
 }

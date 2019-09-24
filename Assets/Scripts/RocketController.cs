@@ -112,7 +112,7 @@ public class RocketController : MonoBehaviour {
     }
 
 
-    private bool useController = false;
+    private bool useController = true;
     public bool UseController
     {
         get
@@ -246,7 +246,7 @@ public class RocketController : MonoBehaviour {
 
 #else
 
-            if (useController == false)
+            if (true || useController == false)
             {
                 for (int i = 0; i < keyCodes.Length; i++)
                 {
@@ -436,11 +436,11 @@ public class RocketController : MonoBehaviour {
         get; set;
     }
 
-    public bool[] Thrusts
+    public float[] Thrusts
     {
         get
         {
-            return thrusts;
+            return thrustsF;
         }
     }
 
@@ -449,7 +449,7 @@ public class RocketController : MonoBehaviour {
         bool oneThrusting = false;
         for (int i = 0; i < Thrusts.Length; i++)
         {
-            if (Thrusts[i])
+            if (Thrusts[i] > 0f)
             {
                 oneThrusting = true;
                 break;
@@ -477,7 +477,10 @@ public class RocketController : MonoBehaviour {
                 }
 
                 thrustLights[index].intensity = 5f * amount;
-                thrustParticles[index].Play();
+                if (amount >= 0.25f)
+                    thrustParticles[index].Play();
+                else
+                    thrustParticles[index].Stop();
             }
             else
             {
@@ -494,6 +497,8 @@ public class RocketController : MonoBehaviour {
 
     public void SetThrust(int index, bool on)
     {
+        SetThrust(index, on ? 1f : 0f);
+        /*
         if (thrusts == null)
         {
             Init();
@@ -520,6 +525,6 @@ public class RocketController : MonoBehaviour {
                 }
             }
             thrusts[index] = on;
-        }
+        }*/
     }
 }

@@ -79,7 +79,7 @@ public class RocketProps : MonoBehaviour
         {
             for (int i = 0; i < rocketController.Thrusts.Length; i++)
             {
-                if (rocketController.Thrusts[i])
+                if (rocketController.Thrusts[i] > 0f)
                 {
                     float factor = 1f;
                     if (rocketController.LandingMoversOut && usesExtraFuel[i] == false)
@@ -88,11 +88,11 @@ public class RocketProps : MonoBehaviour
                     }
                     if (usesExtraFuel[i])
                     {
-                        currentFuelExtra -= Time.deltaTime * thrustFuelPerSecondExtra * factor;
+                        currentFuelExtra -= Time.deltaTime * thrustFuelPerSecondExtra * factor * rocketController.Thrusts[i];
                     }
                     else
                     {
-                        currentFuel -= Time.deltaTime * thrustFuelPerSecond * factor;
+                        currentFuel -= Time.deltaTime * thrustFuelPerSecond * factor * rocketController.Thrusts[i];
                     }
                     StaticsSingleplayer.UseFuel(Time.deltaTime * thrustFuelPerSecond * factor);
                 }

@@ -42,7 +42,7 @@ public class Manager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && SceneManager.GetActiveScene().name != "Garage" && shownEndscreen == false)
+        if ((Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("ResetRocket")) && SceneManager.GetActiveScene().name != "Garage" && shownEndscreen == false)
         {
             Debug.Log("Restart");
             //if (timeKeeper != null) Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;

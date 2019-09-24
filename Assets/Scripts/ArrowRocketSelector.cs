@@ -155,7 +155,7 @@ public class ArrowRocketSelector : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (/*Input.GetKeyDown(KeyCode.Escape)*/Input.GetButtonDown("Cancel"))
         {
             SavedGame.SaveSavegame();
             SceneManager.LoadScene("Main_Menu_3");

@@ -49,7 +49,7 @@ public class TimeKeeper : MonoBehaviour
             {
                 for (int i = 0; i < rocketController.Thrusts.Length; i++)
                 {
-                    if (rocketController.Thrusts[i])
+                    if (rocketController.Thrusts[i] > 0f)
                     {
                         tkStarted = true;
                         StaticsSingleplayer.StartTimer();
