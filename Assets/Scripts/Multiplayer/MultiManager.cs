@@ -144,7 +144,7 @@ public class MultiManager : MonoBehaviour
 
         for (int i = 0; i < rocketController.Thrusts.Length; i++)
         {
-            if (rocketController.Thrusts[i])
+            if (rocketController.Thrusts[i] > 0f)
             {
                 metaState |= counter;
             }

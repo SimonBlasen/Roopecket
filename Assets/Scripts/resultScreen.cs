@@ -352,7 +352,7 @@ public class resultScreen : MonoBehaviour
         }
 
 
-        if (startShowingEndscreen && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)))
+        if (startShowingEndscreen && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire1")))
         {
             ButtonContinueClick();
         }

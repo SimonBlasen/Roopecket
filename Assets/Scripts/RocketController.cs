@@ -44,6 +44,7 @@ public class RocketController : MonoBehaviour {
 
 
     protected bool[] thrusts = null;
+    protected float[] thrustsF = null;
 
     protected bool[] audioOn = null;
 
@@ -87,7 +88,7 @@ public class RocketController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(keyLander))
+        if (Input.GetKeyDown(keyLander) || Input.GetButtonDown("Fire1"))
         {
 
            // FindObjectOfType<AudioManager>().Play("LanderMovers");
@@ -111,6 +112,20 @@ public class RocketController : MonoBehaviour {
     }
 
 
+    private bool useController = true;
+    public bool UseController
+    {
+        get
+        {
+            return useController;
+        }
+        set
+        {
+            useController = value;
+        }
+    }
+
+
     // Update is called once per frame
     protected void FixedUpdate()
     {
@@ -119,19 +134,40 @@ public class RocketController : MonoBehaviour {
             int thrAmount = 0;
             for (int i = 0; i < thrustPositions.Length; i++)
             {
-                if (thrusts[i])
+                if (useController == false)
                 {
-                    if (rocketProps.usesExtraFuel[i])
+                    if (thrusts[i])
                     {
-                        if (!rocketProps.OutOfFuelExtra)
+                        if (rocketProps.usesExtraFuel[i])
+                        {
+                            if (!rocketProps.OutOfFuelExtra)
+                            {
+                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                            }
+                        }
+                        else
                         {
                             ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                            thrAmount++;
                         }
                     }
-                    else
+                }
+                else
+                {
+                    if (thrustsF[i] > 0f)
                     {
-                        ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
-                        thrAmount++;
+                        if (rocketProps.usesExtraFuel[i])
+                        {
+                            if (!rocketProps.OutOfFuelExtra)
+                            {
+                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                            }
+                        }
+                        else
+                        {
+                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * thrustsF[i], thrustPositions[i].position);
+                            thrAmount++;
+                        }
                     }
                 }
             }
@@ -210,19 +246,40 @@ public class RocketController : MonoBehaviour {
 
 #else
 
-            for (int i = 0; i < keyCodes.Length; i++)
+            if (true || useController == false)
             {
-                if (Input.GetKey(keyCodes[i]))
+                for (int i = 0; i < keyCodes.Length; i++)
                 {
-                    if (rocketProps.usesExtraFuel[i] == false)
+                    if (Input.GetKey(keyCodes[i]))
                     {
-                        SetThrust(i, true);
+                        if (rocketProps.usesExtraFuel[i] == false)
+                        {
+                            SetThrust(i, true);
+                        }
+                        else
+                        {
+                            if (rocketProps.OutOfFuelExtra == false)
+                            {
+                                SetThrust(i, true);
+                            }
+                            else
+                            {
+                                SetThrust(i, false);
+                            }
+                        }
                     }
                     else
                     {
-                        if (rocketProps.OutOfFuelExtra == false)
+                        if (keyCodesOr.Length == keyCodes.Length)
                         {
-                            SetThrust(i, true);
+                            if (Input.GetKey(keyCodesOr[i]))
+                            {
+                                SetThrust(i, true);
+                            }
+                            else
+                            {
+                                SetThrust(i, false);
+                            }
                         }
                         else
                         {
@@ -230,24 +287,10 @@ public class RocketController : MonoBehaviour {
                         }
                     }
                 }
-                else
-                {
-                    if (keyCodesOr.Length == keyCodes.Length)
-                    {
-                        if (Input.GetKey(keyCodesOr[i]))
-                        {
-                            SetThrust(i, true);
-                        }
-                        else
-                        {
-                            SetThrust(i, false);
-                        }
-                    }
-                    else
-                    {
-                        SetThrust(i, false);
-                    }
-                }
+            }
+            else
+            {
+
             }
 #endif
 
@@ -304,10 +347,12 @@ public class RocketController : MonoBehaviour {
             ownRig.centerOfMass = midPoint.localPosition;
         }
         thrusts = new bool[thrustPositions.Length];
+        thrustsF = new float[thrustPositions.Length];
         audioOn = new bool[thrusts.Length];
         for (int i = 0; i < thrusts.Length; i++)
         {
             thrusts[i] = false;
+            thrustsF[i] = 0f;
         }
         for (int i = 0; i < audioOn.Length; i++)
         {
@@ -391,11 +436,11 @@ public class RocketController : MonoBehaviour {
         get; set;
     }
 
-    public bool[] Thrusts
+    public float[] Thrusts
     {
         get
         {
-            return thrusts;
+            return thrustsF;
         }
     }
 
@@ -404,7 +449,7 @@ public class RocketController : MonoBehaviour {
         bool oneThrusting = false;
         for (int i = 0; i < Thrusts.Length; i++)
         {
-            if (Thrusts[i])
+            if (Thrusts[i] > 0f)
             {
                 oneThrusting = true;
                 break;
@@ -415,8 +460,45 @@ public class RocketController : MonoBehaviour {
     }
     
 
+    public void SetThrust(int index, float amount)
+    {
+        if (thrusts == null)
+        {
+            Init();
+        }
+        if (index >= 0 && index < thrustPositions.Length)
+        {
+            if (amount > 0f)
+            {
+                if (thrustsF[index] == 0f)
+                {
+                    thrusterAudioSrcs[index].Play();
+                    audioOn[index] = true;
+                }
+
+                thrustLights[index].intensity = 5f * amount;
+                if (amount >= 0.25f)
+                    thrustParticles[index].Play();
+                else
+                    thrustParticles[index].Stop();
+            }
+            else
+            {
+                thrustLights[index].intensity = 0f;
+                thrustParticles[index].Stop();
+                if (thrustsF[index] > 0f)
+                {
+                    audioOn[index] = false;
+                }
+            }
+            thrustsF[index] = amount;
+        }
+    }
+
     public void SetThrust(int index, bool on)
     {
+        SetThrust(index, on ? 1f : 0f);
+        /*
         if (thrusts == null)
         {
             Init();
@@ -443,6 +525,6 @@ public class RocketController : MonoBehaviour {
                 }
             }
             thrusts[index] = on;
-        }
+        }*/
     }
 }
