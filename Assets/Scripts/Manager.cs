@@ -11,9 +11,13 @@ public class Manager : MonoBehaviour
 
     private TimeKeeper timeKeeper;
 
+    private RocketSpawner rocketSpawner;
+
 	// Use this for initialization
 	void Start ()
     {
+        rocketSpawner = GameObject.FindObjectOfType<RocketSpawner>();
+
         if (SceneManager.GetActiveScene().name != "Tutorial1"
             && SceneManager.GetActiveScene().name != "Tutorial1.1"
             && SceneManager.GetActiveScene().name !=  "Tutorial1.2"
@@ -35,6 +39,10 @@ public class Manager : MonoBehaviour
             if (rocketsFueling[i] != null)
             {
                 rocketsFueling[i].AddFuel(Time.deltaTime * 40f);
+                if (rocketSpawner != null && rocketSpawner.Spawn2Rockets)
+                {
+                    rocketsFueling[i].Heal(Time.deltaTime * 4f);
+                }
                 if (rocketsFueling[i].CurrentFuel >= rocketsFueling[i].MaxFuel)
                 {
                     GetComponent<AudioSource>().Stop();

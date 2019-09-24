@@ -25,7 +25,14 @@ public class ControllerControl : MonoBehaviour
             {
                 if (rocketSpawner.SpawnedRocket != null)
                 {
-                    rocketController = rocketSpawner.SpawnedRocket.GetComponent<RocketController>();
+                    if (rocketSpawner.Spawn2Rockets)
+                    {
+                        rocketController = rocketSpawner.SpawnedRocket2.GetComponent<RocketController>();
+                    }
+                    else
+                    {
+                        rocketController = rocketSpawner.SpawnedRocket.GetComponent<RocketController>();
+                    }
                 }
             }
         }

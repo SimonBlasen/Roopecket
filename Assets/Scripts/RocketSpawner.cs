@@ -146,7 +146,7 @@ public class RocketSpawner : MonoBehaviour {
 
             instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2.5f + (Statics.selectedRocket == 4 ? 1.0f : 0f), 0f);
             instRock.transform.Rotate(0f, startPlatform.transform.rotation.eulerAngles.y, 0f);
-            if (GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp == 19)
+            if (GameObject.FindObjectOfType<LevelNumber>() != null && GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp == 19)
             {
                 instRock.transform.Rotate(0f, 0f, 180f);
             }
@@ -170,6 +170,16 @@ public class RocketSpawner : MonoBehaviour {
                 instRock2.transform.Rotate(0f, startPlatformP2.transform.rotation.eulerAngles.y, 0f);
 
                 instRock2.GetComponent<RocketController>().LandingKey = KeyCode.Keypad0;
+
+                if (Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) > -0.5f && Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) < 0.5f)
+                {
+                    instRock2.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                }
+                else
+                {
+                    instRock2.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+                }
+
 
                 SpawnedRocket2 = instRock2;
 

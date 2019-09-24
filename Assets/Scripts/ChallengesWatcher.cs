@@ -26,12 +26,19 @@ public class ChallengesWatcher : MonoBehaviour
             GetComponent<AudioSource>().clip = audioClip;
             GetComponent<AudioSource>().loop = false;
             GetComponent<AudioSource>().Play();
-            if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
+            if (GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp == -1)
             {
-                curChallenge = SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp];
+                curChallenge = -1;
+            }
+            else
+            {
+                if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
+                {
+                    curChallenge = SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp];
+                }
+                curLevel = GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp;
             }
 
-            curLevel = GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp;
 
             if (curChallenge == 3)
             {

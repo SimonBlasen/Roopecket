@@ -238,6 +238,43 @@ public class RocketProps : MonoBehaviour
 
     private GameObject instAudioLowHealth = null;
 
+    float addHP = 0f;
+
+    public void Heal(float health)
+    {
+        addHP += health;
+        while (addHP > 1f)
+        {
+            currentHealth += 1;
+            addHP -= 1f;
+        }
+
+        if (currentHealth > (maxHealth / 2))
+        {
+
+            damageSmoke.SetActive(false);
+
+        }
+        if (currentHealth > ((maxHealth / 2) - (maxHealth / 4)) && currentHealth <= (maxHealth / 2))
+        {
+            GameObject goLowH = GameObject.Find("Low Health Audio");
+
+            if (goLowH != null)
+            {
+                Destroy(goLowH);
+            }
+
+            damageFire.SetActive(false);
+
+
+        }
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
     public void Damage(int damage)
     {
         if (!Indestroyable)
