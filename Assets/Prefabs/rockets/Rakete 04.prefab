@@ -43949,6 +43949,11 @@ MonoBehaviour:
   arm: {fileID: 4142882836600850}
   joints: []
   velocities: []
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1433282376262822
 GameObject:
   m_ObjectHideFlags: 0
@@ -106869,6 +106874,7 @@ MonoBehaviour:
   rocketVolume: 0.3
   comLandersOut: {fileID: 0}
   comLandersIn: {fileID: 0}
+  cameraPoint: {fileID: 0}
 --- !u!114 &114197461333701030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106885,8 +106891,11 @@ MonoBehaviour:
   collisionDamage: 0.02777778
   impactToleranceThrusters: 3
   maxHealth: 150
-  maxFuel: 600
-  thrustFuelPerSecond: 1.5
+  maxFuel: 150
+  maxFuelExtra: 200
+  thrustFuelPerSecond: 1
+  thrustFuelPerSecondExtra: 4
+  usesExtraFuel: 
   okToHitTransforms:
   - {fileID: 1854944290617741644}
   - {fileID: 2890457206504913328}
@@ -116830,6 +116839,11 @@ MonoBehaviour:
   arm: {fileID: 4971188197538114}
   joints: []
   velocities: []
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1987196540139306
 GameObject:
   m_ObjectHideFlags: 0
@@ -121861,6 +121875,11 @@ MonoBehaviour:
   velocities:
   - 36
   - -260
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1607707005707145323
 GameObject:
   m_ObjectHideFlags: 0
@@ -131912,7 +131931,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.375, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.80200034, y: 0.6410003, z: 0}
+  m_ConnectedAnchor: {x: -0.8020003, y: 0.6410002, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -131998,7 +132017,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00009183586, y: -1.249098, z: 0}
+  m_ConnectedAnchor: {x: -0.00009189546, y: -1.2490978, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -137078,6 +137097,11 @@ MonoBehaviour:
   velocities:
   - 36
   - -260
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &5082346147391350770
 GameObject:
   m_ObjectHideFlags: 0
@@ -142545,7 +142569,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.375, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.80200034, y: 0.6410003, z: 0}
+  m_ConnectedAnchor: {x: 0.8020003, y: 0.6410002, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -142708,7 +142732,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00009183586, y: -1.249098, z: 0}
+  m_ConnectedAnchor: {x: -0.00009189546, y: -1.2490978, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0

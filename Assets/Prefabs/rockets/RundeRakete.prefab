@@ -53657,6 +53657,7 @@ MonoBehaviour:
   rocketVolume: 0.3
   comLandersOut: {fileID: 2058006576953229309}
   comLandersIn: {fileID: 2058006576953229309}
+  cameraPoint: {fileID: 0}
 --- !u!114 &114583893794006604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53673,8 +53674,11 @@ MonoBehaviour:
   collisionDamage: 0.02777778
   impactToleranceThrusters: 3
   maxHealth: 250
-  maxFuel: 200
-  thrustFuelPerSecond: 1.5
+  maxFuel: 80
+  maxFuelExtra: 200
+  thrustFuelPerSecond: 1.2
+  thrustFuelPerSecondExtra: 4
+  usesExtraFuel: 
   okToHitTransforms:
   - {fileID: 4512617903558802626}
   - {fileID: 1402265267690000383}
@@ -73230,7 +73234,7 @@ HingeJoint:
   m_Anchor: {x: -0.5, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.38528123, y: -1.001741, z: 0}
+  m_ConnectedAnchor: {x: 0.3852812, y: -1.0017409, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -73387,6 +73391,11 @@ MonoBehaviour:
   - {fileID: 5633386670161651737}
   velocities:
   - -100
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &2022620949369353508
 GameObject:
   m_ObjectHideFlags: 0
@@ -92576,6 +92585,11 @@ MonoBehaviour:
   - {fileID: 4987354217669192561}
   velocities:
   - -100
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &8314371129045454769
 GameObject:
   m_ObjectHideFlags: 0
@@ -92696,7 +92710,7 @@ HingeJoint:
   m_Anchor: {x: -0.5, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.38528123, y: -1.001741, z: 0}
+  m_ConnectedAnchor: {x: -0.3852812, y: -1.0017409, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0

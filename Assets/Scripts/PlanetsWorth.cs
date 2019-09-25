@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlanetsWorth : MonoBehaviour
 {
-    public static float[] PlanetsFactors = new float[] {    0.03f,
-                                                            0.03f,
-                                                            0.05f,
-                                                            0.05f,
-                                                            0.05f,
-                                                            0.05f,
+    public static float[] PlanetsFactors = new float[] {    0.05f,
+                                                            0.06f,
+                                                            0.07f,
+                                                            0.08f,
+                                                            0.09f,
+                                                            0.08f,
 
                                                             0.15f,
                                                             0.2f,
-                                                            0.2f,
+                                                            0.25f,
                                                             0.4f,
                                                             0.3f,
 

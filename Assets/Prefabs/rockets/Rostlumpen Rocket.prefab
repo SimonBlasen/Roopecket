@@ -417,7 +417,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 1}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.96452314, y: -0.3994882, z: 0}
+  m_ConnectedAnchor: {x: 0.9645231, y: -0.39948818, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -496,6 +496,11 @@ MonoBehaviour:
   - {fileID: 5242975501173547631}
   velocities:
   - -200
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1497458300863997425
 GameObject:
   m_ObjectHideFlags: 0
@@ -15124,8 +15129,11 @@ MonoBehaviour:
   collisionDamage: 0.02777778
   impactToleranceThrusters: 430
   maxHealth: 200
-  maxFuel: 120
+  maxFuel: 80
+  maxFuelExtra: 200
   thrustFuelPerSecond: 1
+  thrustFuelPerSecondExtra: 4
+  usesExtraFuel: 
   okToHitTransforms:
   - {fileID: 7294352754179746743}
   - {fileID: 2496183645708060268}
@@ -15194,6 +15202,7 @@ MonoBehaviour:
   rocketVolume: 0.3
   comLandersOut: {fileID: 3319271720374572872}
   comLandersIn: {fileID: 5283528256279388158}
+  cameraPoint: {fileID: 0}
 --- !u!75 &1567655109278815633
 ConstantForce:
   m_ObjectHideFlags: 0
@@ -31139,6 +31148,11 @@ MonoBehaviour:
   arm: {fileID: 1495876970307789711}
   joints: []
   velocities: []
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1498216873016697965
 GameObject:
   m_ObjectHideFlags: 0
@@ -31462,6 +31476,11 @@ MonoBehaviour:
   arm: {fileID: 1495928829619741071}
   joints: []
   velocities: []
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1498279522519887551
 GameObject:
   m_ObjectHideFlags: 0
@@ -94478,7 +94497,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 1}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.96452314, y: -0.3994882, z: 0}
+  m_ConnectedAnchor: {x: -0.96452314, y: -0.39948818, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -94587,6 +94606,11 @@ MonoBehaviour:
   - {fileID: 4778742024657742899}
   velocities:
   - -200
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &6910713421709699240
 GameObject:
   m_ObjectHideFlags: 0

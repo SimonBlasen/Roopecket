@@ -5165,6 +5165,11 @@ MonoBehaviour:
   - {fileID: 8428566795495014649}
   velocities:
   - 250
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &4329299120398041504
 GameObject:
   m_ObjectHideFlags: 0
@@ -10420,7 +10425,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.04000028, y: 2.29, z: 0}
+  m_ConnectedAnchor: {x: -0.040000275, y: 2.2899997, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -24870,7 +24875,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!75 &4402845661263312656
 ConstantForce:
@@ -24919,6 +24924,7 @@ MonoBehaviour:
   rocketVolume: 0.3
   comLandersOut: {fileID: 0}
   comLandersIn: {fileID: 0}
+  cameraPoint: {fileID: 0}
 --- !u!114 &4433111189414106026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24935,8 +24941,11 @@ MonoBehaviour:
   collisionDamage: 0.02777778
   impactToleranceThrusters: 3
   maxHealth: 250
-  maxFuel: 200
-  thrustFuelPerSecond: 1.5
+  maxFuel: 75
+  maxFuelExtra: 200
+  thrustFuelPerSecond: 3
+  thrustFuelPerSecondExtra: 4
+  usesExtraFuel: 
   okToHitTransforms: []
   rocketController: {fileID: 4433705577069534110}
   cameraMulti: {fileID: 0}

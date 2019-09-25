@@ -56128,6 +56128,11 @@ MonoBehaviour:
   - {fileID: 7200117396522236594}
   velocities:
   - -200
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &7200117396083209895
 GameObject:
   m_ObjectHideFlags: 0
@@ -99931,6 +99936,11 @@ MonoBehaviour:
   - {fileID: 7200117395194504544}
   velocities:
   - 200
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &7200117396748170835
 GameObject:
   m_ObjectHideFlags: 0
@@ -125305,8 +125315,11 @@ MonoBehaviour:
   collisionDamage: 0.1
   impactToleranceThrusters: 5
   maxHealth: 200
-  maxFuel: 200
+  maxFuel: 120
+  maxFuelExtra: 200
   thrustFuelPerSecond: 1
+  thrustFuelPerSecondExtra: 4
+  usesExtraFuel: 
   okToHitTransforms:
   - {fileID: 7200117395817692240}
   - {fileID: 7200117396381015598}
@@ -125385,9 +125398,10 @@ MonoBehaviour:
   particlesLandingThrust:
   - {fileID: 7616311860834201856}
   - {fileID: 7616311861452438735}
-  rocketVolume: 1
+  rocketVolume: 0.3
   comLandersOut: {fileID: 7200117397251914572}
   comLandersIn: {fileID: 7200117397251914572}
+  cameraPoint: {fileID: 0}
 --- !u!1 &7200117397192999188
 GameObject:
   m_ObjectHideFlags: 0

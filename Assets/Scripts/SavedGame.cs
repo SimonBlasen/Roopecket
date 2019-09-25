@@ -350,18 +350,18 @@ public class SavedGame
     public static float[] RocketMultiplier = new float[]
         {
            0.7f,    // 0.7159f, // MarcRocket  
-           0.4f,  // 1f, // LearningRocket
-           0.5f,  // 1.2322f, // Runder Rakete
-           0.6f,  //  0.7488f, // Long Rocket
-           0.7f,  //    1f,  // rostlumpen Rocket
-           0.8f,  //   1f, // Bärchen Rocket
+           0.5f,  // 1f, // LearningRocket
+           0.6f,  // 1.2322f, // Runder Rakete
+           0.7f,  //  0.7488f, // Long Rocket
+           0.75f,  //    1f,  // rostlumpen Rocket
+           0.9f,  //   1f, // Bärchen Rocket
            1.2f,  //  0.5289f, // Vogelrocket
            1.2f,  //    1f, // 7er Rakete
            1.4f,  //  1.9f,  // Rakete 04
            2.0f,  //  1.9f,  // Rakete dongel
            0.7f,  //  1.9f,  // Rubelrakete
-           0.65f,  //  1.9f,  // Bass rakete
-           0.65f,  //            Maudado rakete
+           0.8f,  //  1.9f,  // Bass rakete
+           0.8f,  //            Maudado rakete
            0.95f,  //            SpaceX
        
           
@@ -534,7 +534,7 @@ public class SavedGame
 
             else if (level == 17)
             {
-                return 55;
+                return 60;
             }
 
             else if (level == 18)
@@ -616,7 +616,7 @@ public class SavedGame
 
             else if (level == 13)
             {
-                return 69;
+                return 80;
             }
 
             else if (level == 14)
@@ -626,12 +626,12 @@ public class SavedGame
 
             else if (level == 15)
             {
-                return 80;
+                return 100;
             }
 
             else if (level == 16)
             {
-                return 90;
+                return 120;
             }
 
             else if (level == 17)
