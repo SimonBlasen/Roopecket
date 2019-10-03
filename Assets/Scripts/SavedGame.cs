@@ -341,6 +341,7 @@ public class SavedGame
             399,   // Bass Rakete
             2000,   // Maudado Rakete
             3000,   // SpaceX Rakete
+            1300,   // KuenOOb Rakete
            
            
           
@@ -363,6 +364,7 @@ public class SavedGame
            0.8f,  //  1.9f,  // Bass rakete
            0.8f,  //            Maudado rakete
            0.95f,  //            SpaceX
+            1f,  //            KuenOOb
        
           
             
