@@ -88,7 +88,7 @@ public class RocketController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(keyLander) || Input.GetButtonDown("Fire1"))
+        if ((Input.GetKeyDown(keyLander) && Statics.isSplitscreen == false) || (Input.GetKeyDown(keyLander) && Statics.isSplitscreen && isControledWithKeyboard()) || (isControledWithKeyboard() == false && Statics.isSplitscreen && Input.GetButtonDown(cachedPNAmeLMovers)))
         {
 
            // FindObjectOfType<AudioManager>().Play("LanderMovers");
@@ -111,7 +111,7 @@ public class RocketController : MonoBehaviour {
         }
     }
 
-
+    private string cachedPNAmeLMovers = "";
     private bool useController = true;
     public bool UseController
     {
@@ -125,6 +125,43 @@ public class RocketController : MonoBehaviour {
         }
     }
 
+
+    private bool isControledWithKeyboard()
+    {
+        if (PlayerNumber == 1 && Statics.deviceP1 == 0)
+        {
+            return true;
+        }
+        if (PlayerNumber == 2 && Statics.deviceP2 == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+    private bool isControlledWithGamepad1()
+    {
+        if (PlayerNumber == 1 && Statics.deviceP1 == 1)
+        {
+            return true;
+        }
+        if (PlayerNumber == 2 && Statics.deviceP2 == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+    private bool isControlledWithGamepad2()
+    {
+        if (PlayerNumber == 1 && Statics.deviceP1 == 2)
+        {
+            return true;
+        }
+        if (PlayerNumber == 2 && Statics.deviceP2 == 2)
+        {
+            return true;
+        }
+        return false;
+    }
 
     // Update is called once per frame
     protected void FixedUpdate()
@@ -142,12 +179,12 @@ public class RocketController : MonoBehaviour {
                         {
                             if (!rocketProps.OutOfFuelExtra)
                             {
-                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
+                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 50f, thrustPositions[i].position);
                             }
                         }
                         else
                         {
-                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
+                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 50f, thrustPositions[i].position);
                             thrAmount++;
                         }
                     }
@@ -160,12 +197,12 @@ public class RocketController : MonoBehaviour {
                         {
                             if (!rocketProps.OutOfFuelExtra)
                             {
-                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
+                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 50f, thrustPositions[i].position);
                             }
                         }
                         else
                         {
-                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * thrustsF[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
+                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * thrustsF[i] * Time.fixedDeltaTime * 50f, thrustPositions[i].position);
                             thrAmount++;
                         }
                     }
@@ -246,7 +283,7 @@ public class RocketController : MonoBehaviour {
 
 #else
 
-            if (true || useController == false)
+            if (Statics.isSplitscreen == false || (PlayerNumber == 1 && Statics.deviceP1 == 0) || (PlayerNumber == 2 && Statics.deviceP2 == 0))
             {
                 for (int i = 0; i < keyCodes.Length; i++)
                 {
@@ -335,6 +372,7 @@ public class RocketController : MonoBehaviour {
 
     protected void Init()
     {
+        cachedPNAmeLMovers = "LMovers" + PlayerNumber;
         if (rocketProps.usesExtraFuel == null || rocketProps.usesExtraFuel.Length == 0)
         {
             rocketProps.usesExtraFuel = new bool[thrustPositions.Length];
@@ -379,6 +417,9 @@ public class RocketController : MonoBehaviour {
 
         Manager.Instance.ActivateManager();
     }
+
+    public int PlayerNumber
+    { get; set; }
 
     public KeyCode[] Controls
     {
