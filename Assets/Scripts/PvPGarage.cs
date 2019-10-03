@@ -342,6 +342,6 @@ public class PvPGarage : MonoBehaviour
 
     public void ButtonStartClick()
     {
-        SceneManager.LoadScene("Platform PvP");
+        SceneManager.LoadScene("Platform PvP Simon 2");
     }
 }
