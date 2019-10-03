@@ -300,7 +300,7 @@ public class PvPGarage : MonoBehaviour
         return oldIndex;
     }
 
-    private bool isAnyKeyboardKeyDown()
+    public static bool isAnyKeyboardKeyDown()
     {
         if (Input.GetKeyDown(KeyCode.Return) ||
             Input.GetKeyDown(KeyCode.LeftArrow) ||
@@ -342,6 +342,10 @@ public class PvPGarage : MonoBehaviour
 
     public void ButtonStartClick()
     {
+        Statics.pvpRound = 0;
+        Statics.pvpScoreP1 = 0;
+        Statics.pvpScoreP2 = 0;
+        Statics.isSplitscreen = true;
         SceneManager.LoadScene("Platform PvP Simon 2");
     }
 }

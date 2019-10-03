@@ -29,6 +29,11 @@ public class Statics
 
     public static int deviceP1 = 0;
     public static int deviceP2 = 0;
+    public static bool isSplitscreen = false;
+
+    public static int pvpRound = 0;
+    public static int pvpScoreP1 = 0;
+    public static int pvpScoreP2 = 0;
 
     public static bool movedCTFLogo = false;
 }

@@ -54,6 +54,12 @@ public class RocketSpawner : MonoBehaviour {
             Debug.Log("Detected controller");
             GameObject instController = new GameObject("Controller");
             instController.AddComponent<ControllerControl>();
+            //instController.GetComponent<ControllerControl>().gamepadNumber = 1;
+            if (Statics.isSplitscreen == false)
+            {
+                Statics.deviceP1 = 1;
+                Statics.deviceP2 = 2;
+            }
         }
 
         GameObject instSafeFuel = Instantiate(canvasSafeFuel);
@@ -131,6 +137,7 @@ public class RocketSpawner : MonoBehaviour {
             }
             cmcCam = cmc.transform.GetComponentInChildren<Camera>();
 
+            instRock.GetComponent<RocketController>().PlayerNumber = 0;
             instRock.GetComponent<RocketProps>().cameraMulti = cmc;
             instSafeFuel.GetComponent<TextBlinkScr>().rocketController = instRock.GetComponent<RocketController>();
             instManeuver.GetComponent<TextBlinkSrcManeuver>().rocketController = instRock.GetComponent<RocketController>();
@@ -166,7 +173,7 @@ public class RocketSpawner : MonoBehaviour {
                 rocket2 = instRock2.transform;
                 cmc.rockets = new Transform[] { instRock.transform, instRock2.transform };
                 cmc.rocketRigidbody = null;
-                instRock2.transform.position = startPlatformP2.transform.position + new Vector3(0f, 2f, 0f);
+                instRock2.transform.position = startPlatformP2.transform.position + new Vector3(0f, 2.5f, 0f);
                 instRock2.transform.Rotate(0f, startPlatformP2.transform.rotation.eulerAngles.y, 0f);
 
                 instRock2.GetComponent<RocketController>().LandingKey = KeyCode.Keypad0;
@@ -182,8 +189,10 @@ public class RocketSpawner : MonoBehaviour {
 
 
                 SpawnedRocket2 = instRock2;
+                instRock.GetComponent<RocketController>().PlayerNumber = 1;
+                instRock2.GetComponent<RocketController>().PlayerNumber = 2;
 
-                for (int i = 0; i < instRock2.GetComponent<RocketController>().Controls.Length; i++)
+                /*for (int i = 0; i < instRock2.GetComponent<RocketController>().Controls.Length; i++)
                 {
                     if (i == 0)
                     {
@@ -201,9 +210,9 @@ public class RocketSpawner : MonoBehaviour {
                     {
                         instRock2.GetComponent<RocketController>().Controls[i] = KeyCode.K;
                     }
-                }
+                }*/
 
-                
+
                 cmc1.rockets = new Transform[] { instRock.transform };
                 cmc1.rocketRigidbody = instRock.GetComponent<Rigidbody>();
                 cmc1Cam = cmc1.transform.GetComponentInChildren<Camera>();

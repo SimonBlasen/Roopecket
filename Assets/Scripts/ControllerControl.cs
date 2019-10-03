@@ -9,6 +9,9 @@ public class ControllerControl : MonoBehaviour
     public RocketController rocketController;
     public RocketController rocketControllerP1;
 
+    public int gamepadNumber = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +22,10 @@ public class ControllerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float ls = Input.GetAxis("ControllerLS2");
-        float rs = Input.GetAxis("ControllerRS2");
-        float ls2 = Input.GetAxis("ControllerLS");
-        float rs2 = Input.GetAxis("ControllerRS");
+        float ls = Input.GetAxis("ControllerLS");
+        float rs = Input.GetAxis("ControllerRS");
+        float ls2 = Input.GetAxis("ControllerLS2");
+        float rs2 = Input.GetAxis("ControllerRS2");
         if (Input.GetButtonDown("Cancel"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -63,8 +66,24 @@ public class ControllerControl : MonoBehaviour
             string str = "";
             for (int i = 0; i < amountThrusters; i++)
             {
-                rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
-                rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
+                if (Statics.deviceP2 == 1)
+                {
+                    rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
+                }
+                else if (Statics.deviceP2 == 2)
+                {
+                    rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
+                }
+
+                if (Statics.deviceP1 == 1)
+                {
+                    rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
+                }
+                else if (Statics.deviceP1 == 2)
+                {
+                    rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
+                }
+
                 //rocketController.SetThrust(i, ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters)));
                 //vals[i] = ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters));
                 vals[i] = sampleThruster(i, amountThrusters, ls, rs);
