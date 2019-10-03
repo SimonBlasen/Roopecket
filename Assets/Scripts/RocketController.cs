@@ -142,12 +142,12 @@ public class RocketController : MonoBehaviour {
                         {
                             if (!rocketProps.OutOfFuelExtra)
                             {
-                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
                             }
                         }
                         else
                         {
-                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
                             thrAmount++;
                         }
                     }
@@ -160,12 +160,12 @@ public class RocketController : MonoBehaviour {
                         {
                             if (!rocketProps.OutOfFuelExtra)
                             {
-                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i], thrustPositions[i].position);
+                                ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
                             }
                         }
                         else
                         {
-                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * thrustsF[i], thrustPositions[i].position);
+                            ownRig.AddForceAtPosition(thrustPositions[i].up * thrustStrengthes[i] * thrustsF[i] * Time.fixedDeltaTime * 100f, thrustPositions[i].position);
                             thrAmount++;
                         }
                     }

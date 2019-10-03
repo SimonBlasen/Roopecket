@@ -149,7 +149,7 @@ public class CameraMultiController : MonoBehaviour
                 FinishedLerpingBack = true;
                 lerpBackToTransform = false;
             }
-            Debug.Log(Vector3.Distance(childTransform.position, transformLerpBack.position));
+             //Debug.Log(Vector3.Distance(childTransform.position, transformLerpBack.position));
 
             if (finishedLerpProj == false && Vector2.Distance(proj1, vector1GoalOutside) > 0.003f && Vector2.Distance(proj2, vector2GoalOutside) > 0.003f)
             //if (finishedLerpProj == false && (done1 == false || done2 == false || done3 == false || done4 == false))
