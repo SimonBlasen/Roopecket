@@ -91,6 +91,7 @@ public class showText : MonoBehaviour
                   && SceneManager.GetActiveScene().name != "Tutorial5")
         {
             Cursor.visible = false;
+            Debug.Log("Made Cursor invisible");
         }
 
         Time.timeScale = 1;

@@ -56,7 +56,7 @@ public class LandingPlatform : MonoBehaviour
                 
             }
 
-            if (GameObject.FindObjectOfType<LevelNumber>() != null && SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] < -1f)
+            if (GameObject.FindObjectOfType<LevelNumber>() != null && GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp >= 0 && SavedGame.ChallengeRewards[SavedGame.LastPlayedRocket, GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] < -1f)
             {
                 spawnKey = true;
             }

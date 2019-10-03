@@ -25,9 +25,11 @@ public class Manager : MonoBehaviour
             && SceneManager.GetActiveScene().name !=  "Tutorial2.1"
             && SceneManager.GetActiveScene().name !=  "Tutorial3"
             && SceneManager.GetActiveScene().name !=  "Tutorial4"
-            && SceneManager.GetActiveScene().name !=  "Tutorial5")
+            && SceneManager.GetActiveScene().name != "Tutorial5"
+            && SceneManager.GetActiveScene().name != "Garage PvP")
         {
             Cursor.visible = false;
+            Debug.Log("Made Cursor invisible");
         }
     }
 	
@@ -64,14 +66,17 @@ public class Manager : MonoBehaviour
         {
             if (instance == null)
             {
-                GameObject go = new GameObject();
-                go.AddComponent<Manager>();
-                go.AddComponent<AudioSource>();
-                go.GetComponent<AudioSource>().loop = true;
-                go.name = "Manager";
-                instance = go.GetComponent<Manager>();
+                if (SceneManager.GetActiveScene().name != "Garage PvP")
+                {
+                    GameObject go = new GameObject();
+                    go.AddComponent<Manager>();
+                    go.AddComponent<AudioSource>();
+                    go.GetComponent<AudioSource>().loop = true;
+                    go.name = "Manager";
+                    instance = go.GetComponent<Manager>();
 
-                instance.timeKeeper = GameObject.FindObjectOfType<TimeKeeper>();
+                    instance.timeKeeper = GameObject.FindObjectOfType<TimeKeeper>();
+                }
             }
 
             return instance;

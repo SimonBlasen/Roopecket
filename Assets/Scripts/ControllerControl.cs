@@ -70,7 +70,7 @@ public class ControllerControl : MonoBehaviour
                 vals[i] = sampleThruster(i, amountThrusters, ls, rs);
                 str += vals[i] + ", ";
             }
-            Debug.Log(str);
+            //Debug.Log(str);
         }
     }
 

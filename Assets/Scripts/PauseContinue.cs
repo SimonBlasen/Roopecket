@@ -24,9 +24,12 @@ public class PauseContinue : MonoBehaviour
         instChalWatcher.AddComponent<ChallengesWatcher>();
 
         instChalWatcher.GetComponent<ChallengesWatcher>().textChallengeGUI = textChallenge;
-        instChalWatcher.GetComponent<ChallengesWatcher>().audioClip = challengeClips[SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp]];
+        if (GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp >= 0)
+        {
+            instChalWatcher.GetComponent<ChallengesWatcher>().audioClip = challengeClips[SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp]];
+        }
 
-        if (SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
+        if (GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp >= 0 && SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp] != -1)
         {
             textChallenge.text = "Challenge\n  " + SavedGame.GetChallengeName(SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp]);
         }
@@ -67,6 +70,7 @@ public class PauseContinue : MonoBehaviour
 
                 }
                 Cursor.visible = false;
+                Debug.Log("Made Cursor invisible");
             }
 
 
@@ -108,6 +112,7 @@ public class PauseContinue : MonoBehaviour
                && SceneManager.GetActiveScene().name != "Tutorial5")
         {
             Cursor.visible = false;
+            Debug.Log("Made Cursor invisible");
         }
 
         pauseMenuUI.SetActive(false);
@@ -124,6 +129,7 @@ public class PauseContinue : MonoBehaviour
                 && SceneManager.GetActiveScene().name != "Tutorial5")
         {
             Cursor.visible = false;
+            Debug.Log("Made Cursor invisible");
         }
     }
 

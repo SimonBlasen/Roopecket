@@ -64,6 +64,7 @@ public class outOfFuel : MonoBehaviour
                   && SceneManager.GetActiveScene().name != "Tutorial5")
                 {
                     Cursor.visible = false;
+                    Debug.Log("Made Cursor invisible");
                 }
                 outOfFuelBefore = false;
                 noFuelMenuUI.SetActive(false);
@@ -97,6 +98,7 @@ public class outOfFuel : MonoBehaviour
                   && SceneManager.GetActiveScene().name != "Tutorial5")
         {
             Cursor.visible = false;
+            Debug.Log("Made Cursor invisible");
             //Statics.resetMultiplier += timeKeeper.GetCurrentTime() * 0.04f;
         }
         noFuelMenuUI.SetActive(false);

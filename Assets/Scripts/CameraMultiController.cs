@@ -94,6 +94,7 @@ public class CameraMultiController : MonoBehaviour
             if (finishedLerpProj == false && Vector2.Distance(proj1, proj1Goal) > 0.003f && Vector2.Distance(proj2, proj2Goal) > 0.003f)
             //if (finishedLerpProj == false && (done1 == false || done2 == false || done3 == false || done4 == false))
             {
+
                 proj1 = Vector2.Lerp(proj1, proj1Goal, Mathf.Min(0.5f, (lerpSpeedProjMatr + (timeLerpBackToTransform > 4.3f ? (timeLerpBackToTransform - 4.3f) * 0.4f : 0f))));
                 proj2 = Vector2.Lerp(proj2, proj2Goal, Mathf.Min(0.5f, (lerpSpeedProjMatr + (timeLerpBackToTransform > 4.3f ? (timeLerpBackToTransform - 4.3f) * 0.4f : 0f))));
                 /*proj1 = new Vector2(proj1.x + (done1 ? 0f : Mathf.Sign((proj1Goal.x - proj1.x)) * linearSpeedProjMatr), proj1.y + (done2 ? 0f : Mathf.Sign((proj1Goal.y - proj1.y)) * linearSpeedProjMatr));
@@ -148,6 +149,7 @@ public class CameraMultiController : MonoBehaviour
                 FinishedLerpingBack = true;
                 lerpBackToTransform = false;
             }
+            Debug.Log(Vector3.Distance(childTransform.position, transformLerpBack.position));
 
             if (finishedLerpProj == false && Vector2.Distance(proj1, vector1GoalOutside) > 0.003f && Vector2.Distance(proj2, vector2GoalOutside) > 0.003f)
             //if (finishedLerpProj == false && (done1 == false || done2 == false || done3 == false || done4 == false))

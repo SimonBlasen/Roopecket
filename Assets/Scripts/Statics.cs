@@ -27,5 +27,8 @@ public class Statics
     public static int comicSceneToLoad = 1;
     public static bool testingGarageRocket = false;
 
+    public static int deviceP1 = 0;
+    public static int deviceP2 = 0;
+
     public static bool movedCTFLogo = false;
 }
