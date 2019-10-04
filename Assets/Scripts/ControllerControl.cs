@@ -109,12 +109,19 @@ public class ControllerControl : MonoBehaviour
 
     private float sampleThruster(int index, int thrusters, float left, float right)
     {
-        float pos = index / (thrusters - 1f);
+        if (thrusters == 1)
+        {
+            return Mathf.Max(left, right);
+        }
+        else
+        {
+            float pos = index / (thrusters - 1f);
 
-        float fromLeft = Mathf.Pow(Mathf.Cos(pos * (Mathf.PI / 2f)), 2f) * left;
-        float fromRight = Mathf.Pow(Mathf.Sin(pos * (Mathf.PI / 2f)), 2f) * right;
+            float fromLeft = Mathf.Pow(Mathf.Cos(pos * (Mathf.PI / 2f)), 2f) * left;
+            float fromRight = Mathf.Pow(Mathf.Sin(pos * (Mathf.PI / 2f)), 2f) * right;
 
-        return fromLeft + fromRight;
+            return fromLeft + fromRight;
+        }
 
     }
 }

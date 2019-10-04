@@ -284,7 +284,7 @@ public class PvPGarage : MonoBehaviour
         }
 
         int counter = 0;
-        while (SavedGame.OwnedRockets[oldIndex] == -1)
+        while (SavedGame.OwnedRockets[oldIndex] == -1 || SavedGame.OwnedRockets[oldIndex] == 10 || SavedGame.OwnedRockets[oldIndex] == 9)
         {
             counter++;
             if (counter > 300)
