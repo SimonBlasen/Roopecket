@@ -352,7 +352,7 @@ public class resultScreen : MonoBehaviour
         }
 
 
-        if (startShowingEndscreen && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire1")))
+        if (startShowingEndscreen && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("LMovers1")))
         {
             ButtonContinueClick();
         }
@@ -584,6 +584,7 @@ public class resultScreen : MonoBehaviour
 
     public void ButtonBackToMenuClick()
     {
+        Debug.Log("Back to menu");
         SavedGame.SaveSavegame();
         SceneManager.LoadScene("Main_Menu_3");
     }

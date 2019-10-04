@@ -11,12 +11,12 @@ public class ControllerControl : MonoBehaviour
 
     public int gamepadNumber = 0;
 
+    private bool wasDifferentFromZero = false;
 
     // Start is called before the first frame update
     void Start()
     {
         rocketSpawner = GameObject.FindObjectOfType<RocketSpawner>();
-        
     }
 
     // Update is called once per frame
@@ -26,9 +26,15 @@ public class ControllerControl : MonoBehaviour
         float rs = Input.GetAxis("ControllerRS");
         float ls2 = Input.GetAxis("ControllerLS2");
         float rs2 = Input.GetAxis("ControllerRS2");
+
+        if (ls != 0f || rs != 0f)
+        {
+            wasDifferentFromZero = true;
+        }
+
         if (Input.GetButtonDown("Cancel"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if (rocketController == null)
@@ -45,17 +51,18 @@ public class ControllerControl : MonoBehaviour
                     else
                     {
                         rocketController = rocketSpawner.SpawnedRocket.GetComponent<RocketController>();
+                        rocketControllerP1 = null;
                     }
                 }
             }
         }
-        else
+        else if (wasDifferentFromZero)
         {
             if (rocketController.UseController == false)
             {
                 rocketController.UseController = true;
             }
-            if (rocketControllerP1.UseController == false)
+            if (rocketControllerP1 != null && rocketControllerP1.UseController == false)
             {
                 rocketControllerP1.UseController = true;
             }
@@ -66,7 +73,7 @@ public class ControllerControl : MonoBehaviour
             string str = "";
             for (int i = 0; i < amountThrusters; i++)
             {
-                if (Statics.deviceP2 == 1)
+                if (Statics.isSplitscreen == false || Statics.deviceP2 == 1)
                 {
                     rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
                 }
@@ -75,13 +82,16 @@ public class ControllerControl : MonoBehaviour
                     rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
                 }
 
-                if (Statics.deviceP1 == 1)
+                if (rocketControllerP1 != null)
                 {
-                    rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
-                }
-                else if (Statics.deviceP1 == 2)
-                {
-                    rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
+                    if (Statics.deviceP1 == 1)
+                    {
+                        rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
+                    }
+                    else if (Statics.deviceP1 == 2)
+                    {
+                        rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
+                    }
                 }
 
                 //rocketController.SetThrust(i, ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters)));

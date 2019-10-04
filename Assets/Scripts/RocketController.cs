@@ -88,7 +88,7 @@ public class RocketController : MonoBehaviour {
             }
         }
 
-        if ((Input.GetKeyDown(keyLander) && Statics.isSplitscreen == false) || (Input.GetKeyDown(keyLander) && Statics.isSplitscreen && isControledWithKeyboard()) || (isControledWithKeyboard() == false && Statics.isSplitscreen && Input.GetButtonDown(cachedPNAmeLMovers)))
+        if (((Input.GetKeyDown(keyLander) || Input.GetButtonDown("LMovers1")) && Statics.isSplitscreen == false) || (Input.GetKeyDown(keyLander) && Statics.isSplitscreen && isControledWithKeyboard()) || (isControledWithKeyboard() == false && Statics.isSplitscreen && Input.GetButtonDown(cachedPNAmeLMovers)))
         {
 
            // FindObjectOfType<AudioManager>().Play("LanderMovers");
