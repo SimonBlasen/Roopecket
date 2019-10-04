@@ -55,6 +55,10 @@ public class ControllerControl : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                rocketController = GameObject.FindObjectOfType<RocketController>();
+            }
         }
         else if (wasDifferentFromZero)
         {
