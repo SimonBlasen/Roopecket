@@ -49507,14 +49507,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6916144021895707267}
-  m_LocalRotation: {x: 0, y: -0, z: 0.027049592, w: -0.9996341}
+  m_LocalRotation: {x: 0, y: -0, z: 0.5232426, w: -0.8521838}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.10756651, y: 0.10756651, z: 0.10756651}
   m_Children:
   - {fileID: 6913589938092259001}
   m_Father: {fileID: 6913713238287032905}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 356.9}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 296.9}
 --- !u!33 &6883151794363741047
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -49587,7 +49587,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.9600003, y: -0.3839999, z: 0}
+  m_ConnectedAnchor: {x: -0.96000034, y: -0.38399994, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -49600,11 +49600,11 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -180
-    max: 0
+    min: -120
+    max: 60
     bounciness: 0
     bounceMinVelocity: 0.2
-    contactDistance: 0
+    contactDistance: 10
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
@@ -94088,14 +94088,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8990598497426655167}
-  m_LocalRotation: {x: 0, y: -0, z: 0.027049592, w: -0.9996341}
+  m_LocalRotation: {x: 0, y: -0, z: 0.5232426, w: -0.8521838}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.10756651, y: 0.10756651, z: 0.10756651}
   m_Children:
   - {fileID: 6609669958116173616}
   m_Father: {fileID: 615146161150125755}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 356.9}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 296.9}
 --- !u!33 &5564868386392323559
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -94168,7 +94168,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.9600003, y: -0.3839999, z: 0}
+  m_ConnectedAnchor: {x: 0.96000034, y: -0.38399994, z: 0}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -94181,11 +94181,11 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -180
-    max: 0
+    min: -120
+    max: 60
     bounciness: 0
     bounceMinVelocity: 0.2
-    contactDistance: 0
+    contactDistance: 10
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0

@@ -53241,7 +53241,10 @@ MonoBehaviour:
   impactToleranceThrusters: 430
   maxHealth: 200
   maxFuel: 120
+  maxFuelExtra: 200
   thrustFuelPerSecond: 1
+  thrustFuelPerSecondExtra: 4
+  usesExtraFuel: 
   okToHitTransforms:
   - {fileID: 4293661580264958}
   - {fileID: 308219130121999479}
@@ -53315,6 +53318,7 @@ MonoBehaviour:
   rocketVolume: 0.3
   comLandersOut: {fileID: 4241408596131735501}
   comLandersIn: {fileID: 6745884657701678971}
+  cameraPoint: {fileID: 0}
 --- !u!75 &75858238191871252
 ConstantForce:
   m_ObjectHideFlags: 0
@@ -88028,6 +88032,11 @@ MonoBehaviour:
   arm: {fileID: 4070349911445770}
   joints: []
   velocities: []
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1719532710223418
 GameObject:
   m_ObjectHideFlags: 0
@@ -93179,6 +93188,11 @@ MonoBehaviour:
   - {fileID: 424587623424274171}
   velocities:
   - 200
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &1781470754228676
 GameObject:
   m_ObjectHideFlags: 0
@@ -93206,14 +93220,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781470754228676}
-  m_LocalRotation: {x: 0, y: -0, z: 0.027049592, w: -0.9996341}
+  m_LocalRotation: {x: 0, y: -0, z: 0.5232426, w: -0.8521838}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.10756651, y: 0.10756651, z: 0.10756651}
   m_Children:
   - {fileID: 4293661580264958}
   m_Father: {fileID: 4277012402311438}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 356.9}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 296.9}
 --- !u!33 &33951211377360944
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -93299,8 +93313,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -180
-    max: 0
+    min: -120
+    max: 60
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -117853,14 +117867,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2537855176500704504}
-  m_LocalRotation: {x: 0, y: -0, z: 0.027049592, w: -0.9996341}
+  m_LocalRotation: {x: 0, y: -0, z: 0.5232426, w: -0.8521838}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.10756651, y: 0.10756651, z: 0.10756651}
   m_Children:
   - {fileID: 308219130121999479}
   m_Father: {fileID: 6301714866134537724}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 356.9}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 296.9}
 --- !u!33 &1353087821984040608
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -117946,8 +117960,8 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -180
-    max: 0
+    min: -120
+    max: 60
     bounciness: 0
     bounceMinVelocity: 0.2
     contactDistance: 0
@@ -118012,6 +118026,11 @@ MonoBehaviour:
   - {fileID: 3954748202914980180}
   velocities:
   - 200
+  valve: []
+  valveOutScale: 1
+  valveInScale: 1
+  valveAngleIn: 0
+  valveAngleOut: 1
 --- !u!1 &6388099282208502853
 GameObject:
   m_ObjectHideFlags: 0
