@@ -21,6 +21,8 @@ public class PvPGarage : MonoBehaviour
     private GameObject textP2Controls;
     [SerializeField]
     private GameObject panelButtonStart;
+    [SerializeField]
+    private GameObject panelNoJoystick;
 
 
     private PvPGarageState state = PvPGarageState.CONTROLS_P1;
@@ -29,6 +31,11 @@ public class PvPGarage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (Input.GetJoystickNames().Length == 0)
+        {
+            panelNoJoystick.SetActive(true);
+        }
+
         for (int i = 0; i < rocketsRight.Length; i++)
         {
             rocketsRight[i].SetActive(false);
@@ -219,6 +226,12 @@ public class PvPGarage : MonoBehaviour
 
     private int rocketSelIndexP1 = -1;
     private int rocketSelIndexP2 = -1;
+
+
+    public void ButtonBackToMenuClick()
+    {
+        SceneManager.LoadScene("Main_Menu_3");
+    }
 
     private void setActiveRocket(bool player1, bool forward)
     {

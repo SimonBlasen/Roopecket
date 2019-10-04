@@ -176,7 +176,7 @@ public class RocketSpawner : MonoBehaviour {
                 instRock2.transform.position = startPlatformP2.transform.position + new Vector3(0f, 2.5f, 0f);
                 instRock2.transform.Rotate(0f, startPlatformP2.transform.rotation.eulerAngles.y, 0f);
 
-                instRock2.GetComponent<RocketController>().LandingKey = KeyCode.Keypad0;
+                //instRock2.GetComponent<RocketController>().LandingKey = KeyCode.Keypad0;
 
                 if (Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) > -0.5f && Mathf.Cos(startPlatform.transform.rotation.eulerAngles.y * Mathf.PI / 180f) < 0.5f)
                 {
