@@ -513,7 +513,8 @@ public class RocketController : MonoBehaviour {
             {
                 if (thrustsF[index] == 0f)
                 {
-                    thrusterAudioSrcs[index].Play();
+                    Debug.Log("Play " + index);
+                    if (thrusterAudioSrcs[index].isPlaying == false) thrusterAudioSrcs[index].Play();
                     audioOn[index] = true;
                 }
 
