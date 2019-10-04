@@ -7,6 +7,7 @@ public class MusicContinuous : MonoBehaviour
 {
     private AudioSource audioSource;
     public AudioClip[] MusicList;
+    public AudioClip MusicPVP;
 
     public int[] levels;
 
@@ -72,6 +73,14 @@ public class MusicContinuous : MonoBehaviour
 
             //audioSource.Play();
         }
+    }
+
+    private void setClipToFade(AudioClip clip)
+    {
+        clipToFade = clip;
+        isFading = true;
+        fadingOut = true;
+        fade = 1f;
     }
 
     private string oldScene = "";
@@ -175,6 +184,8 @@ public class MusicContinuous : MonoBehaviour
                 setLevel(18);
             else if (oldScene == "Platform Level 20")
                 setLevel(19);
+            else if (oldScene == "Platform PvP Simon 2")
+                setClipToFade(MusicPVP);
             else
                 setLevel(-1);
 
