@@ -174,6 +174,11 @@ public class ArrowRocketSelector : MonoBehaviour
 
             if (rocketType == -1)
             {
+                if (SavedGame.Money < 500)
+                {
+                    SavedGame.Money += 500;
+                }
+
                 ownNoRocket.SetActive(true);
                 for (int i = 0; i < rocketsBought.Length; i++)
                 {
