@@ -94,7 +94,7 @@ public class RocketProps : MonoBehaviour
                     {
                         currentFuel -= Time.deltaTime * thrustFuelPerSecond * factor * rocketController.Thrusts[i];
                     }
-                    StaticsSingleplayer.UseFuel(Time.deltaTime * thrustFuelPerSecond * factor);
+                    StaticsSingleplayer.UseFuel(Time.deltaTime * thrustFuelPerSecond * factor * rocketController.Thrusts[i]);
                 }
             }
         }
