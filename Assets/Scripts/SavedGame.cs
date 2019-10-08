@@ -648,7 +648,7 @@ public class SavedGame
 
             else if (level == 19)
             {
-                return 77;
+                return 90;
             }
         }
 
@@ -712,7 +712,7 @@ public class SavedGame
             if (i < 6)
             {
                 //planet 1
-                border = (1f / 6f) * 1.3f; // = ungefähr 0.18
+                border = (1f / 6f) * 1.5f; // = ungefähr 0.18
             }
             else if (i < 11)
             {
