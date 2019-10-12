@@ -13,7 +13,7 @@ public class ChallengesSpawner : MonoBehaviour
         for (int i = 0; i < SavedGame.GetChallenges(SavedGame.LastPlayedRocket).Length; i++)
         {
             int chal = SavedGame.GetChallenges(SavedGame.LastPlayedRocket)[i];
-            if (chal != -1)
+            if (chal != -1 && SavedGame.NextLevel[SavedGame.LastPlayedRocket] <= i)
             {
                 GameObject instLine = Instantiate(challengesPointerPrefab);
                 instLine.transform.position = levelPositions[i].LandingPlatformPosition;

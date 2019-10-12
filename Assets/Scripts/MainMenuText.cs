@@ -8,7 +8,7 @@ public class MainMenuText : MonoBehaviour {
 
     private RectTransform menuText;
     private Vector3 spawn;
-    private Vector3 selectedGarage, selectedContinue, selectedOptions, selectedBack2, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen, selectedOnline, selectedBack1, selectedTestarea, selectedfrageZeichen;
+    private Vector3 selectedGarage, selectedContinue, selectedManual, selectedOptions, selectedBack3, selectedBack2, selectedTutorial, selectedQuit, selectedMultiplayer, selectedSplitscreen, selectedOnline, selectedBack1, selectedTestarea, selectedfrageZeichen;
     private bool MouseHover = false;
     private bool Entered;
     private bool MousePress = false;
@@ -31,6 +31,7 @@ public class MainMenuText : MonoBehaviour {
         MouseHover = false;
         spawn = transform.position;
 
+        selectedManual = new Vector3(0f, 0.25f, -4.15f);
         selectedContinue = new Vector3(0f, 0.05f, -4.15f);
         selectedGarage = new Vector3(0f, 0.15f, -4.15f);
         selectedOptions = new Vector3(0f, -0.15f, -4.15f);
@@ -43,6 +44,7 @@ public class MainMenuText : MonoBehaviour {
         selectedOnline = new Vector3(1.791f, 0.137f, -4.63f);
         selectedBack1 = new Vector3(0f, 8.242f, -2.012f);
         selectedBack2 = new Vector3(1.791f, -0.25f, -4.63f);
+        selectedBack3 = new Vector3(0f, -3.3f, -4.37f);
 
         hidedButton = new Vector3(100f, 100f, 100f);
         //FirstTouch = false;
@@ -131,6 +133,29 @@ public class MainMenuText : MonoBehaviour {
                         Debug.Log("Singleplayer");
                         //SceneManager.LoadScene("Tutorial1");
                         mainMenuCam.Index = 2;
+                        //SceneManager.LoadScene("ComicScene");
+
+                    }
+
+                }
+
+               else if (pointName == "Manual" && MouseHover)
+                {
+
+
+
+                    transform.position = Vector3.Lerp(transform.position, selectedManual, buttonsHoverLerpSpeed);
+                    renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
+
+
+
+                    if (MousePress)
+                    {
+
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
+                        
+                        //SceneManager.LoadScene("Tutorial1");
+                        mainMenuCam.Index = 4;
                         //SceneManager.LoadScene("ComicScene");
 
                     }
@@ -315,6 +340,23 @@ public class MainMenuText : MonoBehaviour {
                 else if (pointName == "Back2" && MouseHover)
                 {
                     transform.position = Vector3.Lerp(transform.position, selectedBack2, buttonsHoverLerpSpeed);
+                    //SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+                    //renderer.color = new Color(1f, 1f, 0.5f, 1f);
+                    renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
+
+                    if (MousePress)
+                    {
+                        FindObjectOfType<AudioManager>().Play("MenuButton");
+                        Debug.Log("Back");
+                        //SceneManager.LoadScene("Tutorial1");
+                        mainMenuCam.Index = 0;
+
+                    }
+                }
+
+                else if (pointName == "Back3" && MouseHover)
+                {
+                    transform.position = Vector3.Lerp(transform.position, selectedBack3, buttonsHoverLerpSpeed);
                     //SpriteRenderer renderer = GetComponent<SpriteRenderer>();
                     //renderer.color = new Color(1f, 1f, 0.5f, 1f);
                     renderer.color = Color.Lerp(renderer.color, new Color(1f, 1f, 0.5f, 1f), colorLerp);
