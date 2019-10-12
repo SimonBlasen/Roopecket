@@ -73,35 +73,30 @@ public class ControllerControl : MonoBehaviour
 
             int amountThrusters = rocketController.Thrusts.Length;
 
-            float[] vals = new float[amountThrusters];
-            string str = "";
-            for (int i = 0; i < amountThrusters; i++)
+            for (int i = 0; i < rocketController.Thrusts.Length; i++)
             {
                 if (Statics.isSplitscreen == false || Statics.deviceP2 == 1)
                 {
-                    rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
+                    rocketController.SetThrust(i, sampleThruster(i, rocketController.Thrusts.Length, ls, rs));
                 }
                 else if (Statics.deviceP2 == 2)
                 {
-                    rocketController.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
+                    rocketController.SetThrust(i, sampleThruster(i, rocketController.Thrusts.Length, ls2, rs2));
                 }
-
+            }
+            for (int i = 0; i < rocketControllerP1.Thrusts.Length; i++)
+            {
                 if (rocketControllerP1 != null)
                 {
                     if (Statics.deviceP1 == 1)
                     {
-                        rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls, rs));
+                        rocketControllerP1.SetThrust(i, sampleThruster(i, rocketControllerP1.Thrusts.Length, ls, rs));
                     }
                     else if (Statics.deviceP1 == 2)
                     {
-                        rocketControllerP1.SetThrust(i, sampleThruster(i, amountThrusters, ls2, rs2));
+                        rocketControllerP1.SetThrust(i, sampleThruster(i, rocketControllerP1.Thrusts.Length, ls2, rs2));
                     }
                 }
-
-                //rocketController.SetThrust(i, ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters)));
-                //vals[i] = ls * ((amountThrusters - i) / ((float)amountThrusters)) + rs * ((i) / ((float)amountThrusters));
-                vals[i] = sampleThruster(i, amountThrusters, ls, rs);
-                str += vals[i] + ", ";
             }
             //Debug.Log(str);
         }
