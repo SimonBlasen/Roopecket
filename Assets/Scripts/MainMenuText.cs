@@ -42,7 +42,7 @@ public class MainMenuText : MonoBehaviour {
         selectedMultiplayer = new Vector3(0f, -0.05f, -4.15f);
         selectedSplitscreen = new Vector3(1.791f, 0.05f, -4.63f);
         selectedOnline = new Vector3(1.791f, 0.137f, -4.63f);
-        selectedBack1 = new Vector3(0f, 8.242f, -2.012f);
+        selectedBack1 = new Vector3(0f, 8.163f, -0.885f);
         selectedBack2 = new Vector3(1.791f, -0.25f, -4.63f);
         selectedBack3 = new Vector3(0f, -3.3f, -4.37f);
 
@@ -53,7 +53,7 @@ public class MainMenuText : MonoBehaviour {
             SpriteRenderer renderer = GetComponent<SpriteRenderer>();
 
             if(pointName != "Quit" && pointName != "Back1")
-            renderer.color = new Color(1f, 1f, 0.5f, 0.05f);
+            renderer.color = new Color(1f, 1f, 0.5f, 0.2f);
 
 
 
