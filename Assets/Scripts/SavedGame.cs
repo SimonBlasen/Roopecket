@@ -342,6 +342,7 @@ public class SavedGame
             2000,   // Maudado Rakete
             3000,   // SpaceX Rakete
             1300,   // KuenOOb Rakete
+            2150,   // Cubus 3e Rakete
            
            
           
@@ -365,6 +366,7 @@ public class SavedGame
            0.8f,  //            Maudado rakete
            0.95f,  //            SpaceX
             1f,  //            KuenOOb
+            1.2f,  //            cubus 3e
        
           
             
@@ -506,7 +508,7 @@ public class SavedGame
 
             else if (level == 11)
             {
-                return 30;
+                return 50;
             }
 
             else if (level == 12)
@@ -608,7 +610,7 @@ public class SavedGame
 
             else if (level == 11)
             {
-                return 40;
+                return 75;
             }
 
             else if (level == 12)
