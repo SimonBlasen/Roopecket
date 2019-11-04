@@ -5,7 +5,7 @@ using UnityEngine;
 public class Found_Prof : MonoBehaviour
 {
     private bool foundProf = false;
-    public GameObject profParticles;
+    public GameObject profParticles, profParticles2;
     public int profNumber;
 
 
@@ -41,6 +41,7 @@ public class Found_Prof : MonoBehaviour
                 {
                     foundProf = true;
                     profParticles.SetActive(true);
+                    profParticles2.SetActive(true);
                     SavedGame.DrEberhardtFound[Statics.currentLevel] = true;
                 }
             }

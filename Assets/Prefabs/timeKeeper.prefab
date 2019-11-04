@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225244328470928568}
   - component: {fileID: -8229414438510146781}
+  - component: {fileID: 1162405979}
   m_Layer: 0
   m_Name: timeKeeper
   m_TagString: Untagged
@@ -43,3 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b54947bf33c164ba5ba3c41e6dc592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1162405979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4125040870126914986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba18290209466443aa866db002b39ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 8214283651799a64eb93d7d88f2e25f7, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
