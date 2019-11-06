@@ -71,7 +71,7 @@ public class ArrowRocketSelector : MonoBehaviour
         if (SavedGame.NextLevel[SavedGame.LastPlayedRocket] >= 20)
         {
             int trophy = SavedGame.OwnedRockets[SavedGame.LastPlayedRocket];
-            float curTrophyWorth = SavedGame.TrophiesWorth[trophy];
+            int curTrophyWorth = SavedGame.TrophiesWorth[trophy];
 
             float worthSum = 0f;
 
@@ -83,9 +83,10 @@ public class ArrowRocketSelector : MonoBehaviour
                 }
             }
 
-            if (worthSum > curTrophyWorth)
+            int worthSumInt = (int)worthSum;
+            if (worthSumInt > curTrophyWorth)
             {
-                SavedGame.TrophiesWorth[trophy] = worthSum;
+                SavedGame.TrophiesWorth[trophy] = (int)worthSum;
                 Debug.Log("Saved trophy worth");
 
                 showTrophy(trophy, worthSum);

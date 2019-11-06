@@ -291,7 +291,7 @@ public class SavedGame
                         string[] els = con[1].Split(',');
                         for (int i = 0; i < els.Length; i++)
                         {
-                            TrophiesWorth[i] = Convert.ToSingle(els[i]);
+                            TrophiesWorth[i] = Convert.ToInt32(els[i]);
                         }
                     }
                 }
@@ -408,7 +408,7 @@ public class SavedGame
     public static float[,] CurrentTimeStage = new float[256,20];
     public static float[,] CurrentUsedFuel = new float[256, 20];
     public static float[,] ChallengeRewards = new float[256, 20];
-    public static float[] TrophiesWorth = new float[256];
+    public static int[] TrophiesWorth = new int[256];
 
     public static float FreestyleTime;
     public static float FreestyleDamage;
