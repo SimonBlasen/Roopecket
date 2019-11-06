@@ -34,6 +34,10 @@ public class GarageCameraLook : MonoBehaviour
     private Transform lookatPosRight;
     [SerializeField]
     private Transform lookatPosLeft;
+    [SerializeField]
+    private Transform posTrophies;
+    [SerializeField]
+    private Transform lookatTrophies;
 
     // Start is called before the first frame update
     void Start()
@@ -75,11 +79,17 @@ public class GarageCameraLook : MonoBehaviour
 
         transform.LookAt(lookatChild);
 
-        if (isRight)
+        if (isRight && isCompRight == false)
         {
             transform.position = Vector3.Lerp(transform.position, posRight.position, lerpSpeedMove);
             lookatParent.position = Vector3.Lerp(lookatParent.position, lookatPosRight.position, lerpSpeedMove);
             lookatParent.rotation = Quaternion.Lerp(lookatParent.rotation, lookatPosRight.rotation, 0.1f);
+        }
+        else if (isRight && isCompRight)
+        {
+            transform.position = Vector3.Lerp(transform.position, posTrophies.position, lerpSpeedMove);
+            lookatParent.position = Vector3.Lerp(lookatParent.position, lookatTrophies.position, lerpSpeedMove);
+            lookatParent.rotation = Quaternion.Lerp(lookatParent.rotation, lookatTrophies.rotation, 0.1f);
         }
         else
         {
@@ -93,24 +103,64 @@ public class GarageCameraLook : MonoBehaviour
         // Change
         if (mousePos.y < 0.8f)
         {
-            if (isRight && mousePos.x < changeToLeftPercent)
+            if (isRight && isCompRight == false && mousePos.x < changeToLeftPercent && wasOutsideLeft)
             {
+                wasOutsideLeft = false;
                 isRight = false;
                 arrowRocketSelector.CameraSwitchedToRight(isRight);
             }
-            else if (isRight == false && 1f - mousePos.x < changeToRightPercent)
+            else if (isRight && isCompRight && mousePos.x < changeToLeftPercent && wasOutsideLeft)
             {
+                wasOutsideLeft = false;
+                isRight = true;
+                isCompRight = false;
+                arrowRocketSelector.CameraSwitchedToRight(isRight);
+            }
+            else if (isRight == false && 1f - mousePos.x < changeToRightPercent && wasOutsideRight)
+            {
+                wasOutsideRight = false;
                 isRight = true;
                 arrowRocketSelector.CameraSwitchedToRight(isRight);
             }
+            else if (isRight && 1f - mousePos.x < changeToRightPercent && wasOutsideRight)
+            {
+                isCompRight = true;
+                wasOutsideRight = false;
+            }
+
+            if (mousePos.x >= changeToLeftPercent)
+            {
+                wasOutsideLeft = true;
+            }
+
+            if (1f - mousePos.x >= changeToRightPercent)
+            {
+                wasOutsideRight = true;
+            }
         }
     }
+
+    private bool wasOutsideRight = true;
+    private bool wasOutsideLeft = true;
 
     public bool IsRight
     {
         get { return isRight; }
         set { isRight = value;
             arrowRocketSelector.CameraSwitchedToRight(isRight);
+        }
+    }
+
+    private bool isCompRight = false;
+    public bool IsCompletelyRight
+    {
+        get
+        {
+            return isCompRight;
+        }
+        set
+        {
+            isCompRight = value;
         }
     }
 }

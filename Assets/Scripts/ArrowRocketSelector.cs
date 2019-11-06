@@ -36,6 +36,7 @@ public class ArrowRocketSelector : MonoBehaviour
     public Button buttonBuyRocket;
     public Button buttonTestRocket;
     public GameObject ownNoRocket;
+    public TrophyPreviewer trophyPreviewer;
 
     public MoneyMachine moneyMachine;
     public MoneyMachine moneyMachineSell;
@@ -66,6 +67,31 @@ public class ArrowRocketSelector : MonoBehaviour
         //
         //
 
+
+        if (SavedGame.NextLevel[SavedGame.LastPlayedRocket] >= 20)
+        {
+            int trophy = SavedGame.OwnedRockets[SavedGame.LastPlayedRocket];
+            float curTrophyWorth = SavedGame.TrophiesWorth[trophy];
+
+            float worthSum = 0f;
+
+            for (int i = 0; i < 4; i++)
+            {
+                if (LevelNumber.GetFirstLevelOfStage(i + 1) <= SavedGame.NextLevel[SavedGame.LastPlayedRocket])
+                {
+                    worthSum += SavedGame.GetGlobalWorthStage(SavedGame.LastPlayedRocket, i);
+                }
+            }
+
+            if (worthSum > curTrophyWorth)
+            {
+                SavedGame.TrophiesWorth[trophy] = worthSum;
+                Debug.Log("Saved trophy worth");
+
+                showTrophy(trophy, worthSum);
+            }
+
+        }
 
         moneyMachine.Number = SavedGame.Money;
 
@@ -139,6 +165,11 @@ public class ArrowRocketSelector : MonoBehaviour
         setRocketBoughtActive(SavedGame.LastPlayedRocket);
 
 
+    }
+
+    private void showTrophy(int index, float worth)
+    {
+        trophyPreviewer.ShowTrophy(index, worth);
     }
 
     void Update()

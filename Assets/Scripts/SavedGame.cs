@@ -122,6 +122,14 @@ public class SavedGame
             con = con.Substring(0, con.Length - 1);
             con += seperator;
 
+            con += "14=";
+            for (int i = 0; i < TrophiesWorth.Length; i++)
+            {
+                con += TrophiesWorth[i].ToString() + ",";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
             File.WriteAllText(savegameDir + "/" + savegameFile, con);
         }
     }
@@ -278,6 +286,14 @@ public class SavedGame
                             }
                         }
                     }
+                    else if (con[0] == "14")
+                    {
+                        string[] els = con[1].Split(',');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            TrophiesWorth[i] = Convert.ToSingle(els[i]);
+                        }
+                    }
                 }
             }
         }
@@ -392,6 +408,7 @@ public class SavedGame
     public static float[,] CurrentTimeStage = new float[256,20];
     public static float[,] CurrentUsedFuel = new float[256, 20];
     public static float[,] ChallengeRewards = new float[256, 20];
+    public static float[] TrophiesWorth = new float[256];
 
     public static float FreestyleTime;
     public static float FreestyleDamage;
