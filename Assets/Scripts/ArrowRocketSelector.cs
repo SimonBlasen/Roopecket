@@ -73,6 +73,11 @@ public class ArrowRocketSelector : MonoBehaviour
             int trophy = SavedGame.OwnedRockets[SavedGame.LastPlayedRocket];
             int curTrophyWorth = SavedGame.TrophiesWorth[trophy];
 
+            if (SteamManager.Initialized)
+            {
+                Steamworks.SteamUserStats.SetAchievement("PLAY_THROUGH_GAME");
+            }
+
             float worthSum = 0f;
 
             for (int i = 0; i < 4; i++)

@@ -372,6 +372,80 @@ public class RocketController : MonoBehaviour {
 
     protected void Init()
     {
+        KeyCode[] newKeys = new KeyCode[keyCodes.Length];
+        KeyCode[] newKeysOr = new KeyCode[keyCodesOr.Length];
+
+        for (int i = 0; i < newKeys.Length; i++)
+        {
+            if (keyCodes[i] == KeyCode.A)
+            {
+                newKeys[i] = Statics.key1;
+            }
+            else if (keyCodes[i] == KeyCode.S)
+            {
+                newKeys[i] = Statics.key2;
+            }
+            else if (keyCodes[i] == KeyCode.D)
+            {
+                newKeys[i] = Statics.key3;
+            }
+            else if (keyCodes[i] == KeyCode.F)
+            {
+                newKeys[i] = Statics.key4;
+            }
+            else if (keyCodes[i] == KeyCode.G)
+            {
+                newKeys[i] = Statics.key5;
+            }
+            else if (keyCodes[i] == KeyCode.LeftArrow)
+            {
+                newKeys[i] = Statics.keySpecialLeft;
+            }
+            else if (keyCodes[i] == KeyCode.RightArrow)
+            {
+                newKeys[i] = Statics.keySpecialRight;
+            }
+        }
+
+
+        for (int i = 0; i < newKeysOr.Length; i++)
+        {
+            if (keyCodesOr[i] == KeyCode.A)
+            {
+                newKeysOr[i] = Statics.key1;
+            }
+            else if (keyCodesOr[i] == KeyCode.S)
+            {
+                newKeysOr[i] = Statics.key2;
+            }
+            else if (keyCodesOr[i] == KeyCode.D)
+            {
+                newKeysOr[i] = Statics.key3;
+            }
+            else if (keyCodesOr[i] == KeyCode.F)
+            {
+                newKeysOr[i] = Statics.key4;
+            }
+            else if (keyCodesOr[i] == KeyCode.G)
+            {
+                newKeysOr[i] = Statics.key5;
+            }
+            else if (keyCodesOr[i] == KeyCode.LeftArrow)
+            {
+                newKeysOr[i] = Statics.keySpecialLeft;
+            }
+            else if (keyCodesOr[i] == KeyCode.RightArrow)
+            {
+                newKeysOr[i] = Statics.keySpecialRight;
+            }
+        }
+
+        keyLander = Statics.keyLandingMovers;
+
+        keyCodes = newKeys;
+        keyCodesOr = newKeysOr;
+
+
         cachedPNAmeLMovers = "LMovers" + PlayerNumber;
         if (rocketProps.usesExtraFuel == null || rocketProps.usesExtraFuel.Length == 0)
         {

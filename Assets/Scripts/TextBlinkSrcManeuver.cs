@@ -76,7 +76,7 @@ public class TextBlinkSrcManeuver : MonoBehaviour
                 }
             }
 
-            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)))
+            if ((Input.GetKey(Statics.keySpecialLeft) || Input.GetKey(Statics.keySpecialRight)))
             {
                 deactivated = true;
             }
@@ -84,7 +84,7 @@ public class TextBlinkSrcManeuver : MonoBehaviour
 
         if (!deactivated)
         {
-            if (shouldSafe == false && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)) == false && rocketController.IsThrusting())
+            if (shouldSafe == false && (Input.GetKey(Statics.keySpecialLeft) || Input.GetKey(Statics.keySpecialRight)) == false && rocketController.IsThrusting())
             {
                 moversOutFor += Time.deltaTime;
                 if (isNoIdiot == false && moversOutFor >= 5f)
@@ -92,7 +92,7 @@ public class TextBlinkSrcManeuver : MonoBehaviour
                     shouldSafe = true;
                 }
             }
-            else if (isNoIdiot == false && (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow)) && rocketController.IsThrusting())
+            else if (isNoIdiot == false && (Input.GetKey(Statics.keySpecialLeft) || Input.GetKey(Statics.keySpecialRight)) && rocketController.IsThrusting())
             {
                 moversInFor += Time.deltaTime;
                 if (moversInFor >= 0.2f)
