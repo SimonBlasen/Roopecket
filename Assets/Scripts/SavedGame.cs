@@ -25,6 +25,16 @@ public class SavedGame
         }
         else
         {
+            KeyCodes[0] = (int)Statics.key1;
+            KeyCodes[1] = (int)Statics.key2;
+            KeyCodes[2] = (int)Statics.key3;
+            KeyCodes[3] = (int)Statics.key4;
+            KeyCodes[4] = (int)Statics.key5;
+            KeyCodes[5] = (int)Statics.keyLandingMovers;
+            KeyCodes[6] = (int)Statics.keyReset;
+            KeyCodes[7] = (int)Statics.keySpecialLeft;
+            KeyCodes[8] = (int)Statics.keySpecialRight;
+
             string con = "";
 
             con += "0=" + LastSelectedRocket.ToString() + seperator;
@@ -130,6 +140,14 @@ public class SavedGame
             con = con.Substring(0, con.Length - 1);
             con += seperator;
 
+            con += "15=";
+            for (int i = 0; i < KeyCodes.Length; i++)
+            {
+                con += KeyCodes[i].ToString() + ",";
+            }
+            con = con.Substring(0, con.Length - 1);
+            con += seperator;
+
             File.WriteAllText(savegameDir + "/" + savegameFile, con);
         }
     }
@@ -155,6 +173,16 @@ public class SavedGame
         {
             UnlockedRockets[i] = 0;
         }
+
+        KeyCodes[0] = (int)KeyCode.A;
+        KeyCodes[1] = (int)KeyCode.S;
+        KeyCodes[2] = (int)KeyCode.D;
+        KeyCodes[3] = (int)KeyCode.F;
+        KeyCodes[4] = (int)KeyCode.G;
+        KeyCodes[5] = (int)KeyCode.Space;
+        KeyCodes[6] = (int)KeyCode.R;
+        KeyCodes[7] = (int)KeyCode.LeftArrow;
+        KeyCodes[8] = (int)KeyCode.RightArrow;
     }
 
     public static void LoadSavegame()
@@ -167,6 +195,8 @@ public class SavedGame
         else
         {
             string[] lines = File.ReadAllText(savegameDir + "/" + savegameFile).Split(seperatorC);
+
+            bool foundControlsInFile = false;
 
             for (int l = 0; l < lines.Length; l++)
             {
@@ -294,8 +324,39 @@ public class SavedGame
                             TrophiesWorth[i] = Convert.ToInt32(els[i]);
                         }
                     }
+                    else if (con[0] == "15")
+                    {
+                        foundControlsInFile = true;
+                        string[] els = con[1].Split(',');
+                        for (int i = 0; i < els.Length; i++)
+                        {
+                            KeyCodes[i] = Convert.ToInt32(els[i]);
+                        }
+                    }
                 }
             }
+
+            if (!foundControlsInFile)
+            {
+                KeyCodes[0] = (int)KeyCode.A;
+                KeyCodes[1] = (int)KeyCode.S;
+                KeyCodes[2] = (int)KeyCode.D;
+                KeyCodes[3] = (int)KeyCode.F;
+                KeyCodes[4] = (int)KeyCode.G;
+                KeyCodes[5] = (int)KeyCode.Space;
+                KeyCodes[6] = (int)KeyCode.R;
+                KeyCodes[7] = (int)KeyCode.LeftArrow;
+                KeyCodes[8] = (int)KeyCode.RightArrow;
+            }
+            Statics.key1 = (KeyCode)KeyCodes[0];
+            Statics.key2 = (KeyCode)KeyCodes[1];
+            Statics.key3 = (KeyCode)KeyCodes[2];
+            Statics.key4 = (KeyCode)KeyCodes[3];
+            Statics.key5 = (KeyCode)KeyCodes[4];
+            Statics.keyLandingMovers = (KeyCode)KeyCodes[5];
+            Statics.keyReset = (KeyCode)KeyCodes[6];
+            Statics.keySpecialLeft = (KeyCode)KeyCodes[7];
+            Statics.keySpecialRight = (KeyCode)KeyCodes[8];
         }
     }
 
@@ -312,6 +373,8 @@ public class SavedGame
                                                         //public static int collectedProfs;                   // Für die im Hintergrund angeklickten Profs (Profs haben schon ein Script)
                                                         // Hier kannst noch so viele Sachen hinzufügen wie du willst
 
+
+    public static int[] KeyCodes = new int[9];
     private static int money = 0;
     public static int Money
     {

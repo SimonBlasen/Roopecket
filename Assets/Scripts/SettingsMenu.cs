@@ -13,6 +13,15 @@ public class SettingsMenu : MonoBehaviour
     public TMPro.TMP_Dropdown languageDropdown;
     public Slider sliderVolume;
     public Toggle toggleFullscreen;
+    public TMPro.TextMeshProUGUI buttonKey1;
+    public TMPro.TextMeshProUGUI buttonKey2;
+    public TMPro.TextMeshProUGUI buttonKey3;
+    public TMPro.TextMeshProUGUI buttonKey4;
+    public TMPro.TextMeshProUGUI buttonKey5;
+    public TMPro.TextMeshProUGUI buttonLandingMover;
+    public TMPro.TextMeshProUGUI buttonReset;
+    public TMPro.TextMeshProUGUI buttonSpecialLeft;
+    public TMPro.TextMeshProUGUI buttonSpecialRight;
 
     public MainMenuText mainMenuTextRef;
 
@@ -26,10 +35,98 @@ public class SettingsMenu : MonoBehaviour
     private float newVolume = 0f;
     private bool newIsFullscreen = false;
 
+    private int waitingForKeyIndex = -1;
+
 
     private void Start()
     {
         init();
+    }
+
+    private void Update()
+    {
+        if (waitingForKeyIndex != -1)
+        {
+            if (Input.anyKeyDown)
+            {
+                KeyCode key = KeyCode.A;
+                for (int i = 0; i < 512; i++)
+                {
+                    if (Input.GetKeyDown((KeyCode)i))
+                    {
+                        key = (KeyCode)i;
+                        break;
+                    }
+                }
+
+                if (waitingForKeyIndex == 0)
+                    Statics.key1 = key;
+                else if (waitingForKeyIndex == 1)
+                    Statics.key2 = key;
+                else if (waitingForKeyIndex == 2)
+                    Statics.key3 = key;
+                else if (waitingForKeyIndex == 3)
+                    Statics.key4 = key;
+                else if (waitingForKeyIndex == 4)
+                    Statics.key5 = key;
+                else if (waitingForKeyIndex == 5)
+                    Statics.keyLandingMovers = key;
+                else if (waitingForKeyIndex == 6)
+                    Statics.keyReset= key;
+                else if (waitingForKeyIndex == 7)
+                    Statics.keySpecialLeft = key;
+                else if (waitingForKeyIndex == 8)
+                    Statics.keySpecialRight = key;
+
+                waitingForKeyIndex = -1;
+                RefreshKeyButtons();
+            }
+        }
+    }
+
+    public void ButtonControlsKeyClicked(int buttonIndex)
+    {
+        if (waitingForKeyIndex == -1)
+        {
+            string waitForInputText = "...";
+            waitingForKeyIndex = buttonIndex;
+            if (waitingForKeyIndex == 0)
+                buttonKey1.text = waitForInputText;
+            else if (waitingForKeyIndex == 1)
+                buttonKey2.text = waitForInputText;
+            else if (waitingForKeyIndex == 2)
+                buttonKey3.text = waitForInputText;
+            else if (waitingForKeyIndex == 3)
+                buttonKey4.text = waitForInputText;
+            else if (waitingForKeyIndex == 4)
+                buttonKey5.text = waitForInputText;
+            else if (waitingForKeyIndex == 5)
+                buttonLandingMover.text = waitForInputText;
+            else if (waitingForKeyIndex == 6)
+                buttonReset.text = waitForInputText;
+            else if (waitingForKeyIndex == 7)
+                buttonSpecialLeft.text = waitForInputText;
+            else if (waitingForKeyIndex == 8)
+                buttonSpecialRight.text = waitForInputText;
+        }
+        else
+        {
+            //waitingForKeyIndex = -1;
+            //RefreshKeyButtons();
+        }
+    }
+
+    public void RefreshKeyButtons()
+    {
+        buttonKey1.text = Statics.key1.ToString();
+        buttonKey2.text = Statics.key2.ToString();
+        buttonKey3.text = Statics.key3.ToString();
+        buttonKey4.text = Statics.key4.ToString();
+        buttonKey5.text = Statics.key5.ToString();
+        buttonLandingMover.text = Statics.keyLandingMovers.ToString();
+        buttonReset.text = Statics.keyReset.ToString();
+        buttonSpecialLeft.text = Statics.keySpecialLeft.ToString();
+        buttonSpecialRight.text = Statics.keySpecialRight.ToString();
     }
 
     public void SetResolution(int resolutionIndex)
@@ -64,6 +161,16 @@ public class SettingsMenu : MonoBehaviour
         //Screen.fullScreen = isFullscreen;
     }
 
+    private KeyCode key1 = KeyCode.A;
+    private KeyCode key2 = KeyCode.S;
+    private KeyCode key3 = KeyCode.D;
+    private KeyCode key4 = KeyCode.F;
+    private KeyCode key5 = KeyCode.G;
+    private KeyCode keyLandingMovers = KeyCode.Space;
+    private KeyCode keyReset = KeyCode.R;
+    private KeyCode keySpecialLeft = KeyCode.LeftArrow;
+    private KeyCode keySpecialRight = KeyCode.RightArrow;
+
     private void init()
     {
         if (resolutions == null)
@@ -93,6 +200,8 @@ public class SettingsMenu : MonoBehaviour
             resolutions[7] = new Resolution();
             resolutions[7].width = 2560;
             resolutions[7].height = 1600;
+
+            RefreshKeyButtons();
 
             List<Resolution> newRes = new List<Resolution>();
             newRes.AddRange(resolutions);
@@ -164,6 +273,17 @@ public class SettingsMenu : MonoBehaviour
         if (open)
         {
             init();
+
+            key1 = Statics.key1;
+            key2 = Statics.key2;
+            key3 = Statics.key3;
+            key4 = Statics.key4;
+            key5 = Statics.key5;
+            keyLandingMovers = Statics.keyLandingMovers;
+            keyReset = Statics.keyReset;
+            keySpecialLeft = Statics.keySpecialLeft;
+            keySpecialRight = Statics.keySpecialRight;
+
             oldQualityIndex = QualitySettings.GetQualityLevel();
             oldVolume = AudioListener.volume;
             oldIsFullscreen = Screen.fullScreen;
@@ -196,6 +316,8 @@ public class SettingsMenu : MonoBehaviour
                     break;
                 }
             }
+
+            RefreshKeyButtons();
         }
         else
         {
@@ -218,6 +340,17 @@ public class SettingsMenu : MonoBehaviour
     public void ButtonDiscard()
     {
         LanguageManager.Language = oldLanguage;
+
+        Statics.key1 = key1;
+        Statics.key2 = key2;
+        Statics.key3 = key3;
+        Statics.key4 = key4;
+        Statics.key5 = key5;
+        Statics.keyLandingMovers = keyLandingMovers;
+        Statics.keyReset = keyReset;
+        Statics.keySpecialLeft = keySpecialLeft;
+        Statics.keySpecialRight = keySpecialRight;
+
         //QualitySettings.SetQualityLevel(oldQualityIndex);
         //Screen.fullScreen = oldIsFullscreen;
         //AudioListener.volume = oldVolume;
