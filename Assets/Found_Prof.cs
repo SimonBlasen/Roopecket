@@ -45,9 +45,18 @@ public class Found_Prof : MonoBehaviour
             profParticles.SetActive(false);
         }
     }
+
+    private float counter = 0f;
+
     // Update is called once per frame
     void Update()
     {
+        counter += Time.deltaTime;
+        if (counter >= 3f)
+        {
+            counter = 0f;
+            CheckDrEverhardtAchievements();
+        }
 
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
