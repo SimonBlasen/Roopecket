@@ -151,7 +151,7 @@ public class RocketSpawner : MonoBehaviour {
             cmc.rockets = new Transform[] { cameraTarget != null ? cameraTarget : instRock.transform };
             cmc.rocketRigidbody = instRock.GetComponent<Rigidbody>();
 
-            instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2.5f + (Statics.selectedRocket == 4 ? 1.0f : 0f), 0f);
+            instRock.transform.position = startPlatform.transform.position + new Vector3(0f, 2.5f + ((Statics.selectedRocket == 4 || Statics.selectedRocket == 10) ? 1.0f : 0f), 0f);
             instRock.transform.Rotate(0f, startPlatform.transform.rotation.eulerAngles.y, 0f);
             if (GameObject.FindObjectOfType<LevelNumber>() != null && GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp == 19)
             {
