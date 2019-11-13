@@ -367,6 +367,8 @@ public class resultScreen : MonoBehaviour
 
         LevelLeaderboardDownloader lld = GameObject.FindObjectOfType<LevelLeaderboardDownloader>();
 
+        Debug.Log("Length: " + lld.places.Length.ToString());
+
         lbPos[0].text = "1.";
         lbTime[0].text = (lld.timeFirst / 1000f).ToString();
         lbName[0].text = lld.nameFirst;
