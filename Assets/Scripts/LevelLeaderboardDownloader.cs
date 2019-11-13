@@ -87,7 +87,7 @@ public class LevelLeaderboardDownloader : MonoBehaviour
     {
         if (SteamManager.Initialized)
         {
-            SteamAPICall_t handle = SteamUserStats.FindLeaderboard("level_" + GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp + "_rocket_" + Statics.selectedRocket);
+            SteamAPICall_t handle = SteamUserStats.FindOrCreateLeaderboard("level_" + GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp + "_rocket_" + Statics.selectedRocket, ELeaderboardSortMethod.k_ELeaderboardSortMethodDescending, ELeaderboardDisplayType.k_ELeaderboardDisplayTypeTimeMilliSeconds);
 
             m_LeaderboardFindResult.Set(handle);
             Debug.Log("Created CallResult for FindLeaderboard");
@@ -100,7 +100,7 @@ public class LevelLeaderboardDownloader : MonoBehaviour
         if (isFound && startDownlScore == false)
         {
             startDownlScore = true;
-            SteamAPICall_t handleEntries = SteamUserStats.DownloadLeaderboardEntries(foundLeaderboard, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobalAroundUser, 50, 50);
+            SteamAPICall_t handleEntries = SteamUserStats.DownloadLeaderboardEntries(foundLeaderboard, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobalAroundUser, -50, 50);
             SteamAPICall_t handleEntriesFirst = SteamUserStats.DownloadLeaderboardEntries(foundLeaderboard, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobal, 1, 10);
             //SteamAPICall_t handleEntries = SteamUserStats.DownloadLeaderboardEntriesForUsers(foundLeaderboard, new CSteamID[] { SteamUser.GetSteamID() }, 1);
 
@@ -121,7 +121,7 @@ public class LevelLeaderboardDownloader : MonoBehaviour
 
 
 
-        SteamAPICall_t handleEntries = SteamUserStats.DownloadLeaderboardEntries(foundLeaderboard, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobalAroundUser, 50, 50);
+        SteamAPICall_t handleEntries = SteamUserStats.DownloadLeaderboardEntries(foundLeaderboard, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobalAroundUser, -50, 50);
         SteamAPICall_t handleEntriesFirst = SteamUserStats.DownloadLeaderboardEntries(foundLeaderboard, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobal, 1, 10);
         //SteamAPICall_t handleEntries = SteamUserStats.DownloadLeaderboardEntriesForUsers(foundLeaderboard, new CSteamID[] { SteamUser.GetSteamID() }, 1);
 
