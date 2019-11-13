@@ -87,7 +87,7 @@ public class LevelLeaderboardDownloader : MonoBehaviour
     {
         if (SteamManager.Initialized)
         {
-            SteamAPICall_t handle = SteamUserStats.FindOrCreateLeaderboard("level_" + GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp + "_rocket_" + Statics.selectedRocket, ELeaderboardSortMethod.k_ELeaderboardSortMethodDescending, ELeaderboardDisplayType.k_ELeaderboardDisplayTypeTimeMilliSeconds);
+            SteamAPICall_t handle = SteamUserStats.FindOrCreateLeaderboard("level_" + GameObject.FindObjectOfType<LevelNumber>().LevelNumberProp + "_rocket_" + Statics.selectedRocket, ELeaderboardSortMethod.k_ELeaderboardSortMethodAscending, ELeaderboardDisplayType.k_ELeaderboardDisplayTypeTimeMilliSeconds);
 
             m_LeaderboardFindResult.Set(handle);
             Debug.Log("Created CallResult for FindLeaderboard");
